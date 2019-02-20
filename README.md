@@ -1,6 +1,6 @@
 # Accélérateur de particules
 
-Projet OOP C++ pour PH BA 1 semestre 2
+Projet OOP C++ pour PH BA 2
 
 # [Journal](https://github.com/ninivert/ParticleAccelerator/wiki/Journal)
 
