@@ -1,1 +1,3 @@
-constexpr double EPSILON(1e-6);
+#ifndef EPSILON
+#define EPSILON 1e-6
+#endif
