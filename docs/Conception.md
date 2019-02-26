@@ -1,0 +1,1 @@
+Description de la hiérarchie de classes utilisées (relations d'héritage et d'encapsulation)
