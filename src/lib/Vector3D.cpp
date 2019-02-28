@@ -1,6 +1,6 @@
 #include <string>
 #include <cmath>
-#include "../constants.cpp"
+#include "../constants.h"
 
 using namespace std;
 
