@@ -1,5 +1,5 @@
 #include <cmath>
-#include "../src/constants.h"
+#include "src/constants.h"
 
 class Test {
 public:

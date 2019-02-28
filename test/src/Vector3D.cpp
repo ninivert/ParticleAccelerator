@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cassert>
-#include "../src/lib/Vector3D.cpp"
-#include "./Test.h"
+#include "src/include/Vector3D.h"
+#include "test/lib/Test.h"
 
 using namespace std;
 
