@@ -32,7 +32,7 @@ public:
 	static double tripleProduct(Vector3D, Vector3D, Vector3D);
 
 private:
-	// Private methods and values 
+	// Private methods and values
 	int N;
 
 	// Overloading methods

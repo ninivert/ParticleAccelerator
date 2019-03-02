@@ -1,6 +1,8 @@
+#pragma once
+
 #include <string>
 #include <cmath>
-#include "src/constants.h"
+#include "src/globals.h"
 
 
 /**
@@ -9,10 +11,10 @@
 
 class Vector3D {
 public:
-	// Constructor
+	// Constructors
 
-	Vector3D(const double& _x, const double& _y, const double& _z);
-	Vector3D(const Vector3D& v);
+	Vector3D(double const& _x, double const& _y, double const& _z);
+	Vector3D(Vector3D const& v);
 
 	// Getters
 
@@ -22,20 +24,20 @@ public:
 
 	// Setters
 
-	void setX(const double& _x);
-	void setY(const double& _y);
-	void setZ(const double& _z);
+	void setX(double const& _x);
+	void setY(double const& _y);
+	void setZ(double const& _z);
 
 	// Overloading
 
-	Vector3D operator + (const Vector3D& v) const;
-	Vector3D operator - (const Vector3D& v) const;
-	Vector3D operator * (const double& lambda) const;
-	Vector3D operator / (const double& lambda) const;
-	Vector3D operator ^ (const Vector3D& v) const;
-	double operator * (const Vector3D& v) const;
-	bool operator == (const Vector3D& v) const;
-	void operator = (const Vector3D& v);
+	Vector3D operator + (Vector3D const& v) const;
+	Vector3D operator - (Vector3D const& v) const;
+	Vector3D operator * (double const& lambda) const;
+	Vector3D operator / (double const& lambda) const;
+	Vector3D operator ^ (Vector3D const& v) const;
+	double operator * (Vector3D const& v) const;
+	bool operator == (Vector3D const& v) const;
+	void operator = (Vector3D const& v);
 
 	// Methods
 
@@ -47,7 +49,7 @@ public:
 
 	// Static methods
 
-	static double tripleProduct(const Vector3D& v1, const Vector3D& v2, const Vector3D& v3);
+	static double tripleProduct(Vector3D const& v1, Vector3D const& v2, Vector3D const& v3);
 
 
 private:
@@ -59,17 +61,17 @@ private:
 
 	// Overloading methods
 
-	void __add__(const Vector3D& v);
-	void __sub__(const Vector3D& v);
-	void __mult__(const double& lambda);
-	void __div__(const double& lambda);
-	void __cross__(const Vector3D& v);
-	double __dot__(const Vector3D& v) const;
-	bool __eq__(const Vector3D& v) const;
+	void __add__(Vector3D const& v);
+	void __sub__(Vector3D const& v);
+	void __mult__(double const& lambda);
+	void __div__(double const& lambda);
+	void __cross__(Vector3D const& v);
+	double __dot__(Vector3D const& v) const;
+	bool __eq__(Vector3D const& v) const;
 };
 
 /**
  * Cout overloading
  */
 
-std::ostream& operator<< (std::ostream& stream, const Vector3D& v);
+std::ostream& operator<< (std::ostream& stream, Vector3D const& v);

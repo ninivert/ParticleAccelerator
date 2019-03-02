@@ -40,8 +40,7 @@ v.getY(); // -9
 
 ```cpp
 Vector3D v(1, -2, 6);
-v.stringify(); // (1, -2, 6)
-std::cout << v << endl; // (1, -2, 6)
+std::cout << v.stringify << endl; // (1, -2, 6)
 ```
 
 - `std::string stringify()`:

@@ -2,13 +2,9 @@
 
 Projet OOP C++ pour PH BA 2
 
-# [Journal](https://github.com/ninivert/ParticleAccelerator/wiki/Journal)
+# [To the documentation!](./docs)
 
-# [Réponses](https://github.com/ninivert/ParticleAccelerator/wiki/R%C3%A9ponses)
-
-# [Conception](https://github.com/ninivert/ParticleAccelerator/wiki/Conception)
-
-# [Documentation](https://github.com/ninivert/ParticleAccelerator/wiki)
+# [To the builds!](./bin)
 
 # Ressources
 

@@ -1,7 +1,9 @@
+#pragma once
+
 #include <cmath>
-#include "src/constants.h"
+#include "src/globals.h"
 
 class Test {
 public:
-	static bool eq(double, double, double = CONSTANTS::EPSILON);
+	static bool eq(double, double, double = GLOBALS::EPSILON);
 };
