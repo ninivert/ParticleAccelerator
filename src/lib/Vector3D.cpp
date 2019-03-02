@@ -4,7 +4,7 @@ using namespace std;
 using namespace GLOBALS;
 
 /****************************************************************
- * Constructor
+ * Constructors
  ****************************************************************/
 
 Vector3D::Vector3D(double const& _x, double const& _y, double const& _z) {
@@ -13,11 +13,9 @@ Vector3D::Vector3D(double const& _x, double const& _y, double const& _z) {
 	z = _z;
 }
 
-Vector3D::Vector3D(Vector3D const& v) {
-	x = v.getX();
-	y = v.getY();
-	z = v.getZ();
-}
+Vector3D::Vector3D(Vector3D const& v)
+	: x(v.x), y(v.y), z(v.z)
+	{}
 
 /****************************************************************
  * Getters
@@ -79,9 +77,9 @@ bool Vector3D::operator == (Vector3D const& v) const {
 }
 
 void Vector3D::operator = (Vector3D const& v) {
-	x = v.getX();
-	y = v.getY();
-	z = v.getZ();
+	x = v.x;
+	y = v.y;
+	z = v.z;
 }
 
 /****************************************************************
@@ -120,15 +118,15 @@ double Vector3D::tripleProduct(Vector3D const& v1, Vector3D const& v2, Vector3D 
  ****************************************************************/
 
 void Vector3D::__add__(Vector3D const& v) {
-	x += v.getX();
-	y += v.getY();
-	z += v.getZ();
+	x += v.x;
+	y += v.y;
+	z += v.z;
 }
 
 void Vector3D::__sub__(Vector3D const& v) {
-	x -= v.getX();
-	y -= v.getY();
-	z -= v.getZ();
+	x -= v.x;
+	y -= v.y;
+	z -= v.z;
 }
 
 void Vector3D::__mult__(double const& lambda) {
@@ -144,22 +142,22 @@ void Vector3D::__div__(double const& lambda) {
 }
 
 void Vector3D::__cross__(Vector3D const& v) {
-	double _x = y*v.getZ() - z*v.getY();
-	double _y = z*v.getX() - x*v.getZ();
-	double _z = x*v.getY() - y*v.getX();
+	double _x = y*v.z - z*v.y;
+	double _y = z*v.x - x*v.z;
+	double _z = x*v.y - y*v.x;
 	x = _x;
 	y = _y;
 	z = _z;
 }
 
 double Vector3D::__dot__(Vector3D const& v) const {
-	return x*v.getX() + y*v.getY() + z*v.getZ();
+	return x*v.x + y*v.y + z*v.z;
 }
 
 bool Vector3D::__eq__(Vector3D const& v) const {
-	bool a = abs(x - v.getX()) < EPSILON;
-	bool b = abs(y - v.getY()) < EPSILON;
-	bool c = abs(z - v.getZ()) < EPSILON;
+	bool a = abs(x - v.x) < EPSILON;
+	bool b = abs(y - v.y) < EPSILON;
+	bool c = abs(z - v.z) < EPSILON;
 	return a and b and c;
 }
 

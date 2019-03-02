@@ -9,7 +9,7 @@
 
 class Vector3D {
 public:
-	// Constructor
+	// Constructors
 
 	Vector3D(double const& _x, double const& _y, double const& _z);
 	Vector3D(Vector3D const& v);
