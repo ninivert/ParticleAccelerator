@@ -7,3 +7,14 @@
 - Wrote tests for `Vector3D`
 - Made `constants.h` file
 - Setup compilation and `Makefile`
+
+# Week 2
+
+## Todo
+
+- Change `Vector3D` constructor to a default constructor
+- Add large scale error management
+- Improve `Makefile`
+- Read documentation and math background for project
+- Try to use `v.x` in class functions instead of `v.getX()`
+- Change order of `const double` to `double const`
