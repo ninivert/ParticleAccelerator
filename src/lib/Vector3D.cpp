@@ -1,7 +1,7 @@
 #include "src/include/Vector3D.h"
 
 using namespace std;
-using namespace CONSTANTS;
+using namespace GLOBALS;
 
 /****************************************************************
  * Constructor
