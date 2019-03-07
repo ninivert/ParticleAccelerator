@@ -38,14 +38,15 @@ vpath %.o ./build ./test/build/
 
 # =========================================
 # vapth to tell him where to search executables
-vpath testVector3D ./test/bin/
+# vpath testVector3D ./test/bin/testVector3D
 
 
 # =========================================
 # all + .PHONY: clean, clean_all only when asked
 # ->    make clean
-all: testVector3D
-.PHONY: clean cleanall
+all: ./test/bin/testVector3D
+
+.PHONY: all clean cleanall
 
 # =========================================
 # Compilation SRC
@@ -64,13 +65,13 @@ testVector3D.o: testVector3D.cpp Vector3D.h
 
 # =========================================
 # Links editor and creation of executbles
-testVector3D:Vector3D.o testVector3D.o Test.o
+./test/bin/testVector3D:Vector3D.o testVector3D.o Test.o
 	g++ test/build/testVector3D.o test/build/Test.o build/Vector3D.o -o test/bin/testVector3D
 
 
 # =========================================
 # Run tests
-run_testVector3D: testVector3D
+run_testVector3D: ./test/bin/testVector3D
 	$(addprefix $(BTESTPATH), testVector3D)
 
 
