@@ -4,7 +4,6 @@
 #include <cmath>
 #include "src/globals.h"
 
-
 /**
  * Vector3D
  */
@@ -13,6 +12,7 @@ class Vector3D {
 public:
 	// Constructors
 
+	Vector3D();
 	Vector3D(double const& _x, double const& _y, double const& _z);
 	Vector3D(Vector3D const& v);
 
@@ -31,11 +31,16 @@ public:
 	// Overloading
 
 	Vector3D operator + (Vector3D const& v) const;
+	Vector3D& operator += (Vector3D const& v);
 	Vector3D operator - (Vector3D const& v) const;
+	Vector3D& operator -= (Vector3D const& v);
 	Vector3D operator * (double const& lambda) const;
+	Vector3D& operator *= (double const& lambda);
 	Vector3D operator / (double const& lambda) const;
+	Vector3D& operator /= (double const& lambda);
 	Vector3D operator ^ (Vector3D const& v) const;
 	double operator * (Vector3D const& v) const;
+	Vector3D& operator ~ ();
 	bool operator == (Vector3D const& v) const;
 	void operator = (Vector3D const& v);
 
@@ -44,8 +49,8 @@ public:
 	std::string stringify() const;
 	double norm() const;
 	double normSquared() const;
+	Vector3D& rotate(Vector3D axis, double const& alpha );
 
-	void normalize();
 
 	// Static methods
 
@@ -67,6 +72,7 @@ private:
 	void __div__(double const& lambda);
 	void __cross__(Vector3D const& v);
 	double __dot__(Vector3D const& v) const;
+	void __normalize__();
 	bool __eq__(Vector3D const& v) const;
 };
 

@@ -7,11 +7,13 @@ using namespace GLOBALS;
  * Constructors
  ****************************************************************/
 
-Vector3D::Vector3D(double const& _x, double const& _y, double const& _z) {
-	x = _x;
-	y = _y;
-	z = _z;
-}
+Vector3D::Vector3D()
+	: Vector3D(0.0, 0.0, 0.0)
+	{}
+
+Vector3D::Vector3D(double const& _x, double const& _y, double const& _z)
+	: x(_x), y(_y), z(_z)
+	{}
 
 Vector3D::Vector3D(Vector3D const& v)
 	: x(v.x), y(v.y), z(v.z)
@@ -43,10 +45,20 @@ Vector3D Vector3D::operator + (Vector3D const& v) const {
 	return res;
 }
 
+Vector3D& Vector3D::operator += (Vector3D const& v) {
+	this->__add__(v);
+	return (*this);
+}
+
 Vector3D Vector3D::operator - (Vector3D const& v) const {
 	Vector3D res(*this);
 	res.__sub__(v);
 	return res;
+}
+
+Vector3D& Vector3D::operator -= (Vector3D const& v) {
+	__sub__(v);
+	return (*this);
 }
 
 Vector3D Vector3D::operator * (double const& lambda) const {
@@ -55,10 +67,20 @@ Vector3D Vector3D::operator * (double const& lambda) const {
 	return res;
 }
 
+Vector3D& Vector3D::operator *= (double const& lambda) {
+	__mult__(lambda);
+	return (*this);
+}
+
 Vector3D Vector3D::operator / (double const& lambda) const {
 	Vector3D res(*this);
 	res.__div__(lambda);
 	return res;
+}
+
+Vector3D& Vector3D::operator /= (double const& lambda) {
+	__div__(lambda);
+	return (*this);
 }
 
 Vector3D Vector3D::operator ^ (Vector3D const& v) const {
@@ -70,6 +92,11 @@ Vector3D Vector3D::operator ^ (Vector3D const& v) const {
 double Vector3D::operator * (Vector3D const& v) const {
 	Vector3D res(*this);
 	return res.__dot__(v);
+}
+
+Vector3D& Vector3D::operator ~ () {
+	__normalize__();
+	return (*this);
 }
 
 bool Vector3D::operator == (Vector3D const& v) const {
@@ -98,11 +125,11 @@ double Vector3D::normSquared() const {
 	return pow(getX(), 2) + pow(getY(), 2) + pow(getZ(), 2);
 }
 
-void Vector3D::normalize() {
-	double n = norm();
-	x /= n;
-	y /= n;
-	z /= n;
+Vector3D& Vector3D::rotate(Vector3D axis, double const& alpha ) {
+	~axis;
+	(*this) *= cos(alpha);
+	(*this) += (axis ^ (*this)) * sin(alpha) + (axis * ((*this) * axis)) * (1 - cos(alpha));
+	return (*this);
 }
 
 /****************************************************************
@@ -152,6 +179,13 @@ void Vector3D::__cross__(Vector3D const& v) {
 
 double Vector3D::__dot__(Vector3D const& v) const {
 	return getX() * v.getX() + getY() * v.getY() + getZ() * v.getZ();
+}
+
+void Vector3D::__normalize__() {
+	double n = norm();
+	x /= n;
+	y /= n;
+	z /= n;
 }
 
 bool Vector3D::__eq__(Vector3D const& v) const {

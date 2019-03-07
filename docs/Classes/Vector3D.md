@@ -3,12 +3,14 @@
 ## Constructor
 
 ```cpp
-Vector3D(double x, double y, double z);
-Vector3D(Vector3D v);
+Vector3D();
+Vector3D(double const& _x, double const& _y, double const& _z);
+Vector3D(Vector3D const& v);
 ```
 
 An instance of `Vector3D` can be initialized with
 
+- nothing so the vector will be initialized with `(0.0, 0.0, 0.0)`, or
 - a triplet of `double`s representing the vector parameters, or
 - an existing instance of `Vector3D`, of which a copy will be made.
 
@@ -55,23 +57,29 @@ Vector3D v2(3, -7, -2);
 Vector3D v3(4, 7, -1);
 v1 + v2; // Vector3D(5, -12, 4)
 v1 - v2; // Vector3D(-1, 2, 8)
+v1 += v2 // Vector3D(5, -12, 4) in v1
+v1 -= v2 // Vector3D(2, -5, 6) in v1
 v1 * 2; // Vector3D(4, -10, 12)
+v1 *= 2; // Vector3D(4, -10, 12) in v1
 v1 / 3; // Vector3D(0.666667, -1.666667, 2)
+v1 /= 3; // Vector3D(0.666667, -1.666667, 2) in v1
 v1 * v2; // 29
 (v1 ^ v2); // Vector3D(52, 22, 1)
 Vector3D::tripleProduct(v1, v2, v3); // 361
 ```
 
-Operators `+`, `-`, `*` and `^` are overloaded and correspond to the following operations between two instances of `Vector3D`:
+Operators `+`, `+=`, `-`, `-=`, `*` and `^` are overloaded and correspond to the following operations between two instances of `Vector3D`:
 
 - `+`: addition, returns: `Vector3D`
+- `+=`: addition, modifies and returns: `Vector3D`
 - `-`: substraction, returns: `Vector3D`
+- `-=`: substraction, modifies and returns: `Vector3D`
 - `*`: dot product, returns: `double`
 - `^`: cross product, returns: `Vector3D`
 
 > __WARNING__: the `^` operator has a low priority and is evaluated after relational operators. Use parantheses to prioritize the evaluation of `^`. See [the reference](https://en.cppreference.com/w/cpp/language/operator_precedence) for more information.
 
-Scalar multiplication is also overloaded with the `*` and `/` operators (returns: `Vector3D`).
+Scalar multiplication is also overloaded with the `*`, `*=`, `/` and `/=` operators (returns: `Vector3D`).
 
 The `Vector3D` class implements a static function `double Vector3D::tripleProduct` to evaluate the triple product (volume) of three vectors.
 
@@ -106,7 +114,7 @@ You can assign the parameters of a vector to another without copying it.
 Vector3D v(4, -3, 0);
 v.norm(); // 5
 v.normSquared(); // 25
-v.normalize(); // Vector3D(0.8, -0.6, 0)
+~v; // Vector3D(0.8, -0.6, 0)
 v.norm(); // 1
 ```
 
@@ -118,7 +126,19 @@ v.norm(); // 1
 - `double normSquared()`:
 	- Arguments: none
 	- Returns: `double`, squared norm of the vector
-- `void normalize()`:
-	- Arguments: none
-	- Returns: none
-	- Modifies: makes the `Vector3D` instance a unit vector
+
+The `~` operator is overloaded and makes the `Vector3D` instance a unit vector
+
+## Rotation
+
+```cpp
+Vector3D v1(4, -3, 0);
+Vector3D v2(9, 12, 0);
+
+// rotate v1 from 180° around the axis v2
+v1.rotate(v2, M_PI); // Vector3D(-4, 3, 0)
+```
+
+`rotate` modifies and returns `Vector3D` by turning it from `alpha` **radians** around an axis `axis`
+
+> __WARNING__: The angles are in RADIANS

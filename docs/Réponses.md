@@ -26,3 +26,20 @@ Voir la page [Vector3D](Classes/Vector3D.md) pour plus d'informations
 Toutes les méthodes de surcharge et les paramètres du vecteur sont en privé (aucune raison pour que l'utilisateur veuille y accéder, sachant que l'on a surchargé les opérateurs).
 
 Le reste est en public.
+
+# Semaine 3
+
+> Avez-vous ajouté un constructeur de copie ?
+
+> Pourquoi (justifiez votre choix) ?
+
+> Si l'on souhaitait ajouter un constructeur par coordonnées sphériques (deux angles et une longueur),
+	> que cela impliquerait-il au niveau des attributs de la classe ?
+	> quelle serait la difficulté majeure (voire l'impossibilité) de sa réalisation en C++ ? (C'est d'ailleurs pour cela qu'on ne vous demande pas de faire un tel constructeur!)
+
+> Quels opérateurs avez vous introduits ?
+
+> Comment avez-vous implémenté gamma : comme attribut ou comme méthode ? Même question pourl'énergie.
+
+
+
