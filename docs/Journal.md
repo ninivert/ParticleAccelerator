@@ -10,6 +10,7 @@
 
 # Week 2
 
+- `Makefile` improvements
 - Change order of `const double` to `double const`
 - Use `v.getX()` in class functions instead of `v.x()`
 - Change `Vector3D` (tests) to `testVector3D`
@@ -17,6 +18,4 @@
 ## Todo
 
 - Change `Vector3D` constructor to a default constructor
-- Add large scale error management
-- Improve `Makefile`
-- Read documentation and math background for project
+- Add large scale error management --> custom `Exception` sub-classes
