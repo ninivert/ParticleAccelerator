@@ -10,7 +10,7 @@
 
 # Week 2
 
-- `Makefile` improvements
+- `Makefile` template done
 - Change order of `const double` to `double const`
 - Use `v.getX()` in class functions instead of `v.x()`
 - Change `Vector3D` (tests) to `testVector3D`

@@ -11,7 +11,7 @@
 # =========================================
 CXX = g++
 CC = $(CXX)
-CXXFLAGS = -std=c++11
+CXXFLAGS = -std=c++17
 
 # CXXFLAGS += -g
 # For debugging
@@ -22,6 +22,8 @@ CXXFLAGS += -O2
 
 # =========================================
 # To tell him where to search .o and exec files
+# and where to put exec files (TARGET)
+TARGET := testVector3D.bin
 OTESTPATH := ./test/build/
 BTESTPATH := ./test/bin/
 OPATH := ./build/
@@ -31,60 +33,66 @@ BPATH := ./bin/
 # =========================================
 # vpath to tell him where to search .h .cpp .o
 # when he wants to (re)build
-vpath %.h ./src/include ./test/lib/
-vpath %.cpp ./src/lib ./test/lib/ ./test/src/
-vpath %.o ./build ./test/build/
+vpath %.h ./src/include ./test/lib
+vpath %.cpp ./src/lib ./test/lib/ ./test/src
+vpath %.o ./build ./test/build
+vpath %.bin ./bin ./test/bin
 
 
 # =========================================
-# vapth to tell him where to search executables
-# vpath testVector3D ./test/bin/testVector3D
-
-
-# =========================================
-# all + .PHONY: clean, clean_all only when asked
+# .PHONY for all non file-creating commands
 # ->    make clean
-all: ./test/bin/testVector3D
+.PHONY: all clean cleanbuild cleanbin
+all: $(TARGET)
 
-.PHONY: all clean cleanall
 
 # =========================================
 # Compilation SRC
 Vector3D.o: Vector3D.cpp Vector3D.h
-	g++ -c src/lib/Vector3D.cpp -o build/Vector3D.o -I ./
+	@echo [$@] Compiling...
+	@$(CXX) $(CXXFLAGS) -c src/lib/Vector3D.cpp -o $(OPATH)$@ -I ./
 
 
 # =========================================
 # Compilation of TESTS
 Test.o: Test.cpp Test.h
-	g++ -c test/lib/Test.cpp -o test/build/Test.o -I ./
+	@echo [$@] Compiling...
+	@$(CXX) $(CXXFLAGS) -c test/lib/Test.cpp -o $(OTESTPATH)$@ -I ./
 
 testVector3D.o: testVector3D.cpp Vector3D.h
-	g++ -c test/src/testVector3D.cpp -o test/build/testVector3D.o -I ./
+	@echo [$@] Compiling...
+	@$(CXX) $(CXXFLAGS) -c test/src/testVector3D.cpp -o $(OTESTPATH)$@ -I ./
 
 
 # =========================================
 # Links editor and creation of executbles
-./test/bin/testVector3D:Vector3D.o testVector3D.o Test.o
-	g++ test/build/testVector3D.o test/build/Test.o build/Vector3D.o -o test/bin/testVector3D
+testVector3D.bin:Vector3D.o testVector3D.o Test.o
+	@echo [$@] Linking...
+	@$(CXX) $(CXXFLAGS) test/build/testVector3D.o test/build/Test.o build/Vector3D.o -o $(BTESTPATH)$@
 
 
 # =========================================
 # Run tests
-run_testVector3D: ./test/bin/testVector3D
-	$(addprefix $(BTESTPATH), testVector3D)
+run_testVector3D: testVector3D.bin
+	@echo Running [$@]
+	@$<
 
 
 # =========================================
 # Run program
-# "run_ExecutableName": "ExecutableName_Created"
-# 	./../bin/ExecutableName_Created
+# "run_ExecutableName": "ExecutableName_Created.bin"
+#	@echo Running [$@]
+# 	@$<
 
 
 # =========================================
 # clean
-clean:
-	@rm -f $(OPATH)* $(OTESTPATH)*
+clean: cleanbin cleanbuild
 
-cleanall: clean
+cleanbin:
 	@rm -f $(BPATH)* $(BTESTPATH)*
+	@echo Bin files removed correctly
+
+cleanbuild:
+	@rm -f $(OPATH)* $(OTESTPATH)*
+	@echo Build files removed correctly
