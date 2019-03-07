@@ -69,7 +69,7 @@ Operators `+`, `-`, `*` and `^` are overloaded and correspond to the following o
 - `*`: dot product, returns: `double`
 - `^`: cross product, returns: `Vector3D`
 
-> __WARNING__: the `^` operator has a low priority and is evaluated after relational operators. Use parantheses to prioritize the evaluation of `^`. See [the refenrence](https://en.cppreference.com/w/cpp/language/operator_precedence) for more information.
+> __WARNING__: the `^` operator has a low priority and is evaluated after relational operators. Use parantheses to prioritize the evaluation of `^`. See [the reference](https://en.cppreference.com/w/cpp/language/operator_precedence) for more information.
 
 Scalar multiplication is also overloaded with the `*` and `/` operators (returns: `Vector3D`).
 
