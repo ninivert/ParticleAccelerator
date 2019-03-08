@@ -20,7 +20,9 @@
 
 - Add large scale error management -> custom `Exception` sub-classes
 - Answer questions week 3
-- Check `Vector3D` class overloading
+- Check `Vector3D` class overloading for optimization
+- Move `Vector3D `overloading from `__method__` directly to the operator
+- Rename `stringify` to `to_string` to comply to the C++ norm
 - Test performance of `+=` operator return type (`void` vs `Vector3D&`)
 - Test performance of storing coordinates as doubles or an array
 - Creation of a class `Particule`
