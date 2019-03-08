@@ -46,7 +46,7 @@ Vector3D Vector3D::operator + (Vector3D const& v) const {
 }
 
 Vector3D& Vector3D::operator += (Vector3D const& v) {
-	this->__add__(v);
+	__add__(v);
 	return (*this);
 }
 
