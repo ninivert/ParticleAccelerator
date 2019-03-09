@@ -27,3 +27,4 @@
 - Test performance of storing coordinates as doubles or an array
 - Creation of a class `Particule`
 - Creation of tests `Particule`
+- Change constants to `inline` according to the C++17 norm
