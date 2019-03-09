@@ -70,16 +70,16 @@ Vector3D::tripleProduct(v1, v2, v3); // 361
 
 Operators `+`, `+=`, `-`, `-=`, `*` and `^` are overloaded and correspond to the following operations between two instances of `Vector3D`:
 
-- `+`: addition, returns: `Vector3D`
-- `+=`: addition, modifies and returns: `Vector3D`
-- `-`: substraction, returns: `Vector3D`
-- `-=`: substraction, modifies and returns: `Vector3D`
-- `*`: dot product, returns: `double`
-- `^`: cross product, returns: `Vector3D`
+- `+`: addition, returns: `Vector3D const`
+- `-`: substraction, returns: `Vector3D const`
+- `^`: cross product, returns: `Vector3D const`
+- `*`: dot product, returns: `double const`
+- `+=`: addition, modifies and returns: `Vector3D&`
+- `-=`: substraction, modifies and returns: `Vector3D&`
 
 > __WARNING__: the `^` operator has a low priority and is evaluated after relational operators. Use parantheses to prioritize the evaluation of `^`. See [the reference](https://en.cppreference.com/w/cpp/language/operator_precedence) for more information.
 
-Scalar multiplication is also overloaded with the `*`, `*=`, `/` and `/=` operators (returns: `Vector3D`).
+Scalar multiplication is also overloaded with the `*`, `*=`, `/` and `/=` operators (returns: `Vector3D&`).
 
 The `Vector3D` class implements a static function `double Vector3D::tripleProduct` to evaluate the triple product (volume) of three vectors.
 
@@ -127,7 +127,7 @@ v.norm(); // 1
 	- Arguments: none
 	- Returns: `double`, squared norm of the vector
 
-The `~` operator is overloaded and makes the `Vector3D` instance a unit vector
+The `~` operator is overloaded and makes the `Vector3D` instance a unit vector (returns: `Vector3D&`)
 
 ## Rotation
 
@@ -139,6 +139,12 @@ Vector3D v2(9, 12, 0);
 v1.rotate(v2, M_PI); // Vector3D(-4, 3, 0)
 ```
 
-`rotate` modifies and returns `Vector3D` by turning it from `alpha` **radians** around an axis `axis`
+`rotate` modifies and returns `Vector3D&` by turning it from `alpha` **radians** around an axis `axis`
 
-> __WARNING__: The angles are in RADIANS
+- `Vector3D& rotate(Vector3D axis, double const& alpha)`:
+	- Arguments:
+		- `Vector3D axis`: axis around which to rotate
+		- `double alpha`: angle by which to rotate
+	- Returns: `Vector3D&`: reference to the modified vector
+
+> __WARNING__: The angles are in radians
