@@ -36,78 +36,94 @@ void Vector3D::setY(double const& _y) { y = _y; }
 void Vector3D::setZ(double const& _z) { z = _z; }
 
 /****************************************************************
- * Overloading operator
+ * Internal overloading operator
  ****************************************************************/
 
-Vector3D Vector3D::operator + (Vector3D const& v) const {
-	Vector3D res(*this);
-	res.__add__(v);
-	return res;
-}
-
 Vector3D& Vector3D::operator += (Vector3D const& v) {
-	__add__(v);
-	return (*this);
-}
-
-Vector3D Vector3D::operator - (Vector3D const& v) const {
-	Vector3D res(*this);
-	res.__sub__(v);
-	return res;
+	x += v.getX();
+	y += v.getY();
+	z += v.getZ();
+	return *this;
 }
 
 Vector3D& Vector3D::operator -= (Vector3D const& v) {
-	__sub__(v);
-	return (*this);
+	x -= v.getX();
+	y -= v.getY();
+	z -= v.getZ();
+	return *this;
 }
 
-Vector3D Vector3D::operator * (double const& lambda) const {
-	Vector3D res(*this);
-	res.__mult__(lambda);
-	return res;
+Vector3D& Vector3D::operator ^= (Vector3D const& v) {
+	double _x = getY() * v.getZ() - getZ() * v.getY();
+	double _y = getZ() * v.getX() - getX() * v.getZ();
+	double _z = getX() * v.getY() - getY() * v.getX();
+	x = _x;
+	y = _y;
+	z = _z;
+	return *this;
 }
 
 Vector3D& Vector3D::operator *= (double const& lambda) {
-	__mult__(lambda);
-	return (*this);
-}
-
-Vector3D Vector3D::operator / (double const& lambda) const {
-	Vector3D res(*this);
-	res.__div__(lambda);
-	return res;
+	x *= lambda;
+	y *= lambda;
+	z *= lambda;
+	return *this;
 }
 
 Vector3D& Vector3D::operator /= (double const& lambda) {
-	__div__(lambda);
-	return (*this);
-}
-
-Vector3D Vector3D::operator ^ (Vector3D const& v) const {
-	Vector3D res(*this);
-	res.__cross__(v);
-	return res;
-}
-
-double Vector3D::operator * (Vector3D const& v) const {
-	Vector3D res(*this);
-	return res.__dot__(v);
+	x /= lambda;
+	y /= lambda;
+	z /= lambda;
+	return *this;
 }
 
 Vector3D& Vector3D::operator ~ () {
-	__normalize__();
-	return (*this);
+	double n = norm();
+	x /= n;
+	y /= n;
+	z /= n;
+	return *this;
 }
 
-bool Vector3D::operator == (Vector3D const& v) const {
-	return __eq__(v);
-}
-
-void Vector3D::operator = (Vector3D const& v) {
+Vector3D& Vector3D::operator = (Vector3D const& v) {
 	x = v.getX();
 	y = v.getY();
 	z = v.getZ();
+	return *this;
 }
+
+/****************************************************************
+ * External operator overloading
+ ****************************************************************/
+
+Vector3D const operator + (Vector3D v1, Vector3D const& v2) {
+	return (v1 += v2);
+}
+
+Vector3D const operator - (Vector3D v1, Vector3D const& v2) {
+	return (v1 -= v2);
+}
+
+Vector3D const operator * (Vector3D v, double const& lambda) {
+	return (v *= lambda);
+}
+
+Vector3D const operator / (Vector3D v, double const& lambda) {
+	return (v /= lambda);
+}
+
+Vector3D const operator ^ (Vector3D v1, Vector3D const& v2) {
+	return (v1 ^= v2);
+}
+
+double const operator * (Vector3D const& v1, Vector3D const& v2) {
+	return Vector3D::dot(v1, v2);
+}
+
+bool const operator == (Vector3D const& v1, Vector3D const& v2) {
+	return Vector3D::eq(v1, v2);
+}
+
 
 /****************************************************************
  * Methods
@@ -125,7 +141,7 @@ double Vector3D::normSquared() const {
 	return pow(getX(), 2) + pow(getY(), 2) + pow(getZ(), 2);
 }
 
-Vector3D& Vector3D::rotate(Vector3D axis, double const& alpha ) {
+Vector3D& Vector3D::rotate(Vector3D axis, double const& alpha) {
 	~axis;
 	(*this) *= cos(alpha);
 	(*this) += (axis ^ (*this)) * sin(alpha) + (axis * ((*this) * axis)) * (1 - cos(alpha));
@@ -140,58 +156,14 @@ double Vector3D::tripleProduct(Vector3D const& v1, Vector3D const& v2, Vector3D 
 	return v1 * (v2 ^ v3);
 }
 
-/****************************************************************
- * Overloding methods
- ****************************************************************/
-
-void Vector3D::__add__(Vector3D const& v) {
-	x += v.getX();
-	y += v.getY();
-	z += v.getZ();
+double Vector3D::dot(Vector3D const& v1, Vector3D const& v2) {
+	return v1.getX() * v2.getX() + v1.getY() * v2.getY() + v1.getZ() * v2.getZ();
 }
 
-void Vector3D::__sub__(Vector3D const& v) {
-	x -= v.getX();
-	y -= v.getY();
-	z -= v.getZ();
-}
-
-void Vector3D::__mult__(double const& lambda) {
-	x *= lambda;
-	y *= lambda;
-	z *= lambda;
-}
-
-void Vector3D::__div__(double const& lambda) {
-	x /= lambda;
-	y /= lambda;
-	z /= lambda;
-}
-
-void Vector3D::__cross__(Vector3D const& v) {
-	double _x = getY() * v.getZ() - getZ() * v.getY();
-	double _y = getZ() * v.getX() - getX() * v.getZ();
-	double _z = getX() * v.getY() - getY() * v.getX();
-	x = _x;
-	y = _y;
-	z = _z;
-}
-
-double Vector3D::__dot__(Vector3D const& v) const {
-	return getX() * v.getX() + getY() * v.getY() + getZ() * v.getZ();
-}
-
-void Vector3D::__normalize__() {
-	double n = norm();
-	x /= n;
-	y /= n;
-	z /= n;
-}
-
-bool Vector3D::__eq__(Vector3D const& v) const {
-	bool a = abs(getX() - v.getX()) < EPSILON;
-	bool b = abs(getY() - v.getY()) < EPSILON;
-	bool c = abs(getZ() - v.getZ()) < EPSILON;
+bool Vector3D::eq(Vector3D const& v1, Vector3D const& v2) {
+	bool a = abs(v1.getX() - v2.getX()) < EPSILON;
+	bool b = abs(v1.getY() - v2.getY()) < EPSILON;
+	bool c = abs(v1.getZ() - v2.getZ()) < EPSILON;
 	return a and b and c;
 }
 

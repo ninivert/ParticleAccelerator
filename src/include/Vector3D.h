@@ -28,33 +28,28 @@ public:
 	void setY(double const& _y);
 	void setZ(double const& _z);
 
-	// Overloading
+	// Internal Overloading
 
-	Vector3D operator + (Vector3D const& v) const;
 	Vector3D& operator += (Vector3D const& v);
-	Vector3D operator - (Vector3D const& v) const;
 	Vector3D& operator -= (Vector3D const& v);
-	Vector3D operator * (double const& lambda) const;
+	Vector3D& operator ^= (Vector3D const& v);
 	Vector3D& operator *= (double const& lambda);
-	Vector3D operator / (double const& lambda) const;
 	Vector3D& operator /= (double const& lambda);
-	Vector3D operator ^ (Vector3D const& v) const;
-	double operator * (Vector3D const& v) const;
 	Vector3D& operator ~ ();
-	bool operator == (Vector3D const& v) const;
-	void operator = (Vector3D const& v);
+	Vector3D& operator = (Vector3D const& v);
 
 	// Methods
 
 	std::string to_string() const;
 	double norm() const;
 	double normSquared() const;
-	Vector3D& rotate(Vector3D axis, double const& alpha );
-
+	Vector3D& rotate(Vector3D axis, double const& alpha);
 
 	// Static methods
 
 	static double tripleProduct(Vector3D const& v1, Vector3D const& v2, Vector3D const& v3);
+	static double dot(Vector3D const& v1, Vector3D const& v2);
+	static bool eq(Vector3D const& v1, Vector3D const& v2);
 
 
 private:
@@ -63,18 +58,20 @@ private:
 	double x;
 	double y;
 	double z;
-
-	// Overloading methods
-
-	void __add__(Vector3D const& v);
-	void __sub__(Vector3D const& v);
-	void __mult__(double const& lambda);
-	void __div__(double const& lambda);
-	void __cross__(Vector3D const& v);
-	double __dot__(Vector3D const& v) const;
-	void __normalize__();
-	bool __eq__(Vector3D const& v) const;
 };
+
+/**
+ * External overloading
+ */
+
+Vector3D const operator + (Vector3D v1, Vector3D const& v2);
+Vector3D const operator - (Vector3D v1, Vector3D const& v2);
+Vector3D const operator ^ (Vector3D v1, Vector3D const& v2);
+Vector3D const operator * (Vector3D v, double const& lambda);
+Vector3D const operator / (Vector3D v, double const& lambda);
+double const operator * (Vector3D const& v1, Vector3D const& v2);
+bool const operator == (Vector3D const& v1, Vector3D const& v2);
+
 
 /**
  * Cout overloading
