@@ -75,7 +75,7 @@ testVector3D.bin:Vector3D.o testVector3D.o Test.o
 # Run tests
 run_testVector3D: testVector3D.bin
 	@echo Running [$@]
-	@$<
+	@$(BTESTPATH)/testVector3D.bin
 
 
 # =========================================
