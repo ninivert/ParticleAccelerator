@@ -19,15 +19,16 @@
 # Week 3
 
 - Change constants to `inline` according to the C++17 norm
+- Rename `stringify` to `to_string` to comply to the C++ norm
+- Improved `Makefile` style and added `dir` command to create required directories
+- Check `Vector3D` class overloading for optimization
+- Move `Vector3D `overloading from `__method__` directly to the operator
 
 # Todo
 
 - Add large scale error management -> custom `Exception` sub-classes
 - Answer questions week 3
-- Check `Vector3D` class overloading for optimization
-- Move `Vector3D `overloading from `__method__` directly to the operator
-- Rename `stringify` to `to_string` to comply to the C++ norm
-- Test performance of `+=` operator return type (`void` vs `Vector3D&`)
 - Test performance of storing coordinates as doubles or an array
 - Creation of a class `Particule`
 - Creation of tests `Particule`
+- Replace getters with readers inside class definition (we can trust ourselves)

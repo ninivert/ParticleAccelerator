@@ -27,6 +27,10 @@ Toutes les méthodes de surcharge et les paramètres du vecteur sont en privé (
 
 Le reste est en public.
 
+# Semaine 2
+
+N/A
+
 # Semaine 3
 
 > Avez-vous ajouté un constructeur de copie ?
@@ -34,12 +38,13 @@ Le reste est en public.
 > Pourquoi (justifiez votre choix) ?
 
 > Si l'on souhaitait ajouter un constructeur par coordonnées sphériques (deux angles et une longueur),
-	> que cela impliquerait-il au niveau des attributs de la classe ?
-	> quelle serait la difficulté majeure (voire l'impossibilité) de sa réalisation en C++ ? (C'est d'ailleurs pour cela qu'on ne vous demande pas de faire un tel constructeur!)
+>
+> - que cela impliquerait-il au niveau des attributs de la classe ?
+> - quelle serait la difficulté majeure (voire l'impossibilité) de sa réalisation en C++ ? (C'est d'ailleurs pour cela qu'on ne vous demande pas de faire un tel constructeur!)
 
 > Quels opérateurs avez vous introduits ?
 
-> Comment avez-vous implémenté gamma : comme attribut ou comme méthode ? Même question pourl'énergie.
+> Comment avez-vous implémenté gamma : comme attribut ou comme méthode ? Même question pour l'énergie.
 
 
 
