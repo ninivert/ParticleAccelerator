@@ -4,7 +4,7 @@
 #define GLOBALS_H
 
 namespace GLOBALS {
-	double const EPSILON(1e-6);
+	inline constexpr double EPSILON(1e-6);
 };
 
 #endif
