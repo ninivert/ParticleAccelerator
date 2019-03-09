@@ -113,8 +113,8 @@ void Vector3D::operator = (Vector3D const& v) {
  * Methods
  ****************************************************************/
 
-string Vector3D::stringify() const {
-	return "("s + to_string(getX()) + ", "s + to_string(getY()) + ", "s + to_string(getZ()) + ")"s;
+string Vector3D::to_string() const {
+	return "("s + std::to_string(getX()) + ", "s + std::to_string(getY()) + ", "s + std::to_string(getZ()) + ")"s;
 }
 
 double Vector3D::norm() const {
@@ -200,6 +200,6 @@ bool Vector3D::__eq__(Vector3D const& v) const {
  ****************************************************************/
 
 ostream& operator<< (ostream& stream, Vector3D const& v) {
-	stream << v.stringify();
+	stream << v.to_string();
 	return stream;
 }

@@ -16,7 +16,11 @@
 - Change `Vector3D` (tests) to `testVector3D`
 - Change `Vector3D` constructor to a default constructor
 
-## Todo
+# Week 3
+
+- Change constants to `inline` according to the C++17 norm
+
+# Todo
 
 - Add large scale error management -> custom `Exception` sub-classes
 - Answer questions week 3
@@ -27,4 +31,3 @@
 - Test performance of storing coordinates as doubles or an array
 - Creation of a class `Particule`
 - Creation of tests `Particule`
-- Change constants to `inline` according to the C++17 norm

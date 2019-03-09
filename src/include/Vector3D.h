@@ -46,7 +46,7 @@ public:
 
 	// Methods
 
-	std::string stringify() const;
+	std::string to_string() const;
 	double norm() const;
 	double normSquared() const;
 	Vector3D& rotate(Vector3D axis, double const& alpha );
