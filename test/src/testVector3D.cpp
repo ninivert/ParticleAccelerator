@@ -15,9 +15,12 @@ int main() {
 	Vector3D const v4(-3, 3, -3);
 	Vector3D const v5(4, -3, 0);
 
+
 	// cout << v1 << endl;
 	// cout << v2 << endl;
 	// cout << v3 << endl;
+	// cout << v4 << endl;
+	// cout << v5 << endl;
 
 	// cout << "\nARITHMETIC\n\n";
 
@@ -60,7 +63,7 @@ int main() {
 		// cout << (v1 *= 0.5) << endl;
 
 	// cout << "Operator / (scalar)\n";
-	// assert((v1 / 3) == Vector3D(0.666667, -1.666667, 2.000000));
+	assert((v1 / 3) == Vector3D(0.666667, -1.666667, 2.000000));
 		// cout << "\tpassed\n";
 		// cout << "\t";
 		// cout << v1 / 3 << endl;
@@ -72,13 +75,13 @@ int main() {
 		// cout << (v2 /= 3) << endl;
 		// cout << (v1 /= 1) << endl;
 
-	// cout << "Operator * (Vector3D:dot product)\n";
+	// cout << "Operator * (Vector3D: dot product)\n";
 	assert((v1 * v2) == 29);
 	assert((v2 * v1) == 29);
 		// cout << "\tpassed\n";
 		// cout << v1 * v2 << endl;
 
-	// cout << "Operator ^ (Vector3D::cross product)\n";
+	// cout << "Operator ^ (Vector3D: cross product)\n";
 	assert((v1 ^ v2) == Vector3D(52, 22, 1));
 	assert((v2 ^ v1) == Vector3D(-52, -22, -1));
 		// cout << "\tpassed\n";
@@ -90,7 +93,15 @@ int main() {
 		// cout << "\tpassed\n";
 		// cout << (v1 ^ v2) * v1 << endl;
 
-	// cout << "Triple Product\n";
+	Vector3D const v6(v1);
+	// cout << v6 << endl;
+	// cout << "Operator ^= (Vector3D: cross product)\n";
+	assert((v1 ^= v2) == Vector3D(52, 22, 1));
+		// cout << "\tpassed\n";
+		// cout << v1 << endl;
+	v1 = v6;
+
+	// cout << "Triple Product (Vector3D: static method triple product)\n";
 	assert(Vector3D::tripleProduct(v1, v2, v3) == 361);
 	assert(Vector3D::tripleProduct(v2, v1, v3) == -361);
 	assert(Vector3D::tripleProduct(v1, v1, v3) == 0);
@@ -117,6 +128,14 @@ int main() {
 		// cout << (v1 == v2) << endl;
 		// cout << "\tpassed\n";
 
+	// cout << "Operator != (Vector3D: inequality test)\n";
+	assert((v1 != v1) == 0);
+		// cout << (v1 == v1) << endl;
+		// cout << "\tpassed\n";
+	assert((v1 != v4) == 1);
+		// cout << (v1 == v2) << endl;
+		// cout << "\tpassed\n";
+
 	// cout << "\nASSIGNMENT\n\n";
 
 	// cout << "Operator = (Vector3D: assignement test)\n";
@@ -126,7 +145,8 @@ int main() {
 		// cout << (v1 == v2) << endl;
 
 	// cout << "\nNORMALIZATION\n\n";
-	// cout << "Normalization\n";
+
+	// cout << "Operator ~ (Vector3D: reduce to unit vector test)\n";
 	v1 = v5;
 	~v1;
 	assert(Test::eq((v1.norm()),1));
@@ -138,7 +158,7 @@ int main() {
 	v1 = v5;
 	v2 = v3;
 	// cout << "\nROTATION\n\n";
-	// cout << "Rotation\n";
+
 	assert(v1.rotate((v1 ^ v2), M_PI) == v5 * (-1));
 		// cout << "\tpassed\n";
 		// cout << v1 * (-1) << endl;

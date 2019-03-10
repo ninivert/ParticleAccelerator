@@ -85,6 +85,12 @@ Vector3D& Vector3D::operator ~ () {
 	return *this;
 }
 
+void Vector3D::operator = (Vector3D const& v) {
+	x = v.getX();
+	y = v.getY();
+	z = v.getZ();
+}
+
 /****************************************************************
  * External operator overloading
  ****************************************************************/

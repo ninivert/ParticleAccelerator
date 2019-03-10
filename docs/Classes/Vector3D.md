@@ -98,7 +98,7 @@ The `Vector3D` class implements a static function `double Vector3D::tripleProduc
 Vector3D v1(1, 5, -4);
 Vector3D v2(1, 5, -4);
 v1 == v2; // true
-v1 != v2; // true
+v1 != v2; // false
 ```
 
 The `==` operator is overloaded and returns `true` iff all the vector parameters coincide.
@@ -113,7 +113,7 @@ v2 = v1;
 v2; // Vector3D(1, 2, -6)
 ```
 
-You can assign the parameters of a vector to another without copying it.
+You can assign the parameters of a vector to another without copying it (by default).
 
 ## Norm and normalization
 

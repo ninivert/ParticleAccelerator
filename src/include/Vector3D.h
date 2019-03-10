@@ -36,6 +36,7 @@ public:
 	Vector3D& operator *= (double const& lambda);
 	Vector3D& operator /= (double const& lambda);
 	Vector3D& operator ~ ();
+	void operator = (Vector3D const& v);
 
 	// Methods
 
