@@ -63,11 +63,11 @@ private:
  * External overloading
  */
 
-Vector3D const operator + (Vector3D v1, Vector3D const& v2);
-Vector3D const operator - (Vector3D v1, Vector3D const& v2);
-Vector3D const operator ^ (Vector3D v1, Vector3D const& v2);
-Vector3D const operator * (Vector3D v, double const& lambda);
-Vector3D const operator / (Vector3D v, double const& lambda);
+Vector3D const& operator + (Vector3D v1, Vector3D const& v2);
+Vector3D const& operator - (Vector3D v1, Vector3D const& v2);
+Vector3D const& operator ^ (Vector3D v1, Vector3D const& v2);
+Vector3D const& operator * (Vector3D v, double const& lambda);
+Vector3D const& operator / (Vector3D v, double const& lambda);
 double const operator * (Vector3D const& v1, Vector3D const& v2);
 bool const operator == (Vector3D const& v1, Vector3D const& v2);
 

@@ -89,23 +89,23 @@ Vector3D& Vector3D::operator ~ () {
  * External operator overloading
  ****************************************************************/
 
-Vector3D const operator + (Vector3D v1, Vector3D const& v2) {
+Vector3D const& operator + (Vector3D v1, Vector3D const& v2) {
 	return (v1 += v2);
 }
 
-Vector3D const operator - (Vector3D v1, Vector3D const& v2) {
+Vector3D const& operator - (Vector3D v1, Vector3D const& v2) {
 	return (v1 -= v2);
 }
 
-Vector3D const operator * (Vector3D v, double const& lambda) {
+Vector3D const& operator * (Vector3D v, double const& lambda) {
 	return (v *= lambda);
 }
 
-Vector3D const operator / (Vector3D v, double const& lambda) {
+Vector3D const& operator / (Vector3D v, double const& lambda) {
 	return (v /= lambda);
 }
 
-Vector3D const operator ^ (Vector3D v1, Vector3D const& v2) {
+Vector3D const& operator ^ (Vector3D v1, Vector3D const& v2) {
 	return (v1 ^= v2);
 }
 
