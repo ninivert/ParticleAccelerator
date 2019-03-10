@@ -110,13 +110,17 @@ Vector3D const& operator ^ (Vector3D v1, Vector3D const& v2) {
 }
 
 double const operator * (Vector3D const& v1, Vector3D const& v2) {
-	return Vector3D::dot(v1, v2);
+	return v1.getX() * v2.getX() +
+		   v1.getY() * v2.getY() +
+		   v1.getZ() * v2.getZ();
 }
 
 bool const operator == (Vector3D const& v1, Vector3D const& v2) {
-	return Vector3D::eq(v1, v2);
+	bool a = abs(v1.getX() - v2.getX()) < EPSILON;
+	bool b = abs(v1.getY() - v2.getY()) < EPSILON;
+	bool c = abs(v1.getZ() - v2.getZ()) < EPSILON;
+	return a and b and c;
 }
-
 
 /****************************************************************
  * Methods
@@ -142,22 +146,11 @@ Vector3D& Vector3D::rotate(Vector3D axis, double const& alpha) {
 }
 
 /****************************************************************
- * Static methods
+ * Static method
  ****************************************************************/
 
 double Vector3D::tripleProduct(Vector3D const& v1, Vector3D const& v2, Vector3D const& v3) {
 	return v1 * (v2 ^ v3);
-}
-
-double Vector3D::dot(Vector3D const& v1, Vector3D const& v2) {
-	return v1.getX() * v2.getX() + v1.getY() * v2.getY() + v1.getZ() * v2.getZ();
-}
-
-bool Vector3D::eq(Vector3D const& v1, Vector3D const& v2) {
-	bool a = abs(v1.getX() - v2.getX()) < EPSILON;
-	bool b = abs(v1.getY() - v2.getY()) < EPSILON;
-	bool c = abs(v1.getZ() - v2.getZ()) < EPSILON;
-	return a and b and c;
 }
 
 /****************************************************************

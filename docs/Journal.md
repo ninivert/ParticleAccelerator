@@ -32,3 +32,6 @@
 - Creation of a class `Particule`
 - Creation of tests `Particule`
 - Replace getters with readers inside class definition (we can trust ourselves)
+		=> What if we change the representation
+		   from (x, y, z) to (phi, theta, rho) or (phi, rho, z)
+		   We would have to change the entire classe to cope with that change

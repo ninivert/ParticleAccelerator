@@ -44,12 +44,9 @@ public:
 	double normSquared() const;
 	Vector3D& rotate(Vector3D axis, double const& alpha);
 
-	// Static methods
+	// Static method
 
 	static double tripleProduct(Vector3D const& v1, Vector3D const& v2, Vector3D const& v3);
-	static double dot(Vector3D const& v1, Vector3D const& v2);
-	static bool eq(Vector3D const& v1, Vector3D const& v2);
-
 
 private:
 	// Attributes
