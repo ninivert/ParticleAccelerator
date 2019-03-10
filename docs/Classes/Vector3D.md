@@ -55,35 +55,40 @@ std::cout << v.to_string() << endl; // (1, -2, 6)
 Vector3D v1(2, -5, 6);
 Vector3D v2(3, -7, -2);
 Vector3D v3(4, 7, -1);
+v1 += v2; // Vector3D(5, -12, 4) in v1
+v1 -= v2; // Vector3D(2, -5, 6) in v1
+v1 ^= v2; // Vector3D(52, 22, 1) in v1
+v1 *= 2; // Vector3D(4, -10, 12) in v1
+v1 /= 3; // Vector3D(0.666667, -1.666667, 2) in v1
+v1 = Vector3D(2, -5, 6);
+
 v1 + v2; // Vector3D(5, -12, 4)
 v1 - v2; // Vector3D(-1, 2, 8)
-v1 += v2 // Vector3D(5, -12, 4) in v1
-v1 -= v2 // Vector3D(2, -5, 6) in v1
 v1 * 2; // Vector3D(4, -10, 12)
-v1 *= 2; // Vector3D(4, -10, 12) in v1
 v1 / 3; // Vector3D(0.666667, -1.666667, 2)
-v1 /= 3; // Vector3D(0.666667, -1.666667, 2) in v1
 v1 * v2; // 29
 (v1 ^ v2); // Vector3D(52, 22, 1)
+
 Vector3D::tripleProduct(v1, v2, v3); // 361
 ```
 
-Operators `+`, `+=`, `-`, `-=`, `*` and `^` are overloaded and correspond to the following operations between two instances of `Vector3D`:
+Operators `+=`, `-=`, `^=`, `+`, `-`, `*` and `^` are overloaded and correspond to the following operations between two instances of `Vector3D`:
 
-- `+`: addition, returns: `Vector3D const`
-- `-`: substraction, returns: `Vector3D const`
-- `^`: cross product, returns: `Vector3D const`
-- `*`: dot product, returns: `double const`
-- `+=`: addition, modifies and returns: `Vector3D&`
-- `-=`: substraction, modifies and returns: `Vector3D&`
+- `+=`: addition, 		modifies and returns: `Vector3D&`
+- `-=`: substraction, 	modifies and returns: `Vector3D&`
+- `^=`: cross product, 	modifies and returns: `Vector3D&`
+- `+`: addition, 		returns: `Vector3D const&`
+- `-`: substraction, 	returns: `Vector3D const&`
+- `^`: cross product, 	returns: `Vector3D const&`
+- `*`: dot product, 	returns: `double const`
 
 > __WARNING__: the `^` operator has a low priority and is evaluated after relational operators. Use parantheses to prioritize the evaluation of `^`. See [the reference](https://en.cppreference.com/w/cpp/language/operator_precedence) for more information.
 
 Scalar multiplication is also overloaded with the `*`, `*=`, `/` and `/=` operators (returns: `Vector3D&`).
 
-The `Vector3D` class implements a static function `double Vector3D::tripleProduct` to evaluate the triple product (volume) of three vectors.
+The `Vector3D` class implements a static function `double Vector3D::tripleProduct` to evaluate the triple product (parallelepiped spanned by the 3 vectors) of three vectors.
 
-- `Vector3D::tripleProduct(Vector3D, Vector3D, Vector3D)`:
+- `Vector3D::tripleProduct(Vector3D const&, Vector3D const&, Vector3D const&)`:
 	- Arguments: three `Vector3D` instances
 	- Returns: `double` corresponding to `v1 * (v2 ^ v3)`
 
@@ -93,9 +98,11 @@ The `Vector3D` class implements a static function `double Vector3D::tripleProduc
 Vector3D v1(1, 5, -4);
 Vector3D v2(1, 5, -4);
 v1 == v2; // true
+v1 != v2; // true
 ```
 
 The `==` operator is overloaded and returns `true` iff all the vector parameters coincide.
+The `!=` operator is overloaded and returns `true` iff all the vector parameters are different.
 
 ## Assignment operations
 
@@ -118,7 +125,7 @@ v.normSquared(); // 25
 v.norm(); // 1
 ```
 
-`norm` and `normSquared` return the norm and the squared norm of the vector, respectively. Use the `normalize` method to make it a unit vector pointing in the same direction.
+`norm` and `normSquared` return the norm and the squared norm of the vector, respectively. Use the `~` operator to make it a unit vector pointing in the same direction.
 
 - `double norm()`:
 	- Arguments: none

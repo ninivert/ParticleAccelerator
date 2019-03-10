@@ -122,6 +122,10 @@ bool const operator == (Vector3D const& v1, Vector3D const& v2) {
 	return a and b and c;
 }
 
+bool const operator != (Vector3D const& v1, Vector3D const& v2) {
+	return !(v1 == v2);
+}
+
 /****************************************************************
  * Methods
  ****************************************************************/
