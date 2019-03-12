@@ -18,7 +18,7 @@ CXXFLAGS += -O2
 # and where to put exec files (TARGET)
 ##################################################################
 
-TARGET := testVector3D.bin
+TARGET := testVector3D.bin testParticle.bin
 OTESTPATH := ./test/build/
 BTESTPATH := ./test/bin/
 OPATH := ./build/
@@ -53,6 +53,10 @@ Vector3D.o: Vector3D.cpp Vector3D.h
 	@echo [$@] Compiling...
 	@$(CXX) $(CXXFLAGS) -c src/lib/Vector3D.cpp -o $(OPATH)$@ -I ./
 
+Particle.o: Particle.cpp Particle.h
+	@echo [$@] Compiling...
+	@$(CXX) $(CXXFLAGS) -c src/lib/Particle.cpp -o $(OPATH)$@ -I ./
+
 
 ##################################################################
 # Compilation of tests
@@ -62,9 +66,13 @@ Test.o: Test.cpp Test.h
 	@echo [$@] Compiling...
 	@$(CXX) $(CXXFLAGS) -c test/lib/Test.cpp -o $(OTESTPATH)$@ -I ./
 
-testVector3D.o: testVector3D.cpp Vector3D.h
+testVector3D.o: testVector3D.cpp Vector3D.h Vector3D.cpp
 	@echo [$@] Compiling...
 	@$(CXX) $(CXXFLAGS) -c test/src/testVector3D.cpp -o $(OTESTPATH)$@ -I ./
+
+testParticle.o: testParticle.cpp Particle.h Particle.cpp
+	@echo [$@] Compiling...
+	@$(CXX) $(CXXFLAGS) -c test/src/testParticle.cpp -o $(OTESTPATH)$@ -I ./
 
 
 ##################################################################
@@ -75,6 +83,10 @@ testVector3D.bin: Vector3D.o testVector3D.o Test.o
 	@echo [$@] Linking...
 	@$(CXX) $(CXXFLAGS) test/build/testVector3D.o test/build/Test.o build/Vector3D.o -o $(BTESTPATH)$@
 
+testParticle.bin: Vector3D.o Particle.o testParticle.o Test.o
+	@echo [$@] Linking...
+	@$(CXX) $(CXXFLAGS) test/build/testParticle.o test/build/Test.o build/Particle.o build/Vector3D.o -o $(BTESTPATH)$@
+
 
 ##################################################################
 # Run tests
@@ -83,6 +95,10 @@ testVector3D.bin: Vector3D.o testVector3D.o Test.o
 run_testVector3D: testVector3D.bin
 	@echo Running [$@]
 	@$(BTESTPATH)/testVector3D.bin
+
+run_testParticle: testParticle.bin
+	@echo Running [$@]
+	@$(BTESTPATH)/testParticle.bin
 
 
 ##################################################################

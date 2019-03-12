@@ -25,10 +25,11 @@
 - Improved `Makefile` style and added `dir` command to create required directories
 - Check `Vector3D` class overloading for optimization
 - Move `Vector3D `overloading from `__method__` directly to the operator
-- Added `PhysicalConstant` struct consisting of a value (`double`) and unit (`string`)
+- Added physical constants in `globals.h`
 
 ## Todo
 
+- Add `PhysicalConstant` struct consisting of a value (`double`) and unit (`string`)
 - Add large scale error management -> custom `Exception` sub-classes
 - Answer questions week 3
 - Test performance of storing coordinates as doubles or an array

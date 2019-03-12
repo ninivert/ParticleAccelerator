@@ -1,8 +1,8 @@
 #include <iostream>
 #include <cassert>
+#include <cmath>
 #include "src/include/Vector3D.h"
 #include "test/lib/Test.h"
-#include <cmath>
 
 using namespace std;
 
