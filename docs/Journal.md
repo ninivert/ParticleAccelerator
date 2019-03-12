@@ -25,6 +25,7 @@
 - Improved `Makefile` style and added `dir` command to create required directories
 - Check `Vector3D` class overloading for optimization
 - Move `Vector3D `overloading from `__method__` directly to the operator
+- Added `PhysicalConstant` struct consisting of a value (`double`) and unit (`string`)
 
 ## Todo
 
@@ -34,3 +35,8 @@
 - Creation of a class `Particule`
 - Creation of tests `Particule`
 - Replace getters with readers inside class definition (we can trust ourselves) --> What if we change the representation from (x, y, z) to (phi, theta, rho) or (phi, rho, z). We would have to change the entire classe to cope with that change !!
+- Create a smallnumber class for manipulating small numbers
+
+## Questions
+
+- Can we use `constexpr` for structs (`PhysicalConstant`)
