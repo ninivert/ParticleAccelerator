@@ -906,7 +906,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h1 id="folder-structure">Folder structure</h1>
 <ul>
 <li><code>/</code>: <code>Makefile</code>, <code>README.md</code>, <code>.gitignore</code></li>
-<li><code>/bin</code>: executables</li>
+<li><code>/bin</code>: executables (<code>.bin</code>)</li>
 <li><code>/build</code>: compiled files (<code>.o</code>)</li>
 <li><code>/data</code>: images, saves, config, etc.</li>
 <li><code>/dev</code>: useful files for unified development (snippets, etc.)</li>
@@ -961,7 +961,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>Test performance of storing coordinates as doubles or an array</li>
 <li>Creation of a class <code>Particule</code></li>
 <li>Creation of tests <code>Particule</code></li>
-<li>Replace getters with readers inside class definition (we can trust ourselves) =&gt; What if we change the representation from (x, y, z) to (phi, theta, rho) or (phi, rho, z) We would have to change the entire classe to cope with that change</li>
+<li>Replace getters with readers inside class definition (we can trust ourselves) --&gt; What if we change the representation from (x, y, z) to (phi, theta, rho) or (phi, rho, z). We would have to change the entire classe to cope with that change !!</li>
 </ul>
 <h1 id="réponses">Réponses</h1>
 <h2 id="semaine-1">Semaine 1</h2>
@@ -995,8 +995,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>N/A</p>
 <h2 id="semaine-3">Semaine 3</h2>
 <blockquote>
-<p>Avez-vous ajouté un constructeur de copie ? Pourquoi (justifiez votre choix) ? Oui, c'est toujours pratique de pouvoir déclarer un nouveau vecteur à partir d'un vecteur déjà existant.</p>
+<p>Avez-vous ajouté un constructeur de copie ? Pourquoi (justifiez votre choix) ?</p>
 </blockquote>
+<p>Oui, c'est toujours pratique de pouvoir déclarer un nouveau vecteur à partir d'un vecteur déjà existant.</p>
 <blockquote>
 <p>Si l'on souhaitait ajouter un constructeur par coordonnées sphériques (deux angles et une longueur),</p>
 <ul>
@@ -1031,7 +1032,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <blockquote>
 <p>Quels opérateurs avez vous introduits ?</p>
 </blockquote>
-<p><a href="./Classes/Vector3D.md">Voir documentation</a>.</p>
+<p><a href="#vector3d">Voir documentation</a>.</p>
 <blockquote>
 <p>Comment avez-vous implémenté gamma : comme attribut ou comme méthode ? Même question pour l'énergie.</p>
 </blockquote>

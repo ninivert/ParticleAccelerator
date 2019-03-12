@@ -36,6 +36,7 @@ N/A
 ## Semaine 3
 
 > Avez-vous ajouté un constructeur de copie ? Pourquoi (justifiez votre choix) ?
+
 Oui, c'est toujours pratique de pouvoir déclarer un nouveau vecteur à partir d'un vecteur déjà existant.
 
 > Si l'on souhaitait ajouter un constructeur par coordonnées sphériques (deux angles et une longueur),
@@ -56,7 +57,7 @@ Tout dépend de comment on souhaite utiliser la classe. Pour l'instant, il nous 
 
 > Quels opérateurs avez vous introduits ?
 
-[Voir documentation](./Classes/Vector3D.md).
+[Voir documentation](#vector3d).
 
 > Comment avez-vous implémenté gamma : comme attribut ou comme méthode ? Même question pour l'énergie.
 

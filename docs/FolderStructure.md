@@ -1,7 +1,7 @@
 # Folder structure
 
 - `/`: `Makefile`, `README.md`, `.gitignore`
-- `/bin`: executables
+- `/bin`: executables (`.bin`)
 - `/build`: compiled files (`.o`)
 - `/data`: images, saves, config, etc.
 - `/dev`: useful files for unified development (snippets, etc.)
