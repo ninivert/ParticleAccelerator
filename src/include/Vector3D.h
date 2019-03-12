@@ -27,6 +27,7 @@ public:
 	void setX(double const& _x);
 	void setY(double const& _y);
 	void setZ(double const& _z);
+	void setNull();
 
 	// Internal Overloading
 

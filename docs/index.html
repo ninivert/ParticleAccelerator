@@ -875,6 +875,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="#week-2">Week 2</a></li>
 <li><a href="#week-3">Week 3</a></li>
 <li><a href="#todo">Todo</a></li>
+<li><a href="#questions">Questions</a></li>
 </ul></li>
 <li><a href="#réponses">Réponses</a><ul>
 <li><a href="#semaine-1">Semaine 1</a></li>
@@ -953,15 +954,23 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>Improved <code>Makefile</code> style and added <code>dir</code> command to create required directories</li>
 <li>Check <code>Vector3D</code> class overloading for optimization</li>
 <li>Move <code>Vector3D</code>overloading from <code>__method__</code> directly to the operator</li>
+<li>Added physical constants in <code>globals.h</code></li>
 </ul>
 <h2 id="todo">Todo</h2>
 <ul>
+<li>Add <code>PhysicalConstant</code> struct consisting of a value (<code>double</code>) and unit (<code>string</code>)</li>
 <li>Add large scale error management -&gt; custom <code>Exception</code> sub-classes</li>
 <li>Answer questions week 3</li>
 <li>Test performance of storing coordinates as doubles or an array</li>
 <li>Creation of a class <code>Particule</code></li>
 <li>Creation of tests <code>Particule</code></li>
 <li>Replace getters with readers inside class definition (we can trust ourselves) --&gt; What if we change the representation from (x, y, z) to (phi, theta, rho) or (phi, rho, z). We would have to change the entire classe to cope with that change !!</li>
+<li>Create a smallnumber class for manipulating small numbers</li>
+<li>Be carefull with overflows</li>
+</ul>
+<h2 id="questions">Questions</h2>
+<ul>
+<li>Can we use <code>constexpr</code> for structs (<code>PhysicalConstant</code>)</li>
 </ul>
 <h1 id="réponses">Réponses</h1>
 <h2 id="semaine-1">Semaine 1</h2>
@@ -985,7 +994,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>Méthodes publiques propres à chaque instance de la classe</li>
 <li>Méthodes statiques avec <code>static</code></li>
 </ul>
-<p>Voir la page <a href="Classes/Vector3D.md">Vector3D</a> pour plus d'informations</p>
+<p><a href="#vector3d">Voir la documentation Vector3D</a> pour plus d'informations.</p>
 <blockquote>
 <p>Quels droits d'accès ?</p>
 </blockquote>
@@ -1036,6 +1045,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <blockquote>
 <p>Comment avez-vous implémenté gamma : comme attribut ou comme méthode ? Même question pour l'énergie.</p>
 </blockquote>
+<p>On stocke <code>gamma</code> comme un attribut simple, car nous comptons faire les calculs à partir de la quantité de mouvement (qui est un multiple de l'énergie).<br />
+Le choix logique est d'implémenter l'énergie comme une méthode <code>getEnergy</code>.</p>
 <h1 id="makefile"><code>Makefile</code></h1>
 <h2 id="available-make-commands">Available make commands</h2>
 <ul>

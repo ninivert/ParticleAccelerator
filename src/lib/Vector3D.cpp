@@ -1,7 +1,6 @@
 #include "src/include/Vector3D.h"
 
 using namespace std;
-using namespace GLOBALS;
 
 /****************************************************************
  * Constructors
@@ -34,6 +33,7 @@ double Vector3D::getZ() const { return z; }
 void Vector3D::setX(double const& _x) { x = _x; }
 void Vector3D::setY(double const& _y) { y = _y; }
 void Vector3D::setZ(double const& _z) { z = _z; }
+void Vector3D::setNull() { x = 0; y = 0; z = 0; }
 
 /****************************************************************
  * Internal overloading operator
@@ -125,9 +125,9 @@ double const operator * (Vector3D const& v1, Vector3D const& v2) {
 }
 
 bool const operator == (Vector3D const& v1, Vector3D const& v2) {
-	bool a = abs(v1.getX() - v2.getX()) < EPSILON;
-	bool b = abs(v1.getY() - v2.getY()) < EPSILON;
-	bool c = abs(v1.getZ() - v2.getZ()) < EPSILON;
+	bool a = abs(v1.getX() - v2.getX()) < GLOBALS::EPSILON;
+	bool b = abs(v1.getY() - v2.getY()) < GLOBALS::EPSILON;
+	bool c = abs(v1.getZ() - v2.getZ()) < GLOBALS::EPSILON;
 	return a and b and c;
 }
 
@@ -170,7 +170,6 @@ double Vector3D::tripleProduct(Vector3D const& v1, Vector3D const& v2, Vector3D 
  * Cout overloading
  ****************************************************************/
 
-ostream& operator<< (ostream& stream, Vector3D const& v) {
-	stream << v.to_string();
-	return stream;
+ostream& operator << (ostream& stream, Vector3D const& v) {
+	return stream << v.to_string();
 }

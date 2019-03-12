@@ -31,11 +31,15 @@ v.getY(); // -2
 Vector3D v(1, -2, 6);
 v.setY(-9);
 v.getY(); // -9
+v.setNull(); // v(0, 0, 0)
 ```
 
 - `void set<X>(double)`:
 	- Arguments
 		- `double`: value to assign the parameter
+	- Returns: none
+- `void setNull()`: resets the vector to the null vector
+	- Arguments: none
 	- Returns: none
 
 ## String representation

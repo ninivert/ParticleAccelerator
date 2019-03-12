@@ -42,7 +42,7 @@ vpath %.bin ./bin ./test/bin
 ##################################################################
 
 .PHONY: all clean cleanbuild cleanbin dir docs
-all: dir $(TARGET)
+all: dir docs $(TARGET)
 
 
 ##################################################################

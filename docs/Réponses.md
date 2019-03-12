@@ -21,7 +21,7 @@ On a préféré cela à l'utilisation de tableaux, moins intuitifs et puisque vu
 - Méthodes publiques propres à chaque instance de la classe
 - Méthodes statiques avec `static`
 
-Voir la page [Vector3D](Classes/Vector3D.md) pour plus d'informations
+[Voir la documentation Vector3D](#vector3d) pour plus d'informations.
 
 > Quels droits d'accès ?
 
@@ -61,6 +61,10 @@ Tout dépend de comment on souhaite utiliser la classe. Pour l'instant, il nous 
 
 > Comment avez-vous implémenté gamma : comme attribut ou comme méthode ? Même question pour l'énergie.
 
+On stocke `gamma` comme un attribut simple, car
 
+1. Nous comptons l'utiliser souvent pour évaluer la quantité de mouvement
+2. La quantité de mouvement (alors facile à calculer) est facile à interpréter phyisquement et nous semble beaucoup utilisée dans les calculs
+3. Manipuler les quantités `gamma` bien plus petites que les c^2 que l'énergie implique nous permettra de mieux comprendre et d'avoir une meilleur précision sur les résultats.
 
-
+Le choix logique est alors d'implémenter l'énergie comme une méthode `getEnergy`.
