@@ -29,7 +29,7 @@ namespace UNITS {
 
 namespace GLOBALS {
 	inline constexpr double EPSILON(1e-6); // For double comparaison
-	inline constexpr double DT(1e-11); // Timestep
+	inline constexpr double DT(1e-1); // Timestep
 };
 
 #endif

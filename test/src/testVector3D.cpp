@@ -160,6 +160,10 @@ int main() {
 	// cout << "\nROTATION\n\n";
 
 	assert(v1.rotate((v1 ^ v2), M_PI) == v5 * (-1));
+
+	v1.setNull();
+
+	assert(v1 == Vector3D(0, 0, 0));
 		// cout << "\tpassed\n";
 		// cout << v1 * (-1) << endl;
 		// cout << v5 << endl;
