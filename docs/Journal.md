@@ -1,4 +1,6 @@
-# Week 1
+# Journal
+
+## Week 1
 
 - Added `Vector3D` class
 - Wrote header file for `Vector3D`
@@ -8,7 +10,7 @@
 - Made `constants.h` file
 - Setup compilation and `Makefile`
 
-# Week 2
+## Week 2
 
 - `Makefile` template done
 - Change order of `const double` to `double const`
@@ -16,7 +18,7 @@
 - Change `Vector3D` (tests) to `testVector3D`
 - Change `Vector3D` constructor to a default constructor
 
-# Week 3
+## Week 3
 
 - Change constants to `inline` according to the C++17 norm
 - Rename `stringify` to `to_string` to comply to the C++ norm
@@ -24,7 +26,7 @@
 - Check `Vector3D` class overloading for optimization
 - Move `Vector3D `overloading from `__method__` directly to the operator
 
-# Todo
+## Todo
 
 - Add large scale error management -> custom `Exception` sub-classes
 - Answer questions week 3

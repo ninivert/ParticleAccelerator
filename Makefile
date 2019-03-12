@@ -41,7 +41,7 @@ vpath %.bin ./bin ./test/bin
 # ->    make clean
 ##################################################################
 
-.PHONY: all clean cleanbuild cleanbin dir
+.PHONY: all clean cleanbuild cleanbin dir docs
 all: dir $(TARGET)
 
 
@@ -110,3 +110,25 @@ dir:
 	@mkdir $(OPATH) -p
 	@mkdir $(BPATH) -p
 	@echo [$@] created necessary directories
+
+##################################################################
+# doc: generate documentation index.html
+##################################################################
+
+docs:
+	@pandoc docs/Index.md \
+			docs/FolderStructure.md \
+			docs/Conception.md \
+			docs/Journal.md \
+			docs/Réponses.md \
+			docs/Makefile.md \
+			docs/Classes/* \
+			-o docs/index.html \
+			--columns 1000 \
+			--include-in-header=docs/Pandoc/gh-pandoc.css.html \
+			--include-in-header=docs/Pandoc/custom.css.html \
+			--toc \
+			--highlight-style pygments \
+			--standalone 
+	@xdg-open docs/index.html
+	@echo [$@] generated documentation

@@ -1,25 +1,27 @@
-# Available make commands
+# `Makefile`
+
+## Available make commands
 
 - `make` : make all changed targets
 	- Compilation
 	- Link Editor
 
-## Compilation
+### Compilation
 
 - `make Vector3D.o` : compile Vector3D.o
 - `make testVector3D.o` : compile testVector3D.o
 - `make Test.o` : compile Test.o
 
-## Link editor
+### Link editor
 
 - `make testVector3D.bin` : link testVector3D.bin
 
 
-## Run
+### Run
 
 - `make run_testVector3D` : run tests for `Vector3D`
 
-## Clean
+### Clean
 
 - `make cleanbin` : remove all bin files from
 	- `/bin`
@@ -36,7 +38,7 @@
 	- `/test/build`
 
 
-# make options
+## make options
 
 - `-B` : Unconditionally make all targets
 - `-n -B` : Print the commands that would be executed, but do not execute them
