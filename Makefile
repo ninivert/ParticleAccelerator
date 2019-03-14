@@ -135,6 +135,7 @@ docs:
 	@pandoc docs/Index.md \
 			docs/FolderStructure.md \
 			docs/Conception.md \
+			docs/Speedtests.md \
 			docs/Journal.md \
 			docs/Réponses.md \
 			docs/Makefile.md \

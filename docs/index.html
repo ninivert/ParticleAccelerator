@@ -870,14 +870,24 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <ul>
 <li><a href="#folder-structure">Folder structure</a></li>
 <li><a href="#conception">Conception</a></li>
+<li><a href="#speedtests">Speedtests</a><ul>
+<li><a href="#vector3d-coordinates-c-style-array-vs-triplet-of-doubles"><code>Vector3D</code> coordinates: c-style array vs triplet of doubles</a><ul>
+<li><a href="#c-style">c-style</a></li>
+<li><a href="#triplet-of-doubles">Triplet of doubles</a></li>
+<li><a href="#results">Results</a></li>
+</ul></li>
+<li><a href="#return-type-for-operator-overloading">Return type for operator overloading</a><ul>
+<li><a href="#return-type-void">Return type <code>void</code></a></li>
+<li><a href="#return-type-vector">Return type <code>Vector&amp;</code></a></li>
+<li><a href="#results-1">Results</a></li>
+</ul></li>
+</ul></li>
 <li><a href="#journal">Journal</a><ul>
 <li><a href="#week-1">Week 1</a></li>
 <li><a href="#week-2">Week 2</a></li>
 <li><a href="#week-3">Week 3</a></li>
 <li><a href="#todo">Todo</a></li>
 <li><a href="#questions">Questions</a></li>
-</ul></li>
-<li><a href="#réponses">Réponses</a><ul>
 <li><a href="#semaine-1">Semaine 1</a></li>
 <li><a href="#semaine-2">Semaine 2</a></li>
 <li><a href="#semaine-3">Semaine 3</a></li>
@@ -928,6 +938,115 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul>
 <h1 id="conception">Conception</h1>
 <p>Description de la hiérarchie de classes utilisées (relations d'héritage et d'encapsulation)</p>
+<h1 id="speedtests">Speedtests</h1>
+<p>In this section we try out different code snippets and get their execution time using the <code>time</code> command.</p>
+<h2 id="vector3d-coordinates-c-style-array-vs-triplet-of-doubles"><code>Vector3D</code> coordinates: c-style array vs triplet of doubles</h2>
+<p>We compared performance of storing <code>Vector3D</code> coordinates in a c-style array and in a triplet of doubles.<br />
+Using the <code>array</code> library gave us horrible performance that couldn't even compete against the other tests.</p>
+<h3 id="c-style">c-style</h3>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="kw">class</span> Vector {
+<span class="kw">public</span>:
+    Vector(<span class="dt">double</span> <span class="at">const</span>&amp; x, <span class="dt">double</span> <span class="at">const</span>&amp; y, <span class="dt">double</span> <span class="at">const</span>&amp; z) {
+        coords[<span class="dv">0</span>] = x;
+        coords[<span class="dv">1</span>] = y;
+        coords[<span class="dv">2</span>] = z;
+    }
+
+    <span class="dt">void</span> <span class="kw">operator</span> += (Vector <span class="at">const</span>&amp; v) {
+        coords[<span class="dv">0</span>] += v.coords[<span class="dv">0</span>];
+        coords[<span class="dv">1</span>] += v.coords[<span class="dv">1</span>];
+        coords[<span class="dv">2</span>] += v.coords[<span class="dv">2</span>];
+        <span class="cf">return</span> *<span class="kw">this</span>;
+    }
+
+<span class="kw">private</span>:
+    <span class="dt">double</span> coords[<span class="dv">3</span>];
+};</code></pre></div>
+<h3 id="triplet-of-doubles">Triplet of doubles</h3>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="kw">class</span> Vector {
+<span class="kw">public</span>:
+    Vector(<span class="dt">double</span> <span class="at">const</span>&amp; _x, <span class="dt">double</span> <span class="at">const</span>&amp; _y, <span class="dt">double</span> <span class="at">const</span>&amp; _z) {
+        x = _x;
+        y = _y;
+        z = _z;
+    }
+
+    <span class="dt">void</span> <span class="kw">operator</span> += (Vector <span class="at">const</span>&amp; v) {
+        x += v.x;
+        y += v.y;
+        z += v.z;
+        <span class="cf">return</span> *<span class="kw">this</span>;
+    }
+
+<span class="kw">private</span>:
+    <span class="dt">double</span> x;
+    <span class="dt">double</span> y;
+    <span class="dt">double</span> z;
+};</code></pre></div>
+<h3 id="results">Results</h3>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">int</span> main() {
+    Vector v(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>);
+
+    <span class="cf">for</span> (<span class="dt">int</span> i(<span class="dv">0</span>); i &lt; <span class="fl">1e9</span>; ++i) {
+        v += Vector(i, i<span class="dv">+1</span>, i<span class="dv">+2</span>);
+    }
+
+    <span class="cf">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+<p>Results: on 1e9 iterations, no significant difference.</p>
+<h2 id="return-type-for-operator-overloading">Return type for operator overloading</h2>
+<h3 id="return-type-void">Return type <code>void</code></h3>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="kw">class</span> Vector {
+<span class="kw">public</span>:
+    Vector(<span class="dt">double</span> <span class="at">const</span>&amp; _x, <span class="dt">double</span> <span class="at">const</span>&amp; _y, <span class="dt">double</span> <span class="at">const</span>&amp; _z) {
+        x = _x;
+        y = _y;
+        z = _z;
+    }
+
+    <span class="dt">void</span> <span class="kw">operator</span> += (Vector <span class="at">const</span>&amp; v) {
+        x += v.x;
+        y += v.y;
+        z += v.z;
+    }
+
+<span class="kw">private</span>:
+    <span class="dt">double</span> x;
+    <span class="dt">double</span> y;
+    <span class="dt">double</span> z;
+};</code></pre></div>
+<h3 id="return-type-vector">Return type <code>Vector&amp;</code></h3>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="kw">class</span> Vector {
+<span class="kw">public</span>:
+    Vector(<span class="dt">double</span> <span class="at">const</span>&amp; _x, <span class="dt">double</span> <span class="at">const</span>&amp; _y, <span class="dt">double</span> <span class="at">const</span>&amp; _z) {
+        x = _x;
+        y = _y;
+        z = _z;
+    }
+
+    Vector&amp; <span class="kw">operator</span> += (Vector <span class="at">const</span>&amp; v) {
+        x += v.x;
+        y += v.y;
+        z += v.z;
+        <span class="cf">return</span> *<span class="kw">this</span>;
+    }
+
+<span class="kw">private</span>:
+    <span class="dt">double</span> x;
+    <span class="dt">double</span> y;
+    <span class="dt">double</span> z;
+};</code></pre></div>
+<h3 id="results-1">Results</h3>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">int</span> main() {
+    Vector v(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>);
+
+    <span class="cf">for</span> (<span class="dt">int</span> i(<span class="dv">0</span>); i &lt; <span class="fl">1e9</span>; ++i) {
+        v += Vector(i, i<span class="dv">+1</span>, i<span class="dv">+2</span>);
+    }
+
+    <span class="cf">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+<p>On 1e9 iterations, return type <code>void</code> was about 0.5 seconds faster.</p>
 <h1 id="journal">Journal</h1>
 <h2 id="week-1">Week 1</h2>
 <ul>
@@ -955,6 +1074,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>Check <code>Vector3D</code> class overloading for optimization</li>
 <li>Move <code>Vector3D</code>overloading from <code>__method__</code> directly to the operator</li>
 <li>Added physical constants in <code>globals.h</code></li>
+<li><a href="#speedtests">Speedtests</a></li>
 </ul>
 <h2 id="todo">Todo</h2>
 <ul>
@@ -970,9 +1090,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul>
 <h2 id="questions">Questions</h2>
 <ul>
-<li>Can we use <code>constexpr</code> for structs (<code>PhysicalConstant</code>)</li>
+<li>Can we use <code>constexpr</code> for structs (<code>PhysicalConstant</code>) ?</li>
+<li>Can you chain methods by replacing <code>void</code> with <code>Particle&amp;</code> s.t. <code>p.step().draw()</code> ?</li>
+<li>Constructeur de copie par defaut: why no work? # Réponses</li>
 </ul>
-<h1 id="réponses">Réponses</h1>
 <h2 id="semaine-1">Semaine 1</h2>
 <blockquote>
 <p>Comment représentez vous ces vecteurs ?</p>
@@ -1006,7 +1127,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <blockquote>
 <p>Avez-vous ajouté un constructeur de copie ? Pourquoi (justifiez votre choix) ?</p>
 </blockquote>
-<p>Oui, c'est toujours pratique de pouvoir déclarer un nouveau vecteur à partir d'un vecteur déjà existant.</p>
+<p>Oui, c'est nécessaire dans</p>
 <blockquote>
 <p>Si l'on souhaitait ajouter un constructeur par coordonnées sphériques (deux angles et une longueur),</p>
 <ul>
@@ -1045,8 +1166,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <blockquote>
 <p>Comment avez-vous implémenté gamma : comme attribut ou comme méthode ? Même question pour l'énergie.</p>
 </blockquote>
-<p>On stocke <code>gamma</code> comme un attribut simple, car nous comptons faire les calculs à partir de la quantité de mouvement (qui est un multiple de l'énergie).<br />
-Le choix logique est d'implémenter l'énergie comme une méthode <code>getEnergy</code>.</p>
+<p>On stocke <code>gamma</code> comme un attribut simple, car</p>
+<ol style="list-style-type: decimal">
+<li>Nous comptons l'utiliser souvent pour évaluer la quantité de mouvement</li>
+<li>La quantité de mouvement (alors facile à calculer) est facile à interpréter phyisquement et nous semble beaucoup utilisée dans les calculs</li>
+<li>Manipuler les quantités <code>gamma</code> bien plus petites que les c^2 que l'énergie implique nous permettra de mieux comprendre et d'avoir une meilleur précision sur les résultats.</li>
+</ol>
+<p>Le choix logique est alors d'implémenter l'énergie comme une méthode <code>getEnergy</code>.</p>
 <h1 id="makefile"><code>Makefile</code></h1>
 <h2 id="available-make-commands">Available make commands</h2>
 <ul>
@@ -1119,7 +1245,8 @@ v.getY(); <span class="co">// -2</span></code></pre></div>
 <h2 id="setters">Setters</h2>
 <div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">Vector3D v(<span class="dv">1</span>, <span class="dv">-2</span>, <span class="dv">6</span>);
 v.setY(<span class="dv">-9</span>);
-v.getY(); <span class="co">// -9</span></code></pre></div>
+v.getY(); <span class="co">// -9</span>
+v.setNull(); <span class="co">// v(0, 0, 0)</span></code></pre></div>
 <ul>
 <li><code>void set&lt;X&gt;(double)</code>:
 <ul>
@@ -1127,6 +1254,11 @@ v.getY(); <span class="co">// -9</span></code></pre></div>
 <ul>
 <li><code>double</code>: value to assign the parameter</li>
 </ul></li>
+<li>Returns: none</li>
+</ul></li>
+<li><code>void setNull()</code>: resets the vector to the null vector
+<ul>
+<li>Arguments: none</li>
 <li>Returns: none</li>
 </ul></li>
 </ul>
