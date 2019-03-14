@@ -44,4 +44,3 @@
 
 - Can we use `constexpr` for structs (`PhysicalConstant`) ?
 - Can you chain methods by replacing `void` with `Particle&` s.t. `p.step().draw()` ?
-- Constructeur de copie par defaut: why no work?

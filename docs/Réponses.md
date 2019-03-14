@@ -37,7 +37,7 @@ N/A
 
 > Avez-vous ajouté un constructeur de copie ? Pourquoi (justifiez votre choix) ?
 
-Oui, c'est nécessaire dans l'implémentation de nos surcharges.
+Non, en stockant les coordonnées du vecteur sous forme de `double`, la copie de surface fournie par défaut fonctionne parfaitement. Idem pour l'opérateur d'assignement `=`.
 
 > Si l'on souhaitait ajouter un constructeur par coordonnées sphériques (deux angles et une longueur),
 >

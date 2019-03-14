@@ -888,6 +888,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="#week-3">Week 3</a></li>
 <li><a href="#todo">Todo</a></li>
 <li><a href="#questions">Questions</a></li>
+</ul></li>
+<li><a href="#réponses">Réponses</a><ul>
 <li><a href="#semaine-1">Semaine 1</a></li>
 <li><a href="#semaine-2">Semaine 2</a></li>
 <li><a href="#semaine-3">Semaine 3</a></li>
@@ -1092,8 +1094,8 @@ Using the <code>array</code> library gave us horrible performance that couldn't 
 <ul>
 <li>Can we use <code>constexpr</code> for structs (<code>PhysicalConstant</code>) ?</li>
 <li>Can you chain methods by replacing <code>void</code> with <code>Particle&amp;</code> s.t. <code>p.step().draw()</code> ?</li>
-<li>Constructeur de copie par defaut: why no work? # Réponses</li>
 </ul>
+<h1 id="réponses">Réponses</h1>
 <h2 id="semaine-1">Semaine 1</h2>
 <blockquote>
 <p>Comment représentez vous ces vecteurs ?</p>
@@ -1127,7 +1129,7 @@ Using the <code>array</code> library gave us horrible performance that couldn't 
 <blockquote>
 <p>Avez-vous ajouté un constructeur de copie ? Pourquoi (justifiez votre choix) ?</p>
 </blockquote>
-<p>Oui, c'est nécessaire dans</p>
+<p>Non, en stockant les coordonnées du vecteur sous forme de <code>double</code>, la copie de surface fournie par défaut fonctionne parfaitement. Idem pour l'opérateur d'assignement <code>=</code>.</p>
 <blockquote>
 <p>Si l'on souhaitait ajouter un constructeur par coordonnées sphériques (deux angles et une longueur),</p>
 <ul>
@@ -1296,15 +1298,15 @@ Vector3D::tripleProduct(v1, v2, v3); <span class="co">// 361</span></code></pre>
 <li><code>+=</code>: addition, modifies and returns: <code>Vector3D&amp;</code></li>
 <li><code>-=</code>: substraction, modifies and returns: <code>Vector3D&amp;</code></li>
 <li><code>^=</code>: cross product, modifies and returns: <code>Vector3D&amp;</code></li>
-<li><code>+</code>: addition, returns: <code>Vector3D const&amp;</code></li>
-<li><code>-</code>: substraction, returns: <code>Vector3D const&amp;</code></li>
-<li><code>^</code>: cross product, returns: <code>Vector3D const&amp;</code></li>
-<li><code>*</code>: dot product, returns: <code>double const</code></li>
+<li><code>+</code>: addition, returns: <code>Vector3D</code></li>
+<li><code>-</code>: substraction, returns: <code>Vector3D</code></li>
+<li><code>^</code>: cross product, returns: <code>Vector3D</code></li>
+<li><code>*</code>: dot product, returns: <code>double</code></li>
 </ul>
 <blockquote>
 <p><strong>WARNING</strong>: the <code>^</code> operator has a low priority and is evaluated after relational operators. Use parantheses to prioritize the evaluation of <code>^</code>. See <a href="https://en.cppreference.com/w/cpp/language/operator_precedence">the reference</a> for more information.</p>
 </blockquote>
-<p>Scalar multiplication is also overloaded with the <code>*</code>, <code>*=</code>, <code>/</code> and <code>/=</code> operators (returns: <code>Vector3D&amp;</code>).</p>
+<p>Scalar multiplication is also overloaded with the <code>*</code>, <code>*=</code>, <code>/</code> and <code>/=</code> operators (returns: <code>Vector3D</code>).</p>
 <p>The <code>Vector3D</code> class implements a static function <code>double Vector3D::tripleProduct</code> to evaluate the triple product (parallelepiped spanned by the 3 vectors) of three vectors.</p>
 <ul>
 <li><code>Vector3D::tripleProduct(Vector3D const&amp;, Vector3D const&amp;, Vector3D const&amp;)</code>:
