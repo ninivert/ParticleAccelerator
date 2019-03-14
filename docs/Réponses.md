@@ -37,7 +37,7 @@ N/A
 
 > Avez-vous ajouté un constructeur de copie ? Pourquoi (justifiez votre choix) ?
 
-Oui, c'est toujours pratique de pouvoir déclarer un nouveau vecteur à partir d'un vecteur déjà existant.
+Oui, c'est nécessaire dans l'implémentation de nos surcharges.
 
 > Si l'on souhaitait ajouter un constructeur par coordonnées sphériques (deux angles et une longueur),
 >
