@@ -12,8 +12,8 @@ class Vector3D {
 public:
 	// Constructors
 
-	Vector3D();
-	Vector3D(double const& _x, double const& _y, double const& _z);
+	explicit Vector3D();
+	explicit Vector3D(double const& _x, double const& _y, double const& _z);
 	Vector3D(Vector3D const& v);
 
 	// Getters
