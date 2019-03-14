@@ -41,7 +41,7 @@ public:
 
 	// Methods
 
-	std::string to_string() const;
+	std::ostream& stream(std::ostream& stream) const;
 	double norm() const;
 	double normSquared() const;
 	Vector3D& rotate(Vector3D axis, double const& alpha);
