@@ -970,7 +970,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul>
 <h2 id="questions">Questions</h2>
 <ul>
-<li>Can we use <code>constexpr</code> for structs (<code>PhysicalConstant</code>)</li>
+<li>Can we use <code>constexpr</code> for structs (<code>PhysicalConstant</code>) ?</li>
+<li>Can you chain methods by replacing <code>void</code> with <code>Particle&amp;</code> s.t. <code>p.step().draw()</code> ?</li>
 </ul>
 <h1 id="réponses">Réponses</h1>
 <h2 id="semaine-1">Semaine 1</h2>
@@ -1045,8 +1046,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <blockquote>
 <p>Comment avez-vous implémenté gamma : comme attribut ou comme méthode ? Même question pour l'énergie.</p>
 </blockquote>
-<p>On stocke <code>gamma</code> comme un attribut simple, car nous comptons faire les calculs à partir de la quantité de mouvement (qui est un multiple de l'énergie).<br />
-Le choix logique est d'implémenter l'énergie comme une méthode <code>getEnergy</code>.</p>
+<p>On stocke <code>gamma</code> comme un attribut simple, car</p>
+<ol style="list-style-type: decimal">
+<li>Nous comptons l'utiliser souvent pour évaluer la quantité de mouvement</li>
+<li>La quantité de mouvement (alors facile à calculer) est facile à interpréter phyisquement et nous semble beaucoup utilisée dans les calculs</li>
+<li>Manipuler les quantités <code>gamma</code> bien plus petites que les c^2 que l'énergie implique nous permettra de mieux comprendre et d'avoir une meilleur précision sur les résultats.</li>
+</ol>
+<p>Le choix logique est alors d'implémenter l'énergie comme une méthode <code>getEnergy</code>.</p>
 <h1 id="makefile"><code>Makefile</code></h1>
 <h2 id="available-make-commands">Available make commands</h2>
 <ul>
@@ -1119,7 +1125,8 @@ v.getY(); <span class="co">// -2</span></code></pre></div>
 <h2 id="setters">Setters</h2>
 <div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">Vector3D v(<span class="dv">1</span>, <span class="dv">-2</span>, <span class="dv">6</span>);
 v.setY(<span class="dv">-9</span>);
-v.getY(); <span class="co">// -9</span></code></pre></div>
+v.getY(); <span class="co">// -9</span>
+v.setNull(); <span class="co">// v(0, 0, 0)</span></code></pre></div>
 <ul>
 <li><code>void set&lt;X&gt;(double)</code>:
 <ul>
@@ -1127,6 +1134,11 @@ v.getY(); <span class="co">// -9</span></code></pre></div>
 <ul>
 <li><code>double</code>: value to assign the parameter</li>
 </ul></li>
+<li>Returns: none</li>
+</ul></li>
+<li><code>void setNull()</code>: resets the vector to the null vector
+<ul>
+<li>Arguments: none</li>
 <li>Returns: none</li>
 </ul></li>
 </ul>

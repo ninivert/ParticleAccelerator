@@ -145,6 +145,12 @@ docs:
 			--include-in-header=docs/Pandoc/custom.css.html \
 			--toc \
 			--highlight-style pygments \
-			--standalone 
-	@xdg-open docs/index.html
+			--standalone
 	@echo [$@] generated documentation
+
+##################################################################
+# doc: run index.html
+##################################################################
+run_docs:
+	@xdg-open docs/index.html
+
