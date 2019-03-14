@@ -81,14 +81,14 @@ Operators `+=`, `-=`, `^=`, `+`, `-`, `*` and `^` are overloaded and correspond 
 - `+=`: addition, 		modifies and returns: `Vector3D&`
 - `-=`: substraction, 	modifies and returns: `Vector3D&`
 - `^=`: cross product, 	modifies and returns: `Vector3D&`
-- `+`: addition, 		returns: `Vector3D const&`
-- `-`: substraction, 	returns: `Vector3D const&`
-- `^`: cross product, 	returns: `Vector3D const&`
-- `*`: dot product, 	returns: `double const`
+- `+`: addition, 		returns: `Vector3D`
+- `-`: substraction, 	returns: `Vector3D`
+- `^`: cross product, 	returns: `Vector3D`
+- `*`: dot product, 	returns: `double`
 
 > __WARNING__: the `^` operator has a low priority and is evaluated after relational operators. Use parantheses to prioritize the evaluation of `^`. See [the reference](https://en.cppreference.com/w/cpp/language/operator_precedence) for more information.
 
-Scalar multiplication is also overloaded with the `*`, `*=`, `/` and `/=` operators (returns: `Vector3D&`).
+Scalar multiplication is also overloaded with the `*`, `*=`, `/` and `/=` operators (returns: `Vector3D`).
 
 The `Vector3D` class implements a static function `double Vector3D::tripleProduct` to evaluate the triple product (parallelepiped spanned by the 3 vectors) of three vectors.
 

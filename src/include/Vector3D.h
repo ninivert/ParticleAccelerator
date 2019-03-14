@@ -14,7 +14,6 @@ public:
 
 	explicit Vector3D();
 	explicit Vector3D(double const& _x, double const& _y, double const& _z);
-	Vector3D(Vector3D const& v);
 
 	// Getters
 
@@ -37,7 +36,6 @@ public:
 	Vector3D& operator *= (double const& lambda);
 	Vector3D& operator /= (double const& lambda);
 	Vector3D& operator ~ ();
-	void operator = (Vector3D const& v);
 
 	// Methods
 
@@ -62,12 +60,12 @@ private:
  * External overloading
  */
 
-Vector3D const& operator + (Vector3D v1, Vector3D const& v2);
-Vector3D const& operator - (Vector3D v1, Vector3D const& v2);
-Vector3D const& operator ^ (Vector3D v1, Vector3D const& v2);
-Vector3D const& operator * (Vector3D v, double const& lambda);
-Vector3D const& operator * (double const& lambda, Vector3D v);
-Vector3D const& operator / (Vector3D v, double const& lambda);
+Vector3D const operator + (Vector3D v1, Vector3D const& v2);
+Vector3D const operator - (Vector3D v1, Vector3D const& v2);
+Vector3D const operator ^ (Vector3D v1, Vector3D const& v2);
+Vector3D const operator * (Vector3D v, double const& lambda);
+Vector3D const operator * (double const& lambda, Vector3D v);
+Vector3D const operator / (Vector3D v, double const& lambda);
 double const operator * (Vector3D const& v1, Vector3D const& v2);
 bool const operator == (Vector3D const& v1, Vector3D const& v2);
 bool const operator != (Vector3D const& v1, Vector3D const& v2);

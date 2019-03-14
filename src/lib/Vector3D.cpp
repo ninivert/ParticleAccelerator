@@ -14,10 +14,6 @@ Vector3D::Vector3D(double const& _x, double const& _y, double const& _z)
 	: x(_x), y(_y), z(_z)
 	{}
 
-Vector3D::Vector3D(Vector3D const& v)
-	: x(v.x), y(v.y), z(v.z)
-	{}
-
 /****************************************************************
  * Getters
  ****************************************************************/
@@ -85,36 +81,30 @@ Vector3D& Vector3D::operator ~ () {
 	return *this;
 }
 
-void Vector3D::operator = (Vector3D const& v) {
-	x = v.getX();
-	y = v.getY();
-	z = v.getZ();
-}
-
 /****************************************************************
  * External operator overloading
  ****************************************************************/
 
-Vector3D const& operator + (Vector3D v1, Vector3D const& v2) {
+Vector3D const operator + (Vector3D v1, Vector3D const& v2) {
 	return (v1 += v2);
 }
 
-Vector3D const& operator - (Vector3D v1, Vector3D const& v2) {
+Vector3D const operator - (Vector3D v1, Vector3D const& v2) {
 	return (v1 -= v2);
 }
 
-Vector3D const& operator * (Vector3D v, double const& lambda) {
+Vector3D const operator * (Vector3D v, double const& lambda) {
 	return (v *= lambda);
 }
-Vector3D const& operator * (double const& lambda, Vector3D v) {
+Vector3D const operator * (double const& lambda, Vector3D v) {
 	return (v *= lambda);
 }
 
-Vector3D const& operator / (Vector3D v, double const& lambda) {
+Vector3D const operator / (Vector3D v, double const& lambda) {
 	return (v /= lambda);
 }
 
-Vector3D const& operator ^ (Vector3D v1, Vector3D const& v2) {
+Vector3D const operator ^ (Vector3D v1, Vector3D const& v2) {
 	return (v1 ^= v2);
 }
 

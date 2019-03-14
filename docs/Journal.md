@@ -26,6 +26,7 @@
 - Check `Vector3D` class overloading for optimization
 - Move `Vector3D `overloading from `__method__` directly to the operator
 - Added physical constants in `globals.h`
+- [Speedtests](#speedtests)
 
 ## Todo
 
