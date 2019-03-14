@@ -8,9 +8,9 @@
 using namespace std;
 
 int main() {
-	Particle p1(Vector3D(), Vector3D(), 1, 1);
-	cout << p1 << endl;
-	p1.exertForce(Vector3D(1, 0, 0));
-	p1.step();
-	cout << p1 << endl;
+	// Particle p1(Vector3D(), Vector3D(), 1, 1);
+	// cout << p1 << endl;
+	// p1.exertForce(Vector3D(1, 0, 0));
+	// p1.step();
+	// cout << p1 << endl;
 }
