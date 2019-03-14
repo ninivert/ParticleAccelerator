@@ -1,6 +1,8 @@
 #pragma once
 
 #include <string>
+#include <sstream>
+#include <iomanip>
 #include <cmath>
 #include "src/globals.h"
 #include "src/include/Vector3D.h"
@@ -27,7 +29,6 @@ public:
 	Vector3D getPos() const;
 
 	// Methods
-
 	std::string to_string() const;
 	void step(double dt = GLOBALS::DT);
 	void exertForce(Vector3D const& force);

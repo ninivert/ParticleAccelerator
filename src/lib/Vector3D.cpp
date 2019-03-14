@@ -129,11 +129,13 @@ bool const operator != (Vector3D const& v1, Vector3D const& v2) {
  * Methods
  ****************************************************************/
 
-ostream& Vector3D::stream(ostream& stream) const {
+string Vector3D::to_string() const {
+	stringstream stream;
+	stream << scientific << setprecision(5);
 	stream	<< "("s << getX()
 			<< ", "s << getY()
 			<< ", "s << getZ() << ")"s;
-	return stream;
+	return stream.str();
 }
 
 double Vector3D::norm() const {
@@ -164,5 +166,5 @@ double Vector3D::tripleProduct(Vector3D const& v1, Vector3D const& v2, Vector3D 
  ****************************************************************/
 
 ostream& operator << (ostream& stream, Vector3D const& v) {
-	return stream << v.stream(stream);
+	return stream << v.to_string();
 }

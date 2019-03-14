@@ -7,10 +7,9 @@ using namespace std;
  ****************************************************************/
 
 Particle::Particle(Vector3D const& pos, Vector3D const& speed, double mass, double charge)
-: pos(pos), momentum(speed * mass), mass(mass),
+: pos(pos), momentum(mass * speed), mass(mass),
   charge(charge), forces(Vector3D())
 {}
-
 /****************************************************************
  * Getters
  ****************************************************************/
@@ -24,6 +23,7 @@ double Particle::getGamma() const {
 }
 
 double Particle::getMass() const { return mass; }
+
 double Particle::getCharge() const { return charge * CONSTANTS::E; }
 Vector3D Particle::getSpeed() const { return momentum / getMass(); }
 Vector3D Particle::getForces() const { return forces; }
@@ -36,15 +36,16 @@ Vector3D Particle::getPos() const { return pos; }
  ****************************************************************/
 
 string Particle::to_string() const {
-	string str("Particule : \n");
-	str += "\tPosition: "s + getPos().to_string() + " ("s + UNITS::DISTANCE + ")\n"s;
-	str += "\tSpeed:    "s + getSpeed().to_string() + "\n"s;
-	str += "\tGamma:    "s + std::to_string(getGamma()) + "\n"s;
-	str += "\tEnergy:   "s + std::to_string(getEnergyGeV()) + " (" + UNITS::ENERGY + ")\n"s;
-	str += "\tMass:     "s + std::to_string(getMass()) + " ("s + UNITS::MASS + ")\n"s;
-	str += "\tCharge:   "s + std::to_string(getCharge()) + " ("s + UNITS::CHARGE + ")\n"s;
-	str += "\tForces:   "s + getForces().to_string() + " ("s + UNITS::FORCE + ")\n"s;
-	return str;
+	stringstream stream;
+	stream << scientific << setprecision(6);
+	stream 	<< "Position: "s << getPos() << " ("s + UNITS::DISTANCE << ")\n"s
+			<< "Speed:    "s << getSpeed() << "\n"s
+			<< "Gamma:    "s << getGamma() << "\n"s
+			<< "Energy:   "s << getEnergyGeV() << " (" << UNITS::ENERGY << ")\n"s
+			<< "Mass:     "s << getMass() << " ("s << UNITS::MASS << ")\n"s
+			<< "Charge:   "s << getCharge() << " ("s << UNITS::CHARGE << ")\n"s
+			<< "Forces:   "s << getForces() << " ("s << UNITS::FORCE << ")\n"s;
+	return stream.str();
 }
 
 /****************************************************************
@@ -55,7 +56,7 @@ void Particle::step(double dt) {
 	double const lambda(1/(getGamma() * getMass()));
 	momentum += getMass() * dt * lambda * getForces();
 	pos += dt * getSpeed();
-	forces.setNull();
+	// forces.setNull();
 }
 
 void Particle::exertForce(Vector3D const& force) { forces += force; }

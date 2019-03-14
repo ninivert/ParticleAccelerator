@@ -1,6 +1,8 @@
 #pragma once
 
 #include <string>
+#include <sstream>
+#include <iomanip>
 #include <cmath>
 #include "src/globals.h"
 
@@ -39,7 +41,7 @@ public:
 
 	// Methods
 
-	std::ostream& stream(std::ostream& stream) const;
+	std::string to_string() const;
 	double norm() const;
 	double normSquared() const;
 	Vector3D& rotate(Vector3D axis, double const& alpha);

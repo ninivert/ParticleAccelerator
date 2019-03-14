@@ -17,7 +17,7 @@ namespace CONSTANTS {
 
 namespace UNITS {
 	inline constexpr char ENERGY[]("GeV");
-	inline constexpr char CHARGE[]("GeV");
+	inline constexpr char CHARGE[]("Coulomb");
 	inline constexpr char MASS[]("GeV/c^2");
 	inline constexpr char MOMENTUM[]("GeV/c");
 	inline constexpr char FORCE[]("N");
