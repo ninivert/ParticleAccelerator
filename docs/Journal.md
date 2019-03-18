@@ -33,14 +33,12 @@
 ## Todo
 
 - Add large scale error management -> custom `Exception` sub-classes
-- Answer questions week 3
+- Decide on energy vs momentum
+- Fix `step` function
 - Creation of tests `Particule`
-- Replace getters with readers inside class definition (we can trust ourselves) --> What if we change the representation from (x, y, z) to (phi, theta, rho) or (phi, rho, z). We would have to change the entire classe to cope with that change !!
-- Create a smallnumber class for manipulating small numbers
-- Be carefull with overflows
 - Add padding (ostream)
+- Add 2 constructors for particle
 
 ## Questions
 
-- Can we use `constexpr` for structs (`PhysicalConstant`) ?
 - Can you chain methods by replacing `void` with `Particle&` s.t. `p.step().draw()` ?
