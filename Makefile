@@ -74,6 +74,10 @@ testParticle.o: testParticle.cpp Particle.h Particle.cpp
 	@echo [$@] Compiling...
 	@$(CXX) $(CXXFLAGS) -c test/src/testParticle.cpp -o $(OTESTPATH)$@ -I ./
 
+testConverter.o: testConverter.cpp Converter.h
+	@echo [$@] Compiling...
+	@$(CXX) $(CXXFLAGS) -c test/src/testConverter.cpp -o $(OTESTPATH)$@ -I ./
+
 
 ##################################################################
 # Links editor and creation of executables
@@ -87,18 +91,29 @@ testParticle.bin: Vector3D.o Particle.o testParticle.o Test.o
 	@echo [$@] Linking...
 	@$(CXX) $(CXXFLAGS) test/build/testParticle.o test/build/Test.o build/Particle.o build/Vector3D.o -o $(BTESTPATH)$@
 
+testConverter.bin: testConverter.o Test.o Vector3D.o
+	@echo [$@] Linking...
+	@$(CXX) $(CXXFLAGS) test/build/testConverter.o test/build/Test.o build/Vector3D.o -o $(BTESTPATH)$@
+
 
 ##################################################################
 # Run tests
 ##################################################################
 
 run_testVector3D: testVector3D.bin
-	@echo Running [$@]
+	@echo [$@] Running tests...
 	@$(BTESTPATH)/testVector3D.bin
+	@echo [$@] Success !
 
 run_testParticle: testParticle.bin
-	@echo Running [$@]
+	@echo [$@] Running tests...
 	@$(BTESTPATH)/testParticle.bin
+	@echo [$@] Success !
+
+run_testConverter: testConverter.bin
+	@echo [$@] Running tests...
+	@$(BTESTPATH)/testConverter.bin
+	@echo [$@] Success !
 
 
 ##################################################################
