@@ -14,45 +14,6 @@ An instance of `Vector3D` can be initialized with
 - a triplet of `double`s representing the vector parameters, or
 - an existing instance of `Vector3D`, of which a copy will be made.
 
-## Getters
-
-```cpp
-Vector3D v(1, -2, 6);
-v.getY(); // -2
-```
-
-- `double get<X>()`
-	- Arguments: none
-	- Returns: `double`, parameter of the vector
-
-## Setters
-
-```cpp
-Vector3D v(1, -2, 6);
-v.setY(-9);
-v.getY(); // -9
-v.setNull(); // v(0, 0, 0)
-```
-
-- `void set<X>(double)`:
-	- Arguments
-		- `double`: value to assign the parameter
-	- Returns: none
-- `void setNull()`: resets the vector to the null vector
-	- Arguments: none
-	- Returns: none
-
-## String representation
-
-```cpp
-Vector3D v(1, -2, 6);
-std::cout << v.to_string() << endl; // (1, -2, 6)
-```
-
-- `std::string to_string()`:
-	- Arguments: none
-	- Returns: `string` representation of the vector.
-
 ## Arithmetic operations
 
 ```cpp
@@ -159,3 +120,43 @@ v1.rotate(v2, M_PI); // Vector3D(-4, 3, 0)
 	- Returns: `Vector3D&`: reference to the modified vector
 
 > __WARNING__: The angles are in radians
+
+
+## Getters
+
+```cpp
+Vector3D v(1, -2, 6);
+v.getY(); // -2
+```
+
+- `double get<X>()`
+	- Arguments: none
+	- Returns: `double`, parameter of the vector
+
+## Setters
+
+```cpp
+Vector3D v(1, -2, 6);
+v.setY(-9);
+v.getY(); // -9
+v.setNull(); // v(0, 0, 0)
+```
+
+- `void set<X>(double)`:
+	- Arguments
+		- `double`: value to assign the parameter
+	- Returns: none
+- `void setNull()`: resets the vector to the null vector
+	- Arguments: none
+	- Returns: none
+
+## String representation
+
+```cpp
+Vector3D v(1, -2, 6);
+std::cout << v.to_string() << endl; // (1, -2, 6)
+```
+
+- `std::string to_string()`:
+	- Arguments: none
+	- Returns: `string` representation of the vector.

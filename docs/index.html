@@ -907,16 +907,31 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="#make-options">make options</a></li>
 </ul></li>
 <li><a href="#converter.h"><code>Converter.h</code></a></li>
-<li><a href="#vector3d"><code>Vector3D</code></a><ul>
-<li><a href="#constructor">Constructor</a></li>
+<li><a href="#particle"><code>Particle</code></a><ul>
+<li><a href="#constructors">Constructors</a><ul>
+<li><a href="#using-velocity-only">Using velocity only</a></li>
+<li><a href="#using-a-normalized-direction-vector-and-energy">Using a normalized direction vector and energy</a></li>
+<li><a href="#arguments">Arguments</a></li>
+</ul></li>
+<li><a href="#physics-engine">Physics engine</a><ul>
+<li><a href="#integration-step">Integration step</a></li>
+<li><a href="#force-summation">Force summation</a></li>
+<li><a href="#lorentz-force">Lorentz force</a></li>
+</ul></li>
 <li><a href="#getters">Getters</a></li>
 <li><a href="#setters">Setters</a></li>
 <li><a href="#string-representation">String representation</a></li>
+</ul></li>
+<li><a href="#vector3d"><code>Vector3D</code></a><ul>
+<li><a href="#constructor">Constructor</a></li>
 <li><a href="#arithmetic-operations">Arithmetic operations</a></li>
 <li><a href="#boolean-operations">Boolean operations</a></li>
 <li><a href="#assignment-operations">Assignment operations</a></li>
 <li><a href="#norm-and-normalization">Norm and normalization</a></li>
 <li><a href="#rotation">Rotation</a></li>
+<li><a href="#getters-1">Getters</a></li>
+<li><a href="#setters-1">Setters</a></li>
+<li><a href="#string-representation-1">String representation</a></li>
 </ul></li>
 </ul>
 </div>
@@ -1326,6 +1341,83 @@ CONVERT::MomentumGeVtoSI(Vector3D(<span class="dv">1</span>, <span class="dv">2<
 <li><code>MomentumSItoGeV</code></li>
 </ul></li>
 </ul>
+<h1 id="particle"><code>Particle</code></h1>
+<h2 id="constructors">Constructors</h2>
+<p>There are two ways to initialize a particle.<br />
+Per default, units are expected in GeV. To specify units in the SI system, add <code>false</code> at the end of the argument list.</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// Using the velocity constructor</span>
+Particle p1(Vector3D(<span class="fl">3.00894</span>, <span class="fl">-0.391837</span>, <span class="dv">0</span>), Vector3D(<span class="dv">-210200</span>, <span class="fl">-2.64754e8</span>, <span class="dv">0</span>), <span class="fl">0.938272</span>, <span class="dv">1</span>);
+<span class="co">// Using the normalized direction + energy constructor</span>
+Particle p2(Vector3D(<span class="fl">2.99016</span>, <span class="fl">-0.391837</span>, <span class="dv">0</span>), <span class="dv">2</span>, Vector3D(<span class="dv">210200</span>, <span class="fl">-2.64754e8</span>, <span class="dv">0</span>), <span class="fl">0.938272</span>, <span class="dv">1</span>);
+cout &lt;&lt; p1 &lt;&lt; endl;
+cout &lt;&lt; p2 &lt;&lt; endl;
+p1.exertLorentzForce(Vector3D(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">7</span>));
+p2.exertLorentzForce(Vector3D(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">7</span>));
+p1.step();
+p2.step();
+cout &lt;&lt; p1 &lt;&lt; endl;
+cout &lt;&lt; p2 &lt;&lt; endl;</code></pre></div>
+<h3 id="using-velocity-only">Using velocity only</h3>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">Particle(
+    Vector3D <span class="at">const</span>&amp; pos,
+    Vector3D <span class="at">const</span>&amp; speed,
+    <span class="dt">double</span> <span class="at">const</span>&amp; mass,
+    <span class="dt">int</span> <span class="at">const</span>&amp; charge = <span class="dv">1</span>,
+    <span class="dt">bool</span> <span class="at">const</span>&amp; unitGeV = <span class="kw">true</span>
+);</code></pre></div>
+<h3 id="using-a-normalized-direction-vector-and-energy">Using a normalized direction vector and energy</h3>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">Particle(
+    Vector3D <span class="at">const</span>&amp; pos,
+    <span class="dt">double</span> <span class="at">const</span>&amp; energy,
+    Vector3D speed,
+    <span class="dt">double</span> <span class="at">const</span>&amp; mass,
+    <span class="dt">int</span> <span class="at">const</span>&amp; charge = <span class="dv">1</span>,
+    <span class="dt">bool</span> <span class="at">const</span>&amp; unitGeV = <span class="kw">true</span>
+);</code></pre></div>
+<h3 id="arguments">Arguments</h3>
+<ul>
+<li><code>Vector3D pos</code>: initial position of the particle</li>
+<li><code>Vector3D speed</code>: initial speed of the particle (if applicable)</li>
+<li><code>double energy</code>: intial energy of the particle (if applicable)</li>
+<li><code>double mass</code>: mass of the particle</li>
+<li><code>int charge = 1</code>: charge of the particle in multiples of the elementary charge (i.e. multiples of 1 eV, charge of the electron)</li>
+<li><code>bool unitGeV = true</code>: specify the units of the scalars given to the constructor</li>
+</ul>
+<h2 id="physics-engine">Physics engine</h2>
+<h3 id="integration-step">Integration step</h3>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">p.step();</code></pre></div>
+<p>Integrates the movement equations over a time step <code>dt</code>, which defaults to <code>GLOBALS::DT(1e-11)</code>.</p>
+<h3 id="force-summation">Force summation</h3>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// Exert the force of gravity</span>
+p.exertForce(Vector3D(<span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">9.81</span>*p.getMass()));</code></pre></div>
+<p>Exerts a force onto a particle until the next <code>step</code> call.</p>
+<h3 id="lorentz-force">Lorentz force</h3>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">p1.exertLorentzForce(Vector3D(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">7</span>));</code></pre></div>
+<p>Exerts the Lorentz force on a particle traversing a magnetic field given by the <code>B</code> vector over a timestep <code>dt</code> (defaults to <code>GLOBALS::DT(1e-11)</code>).</p>
+<h2 id="getters">Getters</h2>
+<p>Getters are available for most of the attributes:</p>
+<ul>
+<li><code>double getEnergy</code></li>
+<li><code>double getGamma</code></li>
+<li><code>double getMass</code></li>
+<li><code>double getCharge</code></li>
+<li><code>int getChargeNumber</code></li>
+<li><code>Vector3D getSpeed</code></li>
+<li><code>Vector3D getForces</code></li>
+<li><code>Vector3D getMoment</code></li>
+<li><code>Vector3D getPos</code></li>
+</ul>
+<h2 id="setters">Setters</h2>
+<p>No setters are available for this class (once the particle is created, the only way attributes can change is through time steps <code>Particle::step</code>).</p>
+<h2 id="string-representation">String representation</h2>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">Position</span>        (3.00894, -0.391837, 0)          <span class="kw">(</span><span class="ex">m</span><span class="kw">)</span>
+<span class="ex">Speed</span>           (-210200, -2.64754e+08, 0)       <span class="kw">(</span><span class="ex">m/s</span><span class="kw">)</span>
+<span class="ex">Gamma</span>           2.13157                          (-)
+<span class="ex">Energy</span>          1.99999                          (GeV)
+<span class="ex">Mass</span>            0.938272                         (GeV/c²)
+<span class="ex">Charge</span>          1.60218e-19                      (Coulomb)
+<span class="ex">Forces</span>          (0, 0, 0)                        <span class="kw">(</span><span class="ex">N</span><span class="kw">)</span></code></pre></div>
+<p><code>std::ostream operator &lt;&lt;</code> is overloaded to stream the <code>Particle::to_string</code> representation.</p>
 <h1 id="vector3d"><code>Vector3D</code></h1>
 <h2 id="constructor">Constructor</h2>
 <div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">Vector3D();
@@ -1336,46 +1428,6 @@ Vector3D(Vector3D <span class="at">const</span>&amp; v);</code></pre></div>
 <li>nothing so the vector will be initialized with <code>(0.0, 0.0, 0.0)</code>, or</li>
 <li>a triplet of <code>double</code>s representing the vector parameters, or</li>
 <li>an existing instance of <code>Vector3D</code>, of which a copy will be made.</li>
-</ul>
-<h2 id="getters">Getters</h2>
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">Vector3D v(<span class="dv">1</span>, <span class="dv">-2</span>, <span class="dv">6</span>);
-v.getY(); <span class="co">// -2</span></code></pre></div>
-<ul>
-<li><code>double get&lt;X&gt;()</code>
-<ul>
-<li>Arguments: none</li>
-<li>Returns: <code>double</code>, parameter of the vector</li>
-</ul></li>
-</ul>
-<h2 id="setters">Setters</h2>
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">Vector3D v(<span class="dv">1</span>, <span class="dv">-2</span>, <span class="dv">6</span>);
-v.setY(<span class="dv">-9</span>);
-v.getY(); <span class="co">// -9</span>
-v.setNull(); <span class="co">// v(0, 0, 0)</span></code></pre></div>
-<ul>
-<li><code>void set&lt;X&gt;(double)</code>:
-<ul>
-<li>Arguments
-<ul>
-<li><code>double</code>: value to assign the parameter</li>
-</ul></li>
-<li>Returns: none</li>
-</ul></li>
-<li><code>void setNull()</code>: resets the vector to the null vector
-<ul>
-<li>Arguments: none</li>
-<li>Returns: none</li>
-</ul></li>
-</ul>
-<h2 id="string-representation">String representation</h2>
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">Vector3D v(<span class="dv">1</span>, <span class="dv">-2</span>, <span class="dv">6</span>);
-<span class="bu">std::</span>cout &lt;&lt; v.to_string() &lt;&lt; endl; <span class="co">// (1, -2, 6)</span></code></pre></div>
-<ul>
-<li><code>std::string to_string()</code>:
-<ul>
-<li>Arguments: none</li>
-<li>Returns: <code>string</code> representation of the vector.</li>
-</ul></li>
 </ul>
 <h2 id="arithmetic-operations">Arithmetic operations</h2>
 <div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">Vector3D v1(<span class="dv">2</span>, <span class="dv">-5</span>, <span class="dv">6</span>);
@@ -1471,5 +1523,45 @@ v1.rotate(v2, M_PI); <span class="co">// Vector3D(-4, 3, 0)</span></code></pre><
 <blockquote>
 <p><strong>WARNING</strong>: The angles are in radians</p>
 </blockquote>
+<h2 id="getters-1">Getters</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">Vector3D v(<span class="dv">1</span>, <span class="dv">-2</span>, <span class="dv">6</span>);
+v.getY(); <span class="co">// -2</span></code></pre></div>
+<ul>
+<li><code>double get&lt;X&gt;()</code>
+<ul>
+<li>Arguments: none</li>
+<li>Returns: <code>double</code>, parameter of the vector</li>
+</ul></li>
+</ul>
+<h2 id="setters-1">Setters</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">Vector3D v(<span class="dv">1</span>, <span class="dv">-2</span>, <span class="dv">6</span>);
+v.setY(<span class="dv">-9</span>);
+v.getY(); <span class="co">// -9</span>
+v.setNull(); <span class="co">// v(0, 0, 0)</span></code></pre></div>
+<ul>
+<li><code>void set&lt;X&gt;(double)</code>:
+<ul>
+<li>Arguments
+<ul>
+<li><code>double</code>: value to assign the parameter</li>
+</ul></li>
+<li>Returns: none</li>
+</ul></li>
+<li><code>void setNull()</code>: resets the vector to the null vector
+<ul>
+<li>Arguments: none</li>
+<li>Returns: none</li>
+</ul></li>
+</ul>
+<h2 id="string-representation-1">String representation</h2>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">Vector3D v(<span class="dv">1</span>, <span class="dv">-2</span>, <span class="dv">6</span>);
+<span class="bu">std::</span>cout &lt;&lt; v.to_string() &lt;&lt; endl; <span class="co">// (1, -2, 6)</span></code></pre></div>
+<ul>
+<li><code>std::string to_string()</code>:
+<ul>
+<li>Arguments: none</li>
+<li>Returns: <code>string</code> representation of the vector.</li>
+</ul></li>
+</ul>
 </body>
 </html>
