@@ -61,10 +61,14 @@ Tout dépend de comment on souhaite utiliser la classe. Pour l'instant, il nous 
 
 > Comment avez-vous implémenté gamma : comme attribut ou comme méthode ? Même question pour l'énergie.
 
-On stocke `gamma` comme un attribut simple, car
+`gamma` et `energy` sont implémentées sous forme d'attributs pour les raisons suivantes:
 
-1. Nous comptons l'utiliser souvent pour évaluer la quantité de mouvement
-2. La quantité de mouvement (alors facile à calculer) est facile à interpréter phyisquement et nous semble beaucoup utilisée dans les calculs
-3. Manipuler les quantités `gamma` bien plus petites que les c^2 que l'énergie implique nous permettra de mieux comprendre et d'avoir une meilleur précision sur les résultats.
+1. On stocke la quantité de mouvement: il est en effet plus efficace d'un point de vue algorithmique de la manipuler plutôt que gamma ou l'énergie, gourmandes en racines carrées et autres opérations lentes.
+2. Gamma et l'énergie sont alors juste utiles à deux moments: l'initialisation et l'affichage. Inutile alors de les stocker pour devoir les updater à chaque `Particle::step` !
 
-Le choix logique est alors d'implémenter l'énergie comme une méthode `getEnergy`.
+> Extra: quelles unités pour la représentation?
+
+Nous avons choisi d'utiliser les SI pour les raisons suivantes:
+
+1. Les équations du mouvement sont de base exprimées en SI. Si on avait pris des GeV, il aurait fallu faire beaucoup de conversions !
+2. L'ordinateur se "fiche" bien de manipuler des SI ou des GeV. Les `double` peuvent représenter des réels allant de `2.2e−308` à `1.7e308` ([Wikipedia](https://en.wikipedia.org/wiki/Double-precision_floating-point_format#Double-precision_examples)), donc la précision n'est pas un problème ici. C'est à l'affichage (bien moins fréquent que l'appel de `Particle::step` !) que la conversion se fait à l'aide de `CONVERT::<...>SItoGeV` pour que la sortie soit un peu plus agréable à lire.

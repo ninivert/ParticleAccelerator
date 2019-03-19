@@ -886,8 +886,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="#week-1">Week 1</a></li>
 <li><a href="#week-2">Week 2</a></li>
 <li><a href="#week-3">Week 3</a></li>
+<li><a href="#week-4">Week 4</a></li>
 <li><a href="#todo">Todo</a></li>
-<li><a href="#questions">Questions</a></li>
 </ul></li>
 <li><a href="#réponses">Réponses</a><ul>
 <li><a href="#semaine-1">Semaine 1</a></li>
@@ -903,6 +903,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li><a href="#make-options">make options</a></li>
 </ul></li>
+<li><a href="#convert.h"><code>Convert.h</code></a></li>
 <li><a href="#vector3d"><code>Vector3D</code></a><ul>
 <li><a href="#constructor">Constructor</a></li>
 <li><a href="#getters">Getters</a></li>
@@ -1078,20 +1079,23 @@ Using the <code>array</code> library gave us horrible performance that couldn't 
 <li>Added physical constants in <code>globals.h</code></li>
 <li><a href="#speedtests">Speedtests</a></li>
 <li>Creation of a class <code>Particule</code></li>
-<li>Add <code>PhysicalConstant</code></li>
+<li>Added physical constants namespace</li>
+</ul>
+<h2 id="week-4">Week 4</h2>
+<ul>
+<li>Fixed <code>Particle::step</code> function -&gt; units used were incorrect</li>
+<li>Creation of tests for <code>Particule</code> and <code>Converter.h</code></li>
+<li>Decided on energy vs momentum -&gt; we used momentum (see <a href="#semaine-3">Réponses</a>)</li>
+<li>Added padding for <code>Vector3D</code> and particle display (ostream)</li>
+<li>Added 2 constructors for particle class</li>
+<li>Added <a href="#convert.h"><code>CONVERT</code></a> namespace to easily convert from SI units to GeV and reciprocally</li>
+<li>Added <code>STYLES</code> namespace for unified text output</li>
 </ul>
 <h2 id="todo">Todo</h2>
 <ul>
 <li>Add large scale error management -&gt; custom <code>Exception</code> sub-classes</li>
-<li>Decide on energy vs momentum</li>
-<li>Fix <code>step</code> function</li>
-<li>Creation of tests <code>Particule</code></li>
-<li>Add padding (ostream)</li>
-<li>Add 2 constructors for particle</li>
-</ul>
-<h2 id="questions">Questions</h2>
-<ul>
-<li>Can you chain methods by replacing <code>void</code> with <code>Particle&amp;</code> s.t. <code>p.step().draw()</code> ?</li>
+<li>Add accelerator class</li>
+<li>Add magnet class</li>
 </ul>
 <h1 id="réponses">Réponses</h1>
 <h2 id="semaine-1">Semaine 1</h2>
@@ -1166,13 +1170,19 @@ Using the <code>array</code> library gave us horrible performance that couldn't 
 <blockquote>
 <p>Comment avez-vous implémenté gamma : comme attribut ou comme méthode ? Même question pour l'énergie.</p>
 </blockquote>
-<p>On stocke <code>gamma</code> comme un attribut simple, car</p>
+<p><code>gamma</code> et <code>energy</code> sont implémentées sous forme d'attributs pour les raisons suivantes:</p>
 <ol style="list-style-type: decimal">
-<li>Nous comptons l'utiliser souvent pour évaluer la quantité de mouvement</li>
-<li>La quantité de mouvement (alors facile à calculer) est facile à interpréter phyisquement et nous semble beaucoup utilisée dans les calculs</li>
-<li>Manipuler les quantités <code>gamma</code> bien plus petites que les c^2 que l'énergie implique nous permettra de mieux comprendre et d'avoir une meilleur précision sur les résultats.</li>
+<li>On stocke la quantité de mouvement: il est en effet plus efficace d'un point de vue algorithmique de la manipuler plutôt que gamma ou l'énergie, gourmandes en racines carrées et autres opérations lentes.</li>
+<li>Gamma et l'énergie sont alors juste utiles à deux moments: l'initialisation et l'affichage. Inutile alors de les stocker pour devoir les updater à chaque <code>Particle::step</code> !</li>
 </ol>
-<p>Le choix logique est alors d'implémenter l'énergie comme une méthode <code>getEnergy</code>.</p>
+<blockquote>
+<p>Extra: quelles unités pour la représentation?</p>
+</blockquote>
+<p>Nous avons choisi d'utiliser les SI pour les raisons suivantes:</p>
+<ol style="list-style-type: decimal">
+<li>Les équations du mouvement sont de base exprimées en SI. Si on avait pris des GeV, il aurait fallu faire beaucoup de conversions !</li>
+<li>L'ordinateur se &quot;fiche&quot; bien de manipuler des SI ou des GeV. Les <code>double</code> peuvent représenter des réels allant de <code>2.2e−308</code> à <code>1.7e308</code> (<a href="https://en.wikipedia.org/wiki/Double-precision_floating-point_format#Double-precision_examples">Wikipedia</a>), donc la précision n'est pas un problème ici. C'est à l'affichage (bien moins fréquent que l'appel de <code>Particle::step</code> !) que la conversion se fait à l'aide de <code>CONVERT::&lt;...&gt;SItoGeV</code> pour que la sortie soit un peu plus agréable à lire.</li>
+</ol>
 <h1 id="makefile"><code>Makefile</code></h1>
 <h2 id="available-make-commands">Available make commands</h2>
 <ul>
@@ -1221,6 +1231,7 @@ Using the <code>array</code> library gave us horrible performance that couldn't 
 <li><code>-B</code> : Unconditionally make all targets</li>
 <li><code>-n -B</code> : Print the commands that would be executed, but do not execute them</li>
 </ul>
+<h1 id="convert.h"><code>Convert.h</code></h1>
 <h1 id="vector3d"><code>Vector3D</code></h1>
 <h2 id="constructor">Constructor</h2>
 <div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">Vector3D();
