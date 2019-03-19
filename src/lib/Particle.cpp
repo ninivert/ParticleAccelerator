@@ -6,23 +6,27 @@ using namespace std;
  * Constructor
  ****************************************************************/
 
-Particle::Particle(Vector3D const& pos, Vector3D const& speed, double const& masse, double const& charge, bool const& in_GeV)
-: pos(pos), momentum(masse * speed), mass(masse),
-  charge(charge), forces(Vector3D())
+Particle::Particle(Vector3D const& pos, Vector3D const& speed, double const& _mass, double const& charge, bool const& in_GeV)
+: pos(pos), mass(_mass), charge(charge), forces(Vector3D())
 {
 	if (in_GeV) {
 		mass = CONVERT::MassGeVtoSI(mass);
-		momentum = CONVERT::MomentumGeVtoSI(momentum);
 	}
+	momentum = speed * mass;
 }
 
-Particle::Particle(Vector3D const& pos, double const& energy, Vector3D speed, double const& masse, double const& charge, bool const& in_GeV)
-: pos(pos), momentum(~speed * momentumInit(energy, masse, in_GeV)),
-  mass(masse), charge(charge), forces(Vector3D())
+Particle::Particle(Vector3D const& pos, double const& energy, Vector3D speed, double const& _mass, double const& charge, bool const& in_GeV)
+: pos(pos), mass(_mass), charge(charge), forces(Vector3D())
 {
+	double factor (0);
 	if (in_GeV) {
+		factor = pow(mass / energy, 2);		// WARNING order
 		mass = CONVERT::MassGeVtoSI(mass);
+	} else {
+		factor = pow(pow(CONSTANTS::C, 2) * mass / energy, 2);
 	}
+
+	momentum = ~speed * mass * CONSTANTS::C * sqrt(1 - factor);
 }
 
 /****************************************************************
@@ -30,7 +34,7 @@ Particle::Particle(Vector3D const& pos, double const& energy, Vector3D speed, do
  ****************************************************************/
 
 double Particle::getEnergy() const {
-	return getGamma() * getMass();
+	return getGamma() * getMass() * pow(CONSTANTS::C, 2);
 }
 
 double Particle::getGamma() const {
@@ -51,7 +55,6 @@ Vector3D Particle::getPos() const { return pos; }
 
 string Particle::to_string() const {
 	stringstream stream;
-	stream << "A particle :\n";
 	stream << setprecision(6);
 	stream 	<< "\tPosition :\t"s << getPos() << " ("s + UNITS::DISTANCE << ")\n"s
 			<< "\tSpeed :\t\t"s << getSpeed() << "\n"s
@@ -61,14 +64,6 @@ string Particle::to_string() const {
 			<< "\tCharge :\t"s << getCharge() << " ("s << UNITS::CHARGE << ")\n"s
 			<< "\tForces :\t"s << getForces() << " ("s << UNITS::FORCE << ")\n\n"s;
 	return stream.str();
-}
-
-double const Particle::momentumInit(double const& energy, double const& mass, bool const& in_GeV) const {
-	if (in_GeV) {
-		return mass * CONSTANTS::C * sqrt(1 - pow(mass / energy, 2));
-	} else {
-		return mass * CONSTANTS::C * sqrt(1 - pow(pow(CONSTANTS::C, 2) * mass / energy, 2));
-	}
 }
 
 /****************************************************************
