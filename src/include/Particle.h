@@ -21,9 +21,9 @@ public:
 	// Constructor
 
 	// Constructor for init with velocity
-	Particle(Vector3D const& pos, Vector3D const& speed, double const& mass, double const& charge = 0, bool const& unitGeV = true);
+	Particle(Vector3D const& pos, Vector3D const& speed, double const& mass, int const& charge = 1, bool const& unitGeV = true);
 	// Constructor for init with velocity and energy
-	Particle(Vector3D const& pos, double const& energy, Vector3D speed, double const& mass, double const& charge = 0, bool const& unitGeV = true);
+	Particle(Vector3D const& pos, double const& energy, Vector3D speed, double const& mass, int const& charge = 1, bool const& unitGeV = true);
 
 	// Getters (SI units)
 

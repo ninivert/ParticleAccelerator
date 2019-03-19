@@ -8,7 +8,7 @@ using namespace std;
 
 // Constructor for init with velocity
 
-Particle::Particle(Vector3D const& pos, Vector3D const& speed, double const& _mass, double const& charge, bool const& unitGeV)
+Particle::Particle(Vector3D const& pos, Vector3D const& speed, double const& _mass, int const& charge, bool const& unitGeV)
 : pos(pos), mass(_mass), charge(charge), forces(Vector3D())
 {
 	if (unitGeV) mass = CONVERT::MassGeVtoSI(mass);
@@ -17,7 +17,7 @@ Particle::Particle(Vector3D const& pos, Vector3D const& speed, double const& _ma
 
 // Constructor for init with velocity and energy
 
-Particle::Particle(Vector3D const& pos, double const& energy, Vector3D speed, double const& _mass, double const& charge, bool const& unitGeV)
+Particle::Particle(Vector3D const& pos, double const& energy, Vector3D speed, double const& _mass, int const& charge, bool const& unitGeV)
 : pos(pos), mass(_mass), charge(charge), forces(Vector3D())
 {
 	double factor(0);
