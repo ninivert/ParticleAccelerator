@@ -8,7 +8,7 @@
  ****************************************************************/
 
 namespace CONSTANTS {
-	inline constexpr double eV(1.60217653e-19); // J
+	inline constexpr double EV(1.60217653e-19); // J
 	inline constexpr double E(1.60217653e-19); // C
 	inline constexpr double C(299792458); // m/s
 	inline constexpr double M_PROTON(0.938272); // GeV/c^2
@@ -17,11 +17,13 @@ namespace CONSTANTS {
 
 namespace UNITS {
 	inline constexpr char ENERGY[]("GeV");
-	inline constexpr char CHARGE[]("Coulomb");
-	inline constexpr char MASS[]("GeV/c^2");
 	inline constexpr char MOMENTUM[]("GeV/c");
+	inline constexpr char MASS[]("GeV/c²");
+	inline constexpr char SPEED[]("m/s");
 	inline constexpr char FORCE[]("N");
 	inline constexpr char DISTANCE[]("m");
+	inline constexpr char CHARGE[]("Coulomb");
+	inline constexpr char SCALAR[]("-");
 }
 
 /****************************************************************

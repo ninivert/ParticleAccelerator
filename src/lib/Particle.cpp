@@ -46,7 +46,7 @@ double Particle::getGamma() const {
 }
 
 int Particle::getChargeNumber() const { return charge; }
-double Particle::getCharge() const { return getChargeNumber() * CONSTANTS::E; }
+double Particle::getCharge() const { return getChargeNumber() * CONSTANTS::EV; }
 double Particle::getMass() const { return mass; }
 
 Vector3D Particle::getSpeed() const { return getMoment() / getMass(); }
@@ -73,13 +73,13 @@ string Particle::to_string() const {
 		<< setw(STYLES::PADDING_SM) << ""
 		<< setw(STYLES::PADDING_MD) << "Speed"s
 		<< setw(STYLES::PADDING_LG) << getSpeed()
-		<< ""s
+		<< " ("s + UNITS::SPEED << ")"s
 		<< endl
 		// Gamma
 		<< setw(STYLES::PADDING_SM) << ""
 		<< setw(STYLES::PADDING_MD) << "Gamma"s
 		<< setw(STYLES::PADDING_LG) << getGamma()
-		<< ""s
+		<< " ("s + UNITS::SCALAR << ")"s
 		<< endl
 		// Energy
 		<< setw(STYLES::PADDING_SM) << ""
@@ -138,7 +138,7 @@ void Particle::exertLorentzForce(Vector3D const& B, double const& dt) {
 	// Angle of correction
 	double alpha(asin(dt * F.norm() / (2 * getGamma() * getMoment().norm())));
 	F.rotate(getSpeed() ^ F, alpha);
-	
+
 	// Apply the force
 	exertForce(F);
 }
