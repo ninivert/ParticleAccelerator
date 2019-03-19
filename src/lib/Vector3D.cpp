@@ -131,10 +131,14 @@ bool const operator != (Vector3D const& v1, Vector3D const& v2) {
 
 string Vector3D::to_string() const {
 	stringstream stream;
-	stream << setprecision(6);
-	stream	<< "("s << getX()
-			<< ", "s << getY()
-			<< ", "s << getZ() << ")"s;
+	stream << setprecision(STYLES::PRECISION);
+	stream
+		// x
+		<< "("s << getX()
+		// y
+		<< ", "s << getY()
+		// z
+		<< ", "s << getZ() << ")"s;
 	return stream.str();
 }
 

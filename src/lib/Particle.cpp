@@ -6,21 +6,25 @@ using namespace std;
  * Constructor
  ****************************************************************/
 
-Particle::Particle(Vector3D const& pos, Vector3D const& speed, double const& _mass, double const& charge, bool const& in_GeV)
+// Constructor for init with velocity
+
+Particle::Particle(Vector3D const& pos, Vector3D const& speed, double const& _mass, double const& charge, bool const& unitGeV)
 : pos(pos), mass(_mass), charge(charge), forces(Vector3D())
 {
-	if (in_GeV) {
-		mass = CONVERT::MassGeVtoSI(mass);
-	}
+	if (unitGeV) mass = CONVERT::MassGeVtoSI(mass);
 	momentum = speed * mass;
 }
 
-Particle::Particle(Vector3D const& pos, double const& energy, Vector3D speed, double const& _mass, double const& charge, bool const& in_GeV)
+// Constructor for init with velocity and energy
+
+Particle::Particle(Vector3D const& pos, double const& energy, Vector3D speed, double const& _mass, double const& charge, bool const& unitGeV)
 : pos(pos), mass(_mass), charge(charge), forces(Vector3D())
 {
-	double factor (0);
-	if (in_GeV) {
-		factor = pow(mass / energy, 2);		// WARNING order
+	double factor(0);
+
+	if (unitGeV) {
+		// Order matters here: we first compute m²/E², then convert the mass
+		factor = pow(mass / energy, 2);
 		mass = CONVERT::MassGeVtoSI(mass);
 	} else {
 		factor = pow(pow(CONSTANTS::C, 2) * mass / energy, 2);
@@ -41,8 +45,9 @@ double Particle::getGamma() const {
 	return 1 / sqrt(1 - pow(getSpeed().norm() / CONSTANTS::C, 2));
 }
 
+int Particle::getChargeNumber() const { return charge; }
+double Particle::getCharge() const { return getChargeNumber() * CONSTANTS::E; }
 double Particle::getMass() const { return mass; }
-double Particle::getCharge() const { return charge * CONSTANTS::E; }
 
 Vector3D Particle::getSpeed() const { return getMoment() / getMass(); }
 Vector3D Particle::getForces() const { return forces; }
@@ -55,14 +60,51 @@ Vector3D Particle::getPos() const { return pos; }
 
 string Particle::to_string() const {
 	stringstream stream;
-	stream << setprecision(6);
-	stream 	<< "\tPosition :\t"s << getPos() << " ("s + UNITS::DISTANCE << ")\n"s
-			<< "\tSpeed :\t\t"s << getSpeed() << "\n"s
-			<< "\tGamma :\t\t"s << getGamma() << "\n"s
-			<< "\tEnergy :\t"s << CONVERT::EnergySItoGeV(getEnergy()) << " (" << UNITS::ENERGY << ")\n"s
-			<< "\tMass :\t\t"s << CONVERT::MassSItoGeV(mass) << " ("s << UNITS::MASS << ")\n"s
-			<< "\tCharge :\t"s << getCharge() << " ("s << UNITS::CHARGE << ")\n"s
-			<< "\tForces :\t"s << getForces() << " ("s << UNITS::FORCE << ")\n\n"s;
+	stream << setprecision(STYLES::PRECISION);
+	stream << left;
+	stream
+		// Position
+		<< setw(STYLES::PADDING_SM) << ""
+		<< setw(STYLES::PADDING_MD) << "Position"s
+		<< setw(STYLES::PADDING_LG) << getPos()
+		<< " ("s + UNITS::DISTANCE << ")"s
+		<< endl
+		// Speed
+		<< setw(STYLES::PADDING_SM) << ""
+		<< setw(STYLES::PADDING_MD) << "Speed"s
+		<< setw(STYLES::PADDING_LG) << getSpeed()
+		<< ""s
+		<< endl
+		// Gamma
+		<< setw(STYLES::PADDING_SM) << ""
+		<< setw(STYLES::PADDING_MD) << "Gamma"s
+		<< setw(STYLES::PADDING_LG) << getGamma()
+		<< ""s
+		<< endl
+		// Energy
+		<< setw(STYLES::PADDING_SM) << ""
+		<< setw(STYLES::PADDING_MD) << "Energy"s
+		<< setw(STYLES::PADDING_LG) << CONVERT::EnergySItoGeV(getEnergy())
+		<< " (" << UNITS::ENERGY << ")"s
+		<< endl
+		// Mass
+		<< setw(STYLES::PADDING_SM) << ""
+		<< setw(STYLES::PADDING_MD) << "Mass"s
+		<< setw(STYLES::PADDING_LG) << CONVERT::MassSItoGeV(mass)
+		<< " ("s << UNITS::MASS << ")"s
+		<< endl
+		// Charge
+		<< setw(STYLES::PADDING_SM) << ""
+		<< setw(STYLES::PADDING_MD) << "Charge"s
+		<< setw(STYLES::PADDING_LG) << getCharge()
+		<< " ("s << UNITS::CHARGE << ")"s
+		<< endl
+		// Forces
+		<< setw(STYLES::PADDING_SM) << ""
+		<< setw(STYLES::PADDING_MD) << "Forces"s
+		<< setw(STYLES::PADDING_LG) << getForces()
+		<< " ("s << UNITS::FORCE << ")"s
+		<< endl;
 	return stream.str();
 }
 
@@ -71,22 +113,33 @@ string Particle::to_string() const {
  ****************************************************************/
 
 void Particle::step(double const& dt) {
-	double const lambda(1/(getGamma() * getMass()));
+	// Do nothing if dt is null
+	if (dt == 0) { return; }
+
+	// Integrate the movement equations
+	double const lambda(1 / (getGamma() * getMass()));
 	momentum += getMass() * dt * lambda * getForces();
 	pos += dt * getSpeed();
-	// forces.setNull();
+	forces.setNull();
 }
 
 void Particle::exertForce(Vector3D const& force) { forces += force; }
 
-void Particle::exertMagnetForce(Vector3D const& B, double const& dt) {
-	if (abs(dt) < GLOBALS::DT) { return; }
+void Particle::exertLorentzForce(Vector3D const& B, double const& dt) {
+	// Do nothing if dt is null
+	if (dt == 0) { return; }
+
+	// Apply Lorentz force
 	Vector3D F(getSpeed());
 	F ^= B;
 	F *= getCharge();
 
+	// Correct force term due to Euler integration
+	// Angle of correction
 	double alpha(asin(dt * F.norm() / (2 * getGamma() * getMoment().norm())));
 	F.rotate(getSpeed() ^ F, alpha);
+	
+	// Apply the force
 	exertForce(F);
 }
 

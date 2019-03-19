@@ -31,6 +31,6 @@ namespace CONVERT {
 	inline double EnergyGeVtoSI(double const& val) { return EnergyEVtoSI(val) * 1e9; }
 	inline double EnergySItoEV(double const& val) { return val / CONSTANTS::E; }
 	inline double EnergySItoGeV(double const& val) { return EnergySItoEV(val) / 1e9; }
-};
+}
 
 #endif

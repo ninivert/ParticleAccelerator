@@ -13,8 +13,8 @@ int main() {
 	Particle p2(Vector3D(2.99016, -0.391837, 0), 2, Vector3D(210200, -2.64754e8, 0), 0.938272, 1);
 	cout << "P1 : \n" << p1 << endl;
 	cout << "P2 : \n" << p2 << endl;
-	p1.exertMagnetForce(Vector3D(0, 0, 7));
-	p2.exertMagnetForce(Vector3D(0, 0, 7));
+	p1.exertLorentzForce(Vector3D(0, 0, 7));
+	p2.exertLorentzForce(Vector3D(0, 0, 7));
 	p1.step();
 	p2.step();
 	cout << "P1 : \n" << p1 << endl;

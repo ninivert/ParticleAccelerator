@@ -46,14 +46,25 @@ all: dir docs $(TARGET)
 
 
 ##################################################################
+# Track updates in header files
+##################################################################
+
+globals.h:
+	@echo [$@] Updates tracked...
+
+Converter.h:
+	@echo [$@] Updates tracked...
+
+
+##################################################################
 # Compilation of source files and classes
 ##################################################################
 
-Vector3D.o: Vector3D.cpp Vector3D.h
+Vector3D.o: Vector3D.cpp Vector3D.h globals.h
 	@echo [$@] Compiling...
 	@$(CXX) $(CXXFLAGS) -c src/lib/Vector3D.cpp -o $(OPATH)$@ -I ./
 
-Particle.o: Particle.cpp Particle.h Converter.h
+Particle.o: Particle.cpp Particle.h Converter.h globals.h
 	@echo [$@] Compiling...
 	@$(CXX) $(CXXFLAGS) -c src/lib/Particle.cpp -o $(OPATH)$@ -I ./
 
@@ -62,7 +73,7 @@ Particle.o: Particle.cpp Particle.h Converter.h
 # Compilation of tests
 ##################################################################
 
-Test.o: Test.cpp Test.h
+Test.o: Test.cpp Test.h globals.h
 	@echo [$@] Compiling...
 	@$(CXX) $(CXXFLAGS) -c test/lib/Test.cpp -o $(OTESTPATH)$@ -I ./
 
@@ -70,7 +81,7 @@ testVector3D.o: testVector3D.cpp Vector3D.h Vector3D.cpp
 	@echo [$@] Compiling...
 	@$(CXX) $(CXXFLAGS) -c test/src/testVector3D.cpp -o $(OTESTPATH)$@ -I ./
 
-testParticle.o: testParticle.cpp Particle.h Particle.cpp
+testParticle.o: testParticle.cpp Particle.h Particle.cpp Converter.h
 	@echo [$@] Compiling...
 	@$(CXX) $(CXXFLAGS) -c test/src/testParticle.cpp -o $(OTESTPATH)$@ -I ./
 
@@ -168,6 +179,6 @@ docs:
 # doc: run index.html
 ##################################################################
 
-run_docs:
+run_docs: docs
 	@xdg-open docs/index.html
 

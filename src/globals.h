@@ -13,7 +13,7 @@ namespace CONSTANTS {
 	inline constexpr double C(299792458); // m/s
 	inline constexpr double M_PROTON(0.938272); // GeV/c^2
 	inline constexpr double M_ELECTRON(5.10999e-4); // GeV/c^2
-};
+}
 
 namespace UNITS {
 	inline constexpr char ENERGY[]("GeV");
@@ -22,7 +22,7 @@ namespace UNITS {
 	inline constexpr char MOMENTUM[]("GeV/c");
 	inline constexpr char FORCE[]("N");
 	inline constexpr char DISTANCE[]("m");
-};
+}
 
 /****************************************************************
  * Computational constants
@@ -31,6 +31,19 @@ namespace UNITS {
 namespace GLOBALS {
 	inline constexpr double EPSILON(1e-6); // For double comparaison
 	inline constexpr double DT(1e-11); // Timestep
-};
+}
+
+/****************************************************************
+ * Styling/display constants
+ ****************************************************************/
+
+namespace STYLES {
+	inline constexpr unsigned int PADDING_XSM(4);
+	inline constexpr unsigned int PADDING_SM(8);
+	inline constexpr unsigned int PADDING_MD(16);
+	inline constexpr unsigned int PADDING_LG(32);
+	inline constexpr unsigned int PADDING_XLG(64);
+	inline constexpr unsigned int PRECISION(6);
+}
 
 #endif
