@@ -869,7 +869,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="TOC">
 <ul>
 <li><a href="#folder-structure">Folder structure</a></li>
-<li><a href="#conception">Conception</a></li>
+<li><a href="#conception">Conception</a><ul>
+<li><a href="#hiérarchie-et-dépendances">Hiérarchie et dépendances</a></li>
+<li><a href="#interprétation-physique">Interprétation physique</a></li>
+</ul></li>
 <li><a href="#speedtests">Speedtests</a><ul>
 <li><a href="#vector3d-coordinates-c-style-array-vs-triplet-of-doubles"><code>Vector3D</code> coordinates: c-style array vs triplet of doubles</a><ul>
 <li><a href="#c-style">c-style</a></li>
@@ -903,7 +906,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li><a href="#make-options">make options</a></li>
 </ul></li>
-<li><a href="#convert.h"><code>Convert.h</code></a></li>
+<li><a href="#converter.h"><code>Converter.h</code></a></li>
 <li><a href="#vector3d"><code>Vector3D</code></a><ul>
 <li><a href="#constructor">Constructor</a></li>
 <li><a href="#getters">Getters</a></li>
@@ -940,7 +943,61 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 </ul>
 <h1 id="conception">Conception</h1>
+<h2 id="hiérarchie-et-dépendances">Hiérarchie et dépendances</h2>
 <p>Description de la hiérarchie de classes utilisées (relations d'héritage et d'encapsulation)</p>
+<h2 id="interprétation-physique">Interprétation physique</h2>
+<p>Nous stockons les valeurs physiques (masse, quantité de mouvement, énergie, charge, etc.) dans le système international (SI) et faisons la conversion en unités de GeV au moment opportun (affichage par exemple). Voir les <a href="#semaine-3">questions</a> et la <a href="#converter.h">documentation</a> pour plus d'informations.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Valeur physique</th>
+<th>Unité de stockage</th>
+<th>Unité d'affichage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Energie</td>
+<td>Non stocké</td>
+<td>GeV</td>
+</tr>
+<tr class="even">
+<td>Qté de mouvement</td>
+<td>kg*m/s</td>
+<td>GeV/c</td>
+</tr>
+<tr class="odd">
+<td>Masse</td>
+<td>kg</td>
+<td>GeV/c²</td>
+</tr>
+<tr class="even">
+<td>Vitesse</td>
+<td>Non stocké</td>
+<td>m/s</td>
+</tr>
+<tr class="odd">
+<td>Force</td>
+<td>N</td>
+<td>N</td>
+</tr>
+<tr class="even">
+<td>Distance</td>
+<td>m</td>
+<td>m</td>
+</tr>
+<tr class="odd">
+<td>Charge</td>
+<td>C</td>
+<td>C</td>
+</tr>
+<tr class="even">
+<td>Gamma</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
 <h1 id="speedtests">Speedtests</h1>
 <p>In this section we try out different code snippets and get their execution time using the <code>time</code> command.</p>
 <h2 id="vector3d-coordinates-c-style-array-vs-triplet-of-doubles"><code>Vector3D</code> coordinates: c-style array vs triplet of doubles</h2>
@@ -1231,7 +1288,44 @@ Using the <code>array</code> library gave us horrible performance that couldn't 
 <li><code>-B</code> : Unconditionally make all targets</li>
 <li><code>-n -B</code> : Print the commands that would be executed, but do not execute them</li>
 </ul>
-<h1 id="convert.h"><code>Convert.h</code></h1>
+<h1 id="converter.h"><code>Converter.h</code></h1>
+<p>Utility to convert from SI to GeV and back</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// 1 eV = 1.60217653e-19 Joules</span>
+CONVERT::EnergyEVtoSI(<span class="dv">1</span>); <span class="co">// 1.60217653e-19</span>
+
+<span class="co">// 0.938272 GeV/c² (mass of the proton) = 1.67262e-27 kg</span>
+CONVERT::MassGeVtoSI(CONSTANTS::M_PROTON);
+<span class="co">// 9.10938e-31 kg (mass of the electron) = 5.10999e-4 GeV/c²</span>
+CONVERT::MassSItoGeV(<span class="fl">9.10938e-31</span>);
+<span class="co">// 9.10938e-31 kg (mass of the electron) = 510999 eV/c²</span>
+CONVERT::MassSItoEV(<span class="fl">9.10938e-31</span>);
+
+<span class="co">// (1, 2, -1) GeV/c (momentum) = (5.34429e-19, 1.06886e-18, -5.34429e-19) kg*m/s</span>
+CONVERT::MomentumGeVtoSI(Vector3D(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">-1</span>));</code></pre></div>
+<p>Available functions:</p>
+<ul>
+<li>Mass (Argument: <code>double</code>, Returns: <code>double</code>)
+<ul>
+<li><code>MassEVtoSI</code></li>
+<li><code>MassGeVtoSI</code></li>
+<li><code>MassSItoEV</code></li>
+<li><code>MassSItoGeV</code></li>
+</ul></li>
+<li>Energy (Argument: <code>double</code>, Returns: <code>double</code>)
+<ul>
+<li><code>EnergyEVtoSI</code></li>
+<li><code>EnergyGeVtoSI</code></li>
+<li><code>EnergySItoEV</code></li>
+<li><code>EnergySItoGeV</code></li>
+</ul></li>
+<li>Momentum (Argument: <code>Vector3D</code>, Returns: <code>Vector3D</code>)
+<ul>
+<li><code>MomentumEVtoSI</code></li>
+<li><code>MomentumGeVtoSI</code></li>
+<li><code>MomentumSItoEV</code></li>
+<li><code>MomentumSItoGeV</code></li>
+</ul></li>
+</ul>
 <h1 id="vector3d"><code>Vector3D</code></h1>
 <h2 id="constructor">Constructor</h2>
 <div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">Vector3D();
