@@ -1,5 +1,8 @@
 #pragma once
 
+#ifndef VECTOR3D_H
+#define VECTOR3D_H
+
 #include <string>
 #include <sstream>
 #include <iomanip>
@@ -78,3 +81,5 @@ bool const operator != (Vector3D const& v1, Vector3D const& v2);
  */
 
 std::ostream& operator<< (std::ostream& stream, Vector3D const& v);
+
+#endif

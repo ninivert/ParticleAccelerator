@@ -1,11 +1,16 @@
 #pragma once
 
+#ifndef PARTICLE_H
+#define PARTICLE_H
+
+#include <cmath>
+#include <iomanip>
 #include <string>
 #include <sstream>
-#include <iomanip>
-#include <cmath>
-#include "src/globals.h"
+
+#include "src/include/Converter.h"
 #include "src/include/Vector3D.h"
+#include "src/globals.h"
 
 /**
  * Particle Class
@@ -15,35 +20,32 @@ class Particle {
 public:
 	// Constructor
 
-	Particle(Vector3D const& pos, Vector3D const& speed, double const& mass, double const& charge = 0, bool const& GeV = true);
+	Particle(Vector3D const& pos, Vector3D const& speed, double const& mass, double const& charge = 0, bool const& in_GeV = true);
 
 	// speed is copied in order to normalize it
-	Particle(Vector3D const& pos, double const& energy, Vector3D speed, double const& mass, double const& charge = 0, bool const& GeV = true);
+	Particle(Vector3D const& pos, double const& energy, Vector3D speed, double const& mass, double const& charge = 0, bool const& in_GeV = true);
 
 	// Getters
 
 		// SI units
 	double getEnergy() const;
-	double getCharge() const;
-	double getMass() const;
 	double getGamma() const;
+	double getMass() const;
+	double getCharge() const;
 
 	Vector3D getSpeed() const;
 	Vector3D getForces() const;
 	Vector3D getMoment() const;
 	Vector3D getPos() const;
 
-		// GeV units
-	double getMassGeV() const;
-	double getEnergyGeV() const;
-
-
 	// Methods
 	std::string to_string() const;
+	double const momentumInit(double const& energy, double const& mass, bool const& in_GeV) const;
+
+	//Physics engine
 	void step(double const& dt = GLOBALS::DT);
 	void exertForce(Vector3D const& force);
 	void exertMagnetForce(Vector3D const& B, double const& dt = GLOBALS::DT);
-
 
 private:
 	Vector3D pos;
@@ -59,3 +61,5 @@ private:
  */
 
 std::ostream& operator << (std::ostream& stream, Particle const& p);
+
+#endif

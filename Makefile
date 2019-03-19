@@ -53,7 +53,7 @@ Vector3D.o: Vector3D.cpp Vector3D.h
 	@echo [$@] Compiling...
 	@$(CXX) $(CXXFLAGS) -c src/lib/Vector3D.cpp -o $(OPATH)$@ -I ./
 
-Particle.o: Particle.cpp Particle.h
+Particle.o: Particle.cpp Particle.h Converter.h
 	@echo [$@] Compiling...
 	@$(CXX) $(CXXFLAGS) -c src/lib/Particle.cpp -o $(OPATH)$@ -I ./
 

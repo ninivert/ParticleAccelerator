@@ -131,7 +131,7 @@ bool const operator != (Vector3D const& v1, Vector3D const& v2) {
 
 string Vector3D::to_string() const {
 	stringstream stream;
-	stream << scientific << setprecision(5);
+	stream << setprecision(6);
 	stream	<< "("s << getX()
 			<< ", "s << getY()
 			<< ", "s << getZ() << ")"s;
