@@ -15,14 +15,14 @@ class Particle {
 public:
 	// Constructor
 
-	Particle(Vector3D const& pos, Vector3D const& speed, double const& mass, double const& charge = 0);
+	Particle(Vector3D const& pos, Vector3D const& speed, double const& mass, double const& charge = 0, bool const& GeV = true);
 
 	// speed is copied in order to normalize it
-	Particle(Vector3D const& pos, double const& energy, Vector3D speed, double const& mass, double const& charge = 0);
+	Particle(Vector3D const& pos, double const& energy, Vector3D speed, double const& mass, double const& charge = 0, bool const& GeV = true);
 
 	// Getters
 
-		// GeV units
+		// SI units
 	double getEnergy() const;
 	double getCharge() const;
 	double getMass() const;
@@ -33,10 +33,9 @@ public:
 	Vector3D getMoment() const;
 	Vector3D getPos() const;
 
-		// SI units
-	double getMassSI() const;
-	Vector3D getMomentSI() const;
-	Vector3D getSpeedSI() const;
+		// GeV units
+	double getMassGeV() const;
+	double getEnergyGeV() const;
 
 
 	// Methods
@@ -48,10 +47,10 @@ public:
 
 private:
 	Vector3D pos;
-	Vector3D momentum;	// GeV / c
+	Vector3D momentum;	// m * kg / s (GeV / c)
 	Vector3D forces;
-	double energy;		// GeV
-	double mass;		// GeV / c²
+	double energy;		// J (GeV)
+	double mass;		// kg (GeV / c²)
 	double const charge;
 };
 

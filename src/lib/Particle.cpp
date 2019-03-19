@@ -6,13 +6,13 @@ using namespace std;
  * Constructor
  ****************************************************************/
 
-Particle::Particle(Vector3D const& pos, Vector3D const& speed, double const& mass, double const& charge)
+Particle::Particle(Vector3D const& pos, Vector3D const& speed, double const& mass, double const& charge, bool const& GeV)
 : pos(pos), momentum(mass * speed), mass(mass),
   charge(charge), forces(Vector3D())
 {}
 
-Particle::Particle(Vector3D const& pos, double const& energy, Vector3D speed, double const& mass, double const& charge)
-: pos(pos), momentum(mass * CONSTANTS::C * sqrt(1 - pow( mass / energy, 2)) * ~speed),
+Particle::Particle(Vector3D const& pos, double const& energy, Vector3D speed, double const& mass, double const& charge, bool const& GeV)
+: pos(pos), momentum(mass * CONSTANTS::C * sqrt(1 - pow(pow(CONSTANTS::C, 2) * mass / energy, 2)) * ~speed),
   mass(mass), charge(charge), forces(Vector3D())
 {}
 
@@ -20,25 +20,22 @@ Particle::Particle(Vector3D const& pos, double const& energy, Vector3D speed, do
  * Getters
  ****************************************************************/
 
-double Particle::getEnergy() const {
-	return getGamma() * getMass();
+double Particle::getMassGeV() const { return mass * pow(CONSTANTS::C, 2) / (1e9 * CONSTANTS::E); }
+double Particle::getEnergyGeV() const {
+	return getGamma() * getMassGeV();
 }
+
 
 double Particle::getGamma() const {
 	return 1 / sqrt(1 - pow(getSpeed().norm() / CONSTANTS::C, 2));
 }
 
 double Particle::getMass() const { return mass; }
-double Particle::getMassSI() const { return mass * 1e9 * CONSTANTS::E / pow(CONSTANTS::C, 2); }
-
 double Particle::getCharge() const { return charge * CONSTANTS::E; }
+
 Vector3D Particle::getSpeed() const { return getMoment() / getMass(); }
-Vector3D Particle::getSpeedSI() const { return getMomentSI() / getMassSI(); }
 Vector3D Particle::getForces() const { return forces; }
 Vector3D Particle::getMoment() const { return momentum; }
-Vector3D Particle::getMomentSI() const {
-	return getMoment() * 1e9 * CONSTANTS::E / CONSTANTS::C;
-}
 Vector3D Particle::getPos() const { return pos; }
 
 
@@ -52,8 +49,8 @@ string Particle::to_string() const {
 	stream 	<< "Position: "s << getPos() << " ("s + UNITS::DISTANCE << ")\n"s
 			<< "Speed:    "s << getSpeed() << "\n"s
 			<< "Gamma:    "s << getGamma() << "\n"s
-			<< "Energy:   "s << getEnergy() << " (" << UNITS::ENERGY << ")\n"s
-			<< "Mass:     "s << getMass() << " ("s << UNITS::MASS << ")\n"s
+			<< "Energy:   "s << getEnergyGeV() << " (" << UNITS::ENERGY << ")\n"s
+			<< "Mass:     "s << getMassGeV() << " ("s << UNITS::MASS << ")\n"s
 			<< "Charge:   "s << getCharge() << " ("s << UNITS::CHARGE << ")\n"s
 			<< "Forces:   "s << getForces() << " ("s << UNITS::FORCE << ")\n"s;
 	return stream.str();
@@ -64,7 +61,7 @@ string Particle::to_string() const {
  ****************************************************************/
 
 void Particle::step(double const& dt) {
-	double const lambda(1/(getGamma() * getMassSI()));
+	double const lambda(1/(getGamma() * getMass()));
 	momentum += getMass() * dt * lambda * getForces();
 	pos += dt * getSpeed();
 	// forces.setNull();
@@ -77,7 +74,7 @@ void Particle::exertMagnetForce(Vector3D const& B, double const& dt) {
 	Vector3D F(getSpeed());
 	F ^= B;
 	F *= getCharge();
-	double alpha(asin(dt * F.norm() / (2 * getGamma() * getMomentSI().norm())));
+	double alpha(asin(dt * F.norm() / (2 * getGamma() * getMoment().norm())));
 	F.rotate(getSpeed() ^ F, alpha);
 
 	exertForce(F);
