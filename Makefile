@@ -72,13 +72,13 @@ Element.o: Element.cpp Element.h globals.h
 	@echo [$@] Compiling...
 	@$(CXX) $(CXXFLAGS) -c src/lib/Element.cpp -o $(OPATH)$@ -I ./
 
-MagnetElement.o: MagnetElement.cpp MagnetElement.h globals.h
+Dipole.o: Dipole.cpp Dipole.h globals.h
 	@echo [$@] Compiling...
-	@$(CXX) $(CXXFLAGS) -c src/lib/MagnetElement.cpp -o $(OPATH)$@ -I ./
+	@$(CXX) $(CXXFLAGS) -c src/lib/Dipole.cpp -o $(OPATH)$@ -I ./
 
-ElectrElement.o: ElectrElement.cpp ElectrElement.h globals.h
+Quadrupole.o: Quadrupole.cpp Quadrupole.h globals.h
 	@echo [$@] Compiling...
-	@$(CXX) $(CXXFLAGS) -c src/lib/ElectrElement.cpp -o $(OPATH)$@ -I ./
+	@$(CXX) $(CXXFLAGS) -c src/lib/Quadrupole.cpp -o $(OPATH)$@ -I ./
 
 Accelerator.o: Accelerator.cpp Accelerator.h globals.h
 	@echo [$@] Compiling...
@@ -122,9 +122,9 @@ testParticle.bin: Vector3D.o Particle.o testParticle.o Test.o
 	@echo [$@] Linking...
 	@$(CXX) $(CXXFLAGS) test/build/testParticle.o test/build/Test.o build/Particle.o build/Vector3D.o -o $(BTESTPATH)$@
 
-testAccelerator.bin: Vector3D.o Particle.o Element.o MagnetElement.o ElectrElement.o testAccelerator.o Test.o
+testAccelerator.bin: Vector3D.o Particle.o Element.o Dipole.o Quadrupole.o testAccelerator.o Test.o
 	@echo [$@] Linking...
-	@$(CXX) $(CXXFLAGS) test/build/testAccelerator.o test/build/Test.o build/Element.o build/MagnetElement.o build/ElectrElement.o build/Particle.o build/Vector3D.o -o $(BTESTPATH)$@
+	@$(CXX) $(CXXFLAGS) test/build/testAccelerator.o test/build/Test.o build/Element.o build/Dipole.o build/Quadrupole.o build/Particle.o build/Vector3D.o -o $(BTESTPATH)$@
 
 testConverter.bin: testConverter.o Test.o Vector3D.o
 	@echo [$@] Linking...
