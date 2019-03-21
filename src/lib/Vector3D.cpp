@@ -147,7 +147,7 @@ double Vector3D::norm() const {
 }
 
 double Vector3D::normSquared() const {
-	return pow(getX(), 2) + pow(getY(), 2) + pow(getZ(), 2);
+	return getX() * getX() + getY() * getY() + getZ() * getZ();
 }
 
 Vector3D& Vector3D::rotate(Vector3D axis, double const& alpha) {

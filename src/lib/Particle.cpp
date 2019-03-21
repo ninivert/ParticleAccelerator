@@ -24,10 +24,11 @@ Particle::Particle(Vector3D const& pos, double const& energy, Vector3D speed, do
 
 	if (unitGeV) {
 		// Order matters here: we first compute m²/E², then convert the mass
-		factor = pow(mass / energy, 2);
+		factor = mass * mass / (energy * energy);
 		mass = CONVERT::MassGeVtoSI(mass);
 	} else {
-		factor = pow(pow(CONSTANTS::C, 2) * mass / energy, 2);
+		factor = CONSTANTS::C * CONSTANTS::C * mass * energy;
+		factor *= factor;
 	}
 
 	momentum = ~speed * mass * CONSTANTS::C * sqrt(1 - factor);
@@ -38,11 +39,12 @@ Particle::Particle(Vector3D const& pos, double const& energy, Vector3D speed, do
  ****************************************************************/
 
 double Particle::getEnergy() const {
-	return getGamma() * getMass() * pow(CONSTANTS::C, 2);
+	return getGamma() * getMass() * CONSTANTS::C * CONSTANTS::C;
 }
 
 double Particle::getGamma() const {
-	return 1 / sqrt(1 - pow(getSpeed().norm() / CONSTANTS::C, 2));
+	double tmp = getSpeed().norm() / CONSTANTS::C;
+	return 1 / sqrt(1 - tmp * tmp);
 }
 
 int Particle::getChargeNumber() const { return charge; }
