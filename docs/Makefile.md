@@ -5,21 +5,42 @@
 - `make` : make all changed targets
 	- Compilation
 	- Link Editor
+	- Docs
 
 ### Compilation
 
-- `make Vector3D.o` : compile Vector3D.o
-- `make testVector3D.o` : compile testVector3D.o
-- `make Test.o` : compile Test.o
+- `make <Name>.o` : compile `<Name>.o`
+
+Names :
+
+- Vector3D
+- Particle
+- Element
+
+- Test
+- testVector3D
+- testParticle
+- testConverter
 
 ### Link editor
 
-- `make testVector3D.bin` : link testVector3D.bin
+- `make <Name>.bin` : link `<Name>.bin`
 
+Names :
+
+- testVector3D
+- testParticle
+- testConverter
 
 ### Run
 
-- `make run_testVector3D` : run tests for `Vector3D`
+- `make run_<Name>` : run tests for `<Name>`
+
+Names :
+
+- testVector3D
+- testParticle
+- testConverter
 
 ### Clean
 
@@ -37,6 +58,14 @@
 	- `/test/bin`
 	- `/test/build`
 
+### Dir
+
+- `make dir` : Create necessary directories for the makefile to word
+
+### Docs
+
+- `make docs` : generate documentation `index.html`
+- `make run_docs` : open `index.html`
 
 ## make options
 

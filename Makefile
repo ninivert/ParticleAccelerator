@@ -68,6 +68,10 @@ Particle.o: Particle.cpp Particle.h Converter.h globals.h
 	@echo [$@] Compiling...
 	@$(CXX) $(CXXFLAGS) -c src/lib/Particle.cpp -o $(OPATH)$@ -I ./
 
+Element.o: Element.cpp Element.h Converter.h globals.h
+	@echo [$@] Compiling...
+	@$(CXX) $(CXXFLAGS) -c src/lib/Element.cpp -o $(OPATH)$@ -I ./
+
 
 ##################################################################
 # Compilation of tests

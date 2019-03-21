@@ -896,6 +896,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="#semaine-1">Semaine 1</a></li>
 <li><a href="#semaine-2">Semaine 2</a></li>
 <li><a href="#semaine-3">Semaine 3</a></li>
+<li><a href="#semaine-4">Semaine 4</a></li>
 </ul></li>
 <li><a href="#makefile"><code>Makefile</code></a><ul>
 <li><a href="#available-make-commands">Available make commands</a><ul>
@@ -1156,18 +1157,28 @@ Using the <code>array</code> library gave us horrible performance that couldn't 
 <h2 id="week-4">Week 4</h2>
 <ul>
 <li>Fixed <code>Particle::step</code> function -&gt; units used were incorrect</li>
-<li>Creation of tests for <code>Particule</code> and <code>Converter.h</code></li>
+<li>Creation of tests for <code>Particle</code> and <code>Converter.h</code></li>
 <li>Decided on energy vs momentum -&gt; we used momentum (see <a href="#semaine-3">Réponses</a>)</li>
 <li>Added padding for <code>Vector3D</code> and particle display (ostream)</li>
 <li>Added 2 constructors for particle class</li>
 <li>Added <a href="#convert.h"><code>CONVERT</code></a> namespace to easily convert from SI units to GeV and reciprocally</li>
 <li>Added <code>STYLES</code> namespace for unified text output</li>
+<li>Finish tests for <code>Particle</code></li>
 </ul>
 <h2 id="todo">Todo</h2>
 <ul>
 <li>Add large scale error management -&gt; custom <code>Exception</code> sub-classes</li>
 <li>Add accelerator class</li>
-<li>Add magnet class</li>
+<li>Add element class
+<ul>
+<li>unique_ptr for next element</li>
+<li>C-ptr to know in which <code>Element</code> we are
+<ul>
+<li>use <code>class Element;</code> or <code>class Particle;</code> in header files</li>
+</ul></li>
+<li>magnet sub-class</li>
+<li>electric sub-class</li>
+</ul></li>
 </ul>
 <h1 id="réponses">Réponses</h1>
 <h2 id="semaine-1">Semaine 1</h2>
@@ -1255,6 +1266,25 @@ Using the <code>array</code> library gave us horrible performance that couldn't 
 <li>Les équations du mouvement sont de base exprimées en SI. Si on avait pris des GeV, il aurait fallu faire beaucoup de conversions !</li>
 <li>L'ordinateur se &quot;fiche&quot; bien de manipuler des SI ou des GeV. Les <code>double</code> peuvent représenter des réels allant de <code>2.2e−308</code> à <code>1.7e308</code> (<a href="https://en.wikipedia.org/wiki/Double-precision_floating-point_format#Double-precision_examples">Wikipedia</a>), donc la précision n'est pas un problème ici. C'est à l'affichage (bien moins fréquent que l'appel de <code>Particle::step</code> !) que la conversion se fait à l'aide de <code>CONVERT::&lt;...&gt;SItoGeV</code> pour que la sortie soit un peu plus agréable à lire.</li>
 </ol>
+<h2 id="semaine-4">Semaine 4</h2>
+<blockquote>
+<p>Comment proposez-vous de représenter et d'organiser les éléments ?</p>
+</blockquote>
+<blockquote>
+<p>Comment proposez-vous de représenter les champs magnétiques des éléments ?</p>
+</blockquote>
+<blockquote>
+<p>Avez-vous représenté le centre de courbure des éléments courbes ? Si oui, comment (sous quelle forme) ?</p>
+</blockquote>
+<blockquote>
+<p>Comment représentez vous cette dernière contrainte ? Cela modifie-t-il d'autres classes (que les Elements) ?</p>
+</blockquote>
+<blockquote>
+<p>Comment représentez vous la classe Accelerateur ?</p>
+</blockquote>
+<blockquote>
+<p>Pourquoi faire fait-on cela ? Pourquoi qualifier le constructeur de copie et <code>operator =</code> de « deleted » ?</p>
+</blockquote>
 <h1 id="makefile"><code>Makefile</code></h1>
 <h2 id="available-make-commands">Available make commands</h2>
 <ul>

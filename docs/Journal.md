@@ -45,4 +45,9 @@
 
 - Add large scale error management -> custom `Exception` sub-classes
 - Add accelerator class
-- Add magnet class
+- Add element class
+	- unique_ptr for next element
+	- C-ptr to know in which `Element` we are
+		- use `class Element;` or `class Particle;` in header files
+	- magnet sub-class
+	- electric sub-class
