@@ -8,9 +8,13 @@
 #include <string>
 #include <sstream>
 
+#include "src/include/Element.h"
 #include "src/include/Converter.h"
 #include "src/include/Vector3D.h"
 #include "src/globals.h"
+
+// Resolve ciruclar header definition
+class Element;
 
 /**
  * Particle Class
@@ -54,6 +58,7 @@ private:
 	Vector3D forces;
 	double mass;		// kg			(GeV / c²)
 	int const charge;	// Physically, only whole multiples of elementary charges make sense
+	Element * element = nullptr;
 };
 
 /**

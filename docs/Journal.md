@@ -51,3 +51,6 @@
 		- use `class Element;` or `class Particle;` in header files
 	- magnet sub-class
 	- electric sub-class
+- Add relatist mass to particle
+- Doxygen
+- Polymorphism pointer in accelerator -> define class destructor

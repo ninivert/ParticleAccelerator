@@ -14,12 +14,12 @@
 
 class Dipole : public Element {
 public:
-
-protected:
+	Dipole(Vector3D const& posIn, Vector3D const& posOut, double const& radius, double const& B);
 
 private:
-
-
+	double const curvature;
+	Vector3D const posCenter;
+	double const B; // Magnetic field
 };
 
 

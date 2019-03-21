@@ -9,13 +9,11 @@
 #include "src/globals.h"
 
 /**
- *Quadrupole
+ * Quadrupole
  */
 
 class Quadrupole : public Element {
 public:
-
-protected:
 
 private:
 
