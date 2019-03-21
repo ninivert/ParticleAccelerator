@@ -18,10 +18,12 @@ Names :
 - Element
 - MagnetElement
 - ElectrElement
+- Accelerator
 
 - Test
 - testVector3D
 - testParticle
+- testAccelerator1
 - testConverter
 
 ### Link editor
@@ -32,6 +34,7 @@ Names :
 
 - testVector3D
 - testParticle
+- testAccelerator1
 - testConverter
 
 ### Run
@@ -42,6 +45,7 @@ Names :
 
 - testVector3D
 - testParticle
+- testAccelerator1
 - testConverter
 
 ### Clean

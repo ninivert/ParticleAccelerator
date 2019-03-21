@@ -22,4 +22,6 @@ int main() {
 	assert(CONVERT::EnergyGeVtoSI(1) == CONSTANTS::EV * 1e9);
 	assert(CONVERT::EnergySItoEV(CONSTANTS::EV) == 1);
 	assert(CONVERT::EnergySItoGeV(CONSTANTS::EV) == 1e-9);
+
+	return 0;
 }

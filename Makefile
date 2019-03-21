@@ -18,7 +18,7 @@ CXXFLAGS += -O2
 # and where to put exec files (TARGET)
 ##################################################################
 
-TARGET := testVector3D.bin testParticle.bin
+TARGET := testVector3D.bin testParticle.bin testAccelerator1.bin
 OTESTPATH := ./test/build/
 BTESTPATH := ./test/bin/
 OPATH := ./build/
@@ -68,17 +68,21 @@ Particle.o: Particle.cpp Particle.h Converter.h globals.h
 	@echo [$@] Compiling...
 	@$(CXX) $(CXXFLAGS) -c src/lib/Particle.cpp -o $(OPATH)$@ -I ./
 
-Element.o: Element.cpp Element.h Converter.h globals.h
+Element.o: Element.cpp Element.h globals.h
 	@echo [$@] Compiling...
 	@$(CXX) $(CXXFLAGS) -c src/lib/Element.cpp -o $(OPATH)$@ -I ./
 
-MagnetElement.o: MagnetElement.cpp MagnetElement.h Converter.h globals.h
+MagnetElement.o: MagnetElement.cpp MagnetElement.h globals.h
 	@echo [$@] Compiling...
 	@$(CXX) $(CXXFLAGS) -c src/lib/MagnetElement.cpp -o $(OPATH)$@ -I ./
 
-ElectrElement.o: ElectrElement.cpp ElectrElement.h Converter.h globals.h
+ElectrElement.o: ElectrElement.cpp ElectrElement.h globals.h
 	@echo [$@] Compiling...
 	@$(CXX) $(CXXFLAGS) -c src/lib/ElectrElement.cpp -o $(OPATH)$@ -I ./
+
+Accelerator.o: Accelerator.cpp Accelerator.h globals.h
+	@echo [$@] Compiling...
+	@$(CXX) $(CXXFLAGS) -c src/lib/Accelerator.cpp -o $(OPATH)$@ -I ./
 
 
 ##################################################################
@@ -97,6 +101,10 @@ testParticle.o: testParticle.cpp Particle.h Particle.cpp Converter.h
 	@echo [$@] Compiling...
 	@$(CXX) $(CXXFLAGS) -c test/src/testParticle.cpp -o $(OTESTPATH)$@ -I ./
 
+testAccelerator1.o: testAccelerator1.cpp Accelerator.h Accelerator.cpp Converter.h
+	@echo [$@] Compiling...
+	@$(CXX) $(CXXFLAGS) -c test/src/testAccelerator1.cpp -o $(OTESTPATH)$@ -I ./
+
 testConverter.o: testConverter.cpp Converter.h
 	@echo [$@] Compiling...
 	@$(CXX) $(CXXFLAGS) -c test/src/testConverter.cpp -o $(OTESTPATH)$@ -I ./
@@ -113,6 +121,10 @@ testVector3D.bin: Vector3D.o testVector3D.o Test.o
 testParticle.bin: Vector3D.o Particle.o testParticle.o Test.o
 	@echo [$@] Linking...
 	@$(CXX) $(CXXFLAGS) test/build/testParticle.o test/build/Test.o build/Particle.o build/Vector3D.o -o $(BTESTPATH)$@
+
+testAccelerator1.bin: Vector3D.o Particle.o Element.o MagnetElement.o ElectrElement.o testAccelerator1.o Test.o
+	@echo [$@] Linking...
+	@$(CXX) $(CXXFLAGS) test/build/testAccelerator1.o test/build/Test.o build/Element.o build/MagnetElement.o build/ElectrElement.o build/Particle.o build/Vector3D.o -o $(BTESTPATH)$@
 
 testConverter.bin: testConverter.o Test.o Vector3D.o
 	@echo [$@] Linking...
@@ -131,6 +143,11 @@ run_testVector3D: testVector3D.bin
 run_testParticle: testParticle.bin
 	@echo [$@] Running tests...
 	@$(BTESTPATH)/testParticle.bin
+	@echo [$@] Success !
+
+run_testAccelerator1: testAccelerator1.bin
+	@echo [$@] Running tests...
+	@$(BTESTPATH)/testAccelerator1.bin
 	@echo [$@] Success !
 
 run_testConverter: testConverter.bin

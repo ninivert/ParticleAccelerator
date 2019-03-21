@@ -79,4 +79,5 @@ int main() {
 		// cout << p2.getChargeNumber() << endl << p4.getChargeNumber() << endl;
 
 	// cout << "\nPASSED ALL TESTS.\n";
+	return 0;
 }
