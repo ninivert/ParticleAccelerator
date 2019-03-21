@@ -72,3 +72,20 @@ Nous avons choisi d'utiliser les SI pour les raisons suivantes:
 
 1. Les équations du mouvement sont de base exprimées en SI. Si on avait pris des GeV, il aurait fallu faire beaucoup de conversions !
 2. L'ordinateur se "fiche" bien de manipuler des SI ou des GeV. Les `double` peuvent représenter des réels allant de `2.2e−308` à `1.7e308` ([Wikipedia](https://en.wikipedia.org/wiki/Double-precision_floating-point_format#Double-precision_examples)), donc la précision n'est pas un problème ici. C'est à l'affichage (bien moins fréquent que l'appel de `Particle::step` !) que la conversion se fait à l'aide de `CONVERT::<...>SItoGeV` pour que la sortie soit un peu plus agréable à lire.
+
+## Semaine 4
+
+> Comment proposez-vous de représenter et d'organiser les éléments ?
+
+> Comment proposez-vous de représenter les champs magnétiques des éléments ?
+
+> Avez-vous représenté le centre de courbure des éléments courbes ? Si oui, comment (sous quelle forme) ?
+
+
+> Comment représentez vous cette dernière contrainte ? Cela modifie-t-il d'autres classes (que les Elements) ?
+
+> Comment représentez vous la classe Accelerateur ?
+
+> Pourquoi faire fait-on cela ? Pourquoi qualifier le constructeur de copie et `operator =` de « deleted » ?
+
+

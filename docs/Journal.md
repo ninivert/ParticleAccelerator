@@ -33,12 +33,13 @@
 ## Week 4
 
 - Fixed `Particle::step` function -> units used were incorrect
-- Creation of tests for `Particule` and `Converter.h`
+- Creation of tests for `Particle` and `Converter.h`
 - Decided on energy vs momentum -> we used momentum (see [Réponses](#semaine-3))
 - Added padding for `Vector3D` and particle display (ostream)
 - Added 2 constructors for particle class
 - Added [`CONVERT`](#convert.h) namespace to easily convert from SI units to GeV and reciprocally
 - Added `STYLES` namespace for unified text output
+- Finish tests for `Particle`
 
 ## Todo
 
