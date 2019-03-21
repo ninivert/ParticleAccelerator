@@ -16,6 +16,8 @@ Names :
 - Vector3D
 - Particle
 - Element
+- MagnetElement
+- ElectrElement
 
 - Test
 - testVector3D

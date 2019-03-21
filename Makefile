@@ -72,6 +72,14 @@ Element.o: Element.cpp Element.h Converter.h globals.h
 	@echo [$@] Compiling...
 	@$(CXX) $(CXXFLAGS) -c src/lib/Element.cpp -o $(OPATH)$@ -I ./
 
+MagnetElement.o: MagnetElement.cpp MagnetElement.h Converter.h globals.h
+	@echo [$@] Compiling...
+	@$(CXX) $(CXXFLAGS) -c src/lib/MagnetElement.cpp -o $(OPATH)$@ -I ./
+
+ElectrElement.o: ElectrElement.cpp ElectrElement.h Converter.h globals.h
+	@echo [$@] Compiling...
+	@$(CXX) $(CXXFLAGS) -c src/lib/ElectrElement.cpp -o $(OPATH)$@ -I ./
+
 
 ##################################################################
 # Compilation of tests

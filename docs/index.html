@@ -904,6 +904,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="#link-editor">Link editor</a></li>
 <li><a href="#run">Run</a></li>
 <li><a href="#clean">Clean</a></li>
+<li><a href="#dir">Dir</a></li>
+<li><a href="#docs">Docs</a></li>
 </ul></li>
 <li><a href="#make-options">make options</a></li>
 </ul></li>
@@ -1292,21 +1294,44 @@ Using the <code>array</code> library gave us horrible performance that couldn't 
 <ul>
 <li>Compilation</li>
 <li>Link Editor</li>
+<li>Docs</li>
 </ul></li>
 </ul>
 <h3 id="compilation">Compilation</h3>
 <ul>
-<li><code>make Vector3D.o</code> : compile Vector3D.o</li>
-<li><code>make testVector3D.o</code> : compile testVector3D.o</li>
-<li><code>make Test.o</code> : compile Test.o</li>
+<li><code>make &lt;Name&gt;.o</code> : compile <code>&lt;Name&gt;.o</code></li>
+</ul>
+<p>Names :</p>
+<ul>
+<li>Vector3D</li>
+<li>Particle</li>
+<li>Element</li>
+<li>MagnetElement</li>
+<li><p>ElectrElement</p></li>
+<li>Test</li>
+<li>testVector3D</li>
+<li>testParticle</li>
+<li><p>testConverter</p></li>
 </ul>
 <h3 id="link-editor">Link editor</h3>
 <ul>
-<li><code>make testVector3D.bin</code> : link testVector3D.bin</li>
+<li><code>make &lt;Name&gt;.bin</code> : link <code>&lt;Name&gt;.bin</code></li>
+</ul>
+<p>Names :</p>
+<ul>
+<li>testVector3D</li>
+<li>testParticle</li>
+<li>testConverter</li>
 </ul>
 <h3 id="run">Run</h3>
 <ul>
-<li><code>make run_testVector3D</code> : run tests for <code>Vector3D</code></li>
+<li><code>make run_&lt;Name&gt;</code> : run tests for <code>&lt;Name&gt;</code></li>
+</ul>
+<p>Names :</p>
+<ul>
+<li>testVector3D</li>
+<li>testParticle</li>
+<li>testConverter</li>
 </ul>
 <h3 id="clean">Clean</h3>
 <ul>
@@ -1327,6 +1352,15 @@ Using the <code>array</code> library gave us horrible performance that couldn't 
 <li><code>/test/bin</code></li>
 <li><code>/test/build</code></li>
 </ul></li>
+</ul>
+<h3 id="dir">Dir</h3>
+<ul>
+<li><code>make dir</code> : Create necessary directories for the makefile to word</li>
+</ul>
+<h3 id="docs">Docs</h3>
+<ul>
+<li><code>make docs</code> : generate documentation <code>index.html</code></li>
+<li><code>make run_docs</code> : open <code>index.html</code></li>
 </ul>
 <h2 id="make-options">make options</h2>
 <ul>
