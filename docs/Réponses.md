@@ -4,7 +4,7 @@
 
 > Comment représentez vous ces vecteurs ?
 
-Avec une classe `Vector3D`.
+Avec une classe [`Vector3D`](#vector3d).
 
 > Comment sont-ils organisés : quels attributs ?
 
@@ -77,15 +77,24 @@ Nous avons choisi d'utiliser les SI pour les raisons suivantes:
 
 > Comment proposez-vous de représenter et d'organiser les éléments ?
 
+On a créé une [classe `Element`](#element) dont héritent les classes [`Dipole`](#dipole) et [`Quadrupole`](#quadrupole).
+
 > Comment proposez-vous de représenter les champs magnétiques des éléments ?
+
+Une fonction `Vector3D getField(Vector3D)` retourne la direction et l'amplitude du champ magnétique donné à un endroit dans l'espace par le `Vector3D` fourni en argument.
 
 > Avez-vous représenté le centre de courbure des éléments courbes ? Si oui, comment (sous quelle forme) ?
 
+Oui, comme l'élément est fixe (la position d'entrée de sortie sont des `const`), le centre de courbure est fixe et on peut donc le calculer une seule fois lors de l'initialisation afin d'éviter de le recalculer à chaque fois.
 
-> Comment représentez vous cette dernière contrainte ? Cela modifie-t-il d'autres classes (que les Elements) ?
+> Comment représentez le fait que chaque particule doit être dans un seul élément ? Cela modifie-t-il d'autres classes (que les Elements) ?
+
+Chaque [particule](#particle) dispose d'un pointeur à la C sur un élément de l'accélérateur. Il nous est impossible d'utiliser les `unique_ptr` car il est possible qu'un autre élément/particule aie aussi un pointeur sur l'élément. Nous envisageons la possibilité d'utiliser des `shared_ptr`.
 
 > Comment représentez vous la classe Accelerateur ?
 
-> Pourquoi faire fait-on cela ? Pourquoi qualifier le constructeur de copie et `operator =` de « deleted » ?
+La [classe accélérateur](#accelerator) contient des tableaux dynamiques de [particules](#particle) et d'[éléments](#element)
 
+> Pourquoi qualifier le constructeur de copie et `operator =` de « deleted » ?
 
+Les instances de classe accélérateur contiennent beaucoup de particules et l'éléments, ie. c'est un gros zobjet. On voudrait protéger l'utilisateur de la classe d'en faire des copies non intentionnelles.

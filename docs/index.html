@@ -1187,7 +1187,7 @@ Using the <code>array</code> library gave us horrible performance that couldn't 
 <blockquote>
 <p>Comment représentez vous ces vecteurs ?</p>
 </blockquote>
-<p>Avec une classe <code>Vector3D</code>.</p>
+<p>Avec une classe <a href="#vector3d"><code>Vector3D</code></a>.</p>
 <blockquote>
 <p>Comment sont-ils organisés : quels attributs ?</p>
 </blockquote>
@@ -1272,21 +1272,27 @@ Using the <code>array</code> library gave us horrible performance that couldn't 
 <blockquote>
 <p>Comment proposez-vous de représenter et d'organiser les éléments ?</p>
 </blockquote>
+<p>On a créé une <a href="#element">classe <code>Element</code></a> dont héritent les classes <a href="#dipole"><code>Dipole</code></a> et <a href="#quadrupole"><code>Quadrupole</code></a>.</p>
 <blockquote>
 <p>Comment proposez-vous de représenter les champs magnétiques des éléments ?</p>
 </blockquote>
+<p>Une fonction <code>Vector3D getField(Vector3D)</code> retourne la direction et l'amplitude du champ magnétique donné à un endroit dans l'espace par le <code>Vector3D</code> fourni en argument.</p>
 <blockquote>
 <p>Avez-vous représenté le centre de courbure des éléments courbes ? Si oui, comment (sous quelle forme) ?</p>
 </blockquote>
+<p>Oui, comme l'élément est fixe (la position d'entrée de sortie sont des <code>const</code>), le centre de courbure est fixe et on peut donc le calculer une seule fois lors de l'initialisation afin d'éviter de le recalculer à chaque fois.</p>
 <blockquote>
-<p>Comment représentez vous cette dernière contrainte ? Cela modifie-t-il d'autres classes (que les Elements) ?</p>
+<p>Comment représentez le fait que chaque particule doit être dans un seul élément ? Cela modifie-t-il d'autres classes (que les Elements) ?</p>
 </blockquote>
+<p>Chaque <a href="#particle">particule</a> dispose d'un pointeur à la C sur un élément de l'accélérateur. Il nous est impossible d'utiliser les <code>unique_ptr</code> car il est possible qu'un autre élément/particule aie aussi un pointeur sur l'élément. Nous envisageons la possibilité d'utiliser des <code>shared_ptr</code>.</p>
 <blockquote>
 <p>Comment représentez vous la classe Accelerateur ?</p>
 </blockquote>
+<p>La <a href="#accelerator">classe accélérateur</a> contient des tableaux dynamiques de <a href="#particle">particules</a> et d'<a href="#element">éléments</a></p>
 <blockquote>
-<p>Pourquoi faire fait-on cela ? Pourquoi qualifier le constructeur de copie et <code>operator =</code> de « deleted » ?</p>
+<p>Pourquoi qualifier le constructeur de copie et <code>operator =</code> de « deleted » ?</p>
 </blockquote>
+<p>Les instances de classe accélérateur contiennent beaucoup de particules et l'éléments, ie. c'est un gros zobjet. On voudrait protéger l'utilisateur de la classe d'en faire des copies non intentionnelles.</p>
 <h1 id="makefile"><code>Makefile</code></h1>
 <h2 id="available-make-commands">Available make commands</h2>
 <ul>
