@@ -51,6 +51,12 @@
 		- use `class Element;` or `class Particle;` in header files
 	- magnet sub-class
 	- electric sub-class
-- Add relatist mass to particle
+- Add relativist mass to particle
 - Doxygen
 - Polymorphism pointer in accelerator -> define class destructor
+
+- Review the pointToNext function
+- Cannot overload virtual function (to_string)
+- Create a method in `Element` to make the "full circle" (or not) i.e. the first `Element` has to point on the last one and vice versa (without creating a new Element)
+- Review Straight element (the one that don't do anything)
+	- edit : they are simply `Element`
