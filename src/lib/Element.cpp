@@ -3,7 +3,7 @@
 using namespace std;
 
 /****************************************************************
- * Constructor
+ * Constructors
  ****************************************************************/
 
 Element::Element(Vector3D const& posIn, Vector3D const& posOut, double const& radius)

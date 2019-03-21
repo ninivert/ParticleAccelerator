@@ -60,3 +60,4 @@
 - Create a method in `Element` to make the "full circle" (or not) i.e. the first `Element` has to point on the last one and vice versa (without creating a new Element)
 - Review Straight element (the one that don't do anything)
 	- edit : they are simply `Element`
+- Review if we didn't allow the division by somewhere

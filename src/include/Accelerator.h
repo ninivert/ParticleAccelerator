@@ -22,8 +22,8 @@ public:
 	// Constructor
 
 	Accelerator();
-	Accelerator(Accelerator const& a) = delete;
-	Accelerator& operator = (Accelerator const& a) = delete;
+	Accelerator(Accelerator const&) = delete;
+	Accelerator& operator = (Accelerator const&) = delete;
 
 	// Methods
 
