@@ -23,7 +23,7 @@ Names :
 - Test
 - testVector3D
 - testParticle
-- testAccelerator1
+- testAccelerator
 - testConverter
 
 ### Link editor
@@ -34,7 +34,7 @@ Names :
 
 - testVector3D
 - testParticle
-- testAccelerator1
+- testAccelerator
 - testConverter
 
 ### Run
@@ -45,7 +45,7 @@ Names :
 
 - testVector3D
 - testParticle
-- testAccelerator1
+- testAccelerator
 - testConverter
 
 ### Clean

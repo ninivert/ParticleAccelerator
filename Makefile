@@ -18,7 +18,7 @@ CXXFLAGS += -O2
 # and where to put exec files (TARGET)
 ##################################################################
 
-TARGET := testVector3D.bin testParticle.bin testAccelerator1.bin
+TARGET := testVector3D.bin testParticle.bin testAccelerator.bin
 OTESTPATH := ./test/build/
 BTESTPATH := ./test/bin/
 OPATH := ./build/
@@ -101,9 +101,9 @@ testParticle.o: testParticle.cpp Particle.h Particle.cpp Converter.h
 	@echo [$@] Compiling...
 	@$(CXX) $(CXXFLAGS) -c test/src/testParticle.cpp -o $(OTESTPATH)$@ -I ./
 
-testAccelerator1.o: testAccelerator1.cpp Accelerator.h Accelerator.cpp Converter.h
+testAccelerator.o: testAccelerator.cpp Accelerator.h Accelerator.cpp Converter.h
 	@echo [$@] Compiling...
-	@$(CXX) $(CXXFLAGS) -c test/src/testAccelerator1.cpp -o $(OTESTPATH)$@ -I ./
+	@$(CXX) $(CXXFLAGS) -c test/src/testAccelerator.cpp -o $(OTESTPATH)$@ -I ./
 
 testConverter.o: testConverter.cpp Converter.h
 	@echo [$@] Compiling...
@@ -122,9 +122,9 @@ testParticle.bin: Vector3D.o Particle.o testParticle.o Test.o
 	@echo [$@] Linking...
 	@$(CXX) $(CXXFLAGS) test/build/testParticle.o test/build/Test.o build/Particle.o build/Vector3D.o -o $(BTESTPATH)$@
 
-testAccelerator1.bin: Vector3D.o Particle.o Element.o MagnetElement.o ElectrElement.o testAccelerator1.o Test.o
+testAccelerator.bin: Vector3D.o Particle.o Element.o MagnetElement.o ElectrElement.o testAccelerator.o Test.o
 	@echo [$@] Linking...
-	@$(CXX) $(CXXFLAGS) test/build/testAccelerator1.o test/build/Test.o build/Element.o build/MagnetElement.o build/ElectrElement.o build/Particle.o build/Vector3D.o -o $(BTESTPATH)$@
+	@$(CXX) $(CXXFLAGS) test/build/testAccelerator.o test/build/Test.o build/Element.o build/MagnetElement.o build/ElectrElement.o build/Particle.o build/Vector3D.o -o $(BTESTPATH)$@
 
 testConverter.bin: testConverter.o Test.o Vector3D.o
 	@echo [$@] Linking...
@@ -145,9 +145,9 @@ run_testParticle: testParticle.bin
 	@$(BTESTPATH)/testParticle.bin
 	@echo [$@] Success !
 
-run_testAccelerator1: testAccelerator1.bin
+run_testAccelerator: testAccelerator.bin
 	@echo [$@] Running tests...
-	@$(BTESTPATH)/testAccelerator1.bin
+	@$(BTESTPATH)/testAccelerator.bin
 	@echo [$@] Success !
 
 run_testConverter: testConverter.bin
