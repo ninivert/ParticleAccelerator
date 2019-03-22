@@ -116,7 +116,7 @@ string Particle::to_string() const {
 
 void Particle::step(double const& dt) {
 	// Do nothing if dt is null
-	if (dt == 0) { return; }
+	if (abs(dt) < GLOBALS::DELTA) { return; }
 
 	// Integrate the movement equations
 	double const lambda(1 / (getGamma() * getMass()));
