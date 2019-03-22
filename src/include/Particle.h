@@ -58,7 +58,7 @@ private:
 	Vector3D forces;
 	double mass;		// kg			(GeV / c²)
 	int const charge;	// Physically, only whole multiples of elementary charges make sense
-	Element * element = nullptr;
+	Element * element;
 };
 
 /**
