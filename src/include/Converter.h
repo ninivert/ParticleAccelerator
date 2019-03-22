@@ -1,7 +1,7 @@
-#pragma once
-
 #ifndef CONVERTER_H
 #define CONVERTER_H
+
+#pragma once
 
 #include <cmath>
 #include "src/include/Vector3D.h"

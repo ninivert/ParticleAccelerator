@@ -3,6 +3,7 @@
 #include <cmath>
 #include "src/include/Vector3D.h"
 #include "src/include/Particle.h"
+#include "src/globals.h"
 #include "test/lib/Test.h"
 
 using namespace std;
@@ -11,11 +12,22 @@ int main() {
 	Particle p1(Vector3D(3.00894, -0.391837, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272);
 	Particle p2(Vector3D(2.99016, -0.391837, 0), 2, Vector3D(210200, -2.64754e8, 0), 0.938272);
 
-	Particle p3(Vector3D(3.00893, -0.394485, 0), 1.99999, Vector3D(-1.04302e6, -2.64752e8, 0), 0.938272);
-	Particle p4(Vector3D(2.99015, -0.394485, 0), 2, Vector3D(-622623, -2.64754e8, 0), 0.938272);
+	Particle p3(Vector3D(3.00892956975892, -0.394484520288904, 0), 1.99998900529594, Vector3D(-1043024.10832297, -264752028.890446, 0), 0.938272);
+	Particle p4(Vector3D(2.99015377377424, -0.394484537620625, 0), 2.00000000004337, Vector3D(-622622.575845106, -264753762.062512, 0), 0.938272);
 
-	cout << "P1 : \n" << p1 << endl;
-	cout << "P2 : \n" << p2 << endl;
+	// try {
+	// 	try {
+	//		// THIS WILL THROW OUREXCEPTION
+	// 	} catch (EXCEPTIONS::OurException& e) {
+	// 		ERROR(e.what());
+	// 	}
+	// } catch (EXCEPTIONS::OurException& e) {
+	// 	cout << e.what() << endl;
+	// }
+
+
+	// cout << "P1 : \n" << p1 << endl;
+	// cout << "P2 : \n" << p2 << endl;
 
 	p1.exertLorentzForce(Vector3D(0, 0, 7));
 	p2.exertLorentzForce(Vector3D(0, 0, 7));
@@ -23,8 +35,8 @@ int main() {
 	p1.step();
 	p2.step();
 
-	cout << "P1 : \n" << p1 << endl;
-	cout << "P2 : \n" << p2 << endl;
+	// cout << "P1 : \n" << p1 << endl;
+	// cout << "P2 : \n" << p2 << endl;
 
 	// cout << "Speed\n";
 	// We have to "reduce" the speed or our `operator ==` won't evaluate it correctly

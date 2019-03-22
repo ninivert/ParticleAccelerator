@@ -67,6 +67,9 @@ Vector3D& Vector3D::operator *= (double const& lambda) {
 }
 
 Vector3D& Vector3D::operator /= (double const& lambda) {
+	if (abs(lambda) <= GLOBALS::DELTA) {
+		ERROR(EXCEPTIONS::DIV0);
+	}
 	x /= lambda;
 	y /= lambda;
 	z /= lambda;
@@ -75,9 +78,7 @@ Vector3D& Vector3D::operator /= (double const& lambda) {
 
 Vector3D& Vector3D::operator ~ () {
 	double n = norm();
-	x /= n;
-	y /= n;
-	z /= n;
+	*this /= n;
 	return *this;
 }
 
