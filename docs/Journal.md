@@ -40,24 +40,19 @@
 - Added [`CONVERT`](#convert.h) namespace to easily convert from SI units to GeV and reciprocally
 - Added `STYLES` namespace for unified text output
 - Finish tests for `Particle`
+- Used C-ptr to for `Particle` and `Element` class
+- Used `class Element;` or `class Particle;` in header files to resolve circular header definitions
+- Review the `linkNext` function (create a method in `Element` to make the "full circle" (or not) i.e. the first `Element` has to point on the last one and vice versa (without creating a new Element))
 
 ## Todo
 
 - Add large scale error management -> custom `Exception` sub-classes
+	- Throw division by 0 errors
 - Add accelerator class
 - Add element class
-	- unique_ptr for next element
-	- C-ptr to know in which `Element` we are
-		- use `class Element;` or `class Particle;` in header files
-	- magnet sub-class
-	- electric sub-class
+	- Dipole sub-class
+	- Quadrupole sub-class
+	- Straight sub-class
 - Add relativist mass to particle
 - Doxygen
 - Polymorphism pointer in accelerator -> define class destructor
-
-- Review the pointToNext function
-- Cannot overload virtual function (to_string)
-- Create a method in `Element` to make the "full circle" (or not) i.e. the first `Element` has to point on the last one and vice versa (without creating a new Element)
-- Review Straight element (the one that don't do anything)
-	- edit : they are simply `Element`
-- Review if we didn't allow the division by somewhere
