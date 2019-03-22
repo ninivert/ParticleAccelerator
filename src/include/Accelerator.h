@@ -3,8 +3,14 @@
 
 #pragma once
 
+// Storing particles and elements dynamically
 #include <vector>
+// Maths
+#include <cmath>
+// String representation
 #include <string>
+#include <sstream>
+#include <iomanip>
 
 #include "src/include/Vector3D.h"
 #include "src/include/Particle.h"
@@ -27,14 +33,14 @@ public:
 
 	// Methods
 
-	void step();
-	void addElement();
-	void addElement(Element const& prevElement);
+	void step(double const& dt = GLOBALS::DT);
+	void addElement(Element const& element);
+	void addElement(Element & element, Element & prevElement);
 	void addParticle(Particle const& particle);
 	void clear();
 	void clearParticles();
 	void clearElements();
-	std::string to_string();
+	std::string to_string() const;
 
 private:
 	std::vector<Particle> particles;
