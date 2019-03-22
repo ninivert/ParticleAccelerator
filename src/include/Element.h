@@ -4,6 +4,7 @@
 #pragma once
 
 #include <iomanip>
+#include <iostream>
 #include <string>
 #include <sstream>
 
@@ -34,8 +35,8 @@ public:
 
 	// Methods
 
-	std::string to_string() const;
 	void linkNext(Element & _next);
+	std::string to_string() const;
 
 	// Virtual methods
 
