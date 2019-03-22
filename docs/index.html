@@ -1422,7 +1422,11 @@ CONVERT::MomentumGeVtoSI(Vector3D(<span class="dv">1</span>, <span class="dv">2<
 <p>We defined a compiler macro <code>ERROR(char msg[])</code> which throws a new instance of <code>OurException</code>, sub-class of <code>std::runtime_error</code>.<br />
 <code>OurException</code> provides a simple wrapper to display file name and line number along with the error message.<br />
 In this example, we throw a division by 0 (<code>DIV_0</code>) error that we catch then re-throw to get the error callstack.</p>
-<p>Available messages in the <code>EXCEPTIONS</code> namespace: <code>DIV_0</code></p>
+<p>Available messages in the <code>EXCEPTIONS</code> namespace:</p>
+<ul>
+<li><code>DIV_0</code> : Division by 0</li>
+<li><code>BAD_ORIENTATION</code> : (in <a href="#element">Element</a>) Input and output positions are colinear</li>
+</ul>
 <div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">void</span> child(<span class="dt">double</span> x) {
     <span class="co">// something went terribly wrong</span>
     <span class="co">// did someone divide by 0 again ?</span>

@@ -28,6 +28,7 @@ private:
 
 namespace EXCEPTIONS {
 	inline constexpr char DIV_0[]("Division by 0");
+	inline constexpr char BAD_ORIENTATION[]("Input and output positions are colinear");
 }
 
 // Compiler macro

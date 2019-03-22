@@ -11,6 +11,7 @@
 #include "src/include/Vector3D.h"
 #include "src/include/Particle.h"
 #include "src/globals.h"
+#include "src/exceptions.h"
 
 // Resolve ciruclar header definition
 class Particle;

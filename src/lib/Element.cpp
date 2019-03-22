@@ -11,7 +11,7 @@ Element::Element(Vector3D const& posIn, Vector3D const& posOut, double const& ra
 {
 	double orientation = Vector3D::tripleProduct(Vector3D(0, 0, 1), posIn, posOut);
 	if (abs(orientation) < GLOBALS::DELTA) {
-		ERROR("Triple product is null");
+		ERROR(EXCEPTIONS::BAD_ORIENTATION);
 	} else if (orientation > 0) {
 		Vector3D tmp(this->posIn);
 		this->posIn = this->posOut;
@@ -24,7 +24,7 @@ Element::Element(Vector3D const& posIn, Vector3D const& posOut, double const& ra
 {
 	double orientation = Vector3D::tripleProduct(Vector3D(0, 0, 1), posIn, posOut);
 	if (abs(orientation) < GLOBALS::DELTA) {
-		ERROR("Triple product is null");
+		ERROR(EXCEPTIONS::BAD_ORIENTATION);
 	} else if (orientation > 0) {
 		Vector3D tmp(this->posIn);
 		this->posIn = this->posOut;
