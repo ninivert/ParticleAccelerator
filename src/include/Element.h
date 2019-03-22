@@ -34,22 +34,17 @@ public:
 
 	// Setters
 
-	void setPrev(Element * prev);
-	void setNext(Element * next);
+	void setNext(Element & _next);
 
 	// Methods
 
-	void pointToNext(Element & next);
 	std::string to_string() const;
 
 	// Virtual methods
 
-	virtual Vector3D getField() const = 0;
+	virtual Vector3D getField(Vector3D const& pos) const = 0;
 	virtual bool isInWall(Particle const& p) const = 0;
 	virtual bool isInNext(Particle const& p) const = 0;
-	// overloading of to_string function in order to allow the stringification of an Element
-	// virtual std::string to_string() const = 0;
-
 
 protected:
 	Vector3D const posIn;

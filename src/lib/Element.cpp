@@ -13,7 +13,7 @@ Element::Element(Vector3D const& posIn, Vector3D const& posOut, double const& ra
 Element::Element(Vector3D const& posIn, Vector3D const& posOut, double const& radius, Element & prev)
 : posIn(posIn), posOut(posOut), radius(radius), next(nullptr), prev(&prev)
 {
-	prev.setNext(this);
+	prev.setNext(*this);
 }
 
 /****************************************************************
@@ -28,17 +28,14 @@ double Element::getRadius() const { return radius; }
  * Setters
  ****************************************************************/
 
-void Element::setPrev(Element * _prev) { prev = _prev; }
-void Element::setNext(Element * _next) { next = _next; }
+void Element::setNext(Element & _next) {
+	next = &_next;
+	_next.prev = this;
+}
 
 /****************************************************************
  * Methods
  ****************************************************************/
-
-void Element::pointToNext(Element & next) {
-	setNext(&next);
-	next.setPrev(this);
-}
 
 string Element::to_string() const {
 	stringstream stream;
