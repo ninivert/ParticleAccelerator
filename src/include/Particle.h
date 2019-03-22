@@ -9,9 +9,9 @@
 #include <sstream>
 
 #include "src/include/Element.h"
-#include "src/include/Converter.h"
 #include "src/include/Vector3D.h"
 #include "src/globals.h"
+#include "src/converter.h"
 
 // Resolve ciruclar header definition
 class Element;

@@ -1,4 +1,4 @@
-# `Converter.h`
+# `converter.h`
 
 Utility to convert from SI to GeV and back
 
