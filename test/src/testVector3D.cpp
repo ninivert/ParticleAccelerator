@@ -37,7 +37,7 @@ int main() {
 
 	try {
 		v1 /= 0;
-	} catch (EXCEPTIONS::OurException const& e) {
+	} catch (OurException const& e) {
 		// cout << e.what() << endl;
 	}
 

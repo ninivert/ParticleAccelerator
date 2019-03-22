@@ -4,6 +4,7 @@
 #include "src/include/Vector3D.h"
 #include "src/include/Particle.h"
 #include "src/globals.h"
+#include "src/exceptions.h"
 #include "test/lib/Test.h"
 
 using namespace std;
@@ -18,10 +19,10 @@ int main() {
 	// try {
 	// 	try {
 	//		// THIS WILL THROW OUREXCEPTION
-	// 	} catch (EXCEPTIONS::OurException& e) {
+	// 	} catch (OurException& e) {
 	// 		ERROR(e.what());
 	// 	}
-	// } catch (EXCEPTIONS::OurException& e) {
+	// } catch (OurException& e) {
 	// 	cout << e.what() << endl;
 	// }
 

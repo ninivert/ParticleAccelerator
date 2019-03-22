@@ -8,6 +8,7 @@
 #include <iomanip>
 #include <cmath>
 #include "src/globals.h"
+#include "src/exceptions.h"
 
 /**
  * Vector3D

@@ -909,7 +909,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li><a href="#make-options">make options</a></li>
 </ul></li>
-<li><a href="#converter.h"><code>Converter.h</code></a></li>
+<li><a href="#converter.h"><code>converter.h</code></a></li>
+<li><a href="#exceptions.h"><code>exceptions.h</code></a></li>
 <li><a href="#particle"><code>Particle</code></a><ul>
 <li><a href="#constructors">Constructors</a><ul>
 <li><a href="#using-velocity-only">Using velocity only</a></li>
@@ -1169,13 +1170,10 @@ Using the <code>array</code> library gave us horrible performance that couldn't 
 <li>Used C-ptr to for <code>Particle</code> and <code>Element</code> class</li>
 <li>Used <code>class Element;</code> or <code>class Particle;</code> in header files to resolve circular header definitions</li>
 <li>Review the <code>linkNext</code> function (create a method in <code>Element</code> to make the &quot;full circle&quot; (or not) i.e. the first <code>Element</code> has to point on the last one and vice versa (without creating a new Element))</li>
+<li>Add <a href="#exceptions.h">large scale error management</a> -&gt; custom <code>Exception</code> sub-classes: Throw division by 0 errors</li>
 </ul>
 <h2 id="todo">Todo</h2>
 <ul>
-<li>Add large scale error management -&gt; custom <code>Exception</code> sub-classes
-<ul>
-<li>Throw division by 0 errors</li>
-</ul></li>
 <li>Add accelerator class</li>
 <li>Add element class
 <ul>
@@ -1382,7 +1380,7 @@ Using the <code>array</code> library gave us horrible performance that couldn't 
 <li><code>-B</code> : Unconditionally make all targets</li>
 <li><code>-n -B</code> : Print the commands that would be executed, but do not execute them</li>
 </ul>
-<h1 id="converter.h"><code>Converter.h</code></h1>
+<h1 id="converter.h"><code>converter.h</code></h1>
 <p>Utility to convert from SI to GeV and back</p>
 <div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// 1 eV = 1.60217653e-19 Joules</span>
 CONVERT::EnergyEVtoSI(<span class="dv">1</span>); <span class="co">// 1.60217653e-19</span>
@@ -1420,6 +1418,42 @@ CONVERT::MomentumGeVtoSI(Vector3D(<span class="dv">1</span>, <span class="dv">2<
 <li><code>MomentumSItoGeV</code></li>
 </ul></li>
 </ul>
+<h1 id="exceptions.h"><code>exceptions.h</code></h1>
+<p>We defined a compiler macro <code>ERROR(char msg[])</code> which throws a new instance of <code>OurException</code>, sub-class of <code>std::runtime_error</code>.<br />
+<code>OurException</code> provides a simple wrapper to display file name and line number along with the error message.<br />
+In this example, we throw a division by 0 (<code>DIV_0</code>) error that we catch then re-throw to get the error callstack.</p>
+<p>Available messages in the <code>EXCEPTIONS</code> namespace: <code>DIV_0</code></p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">void</span> child(<span class="dt">double</span> x) {
+    <span class="co">// something went terribly wrong</span>
+    <span class="co">// did someone divide by 0 again ?</span>
+    ERROR(EXCEPTIONS::DIV_0);
+}
+
+<span class="dt">void</span> parent() {
+    <span class="cf">try</span> {
+        <span class="co">// ...</span>
+        <span class="co">// parent depends child treating some value</span>
+        child(<span class="dv">5</span>);
+        <span class="co">// ...</span>
+    } <span class="cf">catch</span> (OurException&amp; e) {
+        <span class="co">// Retrow the exception for the call stack</span>
+        ERROR(e.what());
+    }
+}
+
+<span class="dt">int</span> main() {
+    <span class="cf">try</span> {
+        parent();
+    } <span class="cf">catch</span> (OurException&amp; e) {
+        cout &lt;&lt; e.what() &lt;&lt; endl;
+    }
+
+    <span class="cf">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+<p>The following code yields</p>
+<pre><code>At file test/src/testException.cpp, line 20
+    At file test/src/testException.cpp, line 9
+    Division by 0</code></pre>
 <h1 id="particle"><code>Particle</code></h1>
 <h2 id="constructors">Constructors</h2>
 <p>There are two ways to initialize a particle.<br />

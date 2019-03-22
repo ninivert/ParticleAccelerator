@@ -43,7 +43,7 @@
 - Used C-ptr to for `Particle` and `Element` class
 - Used `class Element;` or `class Particle;` in header files to resolve circular header definitions
 - Review the `linkNext` function (create a method in `Element` to make the "full circle" (or not) i.e. the first `Element` has to point on the last one and vice versa (without creating a new Element))
-- Add large scale error management -> custom `Exception` sub-classes: Throw division by 0 errors
+- Add [large scale error management](#exceptions.h) -> custom `Exception` sub-classes: Throw division by 0 errors
 
 ## Todo
 
