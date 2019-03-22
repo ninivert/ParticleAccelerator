@@ -40,13 +40,13 @@ public:
 
 	// Virtual methods
 
-	virtual Vector3D getField(Vector3D const& pos) const = 0;
-	virtual bool isInWall(Particle const& p) const = 0;
-	virtual bool isInNext(Particle const& p) const = 0;
+	// virtual Vector3D getField(Vector3D const& pos) const =0;
+	// virtual bool isOut(Particle const& p) const =0;
+	// virtual bool isInNext(Particle const& p) const =0;
 
 protected:
-	Vector3D const posIn;
-	Vector3D const posOut;
+	Vector3D posIn;
+	Vector3D posOut;
 	double const radius;
 	Element * next;		// initialised to nullptr
 	Element * prev;		// initialised to nullptr
