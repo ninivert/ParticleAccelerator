@@ -16,12 +16,21 @@ Dipole::Dipole(Vector3D const& posIn, Vector3D const& posOut, double const& radi
 : Element(posIn, posOut, radius, prev), curvature(curvature)
 {}
 
+/****************************************************************
+ * Getters
+ ****************************************************************/
+
+Vector3D Dipole::getField(Vector3D const& pos) const { return Vector3D(0, 0, B); }
 
 /****************************************************************
  * Setters
  ****************************************************************/
 
 void Dipole::setB(double const& _B) { B = _B; }
+
+/****************************************************************
+ * Methods
+ ****************************************************************/
 
 string Dipole::to_string() const {
 	stringstream stream;
@@ -48,6 +57,14 @@ string Dipole::to_string() const {
 		<< " ("s + UNITS::DISTANCE << ")"s
 		<< endl;
 	return stream.str();
+}
+
+bool Dipole::isOut(Particle const& p) const {
+	return ((p.getPos() - 1 / abs(curvature) * (p.getPos() - p.getPos().getZ() * Vector3D(0, 0, 1))).norm() > getRadius());
+}
+
+bool Dipole::isInNext(Particle const& p) const {
+	return (Vector3D::tripleProduct(Vector3D(0, 0, 1), p.getPos(), getPosOut()) > 0);
 }
 
 /****************************************************************
