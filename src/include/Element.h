@@ -32,13 +32,10 @@ public:
 	Vector3D getPosOut() const;
 	double getRadius() const;
 
-	// Setters
-
-	void setNext(Element & _next);
-
 	// Methods
 
 	std::string to_string() const;
+	void linkNext(Element & _next);
 
 	// Virtual methods
 
