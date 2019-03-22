@@ -18,7 +18,7 @@ CXXFLAGS += -O2
 # and where to put exec files (TARGET)
 ##################################################################
 
-TARGET := testVector3D.bin testParticle.bin testAccelerator.bin
+TARGET := run_testVector3D run_testParticle run_testAccelerator run_testConverter run_testException
 OTESTPATH := ./test/build/
 BTESTPATH := ./test/bin/
 OPATH := ./build/
@@ -30,7 +30,7 @@ BPATH := ./bin/
 # when he wants to (re)build
 ##################################################################
 
-vpath %.h ./src/include ./test/lib
+vpath %.h ./src ./src/include ./test/lib
 vpath %.cpp ./src/lib ./test/lib/ ./test/src
 vpath %.o ./build ./test/build
 vpath %.bin ./bin ./test/bin
@@ -46,41 +46,30 @@ all: dir docs $(TARGET)
 
 
 ##################################################################
-# Track updates in header files
-##################################################################
-
-globals.h:
-	@echo [$@] Updates tracked...
-
-Converter.h:
-	@echo [$@] Updates tracked...
-
-
-##################################################################
 # Compilation of source files and classes
 ##################################################################
 
-Vector3D.o: Vector3D.cpp Vector3D.h globals.h
+Vector3D.o: Vector3D.cpp Vector3D.h
 	@echo [$@] Compiling...
 	@$(CXX) $(CXXFLAGS) -c src/lib/Vector3D.cpp -o $(OPATH)$@ -I ./
 
-Particle.o: Particle.cpp Particle.h Converter.h globals.h
+Particle.o: Particle.cpp Particle.h
 	@echo [$@] Compiling...
 	@$(CXX) $(CXXFLAGS) -c src/lib/Particle.cpp -o $(OPATH)$@ -I ./
 
-Element.o: Element.cpp Element.h globals.h
+Element.o: Element.cpp Element.h
 	@echo [$@] Compiling...
 	@$(CXX) $(CXXFLAGS) -c src/lib/Element.cpp -o $(OPATH)$@ -I ./
 
-Dipole.o: Dipole.cpp Dipole.h globals.h
+Dipole.o: Dipole.cpp Dipole.h
 	@echo [$@] Compiling...
 	@$(CXX) $(CXXFLAGS) -c src/lib/Dipole.cpp -o $(OPATH)$@ -I ./
 
-Quadrupole.o: Quadrupole.cpp Quadrupole.h globals.h
+Quadrupole.o: Quadrupole.cpp Quadrupole.h
 	@echo [$@] Compiling...
 	@$(CXX) $(CXXFLAGS) -c src/lib/Quadrupole.cpp -o $(OPATH)$@ -I ./
 
-Accelerator.o: Accelerator.cpp Accelerator.h globals.h
+Accelerator.o: Accelerator.cpp Accelerator.h
 	@echo [$@] Compiling...
 	@$(CXX) $(CXXFLAGS) -c src/lib/Accelerator.cpp -o $(OPATH)$@ -I ./
 
@@ -89,7 +78,7 @@ Accelerator.o: Accelerator.cpp Accelerator.h globals.h
 # Compilation of tests
 ##################################################################
 
-Test.o: Test.cpp Test.h globals.h
+Test.o: Test.cpp Test.h
 	@echo [$@] Compiling...
 	@$(CXX) $(CXXFLAGS) -c test/lib/Test.cpp -o $(OTESTPATH)$@ -I ./
 
@@ -97,17 +86,21 @@ testVector3D.o: testVector3D.cpp Vector3D.h Vector3D.cpp
 	@echo [$@] Compiling...
 	@$(CXX) $(CXXFLAGS) -c test/src/testVector3D.cpp -o $(OTESTPATH)$@ -I ./
 
-testParticle.o: testParticle.cpp Particle.h Particle.cpp Converter.h
+testParticle.o: testParticle.cpp Particle.h Particle.cpp
 	@echo [$@] Compiling...
 	@$(CXX) $(CXXFLAGS) -c test/src/testParticle.cpp -o $(OTESTPATH)$@ -I ./
 
-testAccelerator.o: testAccelerator.cpp Accelerator.h Accelerator.cpp Converter.h
+testAccelerator.o: testAccelerator.cpp Accelerator.h Accelerator.cpp
 	@echo [$@] Compiling...
 	@$(CXX) $(CXXFLAGS) -c test/src/testAccelerator.cpp -o $(OTESTPATH)$@ -I ./
 
-testConverter.o: testConverter.cpp Converter.h
+testConverter.o: testConverter.cpp
 	@echo [$@] Compiling...
 	@$(CXX) $(CXXFLAGS) -c test/src/testConverter.cpp -o $(OTESTPATH)$@ -I ./
+
+testException.o: testException.cpp
+	@echo [$@] Compiling...
+	@$(CXX) $(CXXFLAGS) -c test/src/testException.cpp -o $(OTESTPATH)$@ -I ./
 
 
 ##################################################################
@@ -129,6 +122,10 @@ testAccelerator.bin: Vector3D.o Particle.o Element.o Dipole.o Quadrupole.o Accel
 testConverter.bin: testConverter.o Test.o Vector3D.o
 	@echo [$@] Linking...
 	@$(CXX) $(CXXFLAGS) test/build/testConverter.o test/build/Test.o build/Vector3D.o -o $(BTESTPATH)$@
+
+testException.bin: testException.o
+	@echo [$@] Linking...
+	@$(CXX) $(CXXFLAGS) test/build/testException.o -o $(BTESTPATH)$@
 
 
 ##################################################################
@@ -153,6 +150,11 @@ run_testAccelerator: testAccelerator.bin
 run_testConverter: testConverter.bin
 	@echo [$@] Running tests...
 	@$(BTESTPATH)/testConverter.bin
+	@echo [$@] Success !
+
+run_testException: testException.bin
+	@echo [$@] Running tests...
+	@$(BTESTPATH)/testException.bin
 	@echo [$@] Success !
 
 
