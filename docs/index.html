@@ -1169,13 +1169,10 @@ Using the <code>array</code> library gave us horrible performance that couldn't 
 <li>Used C-ptr to for <code>Particle</code> and <code>Element</code> class</li>
 <li>Used <code>class Element;</code> or <code>class Particle;</code> in header files to resolve circular header definitions</li>
 <li>Review the <code>linkNext</code> function (create a method in <code>Element</code> to make the &quot;full circle&quot; (or not) i.e. the first <code>Element</code> has to point on the last one and vice versa (without creating a new Element))</li>
+<li>Add large scale error management -&gt; custom <code>Exception</code> sub-classes: Throw division by 0 errors</li>
 </ul>
 <h2 id="todo">Todo</h2>
 <ul>
-<li>Add large scale error management -&gt; custom <code>Exception</code> sub-classes
-<ul>
-<li>Throw division by 0 errors</li>
-</ul></li>
 <li>Add accelerator class</li>
 <li>Add element class
 <ul>

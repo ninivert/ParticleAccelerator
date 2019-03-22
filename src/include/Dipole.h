@@ -3,6 +3,12 @@
 
 #pragma once
 
+#include <cmath>
+#include <iomanip>
+#include <iostream>
+#include <string>
+#include <sstream>
+
 #include "src/include/Element.h"
 #include "src/include/Particle.h"
 #include "src/include/Vector3D.h"
@@ -22,6 +28,7 @@ public:
 	// Setter
 
 	void setB(double const& B);
+	std::string to_string() const;
 
 private:
 	double const curvature;
@@ -29,5 +36,6 @@ private:
 	double B; // Magnetic field
 };
 
+std::ostream& operator<< (std::ostream& stream, Element const& e);
 
 #endif
