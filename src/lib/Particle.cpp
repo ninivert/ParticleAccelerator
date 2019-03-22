@@ -27,7 +27,7 @@ Particle::Particle(Vector3D const& pos, double const& energy, Vector3D speed, do
 		factor = mass * mass / (energy * energy);
 		mass = CONVERT::MassGeVtoSI(mass);
 	} else {
-		factor = CONSTANTS::C * CONSTANTS::C * mass * energy;
+		factor = CONSTANTS::C * CONSTANTS::C * mass / energy;
 		factor *= factor;
 	}
 
