@@ -1,7 +1,7 @@
 #include "src/include/Dipole.h"
 
 /****************************************************************
- * Constructor
+ * Constructors
  ****************************************************************/
 
 Dipole::Dipole(Vector3D const& posIn, Vector3D const& posOut, double const& radius, double const& curvature)
