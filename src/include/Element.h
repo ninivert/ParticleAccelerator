@@ -28,6 +28,13 @@ public:
 	// WARNING: prev and next need to stay coherent
 	Element(Vector3D const& posIn, Vector3D const& posOut, double const& radius, Element & prev);
 
+	// Element(Element const&) = delete;
+	Element& operator = (Element const&) = delete;
+
+	// Destructor
+
+	~Element();
+
 	// Getters
 
 	Vector3D getPosIn() const;

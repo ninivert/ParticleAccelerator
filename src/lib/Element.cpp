@@ -35,6 +35,22 @@ Element::Element(Vector3D const& posIn, Vector3D const& posOut, double const& ra
 }
 
 /****************************************************************
+ * Destructor
+ ****************************************************************/
+
+Element::~Element() {
+	if (next != nullptr) {
+		next->prev = nullptr;
+		next = nullptr;
+	}
+
+	if (prev != nullptr) {
+		prev->next = nullptr;
+		prev = nullptr;
+	}
+}
+
+/****************************************************************
  * Getters
  ****************************************************************/
 

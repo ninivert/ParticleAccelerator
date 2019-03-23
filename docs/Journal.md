@@ -44,14 +44,17 @@
 - Used `class Element;` or `class Particle;` in header files to resolve circular header definitions
 - Review the `linkNext` function (create a method in `Element` to make the "full circle" (or not) i.e. the first `Element` has to point on the last one and vice versa (without creating a new Element))
 - Add [large scale error management](#exceptions.h) -> custom `Exception` sub-classes: Throw division by 0 errors
-
-## Todo
-
 - Add accelerator class
 - Add element class
 	- Dipole sub-class
-	- Quadrupole sub-class
-	- Straight sub-class
-- Add relativist mass to particle
+
+## Todo
+
+- Beware the copy constructor of `Element` (cause : pointers)
+	- used once in `Accelerator::addElement` for the push_back (? need of pointers to Element instead of "proper" Element ?)
+- Quadrupole sub-class
+- Straight sub-class
+
 - Doxygen
+- Add relativist mass to particle
 - Polymorphism pointer in accelerator -> define class destructor
