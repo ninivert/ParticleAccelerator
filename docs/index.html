@@ -1171,19 +1171,23 @@ Using the <code>array</code> library gave us horrible performance that couldn't 
 <li>Used <code>class Element;</code> or <code>class Particle;</code> in header files to resolve circular header definitions</li>
 <li>Review the <code>linkNext</code> function (create a method in <code>Element</code> to make the &quot;full circle&quot; (or not) i.e. the first <code>Element</code> has to point on the last one and vice versa (without creating a new Element))</li>
 <li>Add <a href="#exceptions.h">large scale error management</a> -&gt; custom <code>Exception</code> sub-classes: Throw division by 0 errors</li>
-</ul>
-<h2 id="todo">Todo</h2>
-<ul>
 <li>Add accelerator class</li>
 <li>Add element class
 <ul>
 <li>Dipole sub-class</li>
-<li>Quadrupole sub-class</li>
-<li>Straight sub-class</li>
 </ul></li>
-<li>Add relativist mass to particle</li>
+</ul>
+<h2 id="todo">Todo</h2>
+<ul>
+<li>Beware the copy constructor of <code>Element</code> (cause : pointers)
+<ul>
+<li>used once in <code>Accelerator::addElement</code> for the push_back (? need of pointers to Element instead of &quot;proper&quot; Element ?)</li>
+</ul></li>
+<li>Quadrupole sub-class</li>
+<li><p>Straight sub-class</p></li>
 <li>Doxygen</li>
-<li>Polymorphism pointer in accelerator -&gt; define class destructor</li>
+<li>Add relativist mass to particle</li>
+<li><p>Polymorphism pointer in accelerator -&gt; define class destructor</p></li>
 </ul>
 <h1 id="réponses">Réponses</h1>
 <h2 id="semaine-1">Semaine 1</h2>
