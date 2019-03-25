@@ -7,7 +7,7 @@ In this example, we throw a division by 0 (`DIV_0`) error that we catch then re-
 Available messages in the `EXCEPTIONS` namespace:
 
 - `DIV_0` : Division by 0
-- `BAD_ORIENTATION` : (in [Element](#element)) Input and output positions are colinear
+- `BAD_ORIENTATION` : (in [Element](#element)) : Input and output positions are colinear
 
 ```cpp
 void child(double x) {
