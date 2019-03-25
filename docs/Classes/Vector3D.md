@@ -5,14 +5,12 @@
 ```cpp
 Vector3D();
 Vector3D(double const& _x, double const& _y, double const& _z);
-Vector3D(Vector3D const& v);
 ```
 
 An instance of `Vector3D` can be initialized with
 
 - nothing so the vector will be initialized with `(0.0, 0.0, 0.0)`, or
 - a triplet of `double`s representing the vector parameters, or
-- an existing instance of `Vector3D`, of which a copy will be made.
 
 ## Arithmetic operations
 
@@ -51,7 +49,7 @@ Operators `+=`, `-=`, `^=`, `+`, `-`, `*` and `^` are overloaded and correspond 
 
 Scalar multiplication is also overloaded with the `*`, `*=`, `/` and `/=` operators (returns: `Vector3D`).
 
-The `Vector3D` class implements a static function `double Vector3D::tripleProduct` to evaluate the triple product (parallelepiped spanned by the 3 vectors) of three vectors.
+The `Vector3D` class implements a static function `double Vector3D::tripleProduct` to evaluate the triple product (oriented volume of the spanned parallelepiped of the 3 vectors) of three vectors.
 
 - `Vector3D::tripleProduct(Vector3D const&, Vector3D const&, Vector3D const&)`:
 	- Arguments: three `Vector3D` instances

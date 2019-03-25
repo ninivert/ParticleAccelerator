@@ -103,9 +103,9 @@ public:
 	Vector3D& operator -= (Vector3D const& v);
 
 	/**
-	 * Vector product of *this with a given vector.
+	 * Cross product of *this with a given vector.
 	 *
-	 * The vector product results in a vector which is normal to both input vectors.
+	 * The cross product results in a vector which is normal to both input vectors.
 	 *
 	 * Its direction is such that vectors v1_in, v2_in, v_out is a normal oriented base.
 	 *
@@ -130,6 +130,8 @@ public:
 
 	/**
 	 * Normalizes *this such that its norm becomes 1, but its direction remains unchanged
+	 *
+	 * If you try to normalize the null vector (aka this->norm() < GLOBALS::DELTA), we _will_ yell at you
 	 */
 
 	Vector3D& operator ~ ();
@@ -161,7 +163,7 @@ public:
 	/**
 	 * Rotates the vector by `alpha` around a given `axis` vector.
 	 *
-	 * WARNING: the angles are given in radians
+	 * WARNING: the angles are given in __radians__
 	 */
 
 	Vector3D& rotate(Vector3D axis, double const& alpha);
@@ -171,7 +173,7 @@ public:
 	 ****************************************************************/
 
 	/**
-	 * Returns the triple product (volume of the spanned parallepiped) of v1, v2, v3; i.e. v1 * (v2 ^ v3)
+	 * Returns the triple product (oriented volume of the spanned parallepiped) of v1, v2, v3; i.e. v1 * (v2 ^ v3)
 	 */
 
 	static double tripleProduct(Vector3D const& v1, Vector3D const& v2, Vector3D const& v3);
@@ -202,6 +204,11 @@ Vector3D const operator - (Vector3D v1, Vector3D const& v2);
 
 /**
  * Returns the vector product of the lhs and rhs
+ *
+ * This operator has a low priority and is evaluated after relational operators.
+ * Use parantheses to prioritize the evaluation of `^`
+ *
+ * See [the reference](https://en.cppreference.com/w/cpp/language/operator_precedence) for more information.
  */
 
 Vector3D const operator ^ (Vector3D v1, Vector3D const& v2);
