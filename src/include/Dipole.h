@@ -48,6 +48,4 @@ private:
 	double B;					// Magnetic field
 };
 
-std::ostream& operator<< (std::ostream& stream, Element const& e);
-
 #endif

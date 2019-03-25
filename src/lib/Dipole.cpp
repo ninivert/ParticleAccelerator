@@ -67,11 +67,3 @@ bool Dipole::isOut(Particle const& p) const {
 bool Dipole::isInNext(Particle const& p) const {
 	return (Vector3D::tripleProduct(Vector3D(0, 0, 1), p.getPos(), getPosOut()) > 0);
 }
-
-/****************************************************************
- * Operator overloading
- ****************************************************************/
-
-ostream& operator << (ostream& stream, Dipole const& d) {
-	return stream << d.to_string();
-}
