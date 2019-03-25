@@ -41,21 +41,21 @@ string Dipole::to_string() const {
 	stream
 		// Curvature
 		<< setw(STYLES::PADDING_SM) << ""
-		<< setw(STYLES::PADDING_MD) << "Curvature"s
+		<< setw(STYLES::PADDING_MD) << "Curvature"
 		<< setw(STYLES::PADDING_LG) << curvature
-		<< " ("s + UNITS::CURVATURE << ")"s
+		<< " (" << UNITS::CURVATURE << ")"
 		<< endl
 		// Curvature center
 		<< setw(STYLES::PADDING_SM) << ""
-		<< setw(STYLES::PADDING_MD) << "Curv. center"s
+		<< setw(STYLES::PADDING_MD) << "Curv. center"
 		<< setw(STYLES::PADDING_LG) << posCenter
-		<< " ("s + UNITS::DISTANCE << ")"s
+		<< " (" << UNITS::DISTANCE << ")"
 		<< endl
 		// Magnetic field
 		<< setw(STYLES::PADDING_SM) << ""
-		<< setw(STYLES::PADDING_MD) << "Magnetic field"s
+		<< setw(STYLES::PADDING_MD) << "Magnetic field"
 		<< setw(STYLES::PADDING_LG) << getField(Vector3D(0, 0, 0))
-		<< " ("s + UNITS::DISTANCE << ")"s
+		<< " (" << UNITS::DISTANCE << ")"
 		<< endl;
 	return stream.str();
 }

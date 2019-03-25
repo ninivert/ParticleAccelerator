@@ -135,11 +135,11 @@ string Vector3D::to_string() const {
 	stream << setprecision(STYLES::PRECISION);
 	stream
 		// x
-		<< "("s << getX()
+		<< "(" << getX()
 		// y
-		<< ", "s << getY()
+		<< ", " << getY()
 		// z
-		<< ", "s << getZ() << ")"s;
+		<< ", " << getZ() << ")";
 	return stream.str();
 }
 

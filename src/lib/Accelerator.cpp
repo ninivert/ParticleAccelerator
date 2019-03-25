@@ -61,9 +61,9 @@ string Accelerator::to_string() const {
 	stringstream stream;
 	stream << setprecision(STYLES::PRECISION);
 	stream << left;
-	stream << "Accelerator contains "s << elements.size() << " element(s)"s << endl;
+	stream << "Accelerator contains " << elements.size() << " element(s)" << endl;
 	for (shared_ptr<Element> const& element : elements) stream << *element << endl;
-	stream << "Accelerator contains "s << particles.size() << " particle(s)"s << endl;
+	stream << "Accelerator contains " << particles.size() << " particle(s)" << endl;
 	for (unique_ptr<Particle> const& particle : particles) stream << *particle << endl;
 	return stream.str();
 }
