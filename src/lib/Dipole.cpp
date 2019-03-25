@@ -8,7 +8,7 @@ using namespace std;
 
 Dipole::Dipole(Vector3D const& posIn, Vector3D const& posOut, double const& radius, double const& curvature)
 : Element(posIn, posOut, radius), curvature(curvature),
-  posCenter (0.5 * (posOut + posIn) + 1 / curvature * sqrt(1 - (posOut - posIn).normSquared() * curvature * curvature / 4) * ((posOut - posIn) ^ Vector3D(0, 0, 1)))
+  posCenter (0.5 * (posOut + posIn) + sqrt(1 / (curvature * curvature) - (posOut - posIn).normSquared()/ 4.0) * ((posOut - posIn) ^ Vector3D(0, 0, 1)) / (posOut - posIn).norm())
 {}
 
 
@@ -34,26 +34,27 @@ void Dipole::setB(double const& _B) { B = _B; }
 
 string Dipole::to_string() const {
 	stringstream stream;
+	stream << "Dipole : " << endl;
 	stream << Element::to_string();
 	stream << setprecision(STYLES::PRECISION);
 	stream << left;
 	stream
-		// Entry position
+		// Curvature
 		<< setw(STYLES::PADDING_SM) << ""
 		<< setw(STYLES::PADDING_MD) << "Curvature"s
 		<< setw(STYLES::PADDING_LG) << curvature
 		<< " ("s + UNITS::DISTANCE << "^-1)"s
 		<< endl
-		// Release position
+		// Curvature center
 		<< setw(STYLES::PADDING_SM) << ""
 		<< setw(STYLES::PADDING_MD) << "Curvature center"s
 		<< setw(STYLES::PADDING_LG) << posCenter
 		<< " ("s + UNITS::DISTANCE << ")"s
 		<< endl
-		// Radius
+		// Magnetic field
 		<< setw(STYLES::PADDING_SM) << ""
 		<< setw(STYLES::PADDING_MD) << "Magnetic field"s
-		<< setw(STYLES::PADDING_LG) << B
+		<< setw(STYLES::PADDING_LG) << getField(Vector3D(0, 0, 0))
 		<< " ("s + UNITS::DISTANCE << ")"s
 		<< endl;
 	return stream.str();

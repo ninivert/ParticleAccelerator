@@ -14,5 +14,16 @@ using namespace std;
 
 int main() {
 
+	Accelerator acc;
+	acc.addElement(new Dipole(Vector3D(1, 0, 0), Vector3D(0, -1, 0), 0.1, 1));
+
+	acc.addParticle(new Particle(Vector3D(1.00984, -0.191837, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272));
+	acc.addParticle(new Particle(Vector3D(0.99016, -0.191837, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272));
+
+	cout << acc << endl;
+
+	acc.clearParticles();
+	cout << acc << endl;
+
 	return 0;
 }

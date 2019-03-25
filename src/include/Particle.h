@@ -29,6 +29,9 @@ public:
 	// Constructor for init with velocity and energy
 	Particle(Vector3D const& pos, double const& energy, Vector3D speed, double const& mass, int const& charge = 1, bool const& unitGeV = true);
 
+	// Destructor to set element to nullptr and don't delete an element
+	~Particle();
+
 	// Getters (SI units)
 
 	double getEnergy() const;

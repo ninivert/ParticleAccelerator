@@ -28,7 +28,7 @@ public:
 	// Getters
 
 	// By convention the magnetic field is alongside the direction of the third vector of the canonical basis
-	Vector3D getField(Vector3D const& pos) const;
+	virtual Vector3D getField(Vector3D const& pos) const override;
 
 	// Setter
 
@@ -36,10 +36,9 @@ public:
 
 	// Methods
 
-	std::string to_string() const;
-
-	bool isOut(Particle const& p) const;
-	bool isInNext(Particle const& p) const;
+	virtual std::string to_string() const override;
+	virtual bool isOut(Particle const& p) const override;
+	virtual bool isInNext(Particle const& p) const override;
 
 
 
