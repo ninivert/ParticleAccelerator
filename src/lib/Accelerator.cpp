@@ -29,16 +29,25 @@ void Accelerator::step(double const& dt) {
 }
 
 void Accelerator::addElement(Element * element) {
-	elements.push_back(shared_ptr<Element>(element));
+	// Protection against empty pointers
+	if (element != nullptr) {
+		elements.push_back(shared_ptr<Element>(element));
+	}
 }
 
 void Accelerator::addElement(Element * element, Element * prevElement) {
-	elements.push_back(shared_ptr<Element>(element));
-	prevElement->linkNext(*element);
+	// Protection against empty pointers
+	if (element != nullptr) {
+		elements.push_back(shared_ptr<Element>(element));
+		prevElement->linkNext(*element);
+	}
 }
 
 void Accelerator::addParticle(Particle * particle) {
-	particles.push_back(unique_ptr<Particle>(particle));
+	// Protection against empty pointers
+	if (element != nullptr) {
+		particles.push_back(unique_ptr<Particle>(particle));
+	}
 }
 
 void Accelerator::clearParticles() { particles.clear(); }
