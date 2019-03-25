@@ -45,7 +45,7 @@ void Accelerator::addElement(Element * element, Element * prevElement) {
 
 void Accelerator::addParticle(Particle * particle) {
 	// Protection against empty pointers
-	if (element != nullptr) {
+	if (particle != nullptr) {
 		particles.push_back(unique_ptr<Particle>(particle));
 	}
 }
@@ -61,9 +61,9 @@ string Accelerator::to_string() const {
 	stringstream stream;
 	stream << setprecision(STYLES::PRECISION);
 	stream << left;
-	stream << "Accelerator contains the following elements"s << endl;
+	stream << "Accelerator contains "s << elements.size() << " element(s)"s << endl;
 	for (shared_ptr<Element> const& element : elements) stream << *element << endl;
-	stream << "Accelerator contains the following particles"s << endl;
+	stream << "Accelerator contains "s << particles.size() << " particle(s)"s << endl;
 	for (unique_ptr<Particle> const& particle : particles) stream << *particle << endl;
 	return stream.str();
 }
