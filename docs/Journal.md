@@ -58,3 +58,8 @@
 - Doxygen
 - Add relativist mass to particle
 - Polymorphism pointer in accelerator -> define class destructor
+
+## Questions
+
+- Si `void f()` et `void f() const` sont différents, comment les distiguer lors d'un appel ?
+- Comment detecter a quelle sous-classe appartient une instance ?
