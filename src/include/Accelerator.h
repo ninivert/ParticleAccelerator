@@ -7,6 +7,8 @@
 #include <vector>
 // Maths
 #include <cmath>
+// unique_ptr on Particle + shared_ptr on Element
+#include <memory>
 // String representation
 #include <string>
 #include <sstream>
@@ -20,7 +22,7 @@
 #include "src/globals.h"
 
 /**
- * Element
+ * Accelerator
  */
 
 class Accelerator {
@@ -34,6 +36,12 @@ public:
 	 */
 
 	Accelerator();
+
+	/**
+	 * Destructor calls the clear() method
+	 */
+
+	~Accelerator();
 
 	/**
 	 * Delete copy constructor
@@ -65,7 +73,7 @@ public:
 	 * This element is unlinked from any other element
 	 */
 
-	void addElement(Element const& element);
+	void addElement(Element * element);
 
 	/**
 	 * Add an element (dipole, quadrupole, etc.) to the accelerator
@@ -74,13 +82,13 @@ public:
 	 * `element.prev` and `prevElement.next` pointers are modified to assure cohesion
 	 */
 
-	void addElement(Element & element, Element & prevElement);
+	void addElement(Element * element, Element * prevElement);
 
 	/**
 	 * Adds a particle to the accelerator
 	 */
 
-	void addParticle(Particle const& particle);
+	void addParticle(Particle * particle);
 
 	/**
 	 * Removes all elements and particles from the accelerator
@@ -107,8 +115,8 @@ public:
 	std::string to_string() const;
 
 private:
-	std::vector<Particle> particles;
-	std::vector<Element> elements;
+	std::vector<std::unique_ptr<Particle>> particles;
+	std::vector<std::shared_ptr<Element>> elements;
 };
 
 /**

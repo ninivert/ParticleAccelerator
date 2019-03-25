@@ -3,10 +3,16 @@
 using namespace std;
 
 /****************************************************************
- * Constructors
+ * Constructor
  ****************************************************************/
 
 Accelerator::Accelerator() {};
+
+/****************************************************************
+ * Destructor
+ ****************************************************************/
+
+Accelerator::~Accelerator() { this->clear(); };
 
 /****************************************************************
  * Methods
@@ -17,22 +23,22 @@ void Accelerator::step(double const& dt) {
 	if (abs(dt) < GLOBALS::DELTA) { return; }
 
 	// Step through all the particles
-	for (Particle & particle : particles) {
-		particle.step(dt);
+	for (unique_ptr<Particle> & particle : particles) {
+		particle->step(dt);
 	}
 }
 
-void Accelerator::addElement(Element const& element) {
-	elements.push_back(element);
+void Accelerator::addElement(Element * element) {
+	elements.push_back(shared_ptr<Element>(element));
 }
 
-void Accelerator::addElement(Element & element, Element & prevElement) {
-	elements.push_back(element);
-	prevElement.linkNext(element);
+void Accelerator::addElement(Element * element, Element * prevElement) {
+	elements.push_back(shared_ptr<Element>(element));
+	prevElement->linkNext(*element);
 }
 
-void Accelerator::addParticle(Particle const& particle) {
-	particles.push_back(particle);
+void Accelerator::addParticle(Particle * particle) {
+	particles.push_back(unique_ptr<Particle>(particle));
 }
 
 void Accelerator::clearParticles() { particles.clear(); }
@@ -47,9 +53,9 @@ string Accelerator::to_string() const {
 	stream << setprecision(STYLES::PRECISION);
 	stream << left;
 	stream << "Accelerator contains the following elements"s << endl;
-	for (Element const& element : elements) stream << element << endl;
+	for (shared_ptr<Element> const& element : elements) stream << *element << endl;
 	stream << "Accelerator contains the following particles"s << endl;
-	for (Particle const& particle : particles) stream << particle << endl;
+	for (unique_ptr<Particle> const& particle : particles) stream << *particle << endl;
 	return stream.str();
 }
 
