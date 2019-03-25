@@ -20,6 +20,7 @@ namespace UNITS {
 	inline constexpr char SPEED[]("m/s");
 	inline constexpr char FORCE[]("N");
 	inline constexpr char DISTANCE[]("m");
+	inline constexpr char CURVATURE[]("1/m");
 	inline constexpr char CHARGE[]("Coulomb");
 	inline constexpr char SCALAR[]("-");
 }
