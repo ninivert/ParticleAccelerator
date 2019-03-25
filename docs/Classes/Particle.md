@@ -32,7 +32,7 @@ Particle(
 );
 ```
 
-### Using a normalized direction vector and energy
+### Using a direction vector velocity and energy
 
 ```cpp
 Particle(
@@ -71,7 +71,7 @@ Integrates the movement equations over a time step `dt`, which defaults to `GLOB
 p.exertForce(Vector3D(0, 0, 9.81*p.getMass()));
 ```
 
-Exerts a force onto a particle until the next `step` call.
+Exerts a force onto a particle until the next `step` is called.
 
 ### Lorentz force
 
