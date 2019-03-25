@@ -15,6 +15,13 @@
 class Quadrupole : public Element {
 public:
 
+	virtual Vector3D getField(Vector3D const& pos) const override;
+	virtual bool isOut(Particle const& p) const override;
+	virtual bool isInNext(Particle const& p) const override;
+
+	virtual std::string to_string() const;
+
+
 private:
 
 
