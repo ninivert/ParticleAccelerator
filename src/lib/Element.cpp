@@ -74,13 +74,13 @@ string Element::to_string() const {
 	stream
 		// Entry position
 		<< setw(STYLES::PADDING_SM) << ""
-		<< setw(STYLES::PADDING_MD) << "Entry position"s
+		<< setw(STYLES::PADDING_MD) << "Input pos"s
 		<< setw(STYLES::PADDING_LG) << getPosIn()
 		<< " ("s + UNITS::DISTANCE << ")"s
 		<< endl
 		// Release position
 		<< setw(STYLES::PADDING_SM) << ""
-		<< setw(STYLES::PADDING_MD) << "Release position"s
+		<< setw(STYLES::PADDING_MD) << "Release pos"s
 		<< setw(STYLES::PADDING_LG) << getPosOut()
 		<< " ("s + UNITS::DISTANCE << ")"s
 		<< endl

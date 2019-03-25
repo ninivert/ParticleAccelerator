@@ -47,7 +47,7 @@ string Dipole::to_string() const {
 		<< endl
 		// Curvature center
 		<< setw(STYLES::PADDING_SM) << ""
-		<< setw(STYLES::PADDING_MD) << "Curvature center"s
+		<< setw(STYLES::PADDING_MD) << "Curv. center"s
 		<< setw(STYLES::PADDING_LG) << posCenter
 		<< " ("s + UNITS::DISTANCE << ")"s
 		<< endl
