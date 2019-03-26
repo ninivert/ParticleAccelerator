@@ -22,7 +22,7 @@ int main() {
 	ASSERT_EXCEPTION(acc.addElement(nullptr), EXCEPTIONS::NULLPTR);
 	ASSERT_EXCEPTION(acc.addParticle(nullptr), EXCEPTIONS::NULLPTR);
 
-	ASSERT_EXCEPTION(new Dipole(Vector3D(0, 1, 0), Vector3D(0, -1, 0), 0.1, 1), EXCEPTIONS::BAD_ORIENTATION);
+	ASSERT_EXCEPTION(new Dipole(Vector3D(0, 1, 0), Vector3D(0, -1, 0), 0.1, 1, 0), EXCEPTIONS::BAD_ORIENTATION);
 
 	ASSERT_EXCEPTION(acc.addParticle(new Particle(Vector3D(1.00984, -0.191837, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272)), EXCEPTIONS::NO_ELEMENTS);
 
@@ -30,7 +30,7 @@ int main() {
 	 * Tests for Elements and Particles
 	 ****************************************************************/
 
-	Dipole * dipole = new Dipole(Vector3D(1, 0, 0), Vector3D(0, -1, 0), 0.1, 1, 7);
+	Dipole * dipole = new Dipole(Vector3D(1, 0, 0), Vector3D(0, -1, 0), 0.1, -1, 7);
 	Particle * part1 = new Particle(Vector3D(1.00984, -0.191837, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272);
 	Particle * part2 = new Particle(Vector3D(0.99016, -0.191837, 0), 2, Vector3D(-210200, -2.64754e8, 0), 0.938272);
 
@@ -80,7 +80,7 @@ int main() {
 
 	// Display
 
-	// cout << acc << endl;
+	cout << acc << endl;
 
 	acc.clearParticles();
 	// cout << acc << endl;
