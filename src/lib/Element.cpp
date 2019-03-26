@@ -72,6 +72,11 @@ string Element::to_string() const {
 	stream << setprecision(STYLES::PRECISION);
 	stream << left;
 	stream
+		// Adress
+		<< setw(STYLES::PADDING_SM) << ""
+		<< setw(STYLES::PADDING_MD) << "Adress"
+		<< setw(STYLES::PADDING_LG) << this
+		<< endl
 		// Entry position
 		<< setw(STYLES::PADDING_SM) << ""
 		<< setw(STYLES::PADDING_MD) << "Input pos"
@@ -90,6 +95,7 @@ string Element::to_string() const {
 		<< setw(STYLES::PADDING_LG) << getRadius()
 		<< " (" << UNITS::DISTANCE << ")"
 		<< endl;
+
 	return stream.str();
 }
 
