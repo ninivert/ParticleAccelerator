@@ -15,7 +15,9 @@
 #include "src/globals.h"
 
 /**
- * Dipole
+ * Dipole : it is a sub-class of Element
+ *
+ * It implements the representation of curved elements with magnetic field which aims at balancing the centrifugal force for an ideal trajectory
  */
 
 class Dipole : public Element {
@@ -83,7 +85,7 @@ public:
 	 ****************************************************************/
 
 	/**
-	 * Returns true if the Particle p is still inside the dipole
+	 * Returns true if the Particle p is still inside the dipole (touched the wall)
 	 */
 
 	virtual bool isOut(Particle const& p) const override;
@@ -95,6 +97,7 @@ public:
 	virtual std::string to_string() const override;
 
 private:
+
 	// Attributes
 
 	double const curvature;

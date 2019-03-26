@@ -48,19 +48,25 @@
 - Add element class
 	- Dipole sub-class
 
-## Todo
-
-- Beware the copy constructor of `Element` (cause : pointers)
-	- used once in `Accelerator::addElement` for the push_back (? need of pointers to Element instead of "proper" Element ?)
-- Quadrupole sub-class
-- Straight sub-class
+## Week 5
 
 - Doxygen
-- Add relativist mass to particle
+- Quadrupole sub-class
+- Straight sub-class
 - Polymorphism pointer in accelerator -> define class destructor
+- Beware the copy constructor of `Element` (cause : pointers)
+
+## Todo
+
+- NULLPTR exception in class Element
+- make_circle function in accelerator ?
+- Rename isOut
+- Finish documentation until Element class
+- Drawable class and its derivatives (oh no!)
 
 ## Questions
 
+- Add relativist mass to particle ?
 - Si `void f()` et `void f() const` sont différents, comment les distiguer lors d'un appel ?
 - Comment detecter a quelle sous-classe appartient une instance ?
 - Doit on rendre un `README.md` ?

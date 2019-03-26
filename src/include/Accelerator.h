@@ -46,13 +46,13 @@ public:
 	~Accelerator();
 
 	/**
-	 * Delete copy constructor
+	 * Delete copy constructor mainly to avoid to copy an accelerator (big object) and to forbid the transmission of pointers on particles (unique_ptr) and elements
 	 */
 
 	Accelerator(Accelerator const&) = delete;
 
 	/**
-	 * Delete assignment operator
+	 * Delete assignment operator for the same reasons as the copy constructor (Accelerator::Accelerator(Accelerator const&))
 	 */
 
 	Accelerator& operator = (Accelerator const&) = delete;

@@ -262,7 +262,7 @@ bool const operator != (Vector3D const& v1, Vector3D const& v2);
  ****************************************************************/
 
 /**
- * Streams the `Vector3D::to_string()` representation to a given stream
+ * Overloads ostream operator << for Vector3D
  */
 
 std::ostream& operator<< (std::ostream& stream, Vector3D const& v);
