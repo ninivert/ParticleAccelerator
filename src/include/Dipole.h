@@ -98,7 +98,7 @@ private:
 	// Attributes
 
 	double const curvature;
-	Vector3D const posCenter;
+	Vector3D const posCenter;	// CONVENTION : k positive => counterclockwise (opposite from given parameters)
 	double B;					// Magnetic field
 };
 
