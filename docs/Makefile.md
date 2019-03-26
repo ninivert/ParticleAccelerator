@@ -1,4 +1,4 @@
-# `Makefile`
+# Makefile
 
 ## Available make commands
 

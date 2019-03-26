@@ -63,3 +63,4 @@
 
 - Si `void f()` et `void f() const` sont différents, comment les distiguer lors d'un appel ?
 - Comment detecter a quelle sous-classe appartient une instance ?
+- Doit on rendre un `README.md` ?
