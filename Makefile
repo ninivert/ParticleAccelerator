@@ -171,15 +171,15 @@ clean: cleanbin cleanbuild
 
 cleanbin:
 	@rm -f $(BPATH)* $(BTESTPATH)*
-	@echo Bin files removed correctly
+	@echo [$@] Bin files removed correctly
 
 cleanbuild:
 	@rm -f $(OPATH)* $(OTESTPATH)*
-	@echo Build files removed correctly
+	@echo [$@] Build files removed correctly
 
 cleandocs:
 	@rm -f -r $(DOXYPATH)*
-	@echo Docs files removed correctly
+	@echo [$@] Docs files removed correctly
 
 ##################################################################
 # dir: make necessary directories for the code to compile
