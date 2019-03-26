@@ -1,6 +1,4 @@
 #include "src/globals.h"
-#include <iomanip>
-
 #include "src/exceptions.h"
 #include "src/include/Vector3D.h"
 #include "src/include/Particle.h"
@@ -80,7 +78,7 @@ int main() {
 
 	// Display
 
-	cout << acc << endl;
+	// cout << acc << endl;
 
 	acc.clearParticles();
 	// cout << acc << endl;
