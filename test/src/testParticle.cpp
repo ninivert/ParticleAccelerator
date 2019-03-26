@@ -1,6 +1,3 @@
-#include <iostream>
-#include <cassert>
-#include <cmath>
 #include "src/include/Vector3D.h"
 #include "src/include/Particle.h"
 #include "src/globals.h"
@@ -45,39 +42,39 @@ int main() {
 	// cout << "Position\n";
 	assert(p1.getPos() == p3.getPos());
 		// cout << p1.getPos() << endl << p3.getPos() << endl;
-	assert(true == Test::eq(p2.getPos().getX(), p4.getPos().getX()));
-	assert(true == Test::eq(p2.getPos().getY(), p4.getPos().getY()));
-	assert(true == Test::eq(p2.getPos().getZ(), p4.getPos().getZ()));
+	assert(Test::eq(p2.getPos().getX(), p4.getPos().getX()));
+	assert(Test::eq(p2.getPos().getY(), p4.getPos().getY()));
+	assert(Test::eq(p2.getPos().getZ(), p4.getPos().getZ()));
 		// cout << p2.getPos() << endl << p4.getPos() << endl;
 
 	// cout << "Energy\n";
-	assert(true == Test::eq(p1.getEnergy(), p3.getEnergy()));
+	assert(Test::eq(p1.getEnergy(), p3.getEnergy()));
 		// cout << p1.getEnergy() << endl << p3.getEnergy() << endl;
-	assert(true == Test::eq(p2.getEnergy(), p4.getEnergy()));
+	assert(Test::eq(p2.getEnergy(), p4.getEnergy()));
 		// cout << p2.getEnergy() << endl << p4.getEnergy() << endl;
 
 	// cout << "Gamma\n";
-	assert(true == Test::eq(p1.getGamma(), p3.getGamma()));
+	assert(Test::eq(p1.getGamma(), p3.getGamma()));
 		// cout << p1.getGamma() << endl << p3.getGamma() << endl;
-	assert(true == Test::eq(p2.getGamma(), p4.getGamma()));
+	assert(Test::eq(p2.getGamma(), p4.getGamma()));
 		// cout << p2.getGamma() << endl << p4.getGamma() << endl;
 
 	// cout << "Mass\n";
-	assert(true == Test::eq(p1.getMass(), p3.getMass()));
+	assert(Test::eq(p1.getMass(), p3.getMass()));
 		// cout << p1.getMass() << endl << p3.getMass() << endl;
-	assert(true == Test::eq(p2.getMass(), p4.getMass()));
+	assert(Test::eq(p2.getMass(), p4.getMass()));
 		// cout << p2.getMass() << endl << p4.getMass() << endl;
 
 	// cout << "Charge\n";
-	assert(true == Test::eq(p1.getCharge(), p3.getCharge()));
+	assert(Test::eq(p1.getCharge(), p3.getCharge()));
 		// cout << p1.getCharge() << endl << p3.getCharge() << endl;
-	assert(true == Test::eq(p2.getCharge(), p4.getCharge()));
+	assert(Test::eq(p2.getCharge(), p4.getCharge()));
 		// cout << p2.getCharge() << endl << p4.getCharge() << endl;
 
 	// cout << "Charge Number\n";
-	assert(true == Test::eq(p1.getChargeNumber(), p3.getChargeNumber()));
+	assert(Test::eq(p1.getChargeNumber(), p3.getChargeNumber()));
 		// cout << p1.getChargeNumber() << endl << p3.getChargeNumber() << endl;
-	assert(true == Test::eq(p2.getChargeNumber(), p4.getChargeNumber()));
+	assert(Test::eq(p2.getChargeNumber(), p4.getChargeNumber()));
 		// cout << p2.getChargeNumber() << endl << p4.getChargeNumber() << endl;
 
 	// cout << "\nPASSED ALL TESTS.\n";

@@ -1,8 +1,6 @@
-#include <iostream>
-#include <cassert>
-#include <cmath>
 #include "src/include/Vector3D.h"
 #include "src/globals.h"
+#include "src/exceptions.h"
 #include "test/lib/Test.h"
 
 using namespace std;
@@ -35,7 +33,7 @@ int main() {
 
 	assert((v1 / 3) == Vector3D(2/3.0, -5/3.0, 2.0));
 
-	TESTEXCEPTION(v1 /= 0);
+	ASSERTEXCEPTION(v1 /= 0, EXCEPTIONS::DIV_0);
 
 	assert((v2 /= 3) == Vector3D(3, -7, -2));
 	assert((v2 /= 1) == Vector3D(3, -7, -2));

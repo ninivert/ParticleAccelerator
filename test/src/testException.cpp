@@ -1,4 +1,3 @@
-#include <iostream>
 #include "src/exceptions.h"
 #include "test/lib/Test.h"
 
@@ -23,7 +22,11 @@ void parent() {
 }
 
 int main() {
-	TESTEXCEPTION(parent());
+	try {
+		parent();
+	} catch (OurException& e) {
+		// cout << e.what() << endl;
+	}
 
 	return 0;
 }

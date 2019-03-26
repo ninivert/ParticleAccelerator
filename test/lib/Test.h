@@ -3,7 +3,10 @@
 
 #pragma once
 
+#include <iostream>
 #include <cmath>
+#include <cassert>
+#include <string> // assert exceptions
 #include "src/globals.h"
 #include "src/exceptions.h"
 
@@ -24,8 +27,12 @@ public:
  * Macro to easily test if specific code throws an expression
  */
 
-#ifndef TESTEXCEPTION
-#define TESTEXCEPTION(arg) try { arg; } catch (OurException& e) { cout << "Correctly cought the following exception: " << e.what() << endl; }
+#ifndef ASSERTEXCEPTION
+#define ASSERTEXCEPTION(__test__, __err__) try {\
+	__test__;\
+} catch (OurException& e) {\
+	assert(std::string(e.error()) == std::string(__err__));\
+}
 #endif
 
 #endif

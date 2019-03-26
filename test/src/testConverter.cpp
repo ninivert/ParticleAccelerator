@@ -1,5 +1,3 @@
-#include <cassert>
-#include <iostream>
 #include "src/globals.h"
 #include "src/converter.h"
 #include "test/lib/Test.h"

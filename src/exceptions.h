@@ -15,13 +15,17 @@
 class OurException : public std::runtime_error {
 public:
 	OurException(std::string const& arg, std::string const& file, int const& line)
-	: std::runtime_error(arg), msg("At file " + file + ", line " + std::to_string(line) + "\n\t" + arg)
+	: std::runtime_error(arg),
+	  msg("At file " + file + ", line " + std::to_string(line) + "\n\t" + arg),
+	  exceptionCode(arg)
 	{}
 
 	// "throw" guarantees the compiler this function will NOT throw any exceptions
 	const char * what() const throw() { return msg.c_str(); }
+	const char * error() const throw() { return exceptionCode.c_str(); }
 
 private:
+	std::string exceptionCode;
 	std::string msg;
 };
 
