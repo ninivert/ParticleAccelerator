@@ -16,6 +16,7 @@
 
 class Vector3D {
 public:
+
 	/****************************************************************
 	 * Constructors
 	 ****************************************************************/
@@ -179,6 +180,7 @@ public:
 	static double tripleProduct(Vector3D const& v1, Vector3D const& v2, Vector3D const& v3);
 
 private:
+
 	// Attributes
 
 	double x;
