@@ -44,7 +44,6 @@ int main() {
 	assert((v1 ^ v2) == Vector3D(52, 22, 1));
 	assert((v2 ^ v1) == Vector3D(-52, -22, -1));
 	assert((v1 ^ v2) * v2 == 0);
-
 	assert((v1 ^ v2) * v1 == 0);
 
 	Vector3D const v6(v1);
@@ -52,20 +51,16 @@ int main() {
 	assert((v1 ^= v2) == Vector3D(52, 22, 1));
 
 	v1 = v6;
-
 	assert(Vector3D::tripleProduct(v1, v2, v3) == 361);
 	assert(Vector3D::tripleProduct(v2, v1, v3) == -361);
 
 	assert(v5.norm() == 5);
-
 	assert(v1.normSquared() == 65);
 
 	assert((v1 == v1) == 1);
-
 	assert((v1 == v2) == 0);
 
 	assert((v1 != v1) == 0);
-
 	assert((v1 != v4) == 1);
 
 	v1 = v2;
@@ -78,11 +73,9 @@ int main() {
 
 	v1 = v5;
 	v2 = v3;
-
 	assert(v1.rotate((v1 ^ v2), M_PI) == v5 * (-1));
 
 	v1.setNull();
-
 	assert(v1 == Vector3D(0, 0, 0));
 
 	return 0;

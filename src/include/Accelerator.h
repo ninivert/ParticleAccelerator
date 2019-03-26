@@ -57,6 +57,14 @@ public:
 	Accelerator& operator = (Accelerator const&) = delete;
 
 	/****************************************************************
+	 * Getters
+	 ****************************************************************/
+
+	/**
+	 * OH NO NO NO NO NOOOOOOOOOOOOOO => AGAINST ENCAPSULATION
+	 */
+
+	/****************************************************************
 	 * Methods
 	 ****************************************************************/
 
@@ -104,18 +112,21 @@ public:
 	void clearParticles();
 
 	/**
-	 * Removes all elements from the accelerator
-	 */
-
-	void clearElements();
-
-	/**
 	 * Generates the string representation of the accelerator
 	 */
 
 	std::string to_string() const;
 
 private:
+
+	/**
+	 * Removes all elements from the accelerator
+	 *
+	 * Private for the user not to be allowed to remove elements while particles are still pointing at them
+	 */
+
+	void clearElements();
+
 	// Attributes
 
 	/**
