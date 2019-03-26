@@ -193,7 +193,7 @@ dir:
 ##################################################################
 
 docs: cleandocs
-	@doxygen Doxyfile
+	@doxygen Doxyfile > /dev/null 2>&1
 	@echo [$@] generated documentation
 
 # docs:
