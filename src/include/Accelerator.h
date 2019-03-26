@@ -20,6 +20,7 @@
 #include "src/include/Dipole.h"
 #include "src/include/Quadrupole.h"
 #include "src/globals.h"
+#include "src/exceptions.h"
 
 /**
  * Accelerator

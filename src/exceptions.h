@@ -29,11 +29,19 @@ namespace EXCEPTIONS {
 	/**
 	 * Division by 0
 	 */
+
 	inline constexpr char DIV_0[]("Division by 0");
 
 	/**
-	 * In Element : Input and output positions are colinear
+	 * Pointer is nullptr
 	 */
+
+	inline constexpr char NULLPTR[]("Pointer may not be a nullptr");
+
+	/**
+	 * Class Element : Input and output positions are colinear
+	 */
+
 	inline constexpr char BAD_ORIENTATION[]("Input and output positions are colinear");
 }
 
@@ -44,6 +52,7 @@ namespace EXCEPTIONS {
  * Throws a new instance of `OurException`
  * Such as : DIV_0
  */
+
 #ifndef ERROR
 #define ERROR(arg) throw OurException(arg, __FILE__, __LINE__);
 #endif

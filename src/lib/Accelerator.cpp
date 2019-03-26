@@ -32,6 +32,8 @@ void Accelerator::addElement(Element * element) {
 	// Protection against empty pointers
 	if (element != nullptr) {
 		elements.push_back(shared_ptr<Element>(element));
+	} else {
+		ERROR(EXCEPTIONS::NULLPTR);
 	}
 }
 
@@ -40,6 +42,8 @@ void Accelerator::addElement(Element * element, Element * prevElement) {
 	if (element != nullptr) {
 		elements.push_back(shared_ptr<Element>(element));
 		prevElement->linkNext(*element);
+	} else {
+		ERROR(EXCEPTIONS::NULLPTR);
 	}
 }
 
@@ -47,6 +51,8 @@ void Accelerator::addParticle(Particle * particle) {
 	// Protection against empty pointers
 	if (particle != nullptr) {
 		particles.push_back(unique_ptr<Particle>(particle));
+	} else {
+		ERROR(EXCEPTIONS::NULLPTR);
 	}
 }
 

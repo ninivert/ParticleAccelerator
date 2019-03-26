@@ -1,6 +1,7 @@
 #include <cassert>
 #include <iostream>
 #include "src/globals.h"
+#include "src/exceptions.h"
 #include "src/include/Vector3D.h"
 #include "src/include/Particle.h"
 #include "src/include/Element.h"
@@ -13,7 +14,6 @@ using namespace std;
 
 
 int main() {
-
 	Accelerator acc;
 	acc.addElement(new Dipole(Vector3D(1, 0, 0), Vector3D(0, -1, 0), 0.1, 1));
 
@@ -23,7 +23,14 @@ int main() {
 	cout << acc << endl;
 
 	acc.clearParticles();
+
 	cout << acc << endl;
+
+	try {
+		acc.addElement(nullptr);
+	} catch (OurException& e) {
+		cout << "Correctly cought the following exception: " << e.what() << endl;
+	}
 
 	return 0;
 }
