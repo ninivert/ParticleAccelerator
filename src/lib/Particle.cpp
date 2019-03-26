@@ -125,11 +125,11 @@ string Particle::to_string() const {
 		<< setw(STYLES::PADDING_MD) << "Forces"
 		<< setw(STYLES::PADDING_LG) << getForces()
 		<< " (" << UNITS::FORCE << ")"
-		<< endl
-		// Element
-		<< setw(STYLES::PADDING_SM) << ""
-		<< setw(STYLES::PADDING_MD) << "Element adr."
-		<< setw(STYLES::PADDING_LG) << element
+		// << endl
+		// // Element
+		// << setw(STYLES::PADDING_SM) << ""
+		// << setw(STYLES::PADDING_MD) << "Element adr."
+		// << setw(STYLES::PADDING_LG) << element
 		<< endl;
 	return stream.str();
 }

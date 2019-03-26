@@ -13,21 +13,28 @@ using namespace std;
 int main() {
 	Accelerator acc;
 
+	// Tests for EXCEPTIONS
+
+	ASSERT_EXCEPTION(acc.addElement(nullptr), EXCEPTIONS::NULLPTR);
+	ASSERT_EXCEPTION(acc.addParticle(nullptr), EXCEPTIONS::NULLPTR);
+
+	ASSERT_EXCEPTION(new Dipole(Vector3D(0, 1, 0), Vector3D(0, -1, 0), 0.1, 1), EXCEPTIONS::BAD_ORIENTATION);
+
 	ASSERT_EXCEPTION(acc.addParticle(new Particle(Vector3D(1.00984, -0.191837, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272)), EXCEPTIONS::NO_ELEMENTS);
+
+	// Tests for Elements and Particles
 
 	acc.addElement(new Dipole(Vector3D(1, 0, 0), Vector3D(0, -1, 0), 0.1, 1));
 
 	acc.addParticle(new Particle(Vector3D(1.00984, -0.191837, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272));
 	acc.addParticle(new Particle(Vector3D(0.99016, -0.191837, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272));
 
-	// cout << acc << endl;
+	cout << acc << endl;
 
 	acc.clearParticles();
 
-	// cout << acc << endl;
+	cout << acc << endl;
 
-	ASSERT_EXCEPTION(acc.addElement(nullptr), EXCEPTIONS::NULLPTR);
-	ASSERT_EXCEPTION(acc.addParticle(nullptr), EXCEPTIONS::NULLPTR);
 
 	return 0;
 }
