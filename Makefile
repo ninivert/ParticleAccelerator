@@ -23,6 +23,7 @@ OTESTPATH := ./test/build/
 BTESTPATH := ./test/bin/
 OPATH := ./build/
 BPATH := ./bin/
+DOXYPATH := ./doxydocs/
 
 
 ##################################################################
@@ -172,6 +173,9 @@ cleanbuild:
 	@rm -f $(OPATH)* $(OTESTPATH)*
 	@echo Build files removed correctly
 
+cleandocs:
+	@rm -f -r $(DOXYPATH)*
+	@echo Docs files removed correctly
 
 ##################################################################
 # dir: make necessary directories for the code to compile
@@ -188,28 +192,32 @@ dir:
 # doc: generate documentation index.html
 ##################################################################
 
-docs:
-	@pandoc docs/Index.md \
-			docs/FolderStructure.md \
-			docs/Conception.md \
-			docs/Speedtests.md \
-			docs/Journal.md \
-			docs/Réponses.md \
-			docs/Makefile.md \
-			docs/Classes/* \
-			-o docs/index.html \
-			--columns 1000 \
-			--include-in-header=docs/Pandoc/gh-pandoc.css.html \
-			--include-in-header=docs/Pandoc/custom.css.html \
-			--toc \
-			--highlight-style pygments \
-			--standalone
+docs: cleandocs
+	@doxygen Doxyfile
 	@echo [$@] generated documentation
+
+# docs:
+# 	@pandoc docs/Index.md \
+# 			docs/FolderStructure.md \
+# 			docs/Conception.md \
+# 			docs/Speedtests.md \
+# 			docs/Journal.md \
+# 			docs/Réponses.md \
+# 			docs/Makefile.md \
+# 			docs/Classes/* \
+# 			-o docs/index.html \
+# 			--columns 1000 \
+# 			--include-in-header=docs/Pandoc/gh-pandoc.css.html \
+# 			--include-in-header=docs/Pandoc/custom.css.html \
+# 			--toc \
+# 			--highlight-style pygments \
+# 			--standalone
+# 	@echo [$@] generated documentation
 
 ##################################################################
 # doc: run index.html
 ##################################################################
 
 run_docs: docs
-	@xdg-open docs/index.html
+	@xdg-open $(DOXYPATH)/html/index.html
 
