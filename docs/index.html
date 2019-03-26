@@ -915,7 +915,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="#particle"><code>Particle</code></a><ul>
 <li><a href="#constructors">Constructors</a><ul>
 <li><a href="#using-velocity-only">Using velocity only</a></li>
-<li><a href="#using-a-normalized-direction-vector-and-energy">Using a normalized direction vector and energy</a></li>
+<li><a href="#using-a-direction-vector-velocity-and-energy">Using a direction vector velocity and energy</a></li>
 <li><a href="#arguments">Arguments</a></li>
 </ul></li>
 <li><a href="#physics-engine">Physics engine</a><ul>
@@ -1435,7 +1435,7 @@ In this example, we throw a division by 0 (<code>DIV_0</code>) error that we cat
 <p>Available messages in the <code>EXCEPTIONS</code> namespace:</p>
 <ul>
 <li><code>DIV_0</code> : Division by 0</li>
-<li><code>BAD_ORIENTATION</code> : (in <a href="#element">Element</a>) Input and output positions are colinear</li>
+<li><code>BAD_ORIENTATION</code> : (in <a href="#element">Element</a>) : Input and output positions are colinear</li>
 </ul>
 <div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">void</span> child(<span class="dt">double</span> x) {
     <span class="co">// something went terribly wrong</span>
@@ -1492,7 +1492,7 @@ cout &lt;&lt; p2 &lt;&lt; endl;</code></pre></div>
     <span class="dt">int</span> <span class="at">const</span>&amp; charge = <span class="dv">1</span>,
     <span class="dt">bool</span> <span class="at">const</span>&amp; unitGeV = <span class="kw">true</span>
 );</code></pre></div>
-<h3 id="using-a-normalized-direction-vector-and-energy">Using a normalized direction vector and energy</h3>
+<h3 id="using-a-direction-vector-velocity-and-energy">Using a direction vector velocity and energy</h3>
 <div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">Particle(
     Vector3D <span class="at">const</span>&amp; pos,
     <span class="dt">double</span> <span class="at">const</span>&amp; energy,
@@ -1517,7 +1517,7 @@ cout &lt;&lt; p2 &lt;&lt; endl;</code></pre></div>
 <h3 id="force-summation">Force summation</h3>
 <div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// Exert the force of gravity</span>
 p.exertForce(Vector3D(<span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">9.81</span>*p.getMass()));</code></pre></div>
-<p>Exerts a force onto a particle until the next <code>step</code> call.</p>
+<p>Exerts a force onto a particle until the next <code>step</code> is called.</p>
 <h3 id="lorentz-force">Lorentz force</h3>
 <div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">p1.exertLorentzForce(Vector3D(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">7</span>));</code></pre></div>
 <p>Exerts the Lorentz force on a particle traversing a magnetic field given by the <code>B</code> vector over a timestep <code>dt</code> (defaults to <code>GLOBALS::DT(1e-11)</code>).</p>
@@ -1548,13 +1548,11 @@ p.exertForce(Vector3D(<span class="dv">0</span>, <span class="dv">0</span>, <spa
 <h1 id="vector3d"><code>Vector3D</code></h1>
 <h2 id="constructor">Constructor</h2>
 <div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">Vector3D();
-Vector3D(<span class="dt">double</span> <span class="at">const</span>&amp; _x, <span class="dt">double</span> <span class="at">const</span>&amp; _y, <span class="dt">double</span> <span class="at">const</span>&amp; _z);
-Vector3D(Vector3D <span class="at">const</span>&amp; v);</code></pre></div>
+Vector3D(<span class="dt">double</span> <span class="at">const</span>&amp; _x, <span class="dt">double</span> <span class="at">const</span>&amp; _y, <span class="dt">double</span> <span class="at">const</span>&amp; _z);</code></pre></div>
 <p>An instance of <code>Vector3D</code> can be initialized with</p>
 <ul>
 <li>nothing so the vector will be initialized with <code>(0.0, 0.0, 0.0)</code>, or</li>
 <li>a triplet of <code>double</code>s representing the vector parameters, or</li>
-<li>an existing instance of <code>Vector3D</code>, of which a copy will be made.</li>
 </ul>
 <h2 id="arithmetic-operations">Arithmetic operations</h2>
 <div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">Vector3D v1(<span class="dv">2</span>, <span class="dv">-5</span>, <span class="dv">6</span>);
@@ -1589,7 +1587,7 @@ Vector3D::tripleProduct(v1, v2, v3); <span class="co">// 361</span></code></pre>
 <p><strong>WARNING</strong>: the <code>^</code> operator has a low priority and is evaluated after relational operators. Use parantheses to prioritize the evaluation of <code>^</code>. See <a href="https://en.cppreference.com/w/cpp/language/operator_precedence">the reference</a> for more information.</p>
 </blockquote>
 <p>Scalar multiplication is also overloaded with the <code>*</code>, <code>*=</code>, <code>/</code> and <code>/=</code> operators (returns: <code>Vector3D</code>).</p>
-<p>The <code>Vector3D</code> class implements a static function <code>double Vector3D::tripleProduct</code> to evaluate the triple product (parallelepiped spanned by the 3 vectors) of three vectors.</p>
+<p>The <code>Vector3D</code> class implements a static function <code>double Vector3D::tripleProduct</code> to evaluate the triple product (oriented volume of the spanned parallelepiped of the 3 vectors) of three vectors.</p>
 <ul>
 <li><code>Vector3D::tripleProduct(Vector3D const&amp;, Vector3D const&amp;, Vector3D const&amp;)</code>:
 <ul>

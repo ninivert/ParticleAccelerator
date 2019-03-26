@@ -115,7 +115,22 @@ public:
 	std::string to_string() const;
 
 private:
+	// Attributes
+
+	/**
+	 * Homogeneous collection of unique_ptr on Particle
+	 *
+	 * We chose unique_ptr because the Accelerator will be the only object to point on particles and the intelligent pointers offer a good feature for such usage (dynamical allocation)
+	 */
+
 	std::vector<std::unique_ptr<Particle>> particles;
+
+	/**
+	 * Heterogeneous collection of shared_ptr on Element
+	 *
+	 * We chose shared_ptr because the Accelerator will NOT be the only object to point on particles so we cannot use unique_ptr here, and the intelligent pointers are recommended for this because of dynamical allocation (more convenient than C-pointers)
+	 */
+
 	std::vector<std::shared_ptr<Element>> elements;
 };
 
