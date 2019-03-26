@@ -140,27 +140,27 @@ testException.bin: testException.o
 run_testVector3D: testVector3D.bin
 	@echo [$@] Running tests...
 	@$(BTESTPATH)/testVector3D.bin
-	@echo [$@] Success !
+	@echo [$@] -------------- Success !
 
 run_testParticle: testParticle.bin
 	@echo [$@] Running tests...
 	@$(BTESTPATH)/testParticle.bin
-	@echo [$@] Success !
+	@echo [$@] -------------- Success !
 
 run_testAccelerator: testAccelerator.bin
 	@echo [$@] Running tests...
 	@$(BTESTPATH)/testAccelerator.bin
-	@echo [$@] Success !
+	@echo [$@] -------------- Success !
 
 run_testConverter: testConverter.bin
 	@echo [$@] Running tests...
 	@$(BTESTPATH)/testConverter.bin
-	@echo [$@] Success !
+	@echo [$@] -------------- Success !
 
 run_testException: testException.bin
 	@echo [$@] Running tests...
 	@$(BTESTPATH)/testException.bin
-	@echo [$@] Success !
+	@echo [$@] -------------- Success !
 
 
 ##################################################################

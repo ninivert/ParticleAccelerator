@@ -22,8 +22,8 @@ class Dipole : public Element {
 public:
 	// Constructors
 
-	Dipole(Vector3D const& posIn, Vector3D const& posOut, double const& radius, double const& curvature);
-	Dipole(Vector3D const& posIn, Vector3D const& posOut, double const& radius, double const& curvature, Element & prev);
+	Dipole(Vector3D const& posIn, Vector3D const& posOut, double const& radius, double const& curvature, double const& B = 0);
+	Dipole(Vector3D const& posIn, Vector3D const& posOut, double const& radius, double const& curvature, Element & prev, double const& B = 0);
 
 	// Getters
 
