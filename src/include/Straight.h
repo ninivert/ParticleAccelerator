@@ -23,7 +23,7 @@ public:
 	 ****************************************************************/
 
 	/**
-	 * Constructor for initialisation of a simple Straight element (without linking to the previous one)
+	 * Constructor for initialisation of a simple Straight element (without linking to the previous one) with the initial and final position
 	 *
 	 * `Vector3D posIn`: initial position of the straight element
 	 * `Vector3D posOut`: final position of the straight element
@@ -33,16 +33,42 @@ public:
 	Straight(Vector3D const& posIn, Vector3D const& posOut, double const& radius);
 
 	/**
-	 * Constructor for initialisation of a Straight element witha reference to the previous element
+	 * Constructor for initialisation of a simple Straight element (without linking to the previous one) with the initial position, the length of the element and the direction
+	 *
+	 * `Vector3D posIn`: initial position of the straight element
+	 * `double length` : length of the element
+	 * `Vector3D direction`: direction of the straight element (from initial position) copy in order to normalize it
+	 * `double radius`: internal radius of the vacuum chamber of the straight element
+	 */
+
+	Straight(Vector3D const& posIn, double const& length, Vector3D direction, double const& radius);
+
+	/**
+	 * Constructor for initialisation of a Straight element witha reference to the previous element with the initial and final position
 	 *
 	 * Useful in Accelerator::addElement(Element * element)
 	 *
 	 * `Vector3D posIn`: initial position of the straight element
 	 * `Vector3D posOut`: final position of the straight element
 	 * `double radius`: internal radius of the vacuum chamber of the straight element
+	 * `Element & prev` : reference to the previous Element (for pointer init.)
 	 */
 
 	Straight(Vector3D const& posIn, Vector3D const& posOut, double const& radius, Element & prev);
+
+	/**
+	 * Constructor for initialisation of a Straight element witha reference to the previous element with the initial position, the length of the element and the direction
+	 *
+	 * Useful in Accelerator::addElement(Element * element)
+	 *
+	 * `Vector3D posIn`: initial position of the straight element
+	 * `double length` : length of the element
+	 * `Vector3D direction`: direction of the straight element (from initial position) copy in order to normalize it
+	 * `double radius`: internal radius of the vacuum chamber of the straight element
+	 * `Element & prev` : reference to the previous Element (for pointer init.)
+	 */
+
+	Straight(Vector3D const& posIn, double const& length, Vector3D direction, double const& radius, Element & prev);
 
 	/****************************************************************
 	 * Getter (virtual)

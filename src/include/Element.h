@@ -53,6 +53,8 @@ public:
 	virtual bool isOut(Particle const& p) const = 0;
 
 protected:
+	// Attributes
+
 	Vector3D posIn;
 	Vector3D posOut;
 	double const radius;
