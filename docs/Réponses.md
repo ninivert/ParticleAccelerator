@@ -87,7 +87,7 @@ Une fonction `Vector3D getField(Vector3D)` retourne la direction et l'amplitude 
 
 Oui, comme l'élément est fixe (la position d'entrée de sortie sont des `const`), le centre de courbure est fixe et on peut donc le calculer une seule fois lors de l'initialisation afin d'éviter de le recalculer à chaque fois.
 
-Nous prenons la CONVENTION que quand k est positif, le sens de l'arc de cercle dont les extrémités sont la position initiale et la position finale is TRIGONOMETRIQUE
+Nous prenons la CONVENTION que quand k est positif, le sens de parcourt de l'arc de cercle dont les extrémités sont la position initiale et la position finale est ANTI-TRIGONOMETRIQUE
 
 > Comment représentez le fait que chaque particule doit être dans un seul élément ? Cela modifie-t-il d'autres classes (que les Elements) ?
 
