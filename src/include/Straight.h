@@ -44,7 +44,7 @@ public:
 	Straight(Vector3D const& posIn, double const& length, Vector3D direction, double const& radius);
 
 	/**
-	 * Constructor for initialisation of a Straight element witha reference to the previous element with the initial and final position
+	 * Constructor for initialisation of a Straight element with a reference to the previous element with the initial and final position
 	 *
 	 * Useful in Accelerator::addElement(Element * element)
 	 *
@@ -57,7 +57,7 @@ public:
 	Straight(Vector3D const& posIn, Vector3D const& posOut, double const& radius, Element & prev);
 
 	/**
-	 * Constructor for initialisation of a Straight element witha reference to the previous element with the initial position, the length of the element and the direction
+	 * Constructor for initialisation of a Straight element with a reference to the previous element with the initial position, the length of the element and the direction
 	 *
 	 * Useful in Accelerator::addElement(Element * element)
 	 *

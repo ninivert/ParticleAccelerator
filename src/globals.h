@@ -22,6 +22,7 @@ namespace UNITS {
 	inline constexpr char DISTANCE[]("m");
 	inline constexpr char CURVATURE[]("1/m");
 	inline constexpr char CHARGE[]("Coulomb");
+	inline constexpr char MAGNETIC_FIELD[]("Tesla");
 	inline constexpr char SCALAR[]("-");
 }
 

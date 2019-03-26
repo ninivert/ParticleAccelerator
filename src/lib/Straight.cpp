@@ -23,7 +23,7 @@ Straight::Straight(Vector3D const& posIn, double const& length, Vector3D directi
 {}
 
 /****************************************************************
- * Getter
+ * Getter (virtual)
  ****************************************************************/
 
 Vector3D Straight::getField(Vector3D const& pos) const { return Vector3D(0, 0, 0); }
