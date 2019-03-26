@@ -50,7 +50,13 @@ void Accelerator::addElement(Element * element, Element * prevElement) {
 void Accelerator::addParticle(Particle * particle) {
 	// Protection against empty pointers
 	if (particle != nullptr) {
-		particles.push_back(unique_ptr<Particle>(particle));
+		// Protection against no element to point to
+		if (elements.size() > 0) {
+			particle->setElement(elements[0].get());
+			particles.push_back(unique_ptr<Particle>(particle));
+		} else {
+			ERROR(EXCEPTIONS::NO_ELEMENTS);
+		}
 	} else {
 		ERROR(EXCEPTIONS::NULLPTR);
 	}

@@ -43,6 +43,12 @@ namespace EXCEPTIONS {
 	 */
 
 	inline constexpr char BAD_ORIENTATION[]("Input and output positions are colinear");
+
+	/**
+	 * Class Accelerator : there is no element in which to add the particle
+	 */
+
+	inline constexpr char NO_ELEMENTS[]("Accelerator needs to contain at least one element before adding a particle");
 }
 
 /**

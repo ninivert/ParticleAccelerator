@@ -16,17 +16,6 @@ int main() {
 	Particle p3(Vector3D(3.00892956975892, -0.394484520288904, 0), 1.99998900529594, Vector3D(-1043024.10832297, -264752028.890446, 0), 0.938272);
 	Particle p4(Vector3D(2.99015377377424, -0.394484537620625, 0), 2.00000000004337, Vector3D(-622622.575845106, -264753762.062512, 0), 0.938272);
 
-	// try {
-	// 	try {
-	//		// THIS WILL THROW OUREXCEPTION
-	// 	} catch (OurException& e) {
-	// 		ERROR(e.what());
-	// 	}
-	// } catch (OurException& e) {
-	// 	cout << e.what() << endl;
-	// }
-
-
 	// cout << "P1 : \n" << p1 << endl;
 	// cout << "P2 : \n" << p2 << endl;
 

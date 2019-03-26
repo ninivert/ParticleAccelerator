@@ -63,6 +63,19 @@ Vector3D Particle::getMoment() const { return momentum; }
 Vector3D Particle::getPos() const { return pos; }
 
 /****************************************************************
+ * Setters
+ ****************************************************************/
+
+void Particle::setElement(Element * _element) {
+	// Protection against empty pointers
+	if (_element != nullptr) {
+		element = _element;
+	} else {
+		ERROR(EXCEPTIONS::NULLPTR);
+	}
+}
+
+/****************************************************************
  * Methods
  ****************************************************************/
 
@@ -112,6 +125,11 @@ string Particle::to_string() const {
 		<< setw(STYLES::PADDING_MD) << "Forces"
 		<< setw(STYLES::PADDING_LG) << getForces()
 		<< " (" << UNITS::FORCE << ")"
+		<< endl
+		// Element
+		<< setw(STYLES::PADDING_SM) << ""
+		<< setw(STYLES::PADDING_MD) << "Element adr."
+		<< setw(STYLES::PADDING_LG) << element
 		<< endl;
 	return stream.str();
 }

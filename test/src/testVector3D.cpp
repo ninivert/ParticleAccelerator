@@ -35,11 +35,7 @@ int main() {
 
 	assert((v1 / 3) == Vector3D(2/3.0, -5/3.0, 2.0));
 
-	try {
-		v1 /= 0;
-	} catch (OurException const& e) {
-		// cout << e.what() << endl;
-	}
+	TESTEXCEPTION(v1 /= 0);
 
 	assert((v2 /= 3) == Vector3D(3, -7, -2));
 	assert((v2 /= 1) == Vector3D(3, -7, -2));
