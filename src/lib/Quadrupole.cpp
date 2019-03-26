@@ -10,10 +10,6 @@ bool Quadrupole::isOut(Particle const& p) const {
 	return false;
 }
 
-bool Quadrupole::isInNext(Particle const& p) const {
-	return false;
-}
-
 
 
 string Quadrupole::to_string() const {

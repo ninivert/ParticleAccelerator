@@ -44,13 +44,13 @@ public:
 	// Methods
 
 	void linkNext(Element & _next);
-	virtual std::string to_string() const = 0;
+	bool isInNext(Particle const& p) const;
 
 	// Virtual methods
 
+	virtual std::string to_string() const = 0;
 	virtual Vector3D getField(Vector3D const& pos) const = 0;
 	virtual bool isOut(Particle const& p) const = 0;
-	virtual bool isInNext(Particle const& p) const = 0;
 
 protected:
 	Vector3D posIn;

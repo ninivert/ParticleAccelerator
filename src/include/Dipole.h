@@ -38,9 +38,6 @@ public:
 
 	virtual std::string to_string() const override;
 	virtual bool isOut(Particle const& p) const override;
-	virtual bool isInNext(Particle const& p) const override;
-
-
 
 private:
 	double const curvature;

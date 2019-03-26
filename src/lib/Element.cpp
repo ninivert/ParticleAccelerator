@@ -99,6 +99,10 @@ string Element::to_string() const {
 	return stream.str();
 }
 
+bool Element::isInNext(Particle const& p) const {
+	return (Vector3D::tripleProduct(Vector3D(0, 0, 1), p.getPos(), getPosOut()) > 0);
+}
+
 /****************************************************************
  * Operator overloading
  ****************************************************************/

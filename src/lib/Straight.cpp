@@ -2,8 +2,6 @@
 
 using namespace std;
 
-
-
 /****************************************************************
  * getter
  ****************************************************************/
@@ -15,14 +13,16 @@ Vector3D Straight::getField(Vector3D const& pos) const { return Vector3D(0, 0, 0
  ****************************************************************/
 
 bool Straight::isOut(Particle const& p) const {
-	return false;
-}
-
-bool Straight::isInNext(Particle const& p) const {
-	return false;
+	Vector3D X(p.getPos() - getPosIn());
+	Vector3D d(getPosOut() - getPosIn());
+	~d;
+	return ((X - (X * d) * d).norm() > getRadius());
 }
 
 string Straight::to_string() const {
-	return "Straight : ";
+	stringstream stream;
+	stream << "Straight : " << endl;
+	stream << Element::to_string();
+	return stream.str();
 }
 
