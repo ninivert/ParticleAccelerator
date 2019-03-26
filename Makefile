@@ -18,7 +18,7 @@ CXXFLAGS += -O2
 # and where to put exec files (TARGET)
 ##################################################################
 
-TARGET := run_testVector3D run_testParticle run_testAccelerator run_testConverter run_testException
+TARGET := run_testVector3D run_testParticle run_testElement run_testAccelerator run_testConverter run_testException
 OTESTPATH := ./test/build/
 BTESTPATH := ./test/bin/
 OPATH := ./build/
@@ -95,6 +95,10 @@ testParticle.o: testParticle.cpp Particle.h Particle.cpp
 	@echo [$@] Compiling...
 	@$(CXX) $(CXXFLAGS) -c test/src/testParticle.cpp -o $(OTESTPATH)$@ -I ./
 
+testElement.o: testElement.cpp Element.h Element.cpp
+	@echo [$@] Compiling...
+	@$(CXX) $(CXXFLAGS) -c test/src/testElement.cpp -o $(OTESTPATH)$@ -I ./
+
 testAccelerator.o: testAccelerator.cpp Accelerator.h Accelerator.cpp
 	@echo [$@] Compiling...
 	@$(CXX) $(CXXFLAGS) -c test/src/testAccelerator.cpp -o $(OTESTPATH)$@ -I ./
@@ -119,6 +123,10 @@ testVector3D.bin: Vector3D.o testVector3D.o Test.o
 testParticle.bin: Vector3D.o Particle.o testParticle.o Test.o
 	@echo [$@] Linking...
 	@$(CXX) $(CXXFLAGS) test/build/testParticle.o test/build/Test.o build/Particle.o build/Vector3D.o -o $(BTESTPATH)$@
+
+testElement.bin: Vector3D.o Particle.o Element.o Dipole.o Quadrupole.o Straight.o testElement.o Test.o
+	@echo [$@] Linking...
+	@$(CXX) $(CXXFLAGS) test/build/testElement.o test/build/Test.o build/Element.o build/Dipole.o build/Quadrupole.o build/Straight.o build/Particle.o build/Vector3D.o -o $(BTESTPATH)$@
 
 testAccelerator.bin: Vector3D.o Particle.o Element.o Dipole.o Quadrupole.o Straight.o Accelerator.o testAccelerator.o Test.o
 	@echo [$@] Linking...
@@ -145,6 +153,11 @@ run_testVector3D: testVector3D.bin
 run_testParticle: testParticle.bin
 	@echo [$@] Running tests...
 	@$(BTESTPATH)/testParticle.bin
+	@echo [$@] -------------- Success !
+
+run_testElement: testElement.bin
+	@echo [$@] Running tests...
+	@$(BTESTPATH)/testElement.bin
 	@echo [$@] -------------- Success !
 
 run_testAccelerator: testAccelerator.bin
