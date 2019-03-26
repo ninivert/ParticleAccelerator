@@ -27,8 +27,9 @@ public:
  * Macro to easily test if specific code throws an expression
  */
 
-#ifndef ASSERTEXCEPTION
-#define ASSERTEXCEPTION(__test__, __err__) try {\
+#ifndef ASSERT_EXCEPTION
+#define ASSERT_EXCEPTION(__test__, __err__)\
+try {\
 	__test__;\
 } catch (OurException& e) {\
 	assert(std::string(e.error()) == std::string(__err__));\

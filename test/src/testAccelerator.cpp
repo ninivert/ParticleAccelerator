@@ -13,7 +13,7 @@ using namespace std;
 int main() {
 	Accelerator acc;
 
-	ASSERTEXCEPTION(acc.addParticle(new Particle(Vector3D(1.00984, -0.191837, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272)), EXCEPTIONS::NO_ELEMENTS);
+	ASSERT_EXCEPTION(acc.addParticle(new Particle(Vector3D(1.00984, -0.191837, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272)), EXCEPTIONS::NO_ELEMENTS);
 
 	acc.addElement(new Dipole(Vector3D(1, 0, 0), Vector3D(0, -1, 0), 0.1, 1));
 
@@ -26,8 +26,8 @@ int main() {
 
 	cout << acc << endl;
 
-	ASSERTEXCEPTION(acc.addElement(nullptr), EXCEPTIONS::NULLPTR);
-	ASSERTEXCEPTION(acc.addParticle(nullptr), EXCEPTIONS::NULLPTR);
+	ASSERT_EXCEPTION(acc.addElement(nullptr), EXCEPTIONS::NULLPTR);
+	ASSERT_EXCEPTION(acc.addParticle(nullptr), EXCEPTIONS::NULLPTR);
 
 	return 0;
 }
