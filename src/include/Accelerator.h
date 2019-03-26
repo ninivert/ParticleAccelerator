@@ -19,6 +19,7 @@
 #include "src/include/Element.h"
 #include "src/include/Dipole.h"
 #include "src/include/Quadrupole.h"
+#include "src/include/Straight.h"
 #include "src/globals.h"
 #include "src/exceptions.h"
 

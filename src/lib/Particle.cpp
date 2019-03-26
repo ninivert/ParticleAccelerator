@@ -144,6 +144,13 @@ void Particle::step(double const& dt) {
 
 	// Integrate the movement equations
 	double const lambda(1 / (getGamma() * getMass()));
+
+	// A particle can live freely without an Element so no return of EXCEPTIONS::NULLPTR in the other case
+	// In that case you have to do a Particle::exertLorentzForce by yourself
+	if (element != nullptr) {
+		exertLorentzForce(element->getField(pos), dt);
+	}
+
 	momentum += getMass() * dt * lambda * getForces();
 	pos += dt * getSpeed();
 	forces.setNull();
@@ -152,8 +159,8 @@ void Particle::step(double const& dt) {
 void Particle::exertForce(Vector3D const& force) { forces += force; }
 
 void Particle::exertLorentzForce(Vector3D const& B, double const& dt) {
-	// Do nothing if dt is null
-	if (dt == 0) { return; }
+	// Do nothing if dt is null or B is null (for example in Straight elements)
+	if (dt == 0 or B == Vector3D(0, 0, 0)) { return; }
 
 	// Apply Lorentz force
 	Vector3D F(getSpeed());

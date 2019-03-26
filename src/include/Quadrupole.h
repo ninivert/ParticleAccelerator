@@ -88,7 +88,7 @@ public:
 	 ****************************************************************/
 
 	/**
-	 * Returns true if the Particle p is still inside the quadrupole
+	 * Returns true if the Particle p is outside the quadrupole (touched the wall)
 	 */
 
 	virtual bool isOut(Particle const& p) const override;

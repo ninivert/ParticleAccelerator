@@ -130,7 +130,7 @@ public:
 	 ****************************************************************/
 
 	/**
-	 * Returns true if the Particle p is still inside the Element
+	 * Returns true if the Particle p is outside the Element (touched the wall)
 	 */
 
 	virtual bool isOut(Particle const& p) const = 0;

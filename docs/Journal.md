@@ -60,6 +60,7 @@
 
 - NULLPTR exception in class Element
 - make_circle function in accelerator ?
+- init_particles for the pointer of particles to be initialized with the 1st element
 - Rename isOut
 - Finish documentation until Element class
 - Drawable class and its derivatives (oh no!)

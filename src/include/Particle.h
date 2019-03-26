@@ -152,6 +152,7 @@ public:
 	 * Integrates the movement equations over a time step `dt`, which defaults to `GLOBALS::DT(1e-11)`.
 	 *
 	 * If `dt` is null (aka inferior to GLOBALS::DELTA), then this doesn't do anything
+	 * If `B` is null (aka its components are all inferior to GLOBALS::DELTA), then this doesn't do anything (prevent a DIV_0 (in F.norm() because with F = Vector3D(0, 0, 0))
 	 */
 
 	void step(double const& dt = GLOBALS::DT);
