@@ -3,13 +3,25 @@
 using namespace std;
 
 /****************************************************************
- * getter
+ * Constructors
+ ****************************************************************/
+
+Straight::Straight(Vector3D const& posIn, Vector3D const& posOut, double const& radius)
+: Element(posIn, posOut, radius)
+{}
+
+Straight::Straight(Vector3D const& posIn, Vector3D const& posOut, double const& radius, Element & prev)
+: Element(posIn, posOut, radius, prev)
+{}
+
+/****************************************************************
+ * Getter
  ****************************************************************/
 
 Vector3D Straight::getField(Vector3D const& pos) const { return Vector3D(0, 0, 0); }
 
 /****************************************************************
- * methods
+ * Virtual methods
  ****************************************************************/
 
 bool Straight::isOut(Particle const& p) const {
@@ -25,4 +37,3 @@ string Straight::to_string() const {
 	stream << Element::to_string();
 	return stream.str();
 }
-
