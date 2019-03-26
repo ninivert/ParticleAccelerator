@@ -40,6 +40,8 @@ public:
 	virtual bool isOut(Particle const& p) const override;
 
 private:
+	// Attributes
+
 	double const curvature;
 	Vector3D const posCenter;
 	double B;					// Magnetic field
