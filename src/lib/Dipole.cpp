@@ -61,9 +61,7 @@ string Dipole::to_string() const {
 }
 
 bool Dipole::isOut(Particle const& p) const {
-	return ((p.getPos() - 1 / abs(curvature) * (p.getPos() - p.getPos().getZ() * Vector3D(0, 0, 1))).norm() > getRadius());
-}
-
-bool Dipole::isInNext(Particle const& p) const {
-	return (Vector3D::tripleProduct(Vector3D(0, 0, 1), p.getPos(), getPosOut()) > 0);
+	Vector3D X(p.getPos() - getPosIn());
+	Vector3D u(X - p.getPos().getZ() * Vector3D(0, 0, 1));
+	return ((X - 1 / abs(curvature) * u).norm() > getRadius());
 }
