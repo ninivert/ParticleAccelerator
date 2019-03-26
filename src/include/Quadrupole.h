@@ -16,6 +16,7 @@
 
 class Quadrupole : public Element {
 public:
+
 	/****************************************************************
 	 * Constructors
 	 ****************************************************************/
@@ -23,10 +24,10 @@ public:
 	/**
 	 * Constructor for initialisation of a simple Quadrupole element (without linking to the previous one) with the initial and final position
 	 *
-	 * `Vector3D posIn`: initial position of the quadrupole element
-	 * `Vector3D posOut`: final position of the quadrupole element
-	 * `double radius`: internal radius of the vacuum chamber of the quadrupole element
-	 * `double b`: proper internal magnetic field of the quadrupole (for propotional recall force)
+	 * - `Vector3D posIn`: initial position of the quadrupole element
+	 * - `Vector3D posOut`: final position of the quadrupole element
+	 * - `double radius`: internal radius of the vacuum chamber of the quadrupole element
+	 * - `double b`: proper internal magnetic field of the quadrupole (for propotional recall force)
 	 */
 
 	Quadrupole(Vector3D const& posIn, Vector3D const& posOut, double const& radius, double const& b);
@@ -34,11 +35,11 @@ public:
 	/**
 	 * Constructor for initialisation of a simple Quadrupole element (without linking to the previous one) with the initial position, the length of the element and the direction
 	 *
-	 * `Vector3D posIn`: initial position of the quadrupole element
-	 * `double length` : length of the element
-	 * `Vector3D direction`: direction of the quadrupole element (from initial position) copy in order to normalize it
-	 * `double radius`: internal radius of the vacuum chamber of the quadrupole element
-	 * `double b`: proper internal magnetic field of the quadrupole (for propotional recall force)
+	 * - `Vector3D posIn`: initial position of the quadrupole element
+	 * - `double length` : length of the element
+	 * - `Vector3D direction`: direction of the quadrupole element (from initial position) copy in order to normalize it
+	 * - `double radius`: internal radius of the vacuum chamber of the quadrupole element
+	 * - `double b`: proper internal magnetic field of the quadrupole (for propotional recall force)
 	 */
 
 	Quadrupole(Vector3D const& posIn, double const& length, Vector3D direction, double const& radius, double const& b);
@@ -48,11 +49,11 @@ public:
 	 *
 	 * Useful in Accelerator::addElement(Element * element)
 	 *
-	 * `Vector3D posIn`: initial position of the quadrupole
-	 * `Vector3D posOut`: final position of the quadrupole
-	 * `double radius`: internal radius of the vacuum chamber of the quadrupole
-	 * `double b`: proper internal magnetic field of the quadrupole (for propotional recall force)
-	 * `Element & prev` : reference to the previous Element (for pointer init.)
+	 * - `Vector3D posIn`: initial position of the quadrupole
+	 * - `Vector3D posOut`: final position of the quadrupole
+	 * - `double radius`: internal radius of the vacuum chamber of the quadrupole
+	 * - `double b`: proper internal magnetic field of the quadrupole (for propotional recall force)
+	 * - `Element & prev` : reference to the previous Element (for pointer init.)
 	 */
 
 	Quadrupole(Vector3D const& posIn, Vector3D const& posOut, double const& radius, double const& b, Element & prev);
@@ -62,12 +63,12 @@ public:
 	 *
 	 * Useful in Accelerator::addElement(Element * element)
 	 *
-	 * `Vector3D posIn`: initial position of the quadrupole
-	 * `double length` : length of the element
-	 * `Vector3D direction`: direction of the quadrupole (from initial position) copy in order to normalize it
-	 * `double radius`: internal radius of the vacuum chamber of the quadrupole
-	 * `double b`: proper internal magnetic field of the quadrupole (for propotional recall force)
-	 * `Element & prev` : reference to the previous Element (for pointer init.)
+	 * - `Vector3D posIn`: initial position of the quadrupole
+	 * - `double length` : length of the element
+	 * - `Vector3D direction`: direction of the quadrupole (from initial position) copy in order to normalize it
+	 * - `double radius`: internal radius of the vacuum chamber of the quadrupole
+	 * - `double b`: proper internal magnetic field of the quadrupole (for propotional recall force)
+	 * - `Element & prev` : reference to the previous Element (for pointer init.)
 	 */
 
 	Quadrupole(Vector3D const& posIn, double const& length, Vector3D direction, double const& radius, double const& b, Element & prev);
@@ -87,7 +88,7 @@ public:
 	 ****************************************************************/
 
 	/**
-	 * Returns true if the Particle p is still inside the element
+	 * Returns true if the Particle p is still inside the quadrupole
 	 */
 
 	virtual bool isOut(Particle const& p) const override;
@@ -99,6 +100,7 @@ public:
 	virtual std::string to_string() const;
 
 private:
+
 	// Attribute
 
 	double b;		// Intensity of the magnetic field

@@ -4,7 +4,7 @@
 
 > Comment représentez vous ces vecteurs ?
 
-Avec une classe [`Vector3D`](#vector3d).
+Avec une classe Vector3D.
 
 > Comment sont-ils organisés : quels attributs ?
 
@@ -21,7 +21,7 @@ On a préféré cela à l'utilisation de tableaux, moins intuitifs et puisque vu
 - Méthodes publiques propres à chaque instance de la classe
 - Méthodes statiques avec `static`
 
-[Voir la documentation Vector3D](#vector3d) pour plus d'informations.
+Voir la documentation Vector3D pour plus d'informations.
 
 > Quels droits d'accès ?
 
@@ -57,7 +57,7 @@ Tout dépend de comment on souhaite utiliser la classe. Pour l'instant, il nous 
 
 > Quels opérateurs avez vous introduits ?
 
-[Voir documentation](#vector3d).
+Voir documentation de Vector3D.
 
 > Comment avez-vous implémenté gamma : comme attribut ou comme méthode ? Même question pour l'énergie.
 
@@ -77,7 +77,7 @@ Nous avons choisi d'utiliser les SI pour les raisons suivantes:
 
 > Comment proposez-vous de représenter et d'organiser les éléments ?
 
-On a créé une [classe `Element`](#element) dont héritent les classes [`Dipole`](#dipole) et [`Quadrupole`](#quadrupole).
+On a créé une classe Element dont héritent les classes Dipole et Quadrupole.
 
 > Comment proposez-vous de représenter les champs magnétiques des éléments ?
 
@@ -87,13 +87,15 @@ Une fonction `Vector3D getField(Vector3D)` retourne la direction et l'amplitude 
 
 Oui, comme l'élément est fixe (la position d'entrée de sortie sont des `const`), le centre de courbure est fixe et on peut donc le calculer une seule fois lors de l'initialisation afin d'éviter de le recalculer à chaque fois.
 
+Nous prenons la CONVENTION que quand k est positif, le sens de l'arc de cercle dont les extrémités sont la position initiale et la position finale is TRIGONOMETRIQUE
+
 > Comment représentez le fait que chaque particule doit être dans un seul élément ? Cela modifie-t-il d'autres classes (que les Elements) ?
 
-Chaque [particule](#particle) dispose d'un pointeur à la C sur un élément de l'accélérateur. Il nous est impossible d'utiliser les `unique_ptr` car il est possible qu'un autre élément/particule aie aussi un pointeur sur l'élément. Nous envisageons la possibilité d'utiliser des `shared_ptr`.
+Chaque Particle dispose d'un pointeur à la C sur un élément de l'accélérateur. Il nous est impossible d'utiliser les `unique_ptr` car il est possible qu'un autre élément/particule aie aussi un pointeur sur l'élément. Nous envisageons la possibilité d'utiliser des `shared_ptr`.
 
 > Comment représentez vous la classe Accelerateur ?
 
-La [classe accélérateur](#accelerator) contient des tableaux dynamiques de [particules](#particle) et d'[éléments](#element)
+La classe Accelerator contient des tableaux dynamiques de Particle et d'Element
 
 > Pourquoi qualifier le constructeur de copie et `operator =` de « deleted » ?
 

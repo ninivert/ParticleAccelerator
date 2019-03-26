@@ -22,6 +22,7 @@ class Particle;
 
 class Element {
 public:
+
 	// Constructors
 
 	Element(Vector3D const& posIn, Vector3D const& posOut, double const& radius);
@@ -53,6 +54,7 @@ public:
 	virtual bool isOut(Particle const& p) const = 0;
 
 protected:
+
 	// Attributes
 
 	Vector3D posIn;

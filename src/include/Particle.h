@@ -22,6 +22,7 @@ class Element;
 
 class Particle {
 public:
+
 	/****************************************************************
 	* Constructors
 	****************************************************************/
@@ -29,11 +30,11 @@ public:
 	/**
 	 * Constructor for initialisation with velocity
 	 *
-	 * `Vector3D pos`: initial position of the particle
-	 * `Vector3D speed`: initial speed of the particle (if applicable)
-	 * `double mass`: mass of the particle
-	 * `int charge = 1`: charge of the particle in multiples of the elementary charge (i.e. multiples of 1 eV, charge of the electron)
-	 * `bool unitGeV = true`: specify the units of the scalars given to the constructor
+	 * - `Vector3D pos`: initial position of the particle
+	 * - `Vector3D speed`: initial speed of the particle (if applicable)
+	 * - `double mass`: mass of the particle
+	 * - `int charge = 1`: charge of the particle in multiples of the elementary charge (i.e. multiples of 1 eV, charge of the electron)
+	 * - `bool unitGeV = true`: specify the units of the scalars given to the constructor
 	 *
 	 * Per default, units are expected in GeV. To specify units in the SI system, add `false` at the end of the argument list.
 	 */
@@ -43,12 +44,12 @@ public:
 	/**
 	 * Constructor for initialisation with energy and direction vector velocity
 	 *
-	 * `Vector3D pos`: initial position of the particle
-	 * `Vector3D speed`: initial speed of the particle (if applicable)
-	 * `double energy`: intial energy of the particle (if applicable)
-	 * `double mass`: mass of the particle
-	 * `int charge = 1`: charge of the particle in multiples of the elementary charge (i.e. multiples of 1 eV, charge of the electron)
-	 * `bool unitGeV = true`: specify the units of the scalars given to the constructor
+	 * - `Vector3D pos`: initial position of the particle
+	 * - `Vector3D speed`: initial speed of the particle (if applicable)
+	 * - `double energy`: intial energy of the particle (if applicable)
+	 * - `double mass`: mass of the particle
+	 * - `int charge = 1`: charge of the particle in multiples of the elementary charge (i.e. multiples of 1 eV, charge of the electron)
+	 * - `bool unitGeV = true`: specify the units of the scalars given to the constructor
 	 *
 	 * Per default, units are expected in GeV. To specify units in the SI system, add `false` at the end of the argument list.
 	 */
@@ -170,6 +171,7 @@ public:
 	void exertLorentzForce(Vector3D const& B, double const& dt = GLOBALS::DT);
 
 private:
+
 	// Attributes
 
 	Vector3D pos;
