@@ -7,6 +7,12 @@
 #include <sstream>
 #include <iomanip>
 #include <cmath>
+
+// Circular dependency resolution
+// #include "src/include/fwd/Renderer.fwd.h"
+
+// #include "src/include/Drawable.h"
+// #include "src/include/Renderer.h"
 #include "src/globals.h"
 #include "src/exceptions.h"
 
@@ -178,6 +184,16 @@ public:
 	 */
 
 	static double tripleProduct(Vector3D const& v1, Vector3D const& v2, Vector3D const& v3);
+
+	/****************************************************************
+	 * Rendering engine
+	 ****************************************************************/
+
+	/**
+	 * Reroute the drawing call (double dispatching)
+	 */
+
+	// virtual void draw() const override;
 
 private:
 

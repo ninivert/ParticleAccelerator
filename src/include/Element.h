@@ -8,13 +8,14 @@
 #include <string>
 #include <sstream>
 
+// Circular dependency resolution
+#include "src/include/fwd/Particle.fwd.h"
+
 #include "src/include/Vector3D.h"
 #include "src/include/Particle.h"
 #include "src/globals.h"
 #include "src/exceptions.h"
 
-// Resolve ciruclar header definition
-class Particle;
 
 /**
  * Element is an abstract class which embodies the element of an accelerator
@@ -36,6 +37,7 @@ public:
 	 */
 
 	Element(Vector3D const& posIn, Vector3D const& posOut, double const& radius);
+
 	/**
 	 * Constructor for initialisation of an Element with a reference to the previous element with the initial and final position
 	 *

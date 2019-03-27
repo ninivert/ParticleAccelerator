@@ -95,3 +95,11 @@ string Accelerator::to_string() const {
 std::ostream& operator<< (std::ostream& stream, Accelerator const& a) {
 	return stream << a.to_string();
 }
+
+/****************************************************************
+ * Drawing
+ ****************************************************************/
+
+void Accelerator::draw() const {
+	engine->draw(*this);
+}

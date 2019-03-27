@@ -8,13 +8,13 @@
 #include <string>
 #include <sstream>
 
+// Circular dependency resolution
+#include "src/include/fwd/Element.fwd.h"
+
 #include "src/include/Element.h"
 #include "src/include/Vector3D.h"
 #include "src/globals.h"
 #include "src/converter.h"
-
-// Resolve ciruclar header definition
-class Element;
 
 /**
  * The Particle Class represents a particle evolving in the 3D carthesian space

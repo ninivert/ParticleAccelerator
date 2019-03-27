@@ -173,3 +173,11 @@ double Vector3D::tripleProduct(Vector3D const& v1, Vector3D const& v2, Vector3D 
 ostream& operator << (ostream& stream, Vector3D const& v) {
 	return stream << v.to_string();
 }
+
+/****************************************************************
+ * Drawing
+ ****************************************************************/
+
+// void Accelerator::draw() const {
+// 	engine->draw(*this);
+// }

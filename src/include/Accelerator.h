@@ -14,11 +14,14 @@
 #include <sstream>
 #include <iomanip>
 
+// Circular dependency resolution
+#include "src/include/fwd/Renderer.fwd.h"
+
 #include "src/include/Vector3D.h"
 #include "src/include/Particle.h"
 #include "src/include/Element.h"
-#include "src/include/Dipole.h"
-#include "src/include/Quadrupole.h"
+#include "src/include/Drawable.h"
+#include "src/include/Renderer.h"
 #include "src/globals.h"
 #include "src/exceptions.h"
 
@@ -26,9 +29,8 @@
  * Accelerator
  */
 
-class Accelerator {
+class Accelerator : public Drawable {
 public:
-
 	/****************************************************************
 	 * Constructors
 	 ****************************************************************/
@@ -117,6 +119,16 @@ public:
 	 */
 
 	std::string to_string() const;
+
+	/****************************************************************
+	 * Rendering engine
+	 ****************************************************************/
+
+	/**
+	 * Reroute the drawing call (double dispatching)
+	 */
+
+	virtual void draw() const override;
 
 private:
 
