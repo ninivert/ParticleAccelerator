@@ -19,10 +19,12 @@ int main() {
 	 * Dipole
 	 ****************************************************************/
 
-	Dipole dipole(Vector3D(1, 0, 0), Vector3D(0, -1, 0), 0.1, -1, 5.12);
+	Dipole dipole(Vector3D(3, 0, 0), Vector3D(2, -1, 0), 0.1, -1, 5.12);
 
-	assert(dipole.getPosIn() == Vector3D(1, 0, 0));
-	assert(dipole.getPosOut() == Vector3D(0, -1, 0));
+	// posCenter : (3, -1, 0)
+
+	assert(dipole.getPosIn() == Vector3D(3, 0, 0));
+	assert(dipole.getPosOut() == Vector3D(2, -1, 0));
 	assert(Test::eq(dipole.getRadius(), 0.1));
 	assert(dipole.getField(Vector3D(0, 0, 0)) == Vector3D(0, 0, 5.12));
 	dipole.setB(7);
@@ -34,7 +36,8 @@ int main() {
 	p1.setElement(&dipole);
 	p1.step();
 
-	// assert(dipole.isInNext(p1));
+	// We can see with that with the parameters given the particle is still in the same element
+	assert(not dipole.isInNext(p1));
 
 	// We have to "reduce" the speed or our `operator ==` won't evaluate it correctly
 	// We are working at high speed (10e8) so small errors are way larger than our EPSILON (in globals.h)
@@ -50,63 +53,61 @@ int main() {
 	/****************************************************************
 	 * Quadrupole
 	 ****************************************************************/
-
-	// See example étape 6
+	// See example P10 (Week 6)
 
 	// Badly Oriented (anti-clockwise) => will exchange the posIn and posOut
 	// Made on purpose
-	// Quadrupole quadru(Vector3D(3, 0, 0), -1, Vector3D(0, -1, 0), 0.1, -1.2);
+	Quadrupole quadru(Vector3D(3, -1, 0), -1, Vector3D(0, -1, 0), 0.1, -1.2);
 
-	// assert(quadru.getPosIn() == Vector3D(3, 2, 0));
-	// assert(quadru.getPosOut() == Vector3D(3, 1, 0));
-	// assert(Test::eq(quadru.getRadius(), 0.1));
-	// assert(quadru.getField(Vector3D(0, 0, 0)) == Vector3D(0, 0, -3.6));
+	assert(quadru.getPosIn() == Vector3D(3, 0, 0));
+	assert(quadru.getPosOut() == Vector3D(3, -1, 0));
+	assert(Test::eq(quadru.getRadius(), 0.1));
+	assert(quadru.getField(Vector3D(3.01, 0, 0)) == Vector3D(0, 0, -0.012));
 
-	// Particle p3(Vector3D(3.01, 0, 0), Vector3D(0, -2.64754e8, 0), 0.938272);
+	Particle p3(Vector3D(3.01, 0, 0), Vector3D(0, -2.64754e8, 0), 0.938272);
 
-	// Particle p4(Vector3D(3.01, -0.00264754, 0), Vector3D(-1427.7, -2.64754e+08, 0), 0.938272);
-	// p3.setElement(&quadru);
+	Particle p4(Vector3D(3.01, -0.00264754, 0), Vector3D(1427.7, -2.64754e+08, 0), 0.938272);
 
-	// cout << p3 << endl;
-	// p3.step();
-	// cout << p3 << endl;
+	p3.setElement(&quadru);
+	p3.step();
 
-	// // assert(quadru.isInNext(p3));
+	// Using exemple of P10 exercise, the particle should still be in the current element
+	assert(not quadru.isInNext(p3));
 
-	// // We have to "reduce" the speed or our `operator ==` won't evaluate it correctly
-	// // We are working at high speed (10e8) so small errors are way larger than our EPSILON (in globals.h)
-	// // assert(p3.getSpeed() / 10e8 == p4.getSpeed() / 10e8);
-	// assert(p3.getMoment() == p4.getMoment());
-	// assert(Test::eq(p3.getPos().getX(), p4.getPos().getX()));
-	// assert(Test::eq(p3.getPos().getY(), p4.getPos().getY()));
-	// assert(Test::eq(p3.getPos().getZ(), p4.getPos().getZ()));
+	// We have to "reduce" the speed or our `operator ==` won't evaluate it correctly
+	// We are working at high speed (10e8) so small errors are way larger than our EPSILON (in globals.h)
+	assert(p3.getSpeed() / 10e8 == p4.getSpeed() / 10e8);
+	assert(p3.getMoment() == p4.getMoment());
+	assert(Test::eq(p3.getPos().getX(), p4.getPos().getX()));
+	assert(Test::eq(p3.getPos().getY(), p4.getPos().getY()));
+	assert(Test::eq(p3.getPos().getZ(), p4.getPos().getZ()));
 
-	// assert(Test::eq(p3.getEnergy(), p4.getEnergy()));
-	// assert(Test::eq(p3.getGamma(), p4.getGamma()));
-	// assert(Test::eq(p3.getMass(), p4.getMass()));
-	// assert(Test::eq(p3.getCharge(), p4.getCharge()));
-	// assert(Test::eq(p3.getChargeNumber(), p4.getChargeNumber()));
+	assert(Test::eq(p3.getEnergy(), p4.getEnergy()));
+	assert(Test::eq(p3.getGamma(), p4.getGamma()));
+	assert(Test::eq(p3.getMass(), p4.getMass()));
+	assert(Test::eq(p3.getCharge(), p4.getCharge()));
+	assert(Test::eq(p3.getChargeNumber(), p4.getChargeNumber()));
 
 	/****************************************************************
 	 * Straight
 	 ****************************************************************/
+	// We choose these values for the initial and final position so that the particle is outside the element after 1 step
+	Straight straight(Vector3D(3, 0, 0), Vector3D(3.008939, -0.392, 0), 0.5);
 
-	Straight straight(Vector3D(1, 0, 0), sqrt(2), Vector3D(-1, -1, 0), 0.1);
-
-	assert(straight.getPosIn() == Vector3D(1, 0, 0));
-	assert(straight.getPosOut() == Vector3D(0, -1, 0));
-	assert(Test::eq(straight.getRadius(), 0.1));
+	assert(straight.getPosIn() == Vector3D(3, 0, 0));
+	assert(straight.getPosOut() == Vector3D(3.008939, -0.392, 0));
+	assert(Test::eq(straight.getRadius(), 0.5));
 	assert(straight.getField(Vector3D(0, 0, 0)) == Vector3D(0, 0, 0));
 
 	Particle p5(Vector3D(3.00894, -0.391837, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272);
 
-	// need a lot of decimals of the ernergy to have correct speed values
+	// need a lot of decimals of the energy to have correct speed values
 	Particle p6(Vector3D(3.008937898, -0.39448454, 0), 1.99998900525257, Vector3D(-210200, -2.64754e8, 0), 0.938272);
 
 	p5.setElement(&straight);
 	p5.step();
 
-	// assert(straight.isInNext(p5));
+	assert(straight.isInNext(p5));
 
 	// We have to "reduce" the speed or our `operator ==` won't evaluate it correctly
 	// We are working at high speed (10e8) so small errors are way larger than our EPSILON (in globals.h)
