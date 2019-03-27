@@ -112,7 +112,7 @@ public:
 	 ****************************************************************/
 
 	/**
-	 * Make the pointer next of the current particle point at the _next and reciprocally the pointer prev of the _next particle point at the current particle
+	 * Make the pointer next of the current element point at the _next and reciprocally the pointer prev of the _next element point at the current element
 	 *
 	 * Useful in Accelerator in order to make a full circle (link the last one with the first element)
 	 */
@@ -124,6 +124,19 @@ public:
 	 */
 
 	bool isInNext(Particle const& p) const;
+
+	/**
+	 * Make the pointer "element" of the Particle p point to the new element in which the particle is
+	 *
+	 * Used primarily in Accelerator::updateElement(Particle&)
+	 *
+	 * We evaluate the distance between the particle and the output position of the previous element and the distance between the particle and the input position of the next element
+	 * We return the element whose distance is the shortest
+	 *
+	 * If the distance are the same are both prev and next are nullptr we will return the ancient element without doing anything by CONVENTION, but it should never happen normally
+	 */
+
+	void passPartoNextElement(Particle & p) const;
 
 	/****************************************************************
 	 * Virtual methods
