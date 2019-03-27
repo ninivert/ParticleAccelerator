@@ -55,14 +55,17 @@
 - Straight sub-class
 - Polymorphism pointer in accelerator -> define class destructor
 - Beware the copy constructor of `Element` (cause : pointers)
+- Finish documentation until Element class
+- Finish tests for Element
+- NULLPTR exception in class Element
 
 ## Todo
 
-- NULLPTR exception in class Element
 - make_circle function in accelerator ?
-- init_particles for the pointer of particles to be initialized with the 1st element
+- init_particles for the pointer of particles to be initialized with the 1st element (or the closest one)
+- Include the fact that when a particle gets out of an Element, it should point to the next Element (or nullptr) in the physics engine (Particle.cpp)
+- Accelerator::step() needs to take into account the fact that particles are leaving the accel (not in an Element anymore)
 - Rename isOut
-- Finish documentation until Element class
 - Drawable class and its derivatives (oh no!)
 
 ## Questions
