@@ -59,6 +59,7 @@
 - Finish tests for Element
 - NULLPTR exception in class Element
 - When a particle gets out of an Element, it points to the next Element
+- test the passPartoNextElement function
 
 ## Todo
 
@@ -70,7 +71,6 @@
 - Drawable class and its derivatives (oh no!)
 - Accelerator::step() needs to take into account the fact that particles are leaving the accelerator (not in an Element anymore)
 - test the updateElement function
-- test the passPartoNextElement function
 
 ## Questions
 

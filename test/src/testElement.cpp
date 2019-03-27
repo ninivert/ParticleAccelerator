@@ -91,23 +91,23 @@ int main() {
 	 * Straight
 	 ****************************************************************/
 	// We choose these values for the initial and final position so that the particle is outside the element after 1 step
-	Straight straight(Vector3D(3, 0, 0), Vector3D(3.008939, -0.392, 0), 0.5);
+	Straight straight1(Vector3D(3, 0, 0), Vector3D(3.008939, -0.392, 0), 0.5);
 
-	assert(straight.getPosIn() == Vector3D(3, 0, 0));
-	assert(straight.getPosOut() == Vector3D(3.008939, -0.392, 0));
-	assert(Test::eq(straight.getRadius(), 0.5));
-	assert(straight.getField(Vector3D(0, 0, 0)) == Vector3D(0, 0, 0));
+	assert(straight1.getPosIn() == Vector3D(3, 0, 0));
+	assert(straight1.getPosOut() == Vector3D(3.008939, -0.392, 0));
+	assert(Test::eq(straight1.getRadius(), 0.5));
+	assert(straight1.getField(Vector3D(0, 0, 0)) == Vector3D(0, 0, 0));
 
 	Particle p5(Vector3D(3.00894, -0.391837, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272);
 
 	// need a lot of decimals of the energy to have correct speed values
 	Particle p6(Vector3D(3.008937898, -0.39448454, 0), 1.99998900525257, Vector3D(-210200, -2.64754e8, 0), 0.938272);
 
-	p5.setElement(&straight);
+	p5.setElement(&straight1);
 	p5.step();
 
-	assert(p5.getElement() == &straight);
-	assert(straight.isInNext(p5));
+	assert(p5.getElement() == &straight1);
+	assert(straight1.isInNext(p5));
 
 	// We have to "reduce" the speed or our `operator ==` won't evaluate it correctly
 	// We are working at high speed (10e8) so small errors are way larger than our EPSILON (in globals.h)
@@ -121,9 +121,17 @@ int main() {
 	assert(Test::eq(p5.getChargeNumber(), p6.getChargeNumber()));
 
 	/****************************************************************
-	 * passPartoNextElement
+	 * linkNext + passPartoNextElement
 	 ****************************************************************/
+	Straight straight2(Vector3D(3, 0, 0), Vector3D(3.01, -1, 0), 0.1);
+	Straight straight3(Vector3D(3.01, -1, 0), Vector3D(3.02, -2, 0), 0.1);
 
+	Particle p7(Vector3D(3.015, -1.2, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272);
+	straight2.linkNext(straight3);
+
+	assert(straight2.isInNext(p7));
+	straight2.passPartoNextElement(p7);
+	assert(not straight3.isInNext(p7));
 
 	return 0;
 }
