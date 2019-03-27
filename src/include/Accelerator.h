@@ -129,6 +129,21 @@ private:
 
 	void clearElements();
 
+	/**
+	 * Make the pointer "element" of the Particle p point to the new element in which the particle is now or if there are none
+	 *
+	 * Used in Accelerator::step()
+	 *
+	 * We evaluate the distance between the particle and the output position of the previous element and the distance between the particle and the input position of the next element
+	 * We return the element whose distance is the shortest
+	 *
+	 * If the distance are the same are both prev and next are nullptr we will return the ancient element without doing anything by CONVENTION, but it should never happen normally
+	 *
+	 * Private for the user not to be allowed to change elements like that
+	 */
+
+	void updateElement(Particle & particle) const; // const ?
+
 	// Attributes
 
 	/**

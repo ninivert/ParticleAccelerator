@@ -58,15 +58,19 @@
 - Finish documentation until Element class
 - Finish tests for Element
 - NULLPTR exception in class Element
+- When a particle gets out of an Element, it points to the next Element
 
 ## Todo
 
 - make_circle function in accelerator ?
 - init_particles for the pointer of particles to be initialized with the 1st element (or the closest one)
-- Include the fact that when a particle gets out of an Element, it should point to the next Element (or nullptr) in the physics engine (Particle.cpp)
-- Accelerator::step() needs to take into account the fact that particles are leaving the accel (not in an Element anymore)
-- Rename isOut
+- Force the fact that 2 touching Elements must have the same posOut (in init) and posIn
+- Rename Element::isOut
+- Rename Element::passPartoNextElement
 - Drawable class and its derivatives (oh no!)
+- Accelerator::step() needs to take into account the fact that particles are leaving the accelerator (not in an Element anymore)
+- test the updateElement function
+- test the passPartoNextElement function
 
 ## Questions
 
