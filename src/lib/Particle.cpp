@@ -62,6 +62,14 @@ Vector3D Particle::getForces() const { return forces; }
 Vector3D Particle::getMoment() const { return momentum; }
 Vector3D Particle::getPos() const { return pos; }
 
+Element const * const Particle::getElement() const {
+	if (element != nullptr) {
+		return element;
+	} else {
+		ERROR(EXCEPTIONS::NULLPTR);
+	}
+}
+
 /****************************************************************
  * Setters
  ****************************************************************/
@@ -160,7 +168,7 @@ void Particle::exertForce(Vector3D const& force) { forces += force; }
 
 void Particle::exertLorentzForce(Vector3D const& B, double const& dt) {
 	// Do nothing if dt is null or B is null (for example in Straight elements)
-	if (dt == 0 or B == Vector3D(0, 0, 0)) { return; }
+	if (dt < GLOBALS::DELTA or B == Vector3D(0, 0, 0)) { return; }
 
 	// Apply Lorentz force
 	Vector3D F(getSpeed());

@@ -71,6 +71,32 @@ bool Element::isInNext(Particle const& p) const {
 	return (Vector3D::tripleProduct(Vector3D(0, 0, 1), p.getPos(), getPosOut()) > 0);
 }
 
+void Element::passPartoNextElement(Particle & p) const {
+	// if both pointers are nullptr return without changing anything by CONVENTION
+	if (next == nullptr and prev == nullptr) { return; }
+	if (next == nullptr) {
+		p.setElement(prev);
+		return;
+	}
+	if (prev == nullptr) {
+		p.setElement(next);
+		return;
+	}
+
+	// now the 2 pointers are pointing to Element
+	double diffNext((p.getPos() - next->getPosIn()).norm());
+	double diffPrev((p.getPos() - prev->getPosOut()).norm());
+
+	if (diffNext < diffPrev) {
+		p.setElement(next);
+	} else if (diffNext > diffPrev){
+		p.setElement(prev);
+	}
+
+	// If same distance we will return without changing anything by CONVENTION
+	// but it should never happen normaly
+}
+
 string Element::to_string() const {
 	stringstream stream;
 	stream << setprecision(STYLES::PRECISION);
