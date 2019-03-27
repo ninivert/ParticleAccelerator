@@ -8,9 +8,6 @@
 #include "src/include/Straight.h"
 #include "test/lib/Test.h"
 
-#include <iomanip>
-
-
 using namespace std;
 
 int main() {
