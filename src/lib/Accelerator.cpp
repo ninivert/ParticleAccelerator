@@ -32,6 +32,9 @@ void Accelerator::step(double const& dt) {
 
 	// Step through all the particles
 	for (unique_ptr<Particle> & particle : particles) {
+		// Change the element if the particle goes out
+		updateElement(*particle);
+
 		particle->step(dt);
 	}
 }
@@ -86,6 +89,13 @@ string Accelerator::to_string() const {
 	stream << "Accelerator contains " << particles.size() << " particle(s)" << endl;
 	for (unique_ptr<Particle> const& particle : particles) stream << *particle << endl;
 	return stream.str();
+}
+
+void Accelerator::updateElement(Particle & particle) const {
+	if (not (particle.getElement()->isInNext(particle))) { return; }
+
+	// particle is in next element
+	particle.getElement()->passPartoNextElement(particle);
 }
 
 /****************************************************************

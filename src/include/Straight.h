@@ -88,7 +88,7 @@ public:
 	 ****************************************************************/
 
 	/**
-	 * Returns true if the Particle p is still inside the element
+	 * Returns true if the Particle p is outside the straight element (touched the wall)
 	 */
 
 	virtual bool isOut(Particle const& p) const override;

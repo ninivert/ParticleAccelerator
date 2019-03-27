@@ -27,13 +27,13 @@ Quadrupole::Quadrupole(Vector3D const& posIn, double const& length, Vector3D dir
  ****************************************************************/
 
 Vector3D Quadrupole::getField(Vector3D const& pos) const {
-	Vector3D Jean_Albert(pos - getPosIn());				// X
-	Vector3D Gertrude(getPosOut() - getPosIn());		// d
-	~Gertrude;
-	Vector3D y(Jean_Albert - (Jean_Albert * Gertrude) * Gertrude);
+	Vector3D X(pos - getPosIn());				// X
+	Vector3D d(getPosOut() - getPosIn());		// d
+	~d;
+	Vector3D y(X - (X * d) * d);
 
 	Vector3D e3(0, 0, 1);
-	Vector3D u(e3 ^ Gertrude);
+	Vector3D u(e3 ^ d);
 
 	return b * ((y * u) * e3 + pos.getZ() * u);
 }

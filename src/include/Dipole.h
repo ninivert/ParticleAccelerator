@@ -36,7 +36,7 @@ public:
 	 * - `double curvature`: curvature of the vacuum chamber of the dipole (curvature = 1 / R where R is the radius of curvature)
 	 * - `double B`: the magnetic field of the dipole will change according to the particles that the user wants to keep (depending on their energy)
 	 *
-	 * The center of curvature is initialized with the CONVENTION that when k is positive, the direction of the arc from the initial position to the final position is counter-clockwise (trigonometric)
+	 * The center of curvature is initialized with the CONVENTION that when k is positive, the direction of the arc from the initial position to the final position is CLOCKWISE (anti-trigonometric)
 	 */
 
 	Dipole(Vector3D const& posIn, Vector3D const& posOut, double const& radius, double const& curvature, double const& B);
@@ -53,7 +53,7 @@ public:
 	 * - `Element & prev` : reference to the previous Element (for pointer init.)
 	 * - `double B`: the magnetic field of the dipole will change according to the particles that the user wants to keep (depending on their energy)
 	 *
-	 * The center of curvature is initialized with the CONVENTION that when k is positive, the direction of the arc from the initial position to the final position is counter-clockwise (trigonometric)
+	 * The center of curvature is initialized with the CONVENTION that when k is positive, the direction of the arc from the initial position to the final position is CLOCKWISE (anti-trigonometric)
 	*/
 
 	Dipole(Vector3D const& posIn, Vector3D const& posOut, double const& radius, double const& curvature, Element & prev, double const& B);
@@ -85,7 +85,7 @@ public:
 	 ****************************************************************/
 
 	/**
-	 * Returns true if the Particle p is still inside the dipole (touched the wall)
+	 * Returns true if the Particle p is outside the dipole (touched the wall)
 	 */
 
 	virtual bool isOut(Particle const& p) const override;
@@ -101,7 +101,7 @@ private:
 	// Attributes
 
 	double const curvature;
-	Vector3D const posCenter;	// CONVENTION : k positive => counterclockwise (opposite from given parameters)
+	Vector3D const posCenter;	// CONVENTION : k positive => clockwise (same as given parameters)
 	double B;					// Magnetic field
 };
 

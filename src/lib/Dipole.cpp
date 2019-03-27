@@ -8,7 +8,7 @@ using namespace std;
 
 Dipole::Dipole(Vector3D const& posIn, Vector3D const& posOut, double const& radius, double const& curvature, double const& B)
 : Element(posIn, posOut, radius), curvature(curvature), B(B),
-  posCenter (0.5 * (posOut + posIn) - 1 / (curvature) * sqrt(1 - curvature * curvature * (posOut - posIn).normSquared()/ 4.0) * ((posOut - posIn) ^ Vector3D(0, 0, 1)) / (posOut - posIn).norm())
+  posCenter (0.5 * (posOut + posIn) + 1 / (curvature) * sqrt(1 - curvature * curvature * (posOut - posIn).normSquared()/ 4.0) * ((posOut - posIn) ^ Vector3D(0, 0, 1)) / (posOut - posIn).norm())
 {}
 
 Dipole::Dipole(Vector3D const& posIn, Vector3D const& posOut, double const& radius, double const& curvature, Element & prev, double const& B)
@@ -61,7 +61,7 @@ string Dipole::to_string() const {
 }
 
 bool Dipole::isOut(Particle const& p) const {
-	Vector3D X(p.getPos() - getPosIn());
+	Vector3D X(p.getPos() - posCenter);
 	Vector3D u(X - p.getPos().getZ() * Vector3D(0, 0, 1));
 	return ((X - 1 / abs(curvature) * u).norm() > getRadius());
 }
