@@ -133,5 +133,12 @@ int main() {
 	straight2.passPartoNextElement(p7);
 	assert(not straight3.isInNext(p7));
 
+	/**
+	 * For manual comparaison with the testAccelerator.cpp in the updateElement test (near the end)
+	 */
+
+	// p7.step();
+	// cout << p7 << endl;
+
 	return 0;
 }
