@@ -1,6 +1,6 @@
 # Journal
 
-## Week 1
+## Stage 1
 
 - Added `Vector3D` class
 - Wrote header file for `Vector3D`
@@ -10,7 +10,7 @@
 - Made `constants.h` file
 - Setup compilation and `Makefile`
 
-## Week 2
+## Stage 2
 
 - `Makefile` template done
 - Change order of `const double` to `double const`
@@ -18,7 +18,7 @@
 - Change `Vector3D` (tests) to `testVector3D`
 - Change `Vector3D` constructor to a default constructor
 
-## Week 3
+## Stage 3
 
 - Change constants to `inline` according to the C++17 norm
 - Rename `stringify` to `to_string` to comply to the C++ norm
@@ -30,7 +30,7 @@
 - Creation of a class `Particule`
 - Added physical constants namespace
 
-## Week 4
+## Stage 4
 
 - Fixed `Particle::step` function -> units used were incorrect
 - Creation of tests for `Particle` and `Convert`
@@ -48,7 +48,7 @@
 - Add element class
 	- Dipole sub-class
 
-## Week 5
+## Stage 5
 
 - Doxygen
 - Quadrupole sub-class
@@ -59,25 +59,26 @@
 - Finish tests for Element
 - NULLPTR exception in class Element
 - When a particle gets out of an Element, it points to the next Element
-- test the passPartoNextElement function
-- test the updateElement function
+- test the `Element::updatePointedElement` function
+- test the `Accelerator::updateElement` function
 - 2 touching Elements must have the same posOut (in init) and posIn
 - Changed every include header in `.h` files to a forward declaration to resolve circular conflicts from HELL
 - Bundle up dependencies on header files
+- Rename `Element::isInWall`
+- Answer questions
+- Drawable class and its inheritance
 
 ## Todo
 
+- Implement textual renderer
 - make_circle function in accelerator ?
 - init_particles for the pointer of particles to be initialized with the 1st element (or the closest one)
-- Rename `Element::isOut`
-- Drawable class and its derivatives (oh no!)
 - `Accelerator::step()` needs to take into account the fact that particles are leaving the accelerator (not in an Element anymore)
-- Answer question
-- Make `README.md`
 - Make `exerciceP9.cpp`
-
+- Make `README.md`
 
 ## Questions
 
 - Add relativist mass to particle ?
 - Doit on rendre un `README.md` ?
+- Do we need to specify a virtual destructor on all parent classes (aka `Drawable`) for destruction to correctly take place ?

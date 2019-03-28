@@ -75,7 +75,7 @@ public:
 	 * Destructor for the 2 attributes which are pointers on Element, prev and next, to point to nullptr without deleting these elements
 	 */
 
-	~Element();
+	virtual ~Element();
 
 	/****************************************************************
 	 * Getters
@@ -125,7 +125,7 @@ public:
 	 * Returns true if the Particle p has surpassed the current element and is in the next Element
 	 */
 
-	bool isInNext(Particle const& p) const;
+	bool isInNextElement(Particle const& p) const;
 
 	/**
 	 * Make the pointer "element" of the Particle p point to the new element in which the particle is
@@ -138,7 +138,7 @@ public:
 	 * If the distance are the same are both prev and next are nullptr we will return the ancient element without doing anything by CONVENTION, but it should never happen normally
 	 */
 
-	void passPartoNextElement(Particle & p) const;
+	void updatePointedElement(Particle & p) const;
 
 	/****************************************************************
 	 * Virtual methods
@@ -148,7 +148,7 @@ public:
 	 * Returns true if the Particle p is outside the Element (touched the wall)
 	 */
 
-	virtual bool isOut(Particle const& p) const = 0;
+	virtual bool isInWall(Particle const& p) const = 0;
 
 	/**
 	 * Returns a string representation of the element

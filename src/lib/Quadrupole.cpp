@@ -42,7 +42,7 @@ Vector3D Quadrupole::getField(Vector3D const& pos) const {
  * Virtual methods
  ****************************************************************/
 
-bool Quadrupole::isOut(Particle const& p) const {
+bool Quadrupole::isInWall(Particle const& p) const {
 	Vector3D X(p.getPos() - getPosIn());
 	Vector3D d(getPosOut() - getPosIn());
 	~d;

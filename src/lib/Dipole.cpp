@@ -60,7 +60,7 @@ string Dipole::to_string() const {
 	return stream.str();
 }
 
-bool Dipole::isOut(Particle const& p) const {
+bool Dipole::isInWall(Particle const& p) const {
 	Vector3D X(p.getPos() - posCenter);
 	Vector3D u(X - p.getPos().getZ() * Vector3D(0, 0, 1));
 	return ((X - 1 / abs(curvature) * u).norm() > getRadius());

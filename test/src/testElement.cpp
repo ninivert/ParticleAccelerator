@@ -35,7 +35,7 @@ int main() {
 
 	assert(p1.getElement() == &dipole);
 	// We can see with that with the parameters given the particle is still in the same element
-	assert(not dipole.isInNext(p1));
+	assert(not dipole.isInNextElement(p1));
 
 	// We have to "reduce" the speed or our `operator ==` won't evaluate it correctly
 	// We are working at high speed (10e8) so small errors are way larger than our EPSILON (in globals.h)
@@ -71,7 +71,7 @@ int main() {
 
 	assert(p3.getElement() == &quadru);
 	// Using exemple of P10 exercise, the particle should still be in the current element
-	assert(not quadru.isInNext(p3));
+	assert(not quadru.isInNextElement(p3));
 
 	// We have to "reduce" the speed or our `operator ==` won't evaluate it correctly
 	// We are working at high speed (10e8) so small errors are way larger than our EPSILON (in globals.h)
@@ -107,7 +107,7 @@ int main() {
 	p5.step();
 
 	assert(p5.getElement() == &straight1);
-	assert(straight1.isInNext(p5));
+	assert(straight1.isInNextElement(p5));
 
 	// We have to "reduce" the speed or our `operator ==` won't evaluate it correctly
 	// We are working at high speed (10e8) so small errors are way larger than our EPSILON (in globals.h)
@@ -121,7 +121,7 @@ int main() {
 	assert(Test::eq(p5.getChargeNumber(), p6.getChargeNumber()));
 
 	/****************************************************************
-	 * linkNext + passPartoNextElement
+	 * linkNext + updatePointedElement
 	 ****************************************************************/
 	Straight straight2(Vector3D(3, 0, 0), Vector3D(3.01, -1, 0), 0.1);
 	Straight straight3(Vector3D(3.01, -1, 0), Vector3D(3.02, -2, 0), 0.1);
@@ -129,9 +129,9 @@ int main() {
 	Particle p7(Vector3D(3.015, -1.2, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272);
 	straight2.linkNext(straight3);
 
-	assert(straight2.isInNext(p7));
-	straight2.passPartoNextElement(p7);
-	assert(not straight3.isInNext(p7));
+	assert(straight2.isInNextElement(p7));
+	straight2.updatePointedElement(p7);
+	assert(not straight3.isInNextElement(p7));
 
 	/**
 	 * For manual comparaison with the testAccelerator.cpp in the updateElement test (near the end)

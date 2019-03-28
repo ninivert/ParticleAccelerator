@@ -95,7 +95,7 @@ public:
 	 * Returns true if the Particle p is outside the quadrupole (touched the wall)
 	 */
 
-	virtual bool isOut(Particle const& p) const override;
+	virtual bool isInWall(Particle const& p) const override;
 
 	/**
 	 * Returns a string representation of the quadrupole

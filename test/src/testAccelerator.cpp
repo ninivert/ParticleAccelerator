@@ -103,9 +103,9 @@ int main() {
 	acc.addElement(straight2);
 	acc.addParticle(p);
 
-	assert(straight1->isInNext(*p));
+	assert(straight1->isInNextElement(*p));
 	acc.step();
-	assert(not straight2->isInNext(*p));
+	assert(not straight2->isInNextElement(*p));
 
 	/**
 	 * To see the results : compare the output (position) with the output (position) of

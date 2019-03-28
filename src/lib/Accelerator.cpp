@@ -93,10 +93,10 @@ string Accelerator::to_string() const {
 }
 
 void Accelerator::updateElement(Particle & particle) const {
-	if (not (particle.getElement()->isInNext(particle))) { return; }
+	if (not (particle.getElement()->isInNextElement(particle))) { return; }
 
 	// particle is in next element
-	particle.getElement()->passPartoNextElement(particle);
+	particle.getElement()->updatePointedElement(particle);
 }
 
 /****************************************************************

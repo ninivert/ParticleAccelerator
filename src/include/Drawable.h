@@ -17,6 +17,11 @@ protected:
 	Renderer * engine;
 
 public:
+
+	/****************************************************************
+	 * Constructors and destructors
+	 ****************************************************************/
+
 	/**
 	 * Constructor takes a pointer to a rendering engine
 	 *
@@ -24,6 +29,16 @@ public:
 	 */
 
 	Drawable(Renderer * engine = nullptr);
+
+	/**
+	 * We need to explicitly specify the virtual destructor
+	 * in order for all inherited classes to be deconstructed correctly
+	 *
+	 * Get the default destructor but allow it to be overridden
+	 * by inheriting classes
+	 */
+
+	virtual ~Drawable() = default;
 
 	/**
 	 * Virtual method that is required to be overwritten

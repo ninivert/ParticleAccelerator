@@ -32,7 +32,7 @@ Vector3D Straight::getField(Vector3D const& pos) const { return Vector3D(0, 0, 0
  * Virtual methods
  ****************************************************************/
 
-bool Straight::isOut(Particle const& p) const {
+bool Straight::isInWall(Particle const& p) const {
 	Vector3D X(p.getPos() - getPosIn());
 	Vector3D d(getPosOut() - getPosIn());
 	~d;

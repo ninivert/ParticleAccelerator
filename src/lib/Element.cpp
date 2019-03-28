@@ -67,11 +67,11 @@ void Element::linkNext(Element & _next) {
 	_next.prev = this;
 }
 
-bool Element::isInNext(Particle const& p) const {
+bool Element::isInNextElement(Particle const& p) const {
 	return (Vector3D::tripleProduct(Vector3D(0, 0, 1), p.getPos(), getPosOut()) > 0);
 }
 
-void Element::passPartoNextElement(Particle & p) const {
+void Element::updatePointedElement(Particle & p) const {
 	// if both pointers are nullptr return without changing anything by CONVENTION
 	if (next == nullptr and prev == nullptr) { return; }
 	if (next == nullptr) {
@@ -84,8 +84,8 @@ void Element::passPartoNextElement(Particle & p) const {
 	}
 
 	// now the 2 pointers are pointing to Element
-	double diffNext((p.getPos() - next->getPosIn()).norm());
-	double diffPrev((p.getPos() - prev->getPosOut()).norm());
+	double diffNext((p.getPos() - next->getPosIn()).normSquared());
+	double diffPrev((p.getPos() - prev->getPosOut()).normSquared());
 
 	if (diffNext < diffPrev) {
 		p.setElement(next);

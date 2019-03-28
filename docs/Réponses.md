@@ -1,6 +1,6 @@
 # Réponses
 
-## Semaine 1
+## Partie 1
 
 > Comment représentez vous ces vecteurs ?
 
@@ -29,11 +29,11 @@ Toutes les méthodes de surcharge et les paramètres du vecteur sont en privé (
 
 Le reste est en public.
 
-## Semaine 2
+## Partie 2
 
 N/A
 
-## Semaine 3
+## Partie 3
 
 > Avez-vous ajouté un constructeur de copie ? Pourquoi (justifiez votre choix) ?
 
@@ -73,7 +73,7 @@ Nous avons choisi d'utiliser les SI pour les raisons suivantes:
 1. Les équations du mouvement sont de base exprimées en SI. Si on avait pris des GeV, il aurait fallu faire beaucoup de conversions !
 2. L'ordinateur se "fiche" bien de manipuler des SI ou des GeV. Les `double` peuvent représenter des réels allant de `2.2e−308` à `1.7e308` ([Wikipedia](https://en.wikipedia.org/wiki/Double-precision_floating-point_format#Double-precision_examples)), donc la précision n'est pas un problème ici. C'est à l'affichage (bien moins fréquent que l'appel de `Particle::step` !) que la conversion se fait à l'aide de `CONVERT::<...>SItoGeV` pour que la sortie soit un peu plus agréable à lire.
 
-## Semaine 4
+## Partie 4
 
 > Comment proposez-vous de représenter et d'organiser les éléments ?
 
@@ -100,3 +100,31 @@ La classe Accelerator contient des tableaux dynamiques de Particle et d'Element
 > Pourquoi qualifier le constructeur de copie et `operator =` de « deleted » ?
 
 Les instances de classe accélérateur contiennent beaucoup de particules et l'éléments, ie. c'est un gros zobjet. On voudrait protéger l'utilisateur de la classe d'en faire des copies non intentionnelles.
+
+## Partie 5
+
+> En termes de POO, quelle est donc la nature de la méthode heurte_bord() (ici `Element::isInWall`) ?
+>
+> Qu'est-ce que cela implique sur la classe générale Element ?
+
+C'est une méthode virtuelle pure, puisque la classe élément est une classe abstraite, c'est-à-dire que l'on ne peut pas instancier un membre de la classe Element.
+
+> En termes de POO, quelle est donc la nature de la méthode dessine() (ici `draw`) ?
+
+- Dans `Renderer`: méthode virtuelle pure (aussi surchargée pour pouvoir dessiner les différents éléments)
+- Dans `Drawable`: méthode virtuelle pure destinée à être substituée dans les sous-classes héritant de `Drawable`
+- Dans les sous-classes héritant de `Drawable`: appel à la fonction `Renderer::draw` pour l'instance en question (polymorphisme)
+
+> La classe `Accelerator` possède une collection de `Particle`s et une collection d'`Element`s et nous souhaitons pouvoir invoquer la méthode `draw` de chacun(e) de ses particules/éléments, de sorte que chacun(e) soit dessiné(e) avec ses caractéristiques propres, c.-à-d. sa propre méthode `draw`
+>
+> Quelle est la bonne façon de le faire dans un cadre de programmation orientée-objet ?
+
+On introduit le polymorphisme sous forme de vecteurs de pointeurs sur des `Element`s et des `Particle`s
+
+> A quoi faut-il faire attention pour les classes contenant des pointeurs ? Quelles solutions peut-on envisager ?
+
+Il faire attention à la gestion de mémoire, lors de
+
+- L'initialisation: allocation de la mémoire en utilisant `new`
+- L'utilisation: utiliser la syntaxe `instance_ptr->method` au lieu de `instance.method`
+- La destruction: désallouer la mémoire correctement avec `delete` ou `smart_ptr.reset()`. Aussi mettre le destructeur en `virtual`, afin que les sous-classes puissent se détruire correctement
