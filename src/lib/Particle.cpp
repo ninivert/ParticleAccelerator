@@ -191,3 +191,15 @@ void Particle::exertLorentzForce(Vector3D const& B, double const& dt) {
 ostream& operator << (ostream& stream, Particle const& p) {
 	return stream << p.to_string();
 }
+
+/****************************************************************
+ * Drawing
+ ****************************************************************/
+
+/**
+ * Dispatch the drawing call
+ */
+
+void Particle::draw() const {
+	engine->draw(*this);
+}

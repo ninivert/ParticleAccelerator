@@ -1,5 +1,5 @@
-#include "src/include/Vector3D.h"
-#include "src/include/Particle.h"
+#include "src/include/bundle/Vector3D.bundle.h"
+#include "src/include/bundle/Particle.bundle.h"
 #include "src/globals.h"
 #include "src/exceptions.h"
 #include "test/lib/Test.h"

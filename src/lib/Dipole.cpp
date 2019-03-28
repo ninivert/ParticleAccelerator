@@ -65,3 +65,15 @@ bool Dipole::isOut(Particle const& p) const {
 	Vector3D u(X - p.getPos().getZ() * Vector3D(0, 0, 1));
 	return ((X - 1 / abs(curvature) * u).norm() > getRadius());
 }
+
+/****************************************************************
+ * Drawing
+ ****************************************************************/
+
+/**
+ * Dispatch the drawing call
+ */
+
+void Dipole::draw() const {
+	engine->draw(*this);
+}

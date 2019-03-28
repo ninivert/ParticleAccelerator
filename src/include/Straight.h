@@ -7,6 +7,8 @@
 class Vector3D;
 class Particle;
 class Element;
+class Drawable;
+class Renderer;
 
 #include "src/globals.h"
 
@@ -100,6 +102,16 @@ public:
 	 */
 
 	virtual std::string to_string() const override;
+
+	/****************************************************************
+	 * Rendering engine
+	 ****************************************************************/
+
+	/**
+	 * Reroute the drawing call (double dispatching)
+	 */
+
+	virtual void draw() const override;
 };
 
 

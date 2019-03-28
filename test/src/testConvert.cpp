@@ -1,6 +1,6 @@
 #include "src/globals.h"
-#include "src/include/Convert.h"
-#include "src/include/Vector3D.h"
+#include "src/include/bundle/Convert.bundle.h"
+#include "src/include/bundle/Vector3D.bundle.h"
 #include "test/lib/Test.h"
 
 using namespace std;

@@ -111,6 +111,10 @@ std::ostream& operator<< (std::ostream& stream, Accelerator const& a) {
  * Drawing
  ****************************************************************/
 
+/**
+ * Dispatch the drawing call
+ */
+
 void Accelerator::draw() const {
 	engine->draw(*this);
 }

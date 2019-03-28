@@ -178,6 +178,10 @@ ostream& operator << (ostream& stream, Vector3D const& v) {
  * Drawing
  ****************************************************************/
 
-// void Accelerator::draw() const {
-// 	engine->draw(*this);
-// }
+/**
+ * Dispatch the drawing call
+ */
+
+void Vector3D::draw() const {
+	engine->draw(*this);
+}

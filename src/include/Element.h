@@ -11,6 +11,8 @@
 // Forward declaration
 class Particle;
 class Vector3D;
+class Drawable;
+class Renderer;
 
 #include "src/globals.h"
 #include "src/exceptions.h"
@@ -19,7 +21,7 @@ class Vector3D;
  * Element is an abstract class which embodies the element of an accelerator
  */
 
-class Element {
+class Element : public Drawable {
 public:
 
 	/****************************************************************

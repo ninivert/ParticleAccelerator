@@ -5,6 +5,7 @@
 
 // Forward declaration
 class Accelerator;
+class Element;
 class Dipole;
 class Quadrupole;
 class Straight;
@@ -57,11 +58,11 @@ public:
 	virtual void draw(Accelerator const& acc) = 0;
 
 	/**
-	 * We don't need to define a draw function for Element
-	 * because it is an abstract method
+	 * Draw an element. This method is not overridden in Element.cpp
+	 * thus the Element remains abstract.
 	 */
 
-	// virtual void draw(Element const& elmt) = 0;
+	virtual void draw(Element const& elmt) = 0;
 
 	/**
 	 * Draw a Dipole element

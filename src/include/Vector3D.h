@@ -8,6 +8,10 @@
 #include <iomanip>
 #include <cmath>
 
+// Forward declaration
+class Drawable;
+class Renderer;
+
 #include "src/globals.h"
 #include "src/exceptions.h"
 
@@ -15,7 +19,7 @@
  * The `Vector3D` class represents a vector in a 3D carthesian space.
  */
 
-class Vector3D {
+class Vector3D : public Drawable {
 public:
 
 	/****************************************************************
@@ -188,7 +192,7 @@ public:
 	 * Reroute the drawing call (double dispatching)
 	 */
 
-	// virtual void draw() const override;
+	virtual void draw() const override;
 
 private:
 

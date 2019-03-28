@@ -1,11 +1,11 @@
 #include "src/globals.h"
 #include "src/exceptions.h"
-#include "src/include/Vector3D.h"
-#include "src/include/Particle.h"
-#include "src/include/Element.h"
-#include "src/include/Dipole.h"
-#include "src/include/Quadrupole.h"
-#include "src/include/Straight.h"
+#include "src/include/bundle/Vector3D.bundle.h"
+#include "src/include/bundle/Particle.bundle.h"
+#include "src/include/bundle/Quadrupole.bundle.h"
+#include "src/include/bundle/Straight.bundle.h"
+#include "src/include/bundle/Dipole.bundle.h"
+#include "src/include/bundle/Element.bundle.h"
 #include "test/lib/Test.h"
 
 using namespace std;

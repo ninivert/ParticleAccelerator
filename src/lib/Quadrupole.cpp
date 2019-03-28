@@ -64,3 +64,15 @@ string Quadrupole::to_string() const {
 		<< endl;
 	return stream.str();
 }
+
+/****************************************************************
+ * Drawing
+ ****************************************************************/
+
+/**
+ * Dispatch the drawing call
+ */
+
+void Quadrupole::draw() const {
+	engine->draw(*this);
+}

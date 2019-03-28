@@ -45,3 +45,15 @@ string Straight::to_string() const {
 	stream << Element::to_string();
 	return stream.str();
 }
+
+/****************************************************************
+ * Drawing
+ ****************************************************************/
+
+/**
+ * Dispatch the drawing call
+ */
+
+void Straight::draw() const {
+	engine->draw(*this);
+}

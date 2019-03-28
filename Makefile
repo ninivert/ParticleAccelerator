@@ -148,9 +148,9 @@ testAccelerator.bin: Vector3D.o Particle.o Convert.o Element.o Dipole.o Quadrupo
 	@echo [$@] Linking...
 	@$(CXX) $(CXXFLAGS) build/Accelerator.o build/Element.o build/Dipole.o build/Quadrupole.o build/Straight.o build/Particle.o build/Convert.o build/Vector3D.o build/Drawable.o build/Renderer.o test/build/testAccelerator.o test/build/Test.o -o $(BTESTPATH)$@
 
-testConvert.bin: testConvert.o Convert.o Vector3D.o Test.o
+testConvert.bin: testConvert.o Convert.o Vector3D.o Drawable.o Renderer.o Test.o
 	@echo [$@] Linking...
-	@$(CXX) $(CXXFLAGS) build/Vector3D.o build/Convert.o test/build/testConvert.o test/build/Test.o -o $(BTESTPATH)$@
+	@$(CXX) $(CXXFLAGS) build/Convert.o build/Vector3D.o build/Drawable.o build/Renderer.o test/build/testConvert.o test/build/Test.o -o $(BTESTPATH)$@
 
 testException.bin: testException.o Test.o
 	@echo [$@] Linking...

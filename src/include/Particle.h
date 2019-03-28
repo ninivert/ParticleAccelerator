@@ -9,8 +9,10 @@
 #include <sstream>
 
 // Forward declaration
-class Element;
 class Vector3D;
+class Element;
+class Drawable;
+class Renderer;
 
 #include "src/globals.h"
 
@@ -18,7 +20,7 @@ class Vector3D;
  * The Particle Class represents a particle evolving in the 3D carthesian space
  */
 
-class Particle {
+class Particle : public Drawable {
 public:
 
 	/****************************************************************
@@ -180,6 +182,16 @@ public:
 	 */
 
 	void exertLorentzForce(Vector3D const& B, double const& dt = GLOBALS::DT);
+
+	/****************************************************************
+	 * Rendering engine
+	 ****************************************************************/
+
+	/**
+	 * Reroute the drawing call (double dispatching)
+	 */
+
+	virtual void draw() const override;
 
 private:
 
