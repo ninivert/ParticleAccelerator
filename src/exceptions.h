@@ -30,6 +30,7 @@ private:
 };
 
 namespace EXCEPTIONS {
+
 	/**
 	 * Division by 0
 	 */
@@ -53,6 +54,12 @@ namespace EXCEPTIONS {
 	 */
 
 	inline constexpr char NO_ELEMENTS[]("Accelerator needs to contain at least one element before adding a particle");
+
+	/**
+	 * Class Accelerator : the position of the new element does not coincide with the output position of the last element of the accelerator
+	 */
+
+	inline constexpr char ELEMENT_INPUT_POSITION[]("The new element needs to have the same input position as the output position of the last element of the accelerator");
 }
 
 /**

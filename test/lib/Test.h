@@ -31,7 +31,8 @@ public:
 #define ASSERT_EXCEPTION(__test__, __err__)\
 try {\
 	__test__;\
-	throw "ASSERT_EXCEPTION did not throw any exceptions !";\
+	std::cerr << "----------------ASSERT_EXCEPTION did not throw any exceptions !" << std::endl;\
+	throw;\
 } catch (OurException& e) {\
 	assert(std::string(e.error()) == std::string(__err__));\
 }
