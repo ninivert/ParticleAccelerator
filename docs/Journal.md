@@ -67,11 +67,11 @@
 - Rename `Element::isInWall`
 - Answer questions
 - Drawable class and its inheritance
+- `Accelerator::closeAccel` method
 
 ## Todo
 
 - Implement textual renderer
-- make_circle function in accelerator ?
 - init_particles for the pointer of particles to be initialized with the 1st element (or the closest one)
 - `Accelerator::step()` needs to take into account the fact that particles are leaving the accelerator (not in an Element anymore)
 - Make `exerciceP9.cpp`
