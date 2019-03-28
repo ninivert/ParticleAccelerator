@@ -8,11 +8,8 @@
 #include <string>
 #include <sstream>
 
-// Circular dependency resolution
 #include "src/include/fwd/Particle.fwd.h"
-
-#include "src/include/Vector3D.h"
-#include "src/include/Particle.h"
+#include "src/include/fwd/Vector3D.fwd.h"
 #include "src/globals.h"
 #include "src/exceptions.h"
 

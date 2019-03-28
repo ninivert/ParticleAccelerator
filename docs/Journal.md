@@ -61,6 +61,7 @@
 - When a particle gets out of an Element, it points to the next Element
 - test the passPartoNextElement function
 - test the updateElement function
+- changed every include header in `.h` files to a forward declaration header to resolve circular conflicts from HELL
 
 ## Todo
 
@@ -78,3 +79,4 @@
 - Si `void f()` et `void f() const` sont différents, comment les distiguer lors d'un appel ?
 - Comment detecter a quelle sous-classe appartient une instance ?
 - Doit on rendre un `README.md` ?
+- Bonne idée de mettre les headers dans un bundle ?

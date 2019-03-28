@@ -10,9 +10,8 @@
 
 // Circular dependency resolution
 #include "src/include/fwd/Element.fwd.h"
-
-#include "src/include/Element.h"
-#include "src/include/Vector3D.h"
+#include "src/include/fwd/Element.fwd.h"
+#include "src/include/fwd/Vector3D.fwd.h"
 #include "src/globals.h"
 
 /**
@@ -23,8 +22,8 @@ class Particle {
 public:
 
 	/****************************************************************
-	* Constructors
-	****************************************************************/
+	 * Constructors
+	 ****************************************************************/
 
 	/**
 	 * Constructor for initialisation with velocity

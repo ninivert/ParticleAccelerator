@@ -8,11 +8,6 @@
 #include <iomanip>
 #include <cmath>
 
-// Circular dependency resolution
-// #include "src/include/fwd/Renderer.fwd.h"
-
-// #include "src/include/Drawable.h"
-// #include "src/include/Renderer.h"
 #include "src/globals.h"
 #include "src/exceptions.h"
 
