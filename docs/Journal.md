@@ -26,7 +26,7 @@
 - Check `Vector3D` class overloading for optimization
 - Move `Vector3D `overloading from `__method__` directly to the operator
 - Added physical constants in `globals.h`
-- [Speedtests](#speedtests)
+- Speedtests
 - Creation of a class `Particule`
 - Added physical constants namespace
 
@@ -34,16 +34,16 @@
 
 - Fixed `Particle::step` function -> units used were incorrect
 - Creation of tests for `Particle` and `Convert`
-- Decided on energy vs momentum -> we used momentum (see [Réponses](#semaine-3))
+- Decided on energy vs momentum -> we used momentum (see Réponses)
 - Added padding for `Vector3D` and particle display (ostream)
 - Added 2 constructors for particle class
-- Added [`CONVERT`](#convert.h) namespace to easily convert from SI units to GeV and reciprocally
+- Added `CONVERT` namespace to easily convert from SI units to GeV and reciprocally
 - Added `STYLES` namespace for unified text output
 - Finish tests for `Particle`
 - Used C-ptr to for `Particle` and `Element` class
 - Used `class Element;` or `class Particle;` in header files to resolve circular header definitions
 - Review the `linkNext` function (create a method in `Element` to make the "full circle" (or not) i.e. the first `Element` has to point on the last one and vice versa (without creating a new Element))
-- Add [large scale error management](#exceptions.h) -> custom `Exception` sub-classes: Throw division by 0 errors
+- Add large scale error management -> custom `Exception` sub-classes: Throw division by 0 errors
 - Add accelerator class
 - Add element class
 	- Dipole sub-class
@@ -75,6 +75,7 @@
 - init_particles for the pointer of particles to be initialized with the 1st element (or the closest one)
 - `Accelerator::step()` needs to take into account the fact that particles are leaving the accelerator (not in an Element anymore)
 - Make `exerciceP9.cpp`
+- [Verify precision in `Particle` class](https://moodle.epfl.ch/mod/forum/discuss.php?d=15995)
 - Make `README.md`
 
 ## Questions
