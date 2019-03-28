@@ -56,10 +56,16 @@ namespace EXCEPTIONS {
 	inline constexpr char NO_ELEMENTS[]("Accelerator needs to contain at least one element before adding a particle");
 
 	/**
-	 * Class Accelerator : the position of the new element does not coincide with the output position of the last element of the accelerator
+	 * Class Accelerator : the input position of the new element does not coincide with the output position of the last element of the accelerator
 	 */
 
 	inline constexpr char ELEMENT_INPUT_POSITION[]("The new element needs to have the same input position as the output position of the last element of the accelerator");
+
+	/**
+	 * Class Accelerator : the position output of the last element does not coincide with the input position of the first element of the accelerator
+	 */
+
+	inline constexpr char POS_END_DIFF_THAN_BEG[]("The last element needs to have the same output position as the input position of the first element of the accelerator");
 }
 
 /**

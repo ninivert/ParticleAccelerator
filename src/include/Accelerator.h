@@ -87,13 +87,12 @@ public:
 	void addElement(Element * element);
 
 	/**
-	 * Add an element (dipole, quadrupole, etc.) to the accelerator
-	 * and assemble it after another element
+	 * Make the full circle by linking the first element and the last one
 	 *
-	 * `element.prev` and `prevElement.next` pointers are modified to assure cohesion
+	 * if their positions (input and output respectively) are different raise an EXCEPTION
 	 */
 
-	void addElement(Element * element, Element * prevElement);
+	void closeAccel();
 
 	/**
 	 * Adds a particle to the accelerator

@@ -22,11 +22,19 @@ int main() {
 	ASSERT_EXCEPTION(acc.addParticle(new Particle(Vector3D(1.00984, -0.191837, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272)), EXCEPTIONS::NO_ELEMENTS);
 
 	ASSERT_EXCEPTION(
-		Straight * straighttest1 = new Straight (Vector3D(3, 0, 0), Vector3D(3.01, -1, 0), 0.1);
-		Straight * straighttest2 = new Straight (Vector3D(3.02, -1, 0), Vector3D(3.02, -2, 0), 0.1);
-		acc.addElement(straighttest1);
-		acc.addElement(straighttest2);
+		acc.addElement(new Straight (Vector3D(3, 0, 0), Vector3D(3.01, -1, 0), 0.1));
+		acc.addElement(new Straight (Vector3D(3.02, -1, 0), Vector3D(3.02, -2, 0), 0.1));
 	, EXCEPTIONS::ELEMENT_INPUT_POSITION);
+
+	acc.clear();
+
+	ASSERT_EXCEPTION(
+		acc.addElement(new Straight (Vector3D(3, 0, 0), Vector3D(-2, -1, 0), 0.1));
+		acc.addElement(new Straight (Vector3D(-2, -1, 0), Vector3D(-2, 1, 0), 0.1));
+		acc.addElement(new Straight (Vector3D(-2, 1, 0), Vector3D(7.2, 0, 0), 0.1));
+
+		acc.closeAccel();
+	, EXCEPTIONS::POS_END_DIFF_THAN_BEG);
 
 	acc.clear();
 
@@ -97,15 +105,16 @@ int main() {
 	 ****************************************************************/
 	Straight * straight1 = new Straight (Vector3D(3, 0, 0), Vector3D(3.01, -1, 0), 0.1);
 	Straight * straight2 = new Straight (Vector3D(3.01, -1, 0), Vector3D(3.02, -2, 0), 0.1);
-	Particle * p = new Particle(Vector3D(3.015, -1.2, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272);;
 
 	acc.addElement(straight1);
 	acc.addElement(straight2);
 	acc.addParticle(p);
 
-	assert(straight1->isInNextElement(*p));
+	assert(p->getElement() == straight1);
+	assert(straight1->isInNext(*p));
 	acc.step();
-	assert(not straight2->isInNextElement(*p));
+	assert(not straight2->isInNext(*p));
+	assert(p->getElement() == straight2);
 
 	/**
 	 * To see the results : compare the output (position) with the output (position) of
