@@ -61,17 +61,17 @@
 - When a particle gets out of an Element, it points to the next Element
 - test the passPartoNextElement function
 - test the updateElement function
+- 2 touching Elements must have the same posOut (in init) and posIn
 - changed every include header in `.h` files to a forward declaration header to resolve circular conflicts from HELL
 
 ## Todo
 
 - make_circle function in accelerator ?
 - init_particles for the pointer of particles to be initialized with the 1st element (or the closest one)
-- Force the fact that 2 touching Elements must have the same posOut (in init) and posIn
 - Rename Element::isOut
-- Rename Element::passPartoNextElement
 - Drawable class and its derivatives (oh no!)
 - Accelerator::step() needs to take into account the fact that particles are leaving the accelerator (not in an Element anymore)
+
 
 ## Questions
 
