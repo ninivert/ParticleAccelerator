@@ -33,7 +33,7 @@ int main() {
 	p1.setElement(&dipole);
 	p1.step();
 
-	assert(&(p1.getElement()) == &dipole);
+	assert(p1.getElement() == &dipole);
 	// We can see with that with the parameters given the particle is still in the same element
 	assert(not dipole.isInNext(p1));
 
@@ -69,7 +69,7 @@ int main() {
 	p3.setElement(&quadru);
 	p3.step();
 
-	assert(&(p3.getElement()) == &quadru);
+	assert(p3.getElement() == &quadru);
 	// Using exemple of P10 exercise, the particle should still be in the current element
 	assert(not quadru.isInNext(p3));
 
@@ -106,7 +106,7 @@ int main() {
 	p5.setElement(&straight1);
 	p5.step();
 
-	assert(&(p5.getElement()) == &straight1);
+	assert(p5.getElement() == &straight1);
 	assert(straight1.isInNext(p5));
 
 	// We have to "reduce" the speed or our `operator ==` won't evaluate it correctly
