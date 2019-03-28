@@ -86,5 +86,25 @@ int main() {
 	acc.clear();
 	// cout << acc << endl;
 
+	/****************************************************************
+	 * updateElement
+	 ****************************************************************/
+	Straight * straight1 = new Straight (Vector3D(3, 0, 0), Vector3D(3.01, -1, 0), 0.1);
+	Straight * straight2 = new Straight (Vector3D(3.01, -1, 0), Vector3D(3.02, -2, 0), 0.1);
+	Particle * p = new Particle(Vector3D(3.015, -1.2, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272);
+
+	acc.addElement(straight1);
+	acc.addElement(straight2, straight1);
+	acc.addParticle(p);
+
+	assert(straight1->isInNext(*p));
+	acc.step();
+	assert(not straight2->isInNext(*p));
+
+	/**
+	 * To see the results : compare the output (position) with the output (position) of
+	 */
+	// cout << acc << endl;
+
 	return 0;
 }
