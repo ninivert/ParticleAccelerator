@@ -14,11 +14,13 @@
 #include <sstream>
 #include <iomanip>
 
-#include "src/include/fwd/Vector3D.fwd.h"
-#include "src/include/fwd/Particle.fwd.h"
-#include "src/include/fwd/Element.fwd.h"
-#include "src/include/fwd/Drawable.fwd.h"
-#include "src/include/fwd/Renderer.fwd.h"
+// Forward declaration
+class Vector3D;
+class Particle;
+class Element;
+class Drawable;
+class Renderer;
+
 #include "src/globals.h"
 #include "src/exceptions.h"
 

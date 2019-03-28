@@ -31,7 +31,7 @@ DOXYPATH := ./doxydocs/
 # when he wants to (re)build
 ##################################################################
 
-vpath %.h ./src ./src/include ./test/lib
+vpath %.h ./src ./src/include ./src/include/bundle ./test/lib
 vpath %.cpp ./src/lib ./test/lib/ ./test/src
 vpath %.o ./build ./test/build
 vpath %.bin ./bin ./test/bin

@@ -3,13 +3,13 @@
 
 #pragma once
 
-// Circular dependency resolution
-#include "src/include/fwd/Accelerator.fwd.h"
-#include "src/include/fwd/Dipole.fwd.h"
-#include "src/include/fwd/Quadrupole.fwd.h"
-#include "src/include/fwd/Straight.fwd.h"
-#include "src/include/fwd/Particle.fwd.h"
-#include "src/include/fwd/Vector3D.fwd.h"
+// Forward declaration
+class Accelerator;
+class Dipole;
+class Quadrupole;
+class Straight;
+class Particle;
+class Vector3D;
 
 /**
  * Rendering engine called from each class respectively

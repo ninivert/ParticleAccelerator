@@ -4,7 +4,10 @@
 #pragma once
 
 #include <cmath>
-#include "src/include/fwd/Vector3D.fwd.h"
+
+// Forward declaration
+class Vector3D;
+
 #include "src/globals.h"
 
 /**

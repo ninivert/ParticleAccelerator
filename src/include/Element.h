@@ -8,11 +8,12 @@
 #include <string>
 #include <sstream>
 
-#include "src/include/fwd/Particle.fwd.h"
-#include "src/include/fwd/Vector3D.fwd.h"
+// Forward declaration
+class Particle;
+class Vector3D;
+
 #include "src/globals.h"
 #include "src/exceptions.h"
-
 
 /**
  * Element is an abstract class which embodies the element of an accelerator

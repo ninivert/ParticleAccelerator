@@ -1,7 +1,4 @@
-#include "src/include/Vector3D.h"
-#include "src/include/Particle.h"
-#include "src/include/Element.h"
-#include "src/include/Dipole.h"
+#include "src/include/bundle/Dipole.bundle.h"
 
 using namespace std;
 

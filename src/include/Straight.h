@@ -3,9 +3,11 @@
 
 #pragma once
 
-#include "src/include/fwd/Vector3D.fwd.h"
-#include "src/include/fwd/Particle.fwd.h"
-#include "src/include/fwd/Element.fwd.h"
+// Forward declaration
+class Vector3D;
+class Particle;
+class Element;
+
 #include "src/globals.h"
 
 /**

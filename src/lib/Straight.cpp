@@ -1,7 +1,4 @@
-#include "src/include/Vector3D.h"
-#include "src/include/Particle.h"
-#include "src/include/Element.h"
-#include "src/include/Straight.h"
+#include "src/include/bundle/Straight.bundle.h"
 
 using namespace std;
 

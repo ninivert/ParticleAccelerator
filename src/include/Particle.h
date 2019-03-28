@@ -8,10 +8,10 @@
 #include <string>
 #include <sstream>
 
-// Circular dependency resolution
-#include "src/include/fwd/Element.fwd.h"
-#include "src/include/fwd/Element.fwd.h"
-#include "src/include/fwd/Vector3D.fwd.h"
+// Forward declaration
+class Element;
+class Vector3D;
+
 #include "src/globals.h"
 
 /**

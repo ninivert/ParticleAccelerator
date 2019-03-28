@@ -62,21 +62,22 @@
 - test the passPartoNextElement function
 - test the updateElement function
 - 2 touching Elements must have the same posOut (in init) and posIn
-- changed every include header in `.h` files to a forward declaration header to resolve circular conflicts from HELL
+- Changed every include header in `.h` files to a forward declaration to resolve circular conflicts from HELL
+- Bundle up dependencies on header files
 
 ## Todo
 
 - make_circle function in accelerator ?
 - init_particles for the pointer of particles to be initialized with the 1st element (or the closest one)
-- Rename Element::isOut
+- Rename `Element::isOut`
 - Drawable class and its derivatives (oh no!)
-- Accelerator::step() needs to take into account the fact that particles are leaving the accelerator (not in an Element anymore)
+- `Accelerator::step()` needs to take into account the fact that particles are leaving the accelerator (not in an Element anymore)
+- Answer question
+- Make `README.md`
+- Make `exerciceP9.cpp`
 
 
 ## Questions
 
 - Add relativist mass to particle ?
-- Si `void f()` et `void f() const` sont différents, comment les distiguer lors d'un appel ?
-- Comment detecter a quelle sous-classe appartient une instance ?
 - Doit on rendre un `README.md` ?
-- Bonne idée de mettre les headers dans un bundle ?

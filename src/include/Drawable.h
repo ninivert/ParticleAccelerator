@@ -3,9 +3,8 @@
 
 #pragma once
 
-// We are not including the full header because we only need the type
-// Including the full header would give a circular dependency from HELL
-#include "src/include/fwd/Renderer.fwd.h"
+// Forward declaration
+class Renderer;
 
 /**
  * Simple class to simulate double double dispatching in C++
