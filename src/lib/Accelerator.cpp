@@ -42,17 +42,18 @@ void Accelerator::step(double const& dt) {
 void Accelerator::addElement(Element * element) {
 	// Protection against empty pointers
 	if (element != nullptr) {
-		elements.push_back(shared_ptr<Element>(element));
-	} else {
-		ERROR(EXCEPTIONS::NULLPTR);
-	}
-}
 
-void Accelerator::addElement(Element * element, Element * prevElement) {
-	// Protection against empty pointers
-	if (element != nullptr) {
-		elements.push_back(shared_ptr<Element>(element));
-		prevElement->linkNext(*element);
+		// Protection against empty vector elements
+		if (elements.size() > 0) {
+			if (elements[elements.size() - 1]->getPosOut() == element->getPosIn()) {
+				elements[elements.size() - 1]->linkNext(*element);
+				elements.push_back(shared_ptr<Element>(element));
+			} else {
+				ERROR(EXCEPTIONS::ELEMENT_INPUT_POSITION);
+			}
+		} else {
+			elements.push_back(shared_ptr<Element>(element));
+		}
 	} else {
 		ERROR(EXCEPTIONS::NULLPTR);
 	}
