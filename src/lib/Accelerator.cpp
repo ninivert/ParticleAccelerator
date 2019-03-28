@@ -64,6 +64,17 @@ void Accelerator::addElement(Element * element) {
 	}
 }
 
+void Accelerator::closeAccel() {
+	// We need 2 elements
+	if (elements.size() > 1) {
+		if (elements[elements.size() - 1]->getPosOut() == elements[0]->getPosIn()) {
+			elements[elements.size() - 1]->linkNext(*elements[0]);
+		} else {
+			ERROR(EXCEPTIONS::POS_END_DIFF_THAN_BEG);
+		}
+	}
+}
+
 void Accelerator::addParticle(Particle * particle) {
 	// Protection against empty pointers
 	if (particle != nullptr) {
