@@ -196,10 +196,6 @@ ostream& operator << (ostream& stream, Particle const& p) {
  * Drawing
  ****************************************************************/
 
-/**
- * Dispatch the drawing call
- */
-
 void Particle::draw() const {
 	engine->draw(*this);
 }

@@ -31,12 +31,12 @@ public:
 	 * Constructor for initialisation with velocity
 	 *
 	 * - `Vector3D pos`: initial position of the particle
-	 * - `Vector3D speed`: initial speed of the particle (if applicable)
+	 * - `Vector3D speed`: initial speed of the particle
 	 * - `double mass`: mass of the particle
 	 * - `int charge = 1`: charge of the particle in multiples of the elementary charge (i.e. multiples of 1 eV, charge of the electron)
 	 * - `bool unitGeV = true`: specify the units of the scalars given to the constructor
 	 *
-	 * Per default, units are expected in GeV. To specify units in the SI system, add `false` at the end of the argument list.
+	 * By default, units are expected in GeV. To specify units in the SI system, add `false` at the end of the argument list.
 	 */
 
 	Particle(Vector3D const& pos, Vector3D const& speed, double const& mass, int const& charge = 1, bool const& unitGeV = true);
@@ -45,13 +45,13 @@ public:
 	 * Constructor for initialisation with energy and direction vector velocity
 	 *
 	 * - `Vector3D pos`: initial position of the particle
-	 * - `Vector3D speed`: initial speed of the particle (if applicable)
-	 * - `double energy`: intial energy of the particle (if applicable)
+	 * - `Vector3D speed`: initial speed of the particle
+	 * - `double energy`: intial energy of the particle
 	 * - `double mass`: mass of the particle
 	 * - `int charge = 1`: charge of the particle in multiples of the elementary charge (i.e. multiples of 1 eV, charge of the electron)
 	 * - `bool unitGeV = true`: specify the units of the scalars given to the constructor
 	 *
-	 * Per default, units are expected in GeV. To specify units in the SI system, add `false` at the end of the argument list.
+	 * By default, units are expected in GeV. To specify units in the SI system, add `false` at the end of the argument list.
 	 */
 
 	Particle(Vector3D const& pos, double const& energy, Vector3D speed, double const& mass, int const& charge = 1, bool const& unitGeV = true);
@@ -61,7 +61,10 @@ public:
 	 ****************************************************************/
 
 	/**
-	 * Destructor to set element to nullptr and don't delete an instance of Element
+	 * Destructor:
+	 *
+	 * - Set Particle::element to nullptr
+	 * - Don't delete the Element !!
 	 */
 
 	~Particle();
@@ -77,7 +80,7 @@ public:
 	double getEnergy() const;
 
 	/**
-	 * Returns the factor gamma (1 / sqrt(1 - v^2 / c^2))
+	 * Returns the factor gamma 1 / sqrt(1 - v² / c²)
 	 */
 
 	double getGamma() const;
@@ -95,7 +98,7 @@ public:
 	double getCharge() const;
 
 	/**
-	 * Returns the attribute number of elementary charge of the particle / macroparticle
+	 * Returns the attribute number of elementary charge of the particle
 	 */
 
 	int getChargeNumber() const;
@@ -107,7 +110,7 @@ public:
 	Vector3D getSpeed() const;
 
 	/**
-	 * Returns the attribute forces which are the forces that are currently moving the particle
+	 * Returns the sum of forces exerted on the Particle
 	 */
 
 	Vector3D getForces() const;
@@ -125,13 +128,11 @@ public:
 	Vector3D getPos() const;
 
 	/**
-	 * Returns the pointer to the Element "element" or if this pointer is nullptr throws an EXCEPTIONS::NULLPTR
+	 * Returns a pointer (for polymorphism purposes) to the Element the Particle is in
 	 *
 	 * Used primarily in Accelerator::updateParticleElement()
 	 *
-	 * We need to return a pointer for the polymorphism to be applycable in this case
-	 *
-	 * But we return a const pointer to a constant Element for the user not to make any mistake (and hoping not to transgress the principles of the OOP)
+	 * Return: const pointer on a constant Element to prevent mistakes (and hoping not to transgress the principles of the OOP)
 	 */
 
 	Element const * const getElementPtr() const;
@@ -164,7 +165,6 @@ public:
 	 * Integrates the movement equations over a time step `dt`, which defaults to `GLOBALS::DT(1e-11)`.
 	 *
 	 * If `dt` is null (aka inferior to GLOBALS::DELTA), then this doesn't do anything
-	 * If `B` is null (aka its components are all inferior to GLOBALS::DELTA), then this doesn't do anything (prevent a DIV_0 (in F.norm() because with F = Vector3D(0, 0, 0))
 	 */
 
 	void step(double const& dt = GLOBALS::DT);
@@ -179,6 +179,9 @@ public:
 	 * Exerts the Lorentz force on a particle traversing a magnetic field given by the `B` vector over a timestep `dt` (defaults to `GLOBALS::DT(1e-11)`).
 	 *
 	 * If `dt` is null (aka inferior to GLOBALS::DELTA), then this doesn't do anything
+	 *
+	 * If `B` is null (aka its components are all inferior to GLOBALS::DELTA), then this doesn't do anything
+	 * (prevent EXCEPTIONS::DIV_0 in F.norm() because with F = Vector3D(0, 0, 0)
 	 */
 
 	void exertLorentzForce(Vector3D const& B, double const& dt = GLOBALS::DT);
@@ -195,14 +198,22 @@ public:
 
 private:
 
-	// Attributes
+	/****************************************************************
+	 * Attributes
+	 ****************************************************************/
 
 	Vector3D pos;
 	Vector3D momentum;	// stored in [m * kg / s]	(GeV / c)
 	Vector3D forces;
 	double mass;		// stored in [kg]			(GeV / c²)
-	int const charge;	// Physically, only whole multiples of elementary charges make sense
 	Element * element;
+
+	/**
+	 * Integer beause physically, only whole multiples of elementary charges make sense
+	 */
+
+	int const charge;
+
 };
 
 /****************************************************************

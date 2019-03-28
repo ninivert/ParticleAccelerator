@@ -59,15 +59,16 @@
 - Finish tests for Element
 - NULLPTR exception in class Element
 - When a particle gets out of an Element, it points to the next Element
-- test the `Element::updatePointedElement` function
-- test the `Accelerator::updateParticleElement` function
-- 2 touching Elements must have the same posOut (in init) and posIn
+- Test the `Element::updatePointedElement` function
+- Test the `Accelerator::updateParticleElement` function
 - Changed every include header in `.h` files to a forward declaration to resolve circular conflicts from HELL
 - Bundle up dependencies on header files
 - Rename `Element::isInWall`
 - Answer questions
 - Drawable class and its inheritance
 - `Accelerator::closeElementLoop` method
+- Review `Accelerator` documentation
+- Review `Particle` documentation
 
 ## Todo
 
@@ -77,6 +78,7 @@
 - Make `exerciceP9.cpp`
 - [Verify precision in `Particle` class](https://moodle.epfl.ch/mod/forum/discuss.php?d=15995)
 - Make `README.md`
+- In Particle, why check if `B` is not null ?
 
 ## Questions
 
