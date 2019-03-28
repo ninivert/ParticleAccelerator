@@ -14,7 +14,6 @@
 #include "src/include/Element.h"
 #include "src/include/Vector3D.h"
 #include "src/globals.h"
-#include "src/converter.h"
 
 /**
  * The Particle Class represents a particle evolving in the 3D carthesian space

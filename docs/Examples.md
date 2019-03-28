@@ -111,7 +111,7 @@ At file test/src/testException.cpp, line 20
 	Division by 0
 ```
 
-## `converter.h`
+## `Convert`
 
 ```cpp
 // 1 eV = 1.60217653e-19 Joules

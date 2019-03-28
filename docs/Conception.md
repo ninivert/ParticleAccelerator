@@ -6,7 +6,7 @@ Description de la hiérarchie de classes utilisées (relations d'héritage et d'
 
 ## Interprétation physique
 
-Nous stockons les valeurs physiques (masse, quantité de mouvement, énergie, charge, etc.) dans le système international (SI) et faisons la conversion en unités de GeV au moment opportun (affichage par exemple). Voir les [questions](#semaine-3) et la [documentation](#converter.h) pour plus d'informations.
+Nous stockons les valeurs physiques (masse, quantité de mouvement, énergie, charge, etc.) dans le système international (SI) et faisons la conversion en unités de GeV au moment opportun (affichage par exemple). Voir les questions et `Convert` pour plus d'informations.
 
 | Valeur physique | Unité de stockage | Unité d'affichage |
 | --- | --- | --- |

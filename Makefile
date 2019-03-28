@@ -18,7 +18,7 @@ CXXFLAGS += -O2
 # and where to put exec files (TARGET)
 ##################################################################
 
-TARGET := run_testVector3D run_testParticle run_testElement run_testAccelerator run_testConverter run_testException run_testRenderer
+TARGET := run_testVector3D run_testParticle run_testElement run_testAccelerator run_testConvert run_testException run_testRenderer
 OTESTPATH := ./test/build/
 BTESTPATH := ./test/bin/
 OPATH := ./build/
@@ -86,6 +86,10 @@ Renderer.o: Renderer.cpp Renderer.h
 	@echo [$@] Compiling...
 	@$(CXX) $(CXXFLAGS) -c src/lib/Renderer.cpp -o $(OPATH)$@ -I ./
 
+Convert.o: Convert.cpp Convert.h
+	@echo [$@] Compiling...
+	@$(CXX) $(CXXFLAGS) -c src/lib/Convert.cpp -o $(OPATH)$@ -I ./
+
 
 ##################################################################
 # Compilation of tests
@@ -111,9 +115,9 @@ testAccelerator.o: testAccelerator.cpp Accelerator.h Accelerator.cpp
 	@echo [$@] Compiling...
 	@$(CXX) $(CXXFLAGS) -c test/src/testAccelerator.cpp -o $(OTESTPATH)$@ -I ./
 
-testConverter.o: testConverter.cpp
+testConvert.o: testConvert.cpp Convert.h Convert.cpp
 	@echo [$@] Compiling...
-	@$(CXX) $(CXXFLAGS) -c test/src/testConverter.cpp -o $(OTESTPATH)$@ -I ./
+	@$(CXX) $(CXXFLAGS) -c test/src/testConvert.cpp -o $(OTESTPATH)$@ -I ./
 
 testException.o: testException.cpp
 	@echo [$@] Compiling...
@@ -132,29 +136,29 @@ testVector3D.bin: Vector3D.o Drawable.o Renderer.o testVector3D.o Test.o
 	@echo [$@] Linking...
 	@$(CXX) $(CXXFLAGS) build/Vector3D.o build/Drawable.o build/Renderer.o test/build/testVector3D.o test/build/Test.o -o $(BTESTPATH)$@
 
-testParticle.bin: Vector3D.o Particle.o Drawable.o Renderer.o testParticle.o Test.o
+testParticle.bin: Vector3D.o Particle.o Convert.o Drawable.o Renderer.o testParticle.o Test.o
 	@echo [$@] Linking...
-	@$(CXX) $(CXXFLAGS) build/Particle.o build/Vector3D.o build/Drawable.o build/Renderer.o test/build/testParticle.o test/build/Test.o -o $(BTESTPATH)$@
+	@$(CXX) $(CXXFLAGS) build/Particle.o build/Convert.o build/Vector3D.o build/Drawable.o build/Renderer.o test/build/testParticle.o test/build/Test.o -o $(BTESTPATH)$@
 
-testElement.bin: Vector3D.o Particle.o Element.o Dipole.o Quadrupole.o Straight.o Drawable.o Renderer.o testElement.o Test.o
+testElement.bin: Vector3D.o Particle.o Convert.o Element.o Dipole.o Quadrupole.o Straight.o Drawable.o Renderer.o testElement.o Test.o
 	@echo [$@] Linking...
-	@$(CXX) $(CXXFLAGS) build/Element.o build/Dipole.o build/Quadrupole.o build/Straight.o build/Particle.o build/Vector3D.o build/Drawable.o build/Renderer.o test/build/testElement.o test/build/Test.o -o $(BTESTPATH)$@
+	@$(CXX) $(CXXFLAGS) build/Element.o build/Convert.o build/Dipole.o build/Quadrupole.o build/Straight.o build/Particle.o build/Vector3D.o build/Drawable.o build/Renderer.o test/build/testElement.o test/build/Test.o -o $(BTESTPATH)$@
 
-testAccelerator.bin: Vector3D.o Particle.o Element.o Dipole.o Quadrupole.o Straight.o Accelerator.o Drawable.o Renderer.o testAccelerator.o Test.o
+testAccelerator.bin: Vector3D.o Particle.o Convert.o Element.o Dipole.o Quadrupole.o Straight.o Accelerator.o Drawable.o Renderer.o testAccelerator.o Test.o
 	@echo [$@] Linking...
-	@$(CXX) $(CXXFLAGS) build/Accelerator.o build/Element.o build/Dipole.o build/Quadrupole.o build/Straight.o build/Particle.o build/Vector3D.o build/Drawable.o build/Renderer.o test/build/testAccelerator.o test/build/Test.o -o $(BTESTPATH)$@
+	@$(CXX) $(CXXFLAGS) build/Accelerator.o build/Element.o build/Dipole.o build/Quadrupole.o build/Straight.o build/Particle.o build/Convert.o build/Vector3D.o build/Drawable.o build/Renderer.o test/build/testAccelerator.o test/build/Test.o -o $(BTESTPATH)$@
 
-testConverter.bin: testConverter.o Vector3D.o Test.o
+testConvert.bin: testConvert.o Convert.o Vector3D.o Test.o
 	@echo [$@] Linking...
-	@$(CXX) $(CXXFLAGS) build/Vector3D.o test/build/testConverter.o test/build/Test.o -o $(BTESTPATH)$@
+	@$(CXX) $(CXXFLAGS) build/Vector3D.o build/Convert.o test/build/testConvert.o test/build/Test.o -o $(BTESTPATH)$@
 
 testException.bin: testException.o Test.o
 	@echo [$@] Linking...
 	@$(CXX) $(CXXFLAGS) test/build/testException.o test/build/Test.o -o $(BTESTPATH)$@
 
-testRenderer.bin: Renderer.o Drawable.o Accelerator.o Element.o Dipole.o Particle.o Quadrupole.o Straight.o Vector3D.o testRenderer.o Test.o
+testRenderer.bin: Renderer.o Drawable.o Accelerator.o Element.o Dipole.o Particle.o Convert.o Quadrupole.o Straight.o Vector3D.o testRenderer.o Test.o
 	@echo [$@] Linking...
-	@$(CXX) $(CXXFLAGS) build/Renderer.o build/Drawable.o build/Accelerator.o build/Element.o build/Dipole.o build/Particle.o build/Quadrupole.o build/Straight.o build/Vector3D.o test/build/testRenderer.o test/build/Test.o -o $(BTESTPATH)$@
+	@$(CXX) $(CXXFLAGS) build/Renderer.o build/Drawable.o build/Accelerator.o build/Element.o build/Dipole.o build/Particle.o build/Convert.o build/Quadrupole.o build/Straight.o build/Vector3D.o test/build/testRenderer.o test/build/Test.o -o $(BTESTPATH)$@
 
 
 ##################################################################
@@ -181,9 +185,9 @@ run_testAccelerator: testAccelerator.bin
 	@$(BTESTPATH)/testAccelerator.bin
 	@echo [$@] -------------- Success !
 
-run_testConverter: testConverter.bin
+run_testConvert: testConvert.bin
 	@echo [$@] Running tests...
-	@$(BTESTPATH)/testConverter.bin
+	@$(BTESTPATH)/testConvert.bin
 	@echo [$@] -------------- Success !
 
 run_testException: testException.bin
