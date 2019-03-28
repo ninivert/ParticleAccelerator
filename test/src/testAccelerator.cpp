@@ -24,7 +24,7 @@ int main() {
 	ASSERT_EXCEPTION(
 		acc.addElement(new Straight (Vector3D(3, 0, 0), Vector3D(3.01, -1, 0), 0.1));
 		acc.addElement(new Straight (Vector3D(3.02, -1, 0), Vector3D(3.02, -2, 0), 0.1));
-	, EXCEPTIONS::ELEMENT_INPUT_POSITION);
+	, EXCEPTIONS::ELEMENTS_NOT_TOUCHING);
 
 	acc.clear();
 
@@ -33,8 +33,8 @@ int main() {
 		acc.addElement(new Straight (Vector3D(-2, -1, 0), Vector3D(-2, 1, 0), 0.1));
 		acc.addElement(new Straight (Vector3D(-2, 1, 0), Vector3D(7.2, 0, 0), 0.1));
 
-		acc.closeAccel();
-	, EXCEPTIONS::POS_END_DIFF_THAN_BEG);
+		acc.closeElementLoop();
+	, EXCEPTIONS::ELEMENT_LOOP_INCOMPLETE);
 
 	acc.clear();
 
@@ -101,7 +101,7 @@ int main() {
 	// cout << acc << endl;
 
 	/****************************************************************
-	 * updateElement
+	 * updateParticleElement
 	 ****************************************************************/
 	Straight * straight1 = new Straight (Vector3D(3, 0, 0), Vector3D(3.01, -1, 0), 0.1);
 	Straight * straight2 = new Straight (Vector3D(3.01, -1, 0), Vector3D(3.02, -2, 0), 0.1);
@@ -111,11 +111,11 @@ int main() {
 	acc.addElement(straight2);
 	acc.addParticle(p);
 
-	assert(p->getElement() == straight1);
+	assert(p->getElementPtr() == straight1);
 	assert(straight1->isInNextElement(*p));
 	acc.step();
 	assert(not straight2->isInNextElement(*p));
-	assert(p->getElement() == straight2);
+	assert(p->getElementPtr() == straight2);
 
 	/**
 	 * To see the results : compare the output (position) with the output (position) of
@@ -125,7 +125,7 @@ int main() {
 	acc.clear();
 
 	/****************************************************************
-	 * closeAccel
+	 * closeElementLoop
 	 ****************************************************************/
 	Straight * straight3 = new Straight (Vector3D(3, 0, 0), Vector3D(-2, -1, 0), 0.1);
 	Straight * straight4 = new Straight (Vector3D(-2, -1, 0), Vector3D(-2, 1, 0), 0.1);
@@ -140,13 +140,13 @@ int main() {
 	acc.addElement(straight4);
 	acc.addElement(straight5);
 
-	acc.closeAccel();
+	acc.closeElementLoop();
 
 	// As straight3 is closer to p2 than straight5,
 	// the particle should be in straight3 (as straight3 is now also linked to straight4)
 	straight5->updatePointedElement(p2);
 
-	assert(p2.getElement() == straight3);
+	assert(p2.getElementPtr() == straight3);
 	acc.clear();
 
 	return 0;

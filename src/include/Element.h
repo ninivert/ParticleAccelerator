@@ -130,7 +130,7 @@ public:
 	/**
 	 * Make the pointer "element" of the Particle p point to the new element in which the particle is
 	 *
-	 * Used primarily in Accelerator::updateElement(Particle&)
+	 * Used primarily in Accelerator::updateParticleElement(Particle&)
 	 *
 	 * We evaluate the distance between the particle and the output position of the previous element and the distance between the particle and the input position of the next element
 	 * We return the element whose distance is the shortest

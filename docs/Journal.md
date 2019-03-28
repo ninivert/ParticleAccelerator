@@ -60,14 +60,14 @@
 - NULLPTR exception in class Element
 - When a particle gets out of an Element, it points to the next Element
 - test the `Element::updatePointedElement` function
-- test the `Accelerator::updateElement` function
+- test the `Accelerator::updateParticleElement` function
 - 2 touching Elements must have the same posOut (in init) and posIn
 - Changed every include header in `.h` files to a forward declaration to resolve circular conflicts from HELL
 - Bundle up dependencies on header files
 - Rename `Element::isInWall`
 - Answer questions
 - Drawable class and its inheritance
-- `Accelerator::closeAccel` method
+- `Accelerator::closeElementLoop` method
 
 ## Todo
 

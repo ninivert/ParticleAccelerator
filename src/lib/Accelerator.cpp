@@ -15,14 +15,6 @@ Accelerator::Accelerator() {};
 Accelerator::~Accelerator() { this->clear(); };
 
 /****************************************************************
- * Getter
- ****************************************************************/
-
-/**
- * No see Accelerator.h
- */
-
-/****************************************************************
  * Methods
  ****************************************************************/
 
@@ -33,7 +25,7 @@ void Accelerator::step(double const& dt) {
 	// Step through all the particles
 	for (unique_ptr<Particle> & particle : particles) {
 		// Change the element if the particle goes out
-		updateElement(*particle);
+		updateParticleElement(*particle);
 
 		particle->step(dt);
 	}
@@ -42,14 +34,14 @@ void Accelerator::step(double const& dt) {
 void Accelerator::addElement(Element * element) {
 	// Protection against empty pointers
 	if (element != nullptr) {
-
 		// Protection against empty vector elements
 		if (elements.size() > 0) {
+			// Protection against non-touching elements
 			if (elements[elements.size() - 1]->getPosOut() == element->getPosIn()) {
 				elements[elements.size() - 1]->linkNext(*element);
 				elements.push_back(shared_ptr<Element>(element));
 			} else {
-				ERROR(EXCEPTIONS::ELEMENT_INPUT_POSITION);
+				ERROR(EXCEPTIONS::ELEMENTS_NOT_TOUCHING);
 			}
 		} else {
 			elements.push_back(shared_ptr<Element>(element));
@@ -59,13 +51,13 @@ void Accelerator::addElement(Element * element) {
 	}
 }
 
-void Accelerator::closeAccel() {
+void Accelerator::closeElementLoop() {
 	// We need 2 elements
 	if (elements.size() > 1) {
 		if (elements[elements.size() - 1]->getPosOut() == elements[0]->getPosIn()) {
 			elements[elements.size() - 1]->linkNext(*elements[0]);
 		} else {
-			ERROR(EXCEPTIONS::POS_END_DIFF_THAN_BEG);
+			ERROR(EXCEPTIONS::ELEMENT_LOOP_INCOMPLETE);
 		}
 	}
 }
@@ -103,11 +95,11 @@ string Accelerator::to_string() const {
 	return stream.str();
 }
 
-void Accelerator::updateElement(Particle & particle) const {
-	if (not (particle.getElement()->isInNextElement(particle))) { return; }
-
-	// particle is in next element
-	particle.getElement()->updatePointedElement(particle);
+void Accelerator::updateParticleElement(Particle & particle) const {
+	if (particle.getElementPtr()->isInNextElement(particle)) {
+		// Particle is in next element
+		particle.getElementPtr()->updatePointedElement(particle);
+	}
 }
 
 /****************************************************************
@@ -121,10 +113,6 @@ std::ostream& operator<< (std::ostream& stream, Accelerator const& a) {
 /****************************************************************
  * Drawing
  ****************************************************************/
-
-/**
- * Dispatch the drawing call
- */
 
 void Accelerator::draw() const {
 	engine->draw(*this);
