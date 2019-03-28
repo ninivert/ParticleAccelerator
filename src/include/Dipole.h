@@ -19,9 +19,7 @@ class Renderer;
 #include "src/globals.h"
 
 /**
- * Dipole : it is a sub-class of Element
- *
- * It implements the representation of curved elements with magnetic field which aims at balancing the centrifugal force for an ideal trajectory
+ * The Dipole corrects the trajectory of the Particles in turns
  */
 
 class Dipole : public Element {
@@ -79,7 +77,7 @@ public:
 	 ****************************************************************/
 
 	/**
-	 * Sets private B to the given parameter
+	 * Sets the magnetic field exerted by the Dipole
 	 */
 
 	void setB(double const& B);
@@ -112,11 +110,18 @@ public:
 
 private:
 
-	// Attributes
+	/****************************************************************
+	 * Attributes
+	 ****************************************************************/
 
 	double const curvature;
-	Vector3D const posCenter;	// CONVENTION : k positive => clockwise (same as given parameters)
-	double B;					// Magnetic field
+	Vector3D const posCenter;
+
+	/**
+	 * Magnetic field intensity
+	 */
+
+	double B;
 };
 
 #endif

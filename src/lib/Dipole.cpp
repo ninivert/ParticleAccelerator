@@ -70,10 +70,6 @@ bool Dipole::isInWall(Particle const& p) const {
  * Drawing
  ****************************************************************/
 
-/**
- * Dispatch the drawing call
- */
-
 void Dipole::draw() const {
 	engine->draw(*this);
 }
