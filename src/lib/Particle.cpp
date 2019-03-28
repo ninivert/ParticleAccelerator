@@ -62,9 +62,9 @@ Vector3D Particle::getForces() const { return forces; }
 Vector3D Particle::getMoment() const { return momentum; }
 Vector3D Particle::getPos() const { return pos; }
 
-Element const * const Particle::getElement() const {
+Element const& Particle::getElement() const {
 	if (element != nullptr) {
-		return element;
+		return *element;
 	} else {
 		ERROR(EXCEPTIONS::NULLPTR);
 	}

@@ -131,10 +131,10 @@ public:
 	 *
 	 * We need to return a pointer for the polymorphism to be applycable in this case
 	 *
-	 * But we return a const pointer to a constant Element for the user not to make any mistake (and hoping not to transgress the principles of the OOP)
+	 * But we return a const reference to a constant Element for the user not to make any mistake (and hoping not to transgress the principles of the OOP)
 	 */
 
-	Element const * const getElement() const;
+	Element const& getElement() const;
 
 	/****************************************************************
 	 * Setters
