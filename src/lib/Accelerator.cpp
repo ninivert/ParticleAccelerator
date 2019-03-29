@@ -22,6 +22,8 @@ void Accelerator::step(double const& dt) {
 	// Do nothing if dt is null
 	if (abs(dt) < GLOBALS::DELTA) { return; }
 
+	clearDeadParticles();
+
 	// Step through all the particles
 	for (unique_ptr<Particle> & particle : particles) {
 		// Change the element if the particle goes out
@@ -99,6 +101,30 @@ void Accelerator::updateParticleElement(Particle & particle) const {
 	if (particle.getElementPtr()->isInNextElement(particle)) {
 		// Particle is in next element
 		particle.getElementPtr()->updatePointedElement(particle);
+	}
+}
+
+void Accelerator::clearDeadParticles() {
+	// Remove particles that are out of the simulation
+	size_t size(particles.size());
+	for (size_t i(0); i < size; ++i) {
+		if (particles[i]->getElementPtr()->isInWall(*particles[i])) {
+			particles[i].reset();
+
+			// using swap + pop_back
+			// faster but changes indexes
+			swap(particles[i], particles[size - 1]);
+			particles.pop_back();
+
+			// using erase
+			// slower but preserves indexes
+			// particles.erase(particles.begin() + i);
+
+			// We resized the vector so we need to take it into account
+			--size;
+			// We need to evalute the new `particles[i]` that has been swapped
+			--i;
+		}
 	}
 }
 

@@ -38,19 +38,6 @@ public:
 
 	Element(Vector3D const& posIn, Vector3D const& posOut, double const& radius);
 
-	/**
-	 * Constructor for initialisation of an Element with a reference to the previous element with the initial and final position
-	 *
-	 * - `Vector3D posIn`: initial position of the element
-	 * - `Vector3D posOut`: final position of the element
-	 * - `double radius`: internal radius of the vacuum chamber of the element
-	 * - `Element & prev` : reference to the previous Element (for pointer init.)
-	 *
-	 * WARNING: prev and next need to stay coherent
-	 */
-
-	Element(Vector3D const& posIn, Vector3D const& posOut, double const& radius, Element & prev);
-
 	/****************************************************************
 	 * Copy constructor and operator =
 	 ****************************************************************/

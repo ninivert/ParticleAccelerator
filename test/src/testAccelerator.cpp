@@ -149,5 +149,52 @@ int main() {
 	assert(p2.getElementPtr() == straight3);
 	acc.clear();
 
+	/****************************************************************
+	 * clearDeadParticles
+	 ****************************************************************/
+	Particle * part_a = new Particle(Vector3D(2.99, -0.01, 0), Vector3D(0, 0, 0), 0.938272);
+	Particle * part_b = new Particle(Vector3D(-2, -1, 0), Vector3D(1e8, 1e8, 0), 0.938272);
+	Particle * part_c = new Particle(Vector3D(3.015, -1.2, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272);
+	Particle * part_d = new Particle(Vector3D(3.015, -1.2, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272);
+	Particle * part_e = new Particle(Vector3D(7.015, -1.2, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272);
+	Particle * part_f = new Particle(Vector3D(-2, -1, 0), Vector3D(1e8, 1e8, 0), 0.938272);
+	Particle * part_g = new Particle(Vector3D(3.015, -1.2, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272);
+	Particle * part_h = new Particle(Vector3D(7.015, 4.21, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272);
+	Particle * part_i = new Particle(Vector3D(3.015, -1.2, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272);
+	Particle * part_j = new Particle(Vector3D(7.015, 4.21, 4), Vector3D(-210200, -2.64754e8, 0), 0.938272);
+
+	Straight * straight6 = new Straight (Vector3D(3, 0, 0), Vector3D(-2, -1, 0), 0.1);
+
+	part_a->setElement(straight6);
+	part_b->setElement(straight6);
+	part_c->setElement(straight6);
+	part_d->setElement(straight6);
+	part_e->setElement(straight6);
+	part_f->setElement(straight6);
+	part_g->setElement(straight6);
+	part_h->setElement(straight6);
+	part_i->setElement(straight6);
+	part_j->setElement(straight6);
+	acc.addElement(straight6);
+
+	acc.addParticle(part_a);
+	acc.addParticle(part_b);
+	acc.addParticle(part_c);
+	acc.addParticle(part_d);
+	acc.addParticle(part_e);
+	acc.addParticle(part_f);
+	acc.addParticle(part_g);
+	acc.addParticle(part_h);
+	acc.addParticle(part_i);
+	acc.addParticle(part_j);
+
+	cout << acc << endl;
+
+	acc.step();
+
+	cout << acc << endl;
+
+	acc.clear();
+
 	return 0;
 }

@@ -151,7 +151,13 @@ private:
 	 * Used in Accelerator::step()
 	 */
 
-	void updateParticleElement(Particle & particle) const; // const ?
+	void updateParticleElement(Particle & particle) const;
+
+	/**
+	 * Remove Particle that are out of the Accelerator
+	 */
+
+	void clearDeadParticles();
 
 	/****************************************************************
 	 * Attributes

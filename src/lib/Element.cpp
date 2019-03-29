@@ -19,21 +19,6 @@ Element::Element(Vector3D const& posIn, Vector3D const& posOut, double const& ra
 	}
 }
 
-Element::Element(Vector3D const& posIn, Vector3D const& posOut, double const& radius, Element & prev)
-: posIn(posIn), posOut(posOut), radius(radius), next(nullptr), prev(&prev)
-{
-	double orientation = Vector3D::tripleProduct(Vector3D(0, 0, 1), posIn, posOut);
-	if (abs(orientation) < GLOBALS::DELTA) {
-		ERROR(EXCEPTIONS::BAD_ORIENTATION);
-	} else if (orientation > 0) {
-		Vector3D tmp(this->posIn);
-		this->posIn = this->posOut;
-		this->posOut = tmp;
-	}
-
-	prev.linkNext(*this);
-}
-
 /****************************************************************
  * Destructor
  ****************************************************************/

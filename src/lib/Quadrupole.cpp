@@ -14,14 +14,6 @@ Quadrupole::Quadrupole(Vector3D const& posIn, double const& length, Vector3D dir
 : Element(posIn, posIn + length * ~direction, radius), b(b)
 {}
 
-Quadrupole::Quadrupole(Vector3D const& posIn, Vector3D const& posOut, double const& radius, double const& b, Element & prev)
-: Element(posIn, posOut, radius, prev), b(b)
-{}
-
-Quadrupole::Quadrupole(Vector3D const& posIn, double const& length, Vector3D direction, double const& radius, double const& b, Element & prev)
-: Element(posIn, posIn + length * ~direction, radius, prev), b(b)
-{}
-
 /****************************************************************
  * Getter (virtual)
  ****************************************************************/

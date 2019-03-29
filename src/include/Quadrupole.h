@@ -50,39 +50,6 @@ public:
 
 	Quadrupole(Vector3D const& posIn, double const& length, Vector3D direction, double const& radius, double const& b);
 
-	/**
-	 * Constructor for initialisation of a Quadrupole
-	 * with a reference to the previous element (linking is automatically done)
-	 * with the initial and final position
-	 *
-	 * Useful in Accelerator::addElement(Element * element)
-	 *
-	 * - `Vector3D posIn`: initial position of the Quadrupole
-	 * - `Vector3D posOut`: final position of the Quadrupole
-	 * - `double radius`: internal radius of the vacuum chamber of the Quadrupole
-	 * - `double b`: proper internal magnetic field of the Quadrupole (for propotional recall force)
-	 * - `Element & prev` : reference to the previous Element (for pointer init.)
-	 */
-
-	Quadrupole(Vector3D const& posIn, Vector3D const& posOut, double const& radius, double const& b, Element & prev);
-
-	/**
-	 * Constructor for initialisation of a Quadrupole
-	 * with a reference to the previous element (linking is automatically done)
-	 * with the initial position, the length of the Quadrupole and the direction
-	 *
-	 * Useful in Accelerator::addElement(Element * element)
-	 *
-	 * - `Vector3D posIn`: initial position of the Quadrupole
-	 * - `double length` : length of the element
-	 * - `Vector3D direction`: direction of the Quadrupole (from initial position) copy in order to normalize it
-	 * - `double radius`: internal radius of the vacuum chamber of the Quadrupole
-	 * - `double b`: proper internal magnetic field of the Quadrupole (for propotional recall force)
-	 * - `Element & prev` : reference to the previous Element (for pointer init.)
-	 */
-
-	Quadrupole(Vector3D const& posIn, double const& length, Vector3D direction, double const& radius, double const& b, Element & prev);
-
 	/****************************************************************
 	 * Getter (virtual)
 	 ****************************************************************/

@@ -43,23 +43,6 @@ public:
 
 	Dipole(Vector3D const& posIn, Vector3D const& posOut, double const& radius, double const& curvature, double const& B);
 
-	/**
-	 * Constructor for initialisation of a Dipole with a reference to the previous element with the initial and final position
-	 *
-	 * Useful in Accelerator::addElement(Element * element)
-	 *
-	 * - `Vector3D posIn`: initial position of the dipole
-	 * - `Vector3D posOut`: final position of the dipole
-	 * - `double radius`: internal radius of the vacuum chamber of the dipole
-	 * - `double curvature`: curvature of the vacuum chamber of the dipole (curvature = 1 / R where R is the radius of curvature)
-	 * - `Element & prev` : reference to the previous Element (for pointer init.)
-	 * - `double B`: the magnetic field of the dipole will change according to the particles that the user wants to keep (depending on their energy)
-	 *
-	 * The center of curvature is initialized with the CONVENTION that when k is positive, the direction of the arc from the initial position to the final position is CLOCKWISE (anti-trigonometric)
-	*/
-
-	Dipole(Vector3D const& posIn, Vector3D const& posOut, double const& radius, double const& curvature, double const& B, Element & prev);
-
 	/****************************************************************
 	 * Getter (virtual)
 	 ****************************************************************/

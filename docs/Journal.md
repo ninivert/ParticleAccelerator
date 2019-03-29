@@ -72,10 +72,14 @@
 - Review `Dipole` documentation
 - Review `Quadrupole` documentation
 - Review `Straight` documentation
+<<<<<<< Updated upstream
 - In Particle, why check if `B` is not null (see Particle documentation) ?
 - Switched places of arguments in `Dipole` constructor to be more coherent with the other `Element` constructors
 - Make `exerciceP9.cpp`
 - [Verify precision in `Particle` class](https://moodle.epfl.ch/mod/forum/discuss.php?d=15995) -> precision is up to \~9-10 digits, errors are due Euler integration (with correction, which itself comes with some level of imprecision) and display, which has to convert units.
+=======
+- In Particle, why check if `B` is not null (see Particle documentation)
+>>>>>>> Stashed changes
 
 ## Todo
 
@@ -87,5 +91,4 @@
 ## Questions
 
 - Add relativist mass to Particle ?
-- Doit on rendre un `README.md` ?
 - Do we need to specify a virtual destructor on all parent classes (aka `Drawable`) for destruction to correctly take place ?
