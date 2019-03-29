@@ -13,9 +13,7 @@ class Renderer;
 #include "src/globals.h"
 
 /**
- * Quadrupole class is a sub-class of Element
- *
- * It represents straight elements with a magnetic field in order to focus the particles beam to an ideal trajectory
+ * The Quadrupole Element focuses a Particle beam towards their ideal trajectory using 4 magnets
  */
 
 class Quadrupole : public Element {
@@ -26,56 +24,64 @@ public:
 	 ****************************************************************/
 
 	/**
-	 * Constructor for initialisation of a simple Quadrupole element (without linking to the previous one) with the initial and final position
+	 * Constructor for initialisation of a simple Quadrupole element
+	 * (without linking to the previous one)
+	 * with the initial and final position
 	 *
-	 * - `Vector3D posIn`: initial position of the quadrupole element
-	 * - `Vector3D posOut`: final position of the quadrupole element
-	 * - `double radius`: internal radius of the vacuum chamber of the quadrupole element
-	 * - `double b`: proper internal magnetic field of the quadrupole (for propotional recall force)
+	 * - `Vector3D posIn`: initial position of the Quadrupole element
+	 * - `Vector3D posOut`: final position of the Quadrupole element
+	 * - `double radius`: internal radius of the vacuum chamber of the Quadrupole element
+	 * - `double b`: proper internal magnetic field of the Quadrupole (for propotional recall force)
 	 */
 
-	Quadrupole(Vector3D const& posIn, Vector3D const& posOut, double const& radius, double const& b);
+	Quadrupole(Vector3D const& posIn, Vector3D const& posOut, double const& radius, double const& B);
 
 	/**
-	 * Constructor for initialisation of a simple Quadrupole element (without linking to the previous one) with the initial position, the length of the element and the direction
+	 * Constructor for initialisation of a simple Quadrupole element
+	 * (without linking to the previous one)
+	 * with the initial position, the length of the element and the direction
 	 *
-	 * - `Vector3D posIn`: initial position of the quadrupole element
+	 * - `Vector3D posIn`: initial position of the Quadrupole element
 	 * - `double length` : length of the element
-	 * - `Vector3D direction`: direction of the quadrupole element (from initial position) copy in order to normalize it
-	 * - `double radius`: internal radius of the vacuum chamber of the quadrupole element
-	 * - `double b`: proper internal magnetic field of the quadrupole (for propotional recall force)
+	 * - `Vector3D direction`: direction of the Quadrupole element (from initial position) copy in order to normalize it
+	 * - `double radius`: internal radius of the vacuum chamber of the Quadrupole element
+	 * - `double b`: proper internal magnetic field of the Quadrupole (for propotional recall force)
 	 */
 
-	Quadrupole(Vector3D const& posIn, double const& length, Vector3D direction, double const& radius, double const& b);
+	Quadrupole(Vector3D const& posIn, double const& length, Vector3D direction, double const& radius, double const& B);
 
 	/**
-	 * Constructor for initialisation of a Quadrupole with a reference to the previous element with the initial and final position
+	 * Constructor for initialisation of a Quadrupole
+	 * with a reference to the previous element (linking is automatically done)
+	 * with the initial and final position
 	 *
 	 * Useful in Accelerator::addElement(Element * element)
 	 *
-	 * - `Vector3D posIn`: initial position of the quadrupole
-	 * - `Vector3D posOut`: final position of the quadrupole
-	 * - `double radius`: internal radius of the vacuum chamber of the quadrupole
-	 * - `double b`: proper internal magnetic field of the quadrupole (for propotional recall force)
+	 * - `Vector3D posIn`: initial position of the Quadrupole
+	 * - `Vector3D posOut`: final position of the Quadrupole
+	 * - `double radius`: internal radius of the vacuum chamber of the Quadrupole
+	 * - `double b`: proper internal magnetic field of the Quadrupole (for propotional recall force)
 	 * - `Element & prev` : reference to the previous Element (for pointer init.)
 	 */
 
-	Quadrupole(Vector3D const& posIn, Vector3D const& posOut, double const& radius, double const& b, Element & prev);
+	Quadrupole(Vector3D const& posIn, Vector3D const& posOut, double const& radius, double const& B, Element & prev);
 
 	/**
-	 * Constructor for initialisation of a Quadrupole with a reference to the previous element with the initial position, the length of the quadrupole and the direction
+	 * Constructor for initialisation of a Quadrupole
+	 * with a reference to the previous element (linking is automatically done)
+	 * with the initial position, the length of the Quadrupole and the direction
 	 *
 	 * Useful in Accelerator::addElement(Element * element)
 	 *
-	 * - `Vector3D posIn`: initial position of the quadrupole
+	 * - `Vector3D posIn`: initial position of the Quadrupole
 	 * - `double length` : length of the element
-	 * - `Vector3D direction`: direction of the quadrupole (from initial position) copy in order to normalize it
-	 * - `double radius`: internal radius of the vacuum chamber of the quadrupole
-	 * - `double b`: proper internal magnetic field of the quadrupole (for propotional recall force)
+	 * - `Vector3D direction`: direction of the Quadrupole (from initial position) copy in order to normalize it
+	 * - `double radius`: internal radius of the vacuum chamber of the Quadrupole
+	 * - `double b`: proper internal magnetic field of the Quadrupole (for propotional recall force)
 	 * - `Element & prev` : reference to the previous Element (for pointer init.)
 	 */
 
-	Quadrupole(Vector3D const& posIn, double const& length, Vector3D direction, double const& radius, double const& b, Element & prev);
+	Quadrupole(Vector3D const& posIn, double const& length, Vector3D direction, double const& radius, double const& B, Element & prev);
 
 	/****************************************************************
 	 * Getter (virtual)
@@ -92,13 +98,13 @@ public:
 	 ****************************************************************/
 
 	/**
-	 * Returns true if the Particle p is outside the quadrupole (touched the wall)
+	 * Returns true if the Particle p is outside the Quadrupole (touched the wall)
 	 */
 
 	virtual bool isInWall(Particle const& p) const override;
 
 	/**
-	 * Returns a string representation of the quadrupole
+	 * Returns a string representation of the Quadrupole
 	 */
 
 	virtual std::string to_string() const;
@@ -115,9 +121,15 @@ public:
 
 private:
 
-	// Attribute
+	/****************************************************************
+	 * Attributes
+	 ****************************************************************/
 
-	double b;		// Intensity of the magnetic field
+	/**
+	 * Intensity of the magnetic field
+	 */
+
+	double B;
 };
 
 
