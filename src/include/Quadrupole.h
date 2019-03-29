@@ -34,7 +34,7 @@ public:
 	 * - `double b`: proper internal magnetic field of the Quadrupole (for propotional recall force)
 	 */
 
-	Quadrupole(Vector3D const& posIn, Vector3D const& posOut, double const& radius, double const& B);
+	Quadrupole(Vector3D const& posIn, Vector3D const& posOut, double const& radius, double const& b);
 
 	/**
 	 * Constructor for initialisation of a simple Quadrupole element
@@ -48,7 +48,7 @@ public:
 	 * - `double b`: proper internal magnetic field of the Quadrupole (for propotional recall force)
 	 */
 
-	Quadrupole(Vector3D const& posIn, double const& length, Vector3D direction, double const& radius, double const& B);
+	Quadrupole(Vector3D const& posIn, double const& length, Vector3D direction, double const& radius, double const& b);
 
 	/**
 	 * Constructor for initialisation of a Quadrupole
@@ -64,7 +64,7 @@ public:
 	 * - `Element & prev` : reference to the previous Element (for pointer init.)
 	 */
 
-	Quadrupole(Vector3D const& posIn, Vector3D const& posOut, double const& radius, double const& B, Element & prev);
+	Quadrupole(Vector3D const& posIn, Vector3D const& posOut, double const& radius, double const& b, Element & prev);
 
 	/**
 	 * Constructor for initialisation of a Quadrupole
@@ -81,7 +81,7 @@ public:
 	 * - `Element & prev` : reference to the previous Element (for pointer init.)
 	 */
 
-	Quadrupole(Vector3D const& posIn, double const& length, Vector3D direction, double const& radius, double const& B, Element & prev);
+	Quadrupole(Vector3D const& posIn, double const& length, Vector3D direction, double const& radius, double const& b, Element & prev);
 
 	/****************************************************************
 	 * Getter (virtual)
@@ -129,7 +129,7 @@ private:
 	 * Intensity of the magnetic field
 	 */
 
-	double B;
+	double b;
 };
 
 

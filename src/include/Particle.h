@@ -181,7 +181,10 @@ public:
 	 * If `dt` is null (aka inferior to GLOBALS::DELTA), then this doesn't do anything
 	 *
 	 * If `B` is null (aka its components are all inferior to GLOBALS::DELTA), then this doesn't do anything
-	 * (prevent EXCEPTIONS::DIV_0 in F.norm() because with F = Vector3D(0, 0, 0)
+	 * (prevent EXCEPTIONS::DIV_0 in `F.rotate()`
+	 *
+	 * 1. If B is null, then F ^ B is null
+	 * 2. Then F.rotate(Vector3D(0, 0, 0), alpha) tries to normalize Vector3D(0, 0, 0) which will scream at you
 	 */
 
 	void exertLorentzForce(Vector3D const& B, double const& dt = GLOBALS::DT);

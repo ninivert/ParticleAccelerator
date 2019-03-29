@@ -35,8 +35,8 @@
 - Fixed `Particle::step` function -> units used were incorrect
 - Creation of tests for `Particle` and `Convert`
 - Decided on energy vs momentum -> we used momentum (see Réponses)
-- Added padding for `Vector3D` and particle display (ostream)
-- Added 2 constructors for particle class
+- Added padding for `Vector3D` and Particle display (ostream)
+- Added 2 constructors for Particle class
 - Added `CONVERT` namespace to easily convert from SI units to GeV and reciprocally
 - Added `STYLES` namespace for unified text output
 - Finish tests for `Particle`
@@ -44,21 +44,21 @@
 - Used `class Element;` or `class Particle;` in header files to resolve circular header definitions
 - Review the `linkNext` function (create a method in `Element` to make the "full circle" (or not) i.e. the first `Element` has to point on the last one and vice versa (without creating a new Element))
 - Add large scale error management -> custom `Exception` sub-classes: Throw division by 0 errors
-- Add accelerator class
-- Add element class
-	- Dipole sub-class
+- Add Accelerator class
+- Add Element class
+- Add Dipole sub-class
 
 ## Stage 5
 
 - Doxygen
 - Quadrupole sub-class
 - Straight sub-class
-- Polymorphism pointer in accelerator -> define class destructor
+- Polymorphism pointer in Accelerator -> define class destructor
 - Beware the copy constructor of `Element` (cause : pointers)
 - Finish documentation until Element class
 - Finish tests for Element
 - NULLPTR exception in class Element
-- When a particle gets out of an Element, it points to the next Element
+- When a Particle gets out of an Element, it points to the next Element
 - Test the `Element::updatePointedElement` function
 - Test the `Accelerator::updateParticleElement` function
 - Changed every include header in `.h` files to a forward declaration to resolve circular conflicts from HELL
@@ -72,19 +72,19 @@
 - Review `Dipole` documentation
 - Review `Quadrupole` documentation
 - Review `Straight` documentation
+- In Particle, why check if `B` is not null (see Particle documentation) ?
 
 ## Todo
 
-- Implement textual renderer
-- init_particles for the pointer of particles to be initialized with the 1st element (or the closest one)
-- `Accelerator::step()` needs to take into account the fact that particles are leaving the accelerator (not in an Element anymore)
+- Implement textual Renderer
+- init_Particles for the pointer of Particles to be initialized with the 1st Element (or the closest one)
+- `Accelerator::step()` needs to take into account the fact that Particles are leaving the Accelerator (not in an Element anymore)
 - Make `exerciceP9.cpp`
 - [Verify precision in `Particle` class](https://moodle.epfl.ch/mod/forum/discuss.php?d=15995)
 - Make `README.md`
-- In Particle, why check if `B` is not null ?
 
 ## Questions
 
-- Add relativist mass to particle ?
+- Add relativist mass to Particle ?
 - Doit on rendre un `README.md` ?
 - Do we need to specify a virtual destructor on all parent classes (aka `Drawable`) for destruction to correctly take place ?
