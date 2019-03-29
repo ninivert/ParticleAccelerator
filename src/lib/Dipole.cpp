@@ -40,19 +40,19 @@ string Dipole::to_string() const {
 	stream << left;
 	stream
 		// Curvature
-		<< setw(STYLES::PADDING_SM) << ""
+		<< setw(STYLES::PADDING_XSM) << ""
 		<< setw(STYLES::PADDING_MD) << "Curvature"
 		<< setw(STYLES::PADDING_LG) << curvature
 		<< " (" << UNITS::CURVATURE << ")"
 		<< endl
 		// Curvature center
-		<< setw(STYLES::PADDING_SM) << ""
+		<< setw(STYLES::PADDING_XSM) << ""
 		<< setw(STYLES::PADDING_MD) << "Curv. center"
 		<< setw(STYLES::PADDING_LG) << posCenter
 		<< " (" << UNITS::DISTANCE << ")"
 		<< endl
 		// Magnetic field
-		<< setw(STYLES::PADDING_SM) << ""
+		<< setw(STYLES::PADDING_XSM) << ""
 		<< setw(STYLES::PADDING_MD) << "Magnetic field"
 		<< setw(STYLES::PADDING_LG) << getField(Vector3D(0, 0, 0))
 		<< " (" << UNITS::DISTANCE << ")"

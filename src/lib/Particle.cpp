@@ -93,49 +93,49 @@ string Particle::to_string() const {
 	stream << left;
 	stream
 		// Position
-		<< setw(STYLES::PADDING_SM) << ""
+		<< setw(STYLES::PADDING_XSM) << ""
 		<< setw(STYLES::PADDING_MD) << "Position"
 		<< setw(STYLES::PADDING_LG) << getPos()
 		<< " (" << UNITS::DISTANCE << ")"
 		<< endl
 		// Speed
-		<< setw(STYLES::PADDING_SM) << ""
+		<< setw(STYLES::PADDING_XSM) << ""
 		<< setw(STYLES::PADDING_MD) << "Speed"
 		<< setw(STYLES::PADDING_LG) << getSpeed()
 		<< " (" << UNITS::SPEED << ")"
 		<< endl
 		// Gamma
-		<< setw(STYLES::PADDING_SM) << ""
+		<< setw(STYLES::PADDING_XSM) << ""
 		<< setw(STYLES::PADDING_MD) << "Gamma"
 		<< setw(STYLES::PADDING_LG) << getGamma()
 		<< " (" << UNITS::SCALAR << ")"
 		<< endl
 		// Energy
-		<< setw(STYLES::PADDING_SM) << ""
+		<< setw(STYLES::PADDING_XSM) << ""
 		<< setw(STYLES::PADDING_MD) << "Energy"
 		<< setw(STYLES::PADDING_LG) << CONVERT::EnergySItoGeV(getEnergy())
 		<< " (" << UNITS::ENERGY << ")"
 		<< endl
 		// Mass
-		<< setw(STYLES::PADDING_SM) << ""
+		<< setw(STYLES::PADDING_XSM) << ""
 		<< setw(STYLES::PADDING_MD) << "Mass"
 		<< setw(STYLES::PADDING_LG) << CONVERT::MassSItoGeV(mass)
 		<< " (" << UNITS::MASS << ")"
 		<< endl
 		// Charge
-		<< setw(STYLES::PADDING_SM) << ""
+		<< setw(STYLES::PADDING_XSM) << ""
 		<< setw(STYLES::PADDING_MD) << "Charge"
 		<< setw(STYLES::PADDING_LG) << getCharge()
 		<< " (" << UNITS::CHARGE << ")"
 		<< endl
 		// Forces
-		<< setw(STYLES::PADDING_SM) << ""
+		<< setw(STYLES::PADDING_XSM) << ""
 		<< setw(STYLES::PADDING_MD) << "Forces"
 		<< setw(STYLES::PADDING_LG) << getForces()
 		<< " (" << UNITS::FORCE << ")"
 		// << endl
 		// // Element
-		// << setw(STYLES::PADDING_SM) << ""
+		// << setw(STYLES::PADDING_XSM) << ""
 		// << setw(STYLES::PADDING_MD) << "Element adr."
 		// << setw(STYLES::PADDING_LG) << element
 		<< endl;

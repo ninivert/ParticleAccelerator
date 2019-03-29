@@ -103,24 +103,24 @@ string Element::to_string() const {
 	stream << left;
 	stream
 		// // Adress
-		// << setw(STYLES::PADDING_SM) << ""
+		// << setw(STYLES::PADDING_XSM) << ""
 		// << setw(STYLES::PADDING_MD) << "Adress"
 		// << setw(STYLES::PADDING_LG) << this
 		// << endl
 		// Entry position
-		<< setw(STYLES::PADDING_SM) << ""
+		<< setw(STYLES::PADDING_XSM) << ""
 		<< setw(STYLES::PADDING_MD) << "Input pos"
 		<< setw(STYLES::PADDING_LG) << getPosIn()
 		<< " (" << UNITS::DISTANCE << ")"
 		<< endl
 		// Release position
-		<< setw(STYLES::PADDING_SM) << ""
+		<< setw(STYLES::PADDING_XSM) << ""
 		<< setw(STYLES::PADDING_MD) << "Release pos"
 		<< setw(STYLES::PADDING_LG) << getPosOut()
 		<< " (" << UNITS::DISTANCE << ")"
 		<< endl
 		// Radius
-		<< setw(STYLES::PADDING_SM) << ""
+		<< setw(STYLES::PADDING_XSM) << ""
 		<< setw(STYLES::PADDING_MD) << "Radius"
 		<< setw(STYLES::PADDING_LG) << getRadius()
 		<< " (" << UNITS::DISTANCE << ")"

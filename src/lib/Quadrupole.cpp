@@ -57,7 +57,7 @@ string Quadrupole::to_string() const {
 	stream << left;
 	stream
 		// Magnetic intensity b
-		<< setw(STYLES::PADDING_SM) << ""
+		<< setw(STYLES::PADDING_XSM) << ""
 		<< setw(STYLES::PADDING_MD) << "Magnet. intens."
 		<< setw(STYLES::PADDING_LG) << b
 		<< " (" << UNITS::MAGNETIC_FIELD << ")"

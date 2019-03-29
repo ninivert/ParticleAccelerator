@@ -74,13 +74,13 @@
 - Review `Straight` documentation
 - In Particle, why check if `B` is not null (see Particle documentation) ?
 - Switched places of arguments in `Dipole` constructor to be more coherent with the other `Element` constructors
+- Make `exerciceP9.cpp`
 
 ## Todo
 
 - Implement textual `Renderer`
 - init_Particles for the pointer of Particles to be initialized with the 1st Element (or the closest one)
 - `Accelerator::step()` needs to take into account the fact that Particles are leaving the Accelerator (not in an Element anymore)
-- Make `exerciceP9.cpp`
 - [Verify precision in `Particle` class](https://moodle.epfl.ch/mod/forum/discuss.php?d=15995)
 - Make `README.md`
 
