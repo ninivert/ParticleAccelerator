@@ -70,6 +70,8 @@
 - Review `Accelerator` documentation
 - Review `Particle` documentation
 - Review `Dipole` documentation
+- Review `Quadrupole` documentation
+- Review `Straight` documentation
 
 ## Todo
 
