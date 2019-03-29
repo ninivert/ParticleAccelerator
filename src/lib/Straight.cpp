@@ -50,10 +50,6 @@ string Straight::to_string() const {
  * Drawing
  ****************************************************************/
 
-/**
- * Dispatch the drawing call
- */
-
 void Straight::draw() const {
 	engine->draw(*this);
 }

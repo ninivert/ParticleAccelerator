@@ -13,11 +13,9 @@ class Renderer;
 #include "src/globals.h"
 
 /**
- * Straight class is a sub-class of Element
+ * Straight is a straight section of an accelerator (duh)
  *
- * It implements the straight section of an accelerator.
- *
- * It is used to bind 2 differents magnets to avoid an overlap of leakage fields
+ * It is used to bind 2 differents magnets and avoid an overlap of magnetic leakage fields
  */
 
 class Straight : public Element {
