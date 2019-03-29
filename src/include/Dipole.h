@@ -58,7 +58,7 @@ public:
 	 * The center of curvature is initialized with the CONVENTION that when k is positive, the direction of the arc from the initial position to the final position is CLOCKWISE (anti-trigonometric)
 	*/
 
-	Dipole(Vector3D const& posIn, Vector3D const& posOut, double const& radius, double const& curvature, Element & prev, double const& B);
+	Dipole(Vector3D const& posIn, Vector3D const& posOut, double const& radius, double const& curvature, double const& B, Element & prev);
 
 	/****************************************************************
 	 * Getter (virtual)

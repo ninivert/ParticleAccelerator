@@ -73,10 +73,11 @@
 - Review `Quadrupole` documentation
 - Review `Straight` documentation
 - In Particle, why check if `B` is not null (see Particle documentation) ?
+- Switched places of arguments in `Dipole` constructor to be more coherent with the other `Element` constructors
 
 ## Todo
 
-- Implement textual Renderer
+- Implement textual `Renderer`
 - init_Particles for the pointer of Particles to be initialized with the 1st Element (or the closest one)
 - `Accelerator::step()` needs to take into account the fact that Particles are leaving the Accelerator (not in an Element anymore)
 - Make `exerciceP9.cpp`

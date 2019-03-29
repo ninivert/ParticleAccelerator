@@ -32,7 +32,7 @@ DOXYPATH := ./doxydocs/
 ##################################################################
 
 vpath %.h ./src ./src/include ./src/include/bundle ./test/lib
-vpath %.cpp ./src/lib ./test/lib/ ./test/src
+vpath %.cpp ./src/lib ./test/lib/ ./test/src ./test/exercices
 vpath %.o ./build ./test/build
 vpath %.bin ./bin ./test/bin
 
@@ -127,6 +127,14 @@ testRenderer.o: testRenderer.cpp testException.cpp
 	@echo [$@] Compiling...
 	@$(CXX) $(CXXFLAGS) -c test/src/testRenderer.cpp -o $(OTESTPATH)$@ -I ./
 
+##################################################################
+# Exercices
+##################################################################
+
+exerciceP9.o: exerciceP9.cpp
+	@echo [$@] Compiling...
+	@$(CXX) $(CXXFLAGS) -c test/exercices/exerciceP9.cpp -o $(OPATH)$@ -I ./
+
 
 ##################################################################
 # Links editor and creation of executables
@@ -159,6 +167,10 @@ testException.bin: testException.o Test.o
 testRenderer.bin: Renderer.o Drawable.o Accelerator.o Element.o Dipole.o Particle.o Convert.o Quadrupole.o Straight.o Vector3D.o testRenderer.o Test.o
 	@echo [$@] Linking...
 	@$(CXX) $(CXXFLAGS) build/Renderer.o build/Drawable.o build/Accelerator.o build/Element.o build/Dipole.o build/Particle.o build/Convert.o build/Quadrupole.o build/Straight.o build/Vector3D.o test/build/testRenderer.o test/build/Test.o -o $(BTESTPATH)$@
+
+exerciceP9.bin: Vector3D.o Particle.o Convert.o Element.o Dipole.o Quadrupole.o Straight.o Accelerator.o Drawable.o Renderer.o exerciceP9.o
+	@echo [$@] Linking...
+	@$(CXX) $(CXXFLAGS) build/Accelerator.o build/Element.o build/Dipole.o build/Quadrupole.o build/Straight.o build/Particle.o build/Convert.o build/Vector3D.o build/Drawable.o build/Renderer.o build/exerciceP9.o -o $(BPATH)$@
 
 
 ##################################################################
@@ -199,6 +211,14 @@ run_testRenderer: testRenderer.bin
 	@echo [$@] Running tests...
 	@$(BTESTPATH)/testRenderer.bin
 	@echo [$@] -------------- Success !
+
+
+##################################################################
+# Exercices
+##################################################################
+
+run_exerciceP9: exerciceP9.bin
+	@$(BPATH)/exerciceP9.bin
 
 
 ##################################################################

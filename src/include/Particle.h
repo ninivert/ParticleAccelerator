@@ -212,7 +212,7 @@ private:
 	Element * element;
 
 	/**
-	 * Integer beause physically, only whole multiples of elementary charges make sense
+	 * Integer because physically, only whole multiples of elementary charges make sense
 	 */
 
 	int const charge;
