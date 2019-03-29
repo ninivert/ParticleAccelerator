@@ -77,12 +77,14 @@
 - Make `exerciceP9.cpp`
 - [Verify precision in `Particle` class](https://moodle.epfl.ch/mod/forum/discuss.php?d=15995) -> precision is up to \~9-10 digits, errors are due Euler integration (with correction, which itself comes with some level of imprecision) and display, which has to convert units.
 - In Particle, why check if `B` is not null (see Particle documentation)
+- `Accelerator::step()` needs to take into account the fact that Particles are leaving the Accelerator (not in an Element anymore)
 
 ## Todo
 
 - Implement textual `Renderer`
+- Implement `FODO`
+- Update `testAccelerator.cpp`
 - init_Particles for the pointer of Particles to be initialized with the 1st Element (or the closest one)
-- `Accelerator::step()` needs to take into account the fact that Particles are leaving the Accelerator (not in an Element anymore)
 - Make `README.md`
 
 ## Questions
