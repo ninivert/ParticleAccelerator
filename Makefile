@@ -172,9 +172,9 @@ testRenderer.bin: Renderer.o TextRenderer.o Drawable.o Accelerator.o Element.o D
 	@echo [$@] Linking...
 	@$(CXX) $(CXXFLAGS) build/Renderer.o build/TextRenderer.o build/Drawable.o build/Accelerator.o build/Element.o build/Dipole.o build/Particle.o build/Convert.o build/Quadrupole.o build/Straight.o build/Vector3D.o test/build/testRenderer.o test/build/Test.o -o $(BTESTPATH)$@
 
-exerciceP9.bin: Vector3D.o Particle.o Convert.o Element.o Dipole.o Quadrupole.o Straight.o Accelerator.o Drawable.o Renderer.o exerciceP9.o
+exerciceP9.bin: Vector3D.o Particle.o Convert.o Element.o Dipole.o Quadrupole.o Straight.o Accelerator.o Drawable.o Renderer.o TextRenderer.o exerciceP9.o
 	@echo [$@] Linking...
-	@$(CXX) $(CXXFLAGS) build/Accelerator.o build/Element.o build/Dipole.o build/Quadrupole.o build/Straight.o build/Particle.o build/Convert.o build/Vector3D.o build/Drawable.o build/Renderer.o build/exerciceP9.o -o $(BPATH)$@
+	@$(CXX) $(CXXFLAGS) build/Accelerator.o build/Element.o build/Dipole.o build/Quadrupole.o build/Straight.o build/Particle.o build/Convert.o build/Vector3D.o build/Drawable.o build/Renderer.o build/TextRenderer.o build/exerciceP9.o -o $(BPATH)$@
 
 
 ##################################################################

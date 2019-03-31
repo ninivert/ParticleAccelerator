@@ -19,7 +19,7 @@ TextRenderer::~TextRenderer() {}
  */
 
 void TextRenderer::draw(Accelerator const& acc) {
-	*streamPtr << acc << endl;
+	*streamPtr << acc;
 }
 
 /**
@@ -27,7 +27,7 @@ void TextRenderer::draw(Accelerator const& acc) {
  */
 
 void TextRenderer::draw(Dipole const& dipole) {
-	*streamPtr << dipole << endl;
+	*streamPtr << dipole;
 }
 
 /**
@@ -35,7 +35,7 @@ void TextRenderer::draw(Dipole const& dipole) {
  */
 
 void TextRenderer::draw(Quadrupole const& quadrupole) {
-	*streamPtr << quadrupole << endl;
+	*streamPtr << quadrupole;
 }
 
 /**
@@ -43,7 +43,7 @@ void TextRenderer::draw(Quadrupole const& quadrupole) {
  */
 
 void TextRenderer::draw(Straight const& straight) {
-	*streamPtr << straight << endl;
+	*streamPtr << straight;
 }
 
 /**
@@ -51,7 +51,7 @@ void TextRenderer::draw(Straight const& straight) {
  */
 
 void TextRenderer::draw(Particle const& particle) {
-	*streamPtr << particle << endl;
+	*streamPtr << particle;
 }
 
 /**
@@ -59,7 +59,7 @@ void TextRenderer::draw(Particle const& particle) {
  */
 
 void TextRenderer::draw(Vector3D const& vec) {
-	*streamPtr << vec << endl;
+	*streamPtr << vec;
 }
 
 // that's all folks !
