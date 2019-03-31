@@ -197,5 +197,11 @@ ostream& operator << (ostream& stream, Particle const& p) {
  ****************************************************************/
 
 void Particle::draw() const {
+	if (engine == nullptr) ERROR(EXCEPTIONS::NULLPTR);
+	engine->draw(*this);
+}
+
+void Particle::drawTo(Renderer * engine) const {
+	if (engine == nullptr) ERROR(EXCEPTIONS::NULLPTR);
 	engine->draw(*this);
 }

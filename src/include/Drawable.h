@@ -45,6 +45,12 @@ public:
 	 */
 
 	virtual void draw() const = 0;
+
+	/**
+	 * Virtual method that is required to be overwritten
+	 */
+
+	virtual void drawTo(Renderer * engine) const = 0;
 };
 
 #endif

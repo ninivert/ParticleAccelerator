@@ -141,5 +141,11 @@ std::ostream& operator<< (std::ostream& stream, Accelerator const& a) {
  ****************************************************************/
 
 void Accelerator::draw() const {
+	if (engine == nullptr) ERROR(EXCEPTIONS::NULLPTR);
+	engine->draw(*this);
+}
+
+void Accelerator::drawTo(Renderer * engine) const {
+	if (engine == nullptr) ERROR(EXCEPTIONS::NULLPTR);
 	engine->draw(*this);
 }

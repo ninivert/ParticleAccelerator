@@ -11,6 +11,7 @@ class Drawable;
 class Renderer;
 
 #include "src/globals.h"
+#include "src/exceptions.h"
 
 /**
  * The Quadrupole Element focuses a Particle beam towards their ideal trajectory using 4 magnets
@@ -85,6 +86,12 @@ public:
 	 */
 
 	virtual void draw() const override;
+
+	/**
+	 * Draw the vector using a given renderer
+	 */
+
+	virtual void drawTo(Renderer * engine) const override;
 
 private:
 

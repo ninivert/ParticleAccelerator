@@ -15,6 +15,7 @@ class Drawable;
 class Renderer;
 
 #include "src/globals.h"
+#include "src/exceptions.h"
 
 /**
  * The Particle Class represents a particle evolving in the 3D carthesian space
@@ -198,6 +199,12 @@ public:
 	 */
 
 	virtual void draw() const override;
+
+	/**
+	 * Draw the vector using a given renderer
+	 */
+
+	virtual void drawTo(Renderer * engine) const override;
 
 private:
 

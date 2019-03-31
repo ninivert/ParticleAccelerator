@@ -59,11 +59,10 @@ public:
 	virtual void draw(Accelerator const& acc) = 0;
 
 	/**
-	 * Draw an element. This method is not overridden in Element.cpp
-	 * thus the Element remains abstract.
+	 * We do not want to draw an abstract type
 	 */
 
-	virtual void draw(Element const& elmt) = 0;
+	virtual void draw(Element const& elmt) = delete;
 
 	/**
 	 * Draw a Dipole element

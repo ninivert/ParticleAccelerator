@@ -1,10 +1,13 @@
 #include "src/include/bundle/TextRenderer.bundle.h"
 
+using namespace std;
+
 /****************************************************************
  * Constructors and destructors
  ****************************************************************/
 
-TextRenderer::TextRenderer() {}
+TextRenderer::TextRenderer(ostream * streamPtr) : streamPtr(streamPtr) {}
+
 TextRenderer::~TextRenderer() {}
 
 /****************************************************************
@@ -16,16 +19,7 @@ TextRenderer::~TextRenderer() {}
  */
 
 void TextRenderer::draw(Accelerator const& acc) {
-
-}
-
-/**
- * Draw an element. This method is not overridden in Element.cpp
- * thus the Element remains abstract.
- */
-
-void TextRenderer::draw(Element const& elmt) {
-
+	*streamPtr << acc << endl;
 }
 
 /**
@@ -33,7 +27,7 @@ void TextRenderer::draw(Element const& elmt) {
  */
 
 void TextRenderer::draw(Dipole const& dipole) {
-
+	*streamPtr << dipole << endl;
 }
 
 /**
@@ -41,7 +35,7 @@ void TextRenderer::draw(Dipole const& dipole) {
  */
 
 void TextRenderer::draw(Quadrupole const& quadrupole) {
-
+	*streamPtr << quadrupole << endl;
 }
 
 /**
@@ -49,7 +43,7 @@ void TextRenderer::draw(Quadrupole const& quadrupole) {
  */
 
 void TextRenderer::draw(Straight const& straight) {
-
+	*streamPtr << straight << endl;
 }
 
 /**
@@ -57,7 +51,7 @@ void TextRenderer::draw(Straight const& straight) {
  */
 
 void TextRenderer::draw(Particle const& particle) {
-
+	*streamPtr << particle << endl;
 }
 
 /**
@@ -65,7 +59,7 @@ void TextRenderer::draw(Particle const& particle) {
  */
 
 void TextRenderer::draw(Vector3D const& vec) {
-
+	*streamPtr << vec << endl;
 }
 
 // that's all folks !

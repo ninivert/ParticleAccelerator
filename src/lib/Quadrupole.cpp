@@ -62,5 +62,11 @@ string Quadrupole::to_string() const {
  ****************************************************************/
 
 void Quadrupole::draw() const {
+	if (engine == nullptr) ERROR(EXCEPTIONS::NULLPTR);
+	engine->draw(*this);
+}
+
+void Quadrupole::drawTo(Renderer * engine) const {
+	if (engine == nullptr) ERROR(EXCEPTIONS::NULLPTR);
 	engine->draw(*this);
 }

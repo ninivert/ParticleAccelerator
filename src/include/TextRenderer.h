@@ -3,6 +3,8 @@
 
 #pragma once
 
+#include <iostream>
+
 // Forward declaration
 class Accelerator;
 class Element;
@@ -20,7 +22,12 @@ public:
 	 * Constructors and destructors
 	 ****************************************************************/
 
-	TextRenderer();
+	/**
+	 * `TextRenderer` will by default print to `std::cout`
+	 * but the user can specify any other stream (i.e. file system streams)
+	 */
+
+	TextRenderer(std::ostream * streamPtr = &std::cout);
 
 	/**
 	 * Get the default destructor but allow it to be overridden
@@ -33,7 +40,7 @@ public:
 	 * We don't want to copy a rendering engine
 	 */
 
-	TextRenderer(TextRenderer const& engine) = delete;
+	// TextRenderer(TextRenderer const& engine) = delete;
 
 
 	/****************************************************************
@@ -44,7 +51,7 @@ public:
 	 * We don't want to copy/assign a rendering engine
 	 */
 
-	TextRenderer& operator = (TextRenderer const& engine) = delete;
+	// TextRenderer& operator = (TextRenderer const& engine) = delete;
 
 	/****************************************************************
 	 * Drawing methods
@@ -55,13 +62,6 @@ public:
 	 */
 
 	virtual void draw(Accelerator const& acc) override;
-
-	/**
-	 * Draw an element. This method is not overridden in Element.cpp
-	 * thus the Element remains abstract.
-	 */
-
-	virtual void draw(Element const& elmt) override;
 
 	/**
 	 * Draw a Dipole element
@@ -92,6 +92,9 @@ public:
 	 */
 
 	virtual void draw(Vector3D const& vec) override;
+
+private:
+	std::ostream * streamPtr;
 };
 
 #endif

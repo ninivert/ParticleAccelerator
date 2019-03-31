@@ -178,10 +178,12 @@ ostream& operator << (ostream& stream, Vector3D const& v) {
  * Drawing
  ****************************************************************/
 
-/**
- * Dispatch the drawing call
- */
-
 void Vector3D::draw() const {
+	if (engine == nullptr) ERROR(EXCEPTIONS::NULLPTR);
+	engine->draw(*this);
+}
+
+void Vector3D::drawTo(Renderer * engine) const {
+	if (engine == nullptr) ERROR(EXCEPTIONS::NULLPTR);
 	engine->draw(*this);
 }

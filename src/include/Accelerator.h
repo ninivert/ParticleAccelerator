@@ -129,6 +129,12 @@ public:
 
 	virtual void draw() const override;
 
+	/**
+	 * Draw the vector using a given renderer
+	 */
+
+	virtual void drawTo(Renderer * engine) const override;
+
 private:
 
 	/****************************************************************

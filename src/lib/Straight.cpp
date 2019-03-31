@@ -43,5 +43,11 @@ string Straight::to_string() const {
  ****************************************************************/
 
 void Straight::draw() const {
+	if (engine == nullptr) ERROR(EXCEPTIONS::NULLPTR);
+	engine->draw(*this);
+}
+
+void Straight::drawTo(Renderer * engine) const {
+	if (engine == nullptr) ERROR(EXCEPTIONS::NULLPTR);
 	engine->draw(*this);
 }

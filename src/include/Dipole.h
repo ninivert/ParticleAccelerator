@@ -17,6 +17,7 @@ class Drawable;
 class Renderer;
 
 #include "src/globals.h"
+#include "src/exceptions.h"
 
 /**
  * The Dipole corrects the trajectory of the Particles in turns
@@ -90,6 +91,12 @@ public:
 	 */
 
 	virtual void draw() const override;
+
+	/**
+	 * Draw the vector using a given renderer
+	 */
+
+	virtual void drawTo(Renderer * engine) const override;
 
 private:
 

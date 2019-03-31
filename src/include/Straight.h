@@ -11,6 +11,7 @@ class Drawable;
 class Renderer;
 
 #include "src/globals.h"
+#include "src/exceptions.h"
 
 /**
  * Straight is a straight section of an accelerator (duh)
@@ -83,6 +84,13 @@ public:
 	 */
 
 	virtual void draw() const override;
+
+	/**
+	 * Draw the vector using a given renderer
+	 */
+
+	virtual void drawTo(Renderer * engine) const override;
+
 };
 
 

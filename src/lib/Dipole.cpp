@@ -66,5 +66,11 @@ bool Dipole::isInWall(Particle const& p) const {
  ****************************************************************/
 
 void Dipole::draw() const {
+	if (engine == nullptr) ERROR(EXCEPTIONS::NULLPTR);
+	engine->draw(*this);
+}
+
+void Dipole::drawTo(Renderer * engine) const {
+	if (engine == nullptr) ERROR(EXCEPTIONS::NULLPTR);
 	engine->draw(*this);
 }
