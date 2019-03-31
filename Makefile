@@ -86,6 +86,10 @@ Renderer.o: Renderer.cpp Renderer.h
 	@echo [$@] Compiling...
 	@$(CXX) $(CXXFLAGS) -c src/lib/Renderer.cpp -o $(OPATH)$@ -I ./
 
+TextRenderer.o: TextRenderer.cpp TextRenderer.h
+	@echo [$@] Compiling...
+	@$(CXX) $(CXXFLAGS) -c src/lib/TextRenderer.cpp -o $(OPATH)$@ -I ./
+
 Convert.o: Convert.cpp Convert.h
 	@echo [$@] Compiling...
 	@$(CXX) $(CXXFLAGS) -c src/lib/Convert.cpp -o $(OPATH)$@ -I ./
@@ -123,7 +127,7 @@ testException.o: testException.cpp
 	@echo [$@] Compiling...
 	@$(CXX) $(CXXFLAGS) -c test/src/testException.cpp -o $(OTESTPATH)$@ -I ./
 
-testRenderer.o: testRenderer.cpp testException.cpp
+testRenderer.o: testRenderer.cpp
 	@echo [$@] Compiling...
 	@$(CXX) $(CXXFLAGS) -c test/src/testRenderer.cpp -o $(OTESTPATH)$@ -I ./
 
@@ -164,9 +168,9 @@ testException.bin: testException.o Test.o
 	@echo [$@] Linking...
 	@$(CXX) $(CXXFLAGS) test/build/testException.o test/build/Test.o -o $(BTESTPATH)$@
 
-testRenderer.bin: Renderer.o Drawable.o Accelerator.o Element.o Dipole.o Particle.o Convert.o Quadrupole.o Straight.o Vector3D.o testRenderer.o Test.o
+testRenderer.bin: Renderer.o TextRenderer.o Drawable.o Accelerator.o Element.o Dipole.o Particle.o Convert.o Quadrupole.o Straight.o Vector3D.o testRenderer.o Test.o
 	@echo [$@] Linking...
-	@$(CXX) $(CXXFLAGS) build/Renderer.o build/Drawable.o build/Accelerator.o build/Element.o build/Dipole.o build/Particle.o build/Convert.o build/Quadrupole.o build/Straight.o build/Vector3D.o test/build/testRenderer.o test/build/Test.o -o $(BTESTPATH)$@
+	@$(CXX) $(CXXFLAGS) build/Renderer.o build/TextRenderer.o build/Drawable.o build/Accelerator.o build/Element.o build/Dipole.o build/Particle.o build/Convert.o build/Quadrupole.o build/Straight.o build/Vector3D.o test/build/testRenderer.o test/build/Test.o -o $(BTESTPATH)$@
 
 exerciceP9.bin: Vector3D.o Particle.o Convert.o Element.o Dipole.o Quadrupole.o Straight.o Accelerator.o Drawable.o Renderer.o exerciceP9.o
 	@echo [$@] Linking...
