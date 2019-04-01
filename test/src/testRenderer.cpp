@@ -4,6 +4,7 @@
 #include "src/include/bundle/Straight.bundle.h"
 #include "src/include/bundle/Dipole.bundle.h"
 #include "src/include/bundle/Quadrupole.bundle.h"
+#include "src/include/bundle/Frodo.bundle.h"
 #include "src/include/bundle/Accelerator.bundle.h"
 #include "src/include/bundle/TextRenderer.bundle.h"
 #include "test/lib/Test.h"

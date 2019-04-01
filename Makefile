@@ -75,6 +75,10 @@ Straight.o: Straight.cpp Straight.h
 	@echo [$@] Compiling...
 	@$(CXX) $(CXXFLAGS) -c src/lib/Straight.cpp -o $(OPATH)$@ -I ./
 
+Frodo.o: Frodo.cpp Frodo.h
+	@echo [$@] Compiling...
+	@$(CXX) $(CXXFLAGS) -c src/lib/Frodo.cpp -o $(OPATH)$@ -I ./
+
 Accelerator.o: Accelerator.cpp Accelerator.h
 	@echo [$@] Compiling...
 	@$(CXX) $(CXXFLAGS) -c src/lib/Accelerator.cpp -o $(OPATH)$@ -I ./
@@ -157,9 +161,9 @@ testElement.bin: Vector3D.o Particle.o Convert.o Element.o Dipole.o Quadrupole.o
 	@echo [$@] Linking...
 	@$(CXX) $(CXXFLAGS) build/Element.o build/Convert.o build/Dipole.o build/Quadrupole.o build/Straight.o build/Particle.o build/Vector3D.o build/Drawable.o build/Renderer.o test/build/testElement.o test/build/Test.o -o $(BTESTPATH)$@
 
-testAccelerator.bin: Vector3D.o Particle.o Convert.o Element.o Dipole.o Quadrupole.o Straight.o Accelerator.o Drawable.o Renderer.o testAccelerator.o Test.o
+testAccelerator.bin: Vector3D.o Particle.o Convert.o Element.o Dipole.o Quadrupole.o Straight.o Frodo.o Accelerator.o Drawable.o Renderer.o testAccelerator.o Test.o
 	@echo [$@] Linking...
-	@$(CXX) $(CXXFLAGS) build/Accelerator.o build/Element.o build/Dipole.o build/Quadrupole.o build/Straight.o build/Particle.o build/Convert.o build/Vector3D.o build/Drawable.o build/Renderer.o test/build/testAccelerator.o test/build/Test.o -o $(BTESTPATH)$@
+	@$(CXX) $(CXXFLAGS) build/Accelerator.o build/Element.o build/Dipole.o build/Quadrupole.o build/Straight.o build/Frodo.o build/Particle.o build/Convert.o build/Vector3D.o build/Drawable.o build/Renderer.o test/build/testAccelerator.o test/build/Test.o -o $(BTESTPATH)$@
 
 testConvert.bin: testConvert.o Convert.o Vector3D.o Drawable.o Renderer.o Test.o
 	@echo [$@] Linking...
@@ -169,9 +173,9 @@ testException.bin: testException.o Test.o
 	@echo [$@] Linking...
 	@$(CXX) $(CXXFLAGS) test/build/testException.o test/build/Test.o -o $(BTESTPATH)$@
 
-testRenderer.bin: Renderer.o TextRenderer.o Drawable.o Accelerator.o Element.o Dipole.o Particle.o Convert.o Quadrupole.o Straight.o Vector3D.o testRenderer.o Test.o
+testRenderer.bin: Renderer.o TextRenderer.o Drawable.o Accelerator.o Element.o Dipole.o Particle.o Convert.o Quadrupole.o Straight.o Frodo.o Vector3D.o testRenderer.o Test.o
 	@echo [$@] Linking...
-	@$(CXX) $(CXXFLAGS) build/Renderer.o build/TextRenderer.o build/Drawable.o build/Accelerator.o build/Element.o build/Dipole.o build/Particle.o build/Convert.o build/Quadrupole.o build/Straight.o build/Vector3D.o test/build/testRenderer.o test/build/Test.o -o $(BTESTPATH)$@
+	@$(CXX) $(CXXFLAGS) build/Renderer.o build/TextRenderer.o build/Drawable.o build/Accelerator.o build/Element.o build/Dipole.o build/Particle.o build/Convert.o build/Quadrupole.o build/Straight.o build/Frodo.o build/Vector3D.o test/build/testRenderer.o test/build/Test.o -o $(BTESTPATH)$@
 
 exerciceP9.bin: Vector3D.o Particle.o Convert.o Element.o Dipole.o Quadrupole.o Straight.o Accelerator.o Drawable.o Renderer.o TextRenderer.o exerciceP9.o
 	@echo [$@] Linking...
