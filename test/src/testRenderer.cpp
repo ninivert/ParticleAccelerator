@@ -18,7 +18,7 @@ int main() {
 	TextRenderer engine;
 
 	// File stream engine
-	ofstream fout("ParticleAccelerator.log");
+	ofstream fout("./log/testRenderer.log");
 	if (fout.fail()) cerr << "Well, that didn't really go as planned..." << endl;
 	TextRenderer engineToFile(&fout);
 
@@ -34,7 +34,7 @@ int main() {
 	ASSERT_EXCEPTION(acc.drawTo(nullptr), EXCEPTIONS::NULLPTR);
 
 	// Rendering
-	acc.drawTo(&engine);
+	// acc.drawTo(&engine);
 	acc.drawTo(&engineToFile);
 
 	// Do this or chap chap will be very mad òwó

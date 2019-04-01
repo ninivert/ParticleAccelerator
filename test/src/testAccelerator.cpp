@@ -155,10 +155,10 @@ int main() {
 	Particle * part_a = new Particle(Vector3D(2.99, -0.01, 0), Vector3D(0, 0, 0), 0.938272);
 	Particle * part_b = new Particle(Vector3D(-2, -1, 0), Vector3D(1e8, 1e8, 0), 0.938272);
 	Particle * part_c = new Particle(Vector3D(3.015, -1.2, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272);
-	Particle * part_d = new Particle(Vector3D(3.015, -1.2, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272);
-	Particle * part_e = new Particle(Vector3D(7.015, -1.2, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272);
+	Particle * part_d = new Particle(Vector3D(0.5, -0.513, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272);
+	Particle * part_e = new Particle(Vector3D(1.25, -11.2, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272);
 	Particle * part_f = new Particle(Vector3D(-2, -1, 0), Vector3D(1e8, 1e8, 0), 0.938272);
-	Particle * part_g = new Particle(Vector3D(3.015, -1.2, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272);
+	Particle * part_g = new Particle(Vector3D(-2.015, -1.01, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272);
 	Particle * part_h = new Particle(Vector3D(7.015, 4.21, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272);
 	Particle * part_i = new Particle(Vector3D(3.015, -1.2, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272);
 	Particle * part_j = new Particle(Vector3D(7.015, 4.21, 4), Vector3D(-210200, -2.64754e8, 0), 0.938272);
@@ -188,11 +188,17 @@ int main() {
 	acc.addParticle(part_i);
 	acc.addParticle(part_j);
 
-	cout << acc << endl;
+	// cout << acc << endl;
 
 	acc.step();
 
-	cout << acc << endl;
+	assert(part_a->getElementPtr() == straight6);
+	assert(part_b->getElementPtr() == straight6);
+	assert(part_d->getElementPtr() == straight6);
+	assert(part_f->getElementPtr() == straight6);
+	assert(part_g->getElementPtr() == straight6);
+
+	// cout << acc << endl;
 
 	acc.clear();
 

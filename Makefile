@@ -42,8 +42,8 @@ vpath %.bin ./bin ./test/bin
 # ->    make clean
 ##################################################################
 
-.PHONY: all clean cleanbuild cleanbin dir docs
-all: dir docs $(TARGET)
+.PHONY: all clean cleanbuild cleanbin dir docs log
+all: dir docs log $(TARGET)
 
 
 ##################################################################
@@ -287,3 +287,10 @@ docs: cleandocs
 run_docs: docs
 	@xdg-open $(DOXYPATH)/html/index.html
 
+##################################################################
+# log: make necessary log files for the code to open these files
+##################################################################
+
+log:
+	@touch ./log/testRenderer.log
+	@echo [$@] Created necessary log files
