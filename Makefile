@@ -24,6 +24,7 @@ BTESTPATH := ./test/bin/
 OPATH := ./build/
 BPATH := ./bin/
 DOXYPATH := ./doxydocs/
+LOGPATH := ./log/
 
 
 ##################################################################
@@ -42,8 +43,8 @@ vpath %.bin ./bin ./test/bin
 # ->    make clean
 ##################################################################
 
-.PHONY: all clean cleanbuild cleanbin dir docs log
-all: dir docs log $(TARGET)
+.PHONY: all clean cleanbuild cleanbin cleandocs cleanlogs dir docs
+all: dir clean docs $(TARGET)
 
 
 ##################################################################
@@ -229,7 +230,7 @@ run_exerciceP9: exerciceP9.bin
 # clean output and build files
 ##################################################################
 
-clean: cleanbin cleanbuild cleandocs
+clean: cleanbin cleanbuild cleandocs cleanlogs
 
 cleanbin:
 	@rm -f $(BPATH)* $(BTESTPATH)*
@@ -243,6 +244,10 @@ cleandocs:
 	@rm -f -r $(DOXYPATH)*
 	@echo [$@] Docs files removed correctly
 
+cleanlogs:
+	@rm -f -r $(LOGPATH)*
+	@echo [$@] Log files removed correctly
+
 ##################################################################
 # dir: make necessary directories for the code to compile
 ##################################################################
@@ -252,6 +257,7 @@ dir:
 	@mkdir $(BTESTPATH) -p
 	@mkdir $(OPATH) -p
 	@mkdir $(BPATH) -p
+	@mkdir $(LOGPATH) -p
 	@echo [$@] created necessary directories
 
 ##################################################################
@@ -291,6 +297,6 @@ run_docs: docs
 # log: make necessary log files for the code to open these files
 ##################################################################
 
-log:
-	@touch ./log/testRenderer.log
-	@echo [$@] Created necessary log files
+# log:
+# 	@touch ./log/testRenderer.log
+# 	@echo [$@] Created necessary log files
