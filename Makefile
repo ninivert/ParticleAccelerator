@@ -31,8 +31,6 @@ ERROR_STRING := "\033[32m"ERROR"\033[0m"
 ##################################################################
 
 TARGETS := testVector3D testParticle testElement testAccelerator testConvert testException testRenderer exerciceP9
-BINTARGET := $(addsuffix .bin, $(TARGETS))
-RUNTARGET := $(TARGETS)
 OPATH := build
 BPATH := bin
 DOXYPATH := doxydocs
@@ -56,7 +54,7 @@ vpath %.bin bin
 ##################################################################
 
 .PHONY: all clean cleanbuild cleanbin cleandocs cleanlogs dir docs %
-all: dir docs $(BINTARGET) $(RUNTARGET)
+all: dir docs $(TARGETS)
 
 
 ##################################################################
@@ -90,35 +88,35 @@ exerciceP9.o: exerciceP9.cpp
 ##################################################################
 
 testVector3D.bin: Vector3D.o Drawable.o Renderer.o testVector3D.o Test.o
-	@$(CXX) $(CXXFLAGS) $(addprefix $(OPATH)/, $^) -o $(BPATH)/$@
+	@$(CXX) $(CXXFLAGS) $(addprefix $(OPATH)/, $(notdir $^)) -o $(BPATH)/$@
 	@echo $(OK_STRING) $(LINKED_STRING) $@
 
 testParticle.bin: Vector3D.o Particle.o Convert.o Drawable.o Renderer.o testParticle.o Test.o
-	@$(CXX) $(CXXFLAGS) $(addprefix $(OPATH)/, $^) -o $(BPATH)/$@
+	@$(CXX) $(CXXFLAGS) $(addprefix $(OPATH)/, $(notdir $^)) -o $(BPATH)/$@
 	@echo $(OK_STRING) $(LINKED_STRING) $@
 
 testElement.bin: Vector3D.o Particle.o Convert.o Element.o Dipole.o Quadrupole.o Straight.o Drawable.o Renderer.o testElement.o Test.o
-	@$(CXX) $(CXXFLAGS) $(addprefix $(OPATH)/, $^) -o $(BPATH)/$@
+	@$(CXX) $(CXXFLAGS) $(addprefix $(OPATH)/, $(notdir $^)) -o $(BPATH)/$@
 	@echo $(OK_STRING) $(LINKED_STRING) $@
 
 testAccelerator.bin: Vector3D.o Particle.o Convert.o Element.o Dipole.o Quadrupole.o Straight.o Frodo.o Accelerator.o Drawable.o Renderer.o testAccelerator.o Test.o
-	@$(CXX) $(CXXFLAGS) $(addprefix $(OPATH)/, $^) -o $(BPATH)/$@
+	@$(CXX) $(CXXFLAGS) $(addprefix $(OPATH)/, $(notdir $^)) -o $(BPATH)/$@
 	@echo $(OK_STRING) $(LINKED_STRING) $@
 
 testConvert.bin: testConvert.o Convert.o Vector3D.o Drawable.o Renderer.o Test.o
-	@$(CXX) $(CXXFLAGS) $(addprefix $(OPATH)/, $^) -o $(BPATH)/$@
+	@$(CXX) $(CXXFLAGS) $(addprefix $(OPATH)/, $(notdir $^)) -o $(BPATH)/$@
 	@echo $(OK_STRING) $(LINKED_STRING) $@
 
 testException.bin: testException.o Test.o
-	@$(CXX) $(CXXFLAGS) $(addprefix $(OPATH)/, $^) -o $(BPATH)/$@
+	@$(CXX) $(CXXFLAGS) $(addprefix $(OPATH)/, $(notdir $^)) -o $(BPATH)/$@
 	@echo $(OK_STRING) $(LINKED_STRING) $@
 
 testRenderer.bin: Renderer.o TextRenderer.o Drawable.o Accelerator.o Element.o Dipole.o Particle.o Convert.o Quadrupole.o Straight.o Frodo.o Vector3D.o testRenderer.o Test.o
-	@$(CXX) $(CXXFLAGS) $(addprefix $(OPATH)/, $^) -o $(BPATH)/$@
+	@$(CXX) $(CXXFLAGS) $(addprefix $(OPATH)/, $(notdir $^)) -o $(BPATH)/$@
 	@echo $(OK_STRING) $(LINKED_STRING) $@
 
 exerciceP9.bin: Vector3D.o Particle.o Convert.o Element.o Dipole.o Quadrupole.o Straight.o Accelerator.o Drawable.o Renderer.o TextRenderer.o exerciceP9.o
-	@$(CXX) $(CXXFLAGS) $(addprefix $(OPATH)/, $^) -o $(BPATH)/$@
+	@$(CXX) $(CXXFLAGS) $(addprefix $(OPATH)/, $(notdir $^)) -o $(BPATH)/$@
 	@echo $(OK_STRING) $(LINKED_STRING) $@
 
 
@@ -129,7 +127,7 @@ exerciceP9.bin: Vector3D.o Particle.o Convert.o Element.o Dipole.o Quadrupole.o 
 
 %: %.bin
 	@$(BPATH)/$*.bin
-	@echo $(OK_STRING) $(TESTED_STRING) $<
+	@echo $(OK_STRING) $(TESTED_STRING) $*
 
 
 ##################################################################
