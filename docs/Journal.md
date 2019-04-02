@@ -82,6 +82,9 @@
 	- Different `iostream`s
 	- Prevent drawing on `nullptr`
 - Significantly improved `makefile`
+
+## Stage 6
+
 - Update `testAccelerator.cpp`
 
 ## Todo
