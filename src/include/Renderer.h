@@ -9,6 +9,7 @@ class Element;
 class Dipole;
 class Quadrupole;
 class Straight;
+class Frodo;
 class Particle;
 class Vector3D;
 
@@ -81,6 +82,12 @@ public:
 	 */
 
 	virtual void draw(Straight const& straight) = 0;
+
+	/**
+	 * Draw a FODO element
+	 */
+
+	virtual void draw(Frodo const& frodo) = 0;
 
 	/**
 	 * Draw a Particle
