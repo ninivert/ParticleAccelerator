@@ -30,7 +30,7 @@ ERROR_STRING := "\033[32m"ERROR"\033[0m"
 # and where to put exec files (TARGET)
 ##################################################################
 
-TARGETS := testVector3D testParticle testElement testAccelerator testConvert testException testRenderer exerciceP9
+TARGETS := testVector3D testParticle testElement testAccelerator testConvert testException testRenderer testFrodo exerciceP9
 OPATH := build
 BPATH := bin
 DOXYPATH := doxydocs
@@ -87,23 +87,27 @@ exerciceP9.o: exerciceP9.cpp
 # Links editor and creation of executables
 ##################################################################
 
-testVector3D.bin: Vector3D.o Drawable.o Renderer.o testVector3D.o Test.o
+testVector3D.bin: testVector3D.o Test.o Vector3D.o Drawable.o Renderer.o
 	@$(CXX) $(CXXFLAGS) $(addprefix $(OPATH)/, $(notdir $^)) -o $(BPATH)/$@
 	@echo $(OK_STRING) $(LINKED_STRING) $@
 
-testParticle.bin: Vector3D.o Particle.o Convert.o Drawable.o Renderer.o testParticle.o Test.o
+testParticle.bin: testParticle.o Test.o Vector3D.o Particle.o Convert.o Drawable.o Renderer.o
 	@$(CXX) $(CXXFLAGS) $(addprefix $(OPATH)/, $(notdir $^)) -o $(BPATH)/$@
 	@echo $(OK_STRING) $(LINKED_STRING) $@
 
-testElement.bin: Vector3D.o Particle.o Convert.o Element.o Dipole.o Quadrupole.o Straight.o Drawable.o Renderer.o testElement.o Test.o
+testElement.bin: testElement.o Test.o Vector3D.o Particle.o Convert.o Element.o Dipole.o Quadrupole.o Straight.o Drawable.o Renderer.o
 	@$(CXX) $(CXXFLAGS) $(addprefix $(OPATH)/, $(notdir $^)) -o $(BPATH)/$@
 	@echo $(OK_STRING) $(LINKED_STRING) $@
 
-testAccelerator.bin: Vector3D.o Particle.o Convert.o Element.o Dipole.o Quadrupole.o Straight.o Frodo.o Accelerator.o Drawable.o Renderer.o testAccelerator.o Test.o
+testAccelerator.bin: testAccelerator.o Test.o Vector3D.o Particle.o Convert.o Element.o Dipole.o Quadrupole.o Straight.o Frodo.o Accelerator.o Drawable.o Renderer.o
 	@$(CXX) $(CXXFLAGS) $(addprefix $(OPATH)/, $(notdir $^)) -o $(BPATH)/$@
 	@echo $(OK_STRING) $(LINKED_STRING) $@
 
-testConvert.bin: testConvert.o Convert.o Vector3D.o Drawable.o Renderer.o Test.o
+testFrodo.bin: testFrodo.o Test.o Vector3D.o Particle.o Convert.o Element.o Dipole.o Quadrupole.o Straight.o Frodo.o Accelerator.o Drawable.o Renderer.o TextRenderer.o
+	@$(CXX) $(CXXFLAGS) $(addprefix $(OPATH)/, $(notdir $^)) -o $(BPATH)/$@
+	@echo $(OK_STRING) $(LINKED_STRING) $@
+
+testConvert.bin: testConvert.o Test.o Convert.o Vector3D.o Drawable.o Renderer.o
 	@$(CXX) $(CXXFLAGS) $(addprefix $(OPATH)/, $(notdir $^)) -o $(BPATH)/$@
 	@echo $(OK_STRING) $(LINKED_STRING) $@
 
@@ -111,7 +115,7 @@ testException.bin: testException.o Test.o
 	@$(CXX) $(CXXFLAGS) $(addprefix $(OPATH)/, $(notdir $^)) -o $(BPATH)/$@
 	@echo $(OK_STRING) $(LINKED_STRING) $@
 
-testRenderer.bin: Renderer.o TextRenderer.o Drawable.o Accelerator.o Element.o Dipole.o Particle.o Convert.o Quadrupole.o Straight.o Frodo.o Vector3D.o testRenderer.o Test.o
+testRenderer.bin: testRenderer.o Test.o Renderer.o TextRenderer.o Drawable.o Accelerator.o Element.o Dipole.o Particle.o Convert.o Quadrupole.o Straight.o Frodo.o Vector3D.o
 	@$(CXX) $(CXXFLAGS) $(addprefix $(OPATH)/, $(notdir $^)) -o $(BPATH)/$@
 	@echo $(OK_STRING) $(LINKED_STRING) $@
 

@@ -9,7 +9,6 @@
 #include "src/include/Straight.h"
 #include "src/include/Dipole.h"
 #include "src/include/Quadrupole.h"
-#include "src/include/Frodo.h"
 #include "src/include/Accelerator.h"
 
 #include "src/include/TextRenderer.h"

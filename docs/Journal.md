@@ -86,15 +86,17 @@
 ## Stage 6
 
 - Update `testAccelerator.cpp`
+- Make `README.md`
 
 ## Todo
 
+- Review exercice9 and `EXCEPTIONS::BAD_DIRECTION`
 - Update every constructor that inherits from `Drawable` to also init `Renderer * engine`
 - Implement `FODO`
 - init_Particles for the pointer of Particles to be initialized with the 1st Element (or the closest one)
-- Make `README.md`
 
 ## Questions
 
 - Add relativist mass to Particle ?
 - Do we need to specify a virtual destructor on all parent classes (aka `Drawable`) for destruction to correctly take place ?
+- Problem with exerciceP9 ?

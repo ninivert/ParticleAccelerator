@@ -9,9 +9,10 @@
 #include <sstream>
 
 // Forward declaration
-class Particle;
 class Vector3D;
-class Element;
+class Particle;
+class Straight;
+class Quadrupole;
 class Drawable;
 class Renderer;
 
@@ -22,7 +23,7 @@ class Renderer;
  * YOU MUST PROTECT THE RING FRODO
  */
 
-class Frodo : public Straight, public Quadrupole {
+class Frodo : public Straight {
 public:
 
 	/****************************************************************
@@ -106,8 +107,67 @@ private:
 
 	double straightLength;
 
-	// posIn, posOut, radius -> inherited from Element
-	// b -> inherited from Quadrupole
+	/**
+	 * Length of the focalizer sections (computed)
+	 */
+
+	double lensLength;
+
+	/**
+	 * Direction Frodo is facing (computed)
+	 */
+
+	Vector3D direction;
+
+	/**
+	 * First intersection, between focalizer and firstStraight (computed)
+	 */
+
+	Vector3D intersect1;
+
+	/**
+	 * Second intersection, between firstStraight and defocalizer (computed)
+	 */
+
+	Vector3D intersect2;
+
+	/**
+	 * First intersection, between defocalizer and lastStraight (computed)
+	 */
+
+	Vector3D intersect3;
+
+	/**
+	 * Quadrupole magnetic field intensity
+	 */
+
+	double b;
+
+	// posIn, posOut, radius -> inherited from Straight
+
+	/**
+	 * Focalizer Quadrupole element
+	 */
+
+	Quadrupole focalizer;
+
+	/**
+	 * Defocalizer Quadrupole element
+	 */
+
+	Quadrupole defocalizer;
+
+	/**
+	 * First Straight element
+	 */
+
+	Straight firstStraight;
+
+	/**
+	 * Second Straight element
+	 */
+
+	Straight lastStraight;
 };
 
 #endif

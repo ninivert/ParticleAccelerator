@@ -3,6 +3,11 @@
 
 #pragma once
 
+#include <iomanip>
+#include <iostream>
+#include <string>
+#include <sstream>
+
 // Forward declaration
 class Vector3D;
 class Particle;
