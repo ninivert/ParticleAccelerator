@@ -198,6 +198,9 @@ int main() {
 	assert(part_f->getElementPtr() == straight6);
 	assert(part_g->getElementPtr() == straight6);
 
+	// We can't use assert to verify that the pointers are correctly deleted
+	// because... they are deleted °w°
+
 	// cout << acc << endl;
 
 	acc.clear();
