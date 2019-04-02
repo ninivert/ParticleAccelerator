@@ -30,8 +30,9 @@ ERROR_STRING := "\033[32m"ERROR"\033[0m"
 # and where to put exec files (TARGET)
 ##################################################################
 
-TESTS := testVector3D testParticle testElement testAccelerator testConvert testException testRenderer exerciceP9
-TARGET := $(addsuffix .bin, $(TESTS))
+TARGETS := testVector3D testParticle testElement testAccelerator testConvert testException testRenderer exerciceP9
+BINTARGET := $(addsuffix .bin, $(TARGETS))
+RUNTARGET := $(TARGETS)
 OPATH := build
 BPATH := bin
 DOXYPATH := doxydocs
@@ -54,8 +55,8 @@ vpath %.bin bin
 # ->    make clean
 ##################################################################
 
-.PHONY: all clean cleanbuild cleanbin cleandocs cleanlogs dir docs
-all: dir clean docs $(TARGET) $(TESTS)
+.PHONY: all clean cleanbuild cleanbin cleandocs cleanlogs dir docs %
+all: dir docs $(BINTARGET) $(RUNTARGET)
 
 
 ##################################################################
@@ -127,7 +128,7 @@ exerciceP9.bin: Vector3D.o Particle.o Convert.o Element.o Dipole.o Quadrupole.o 
 ##################################################################
 
 %: %.bin
-	@$(BPATH)/$<
+	@$(BPATH)/$*.bin
 	@echo $(OK_STRING) $(TESTED_STRING) $<
 
 
@@ -162,7 +163,7 @@ dir:
 	@mkdir $(OPATH) -p
 	@mkdir $(BPATH) -p
 	@mkdir $(LOGPATH) -p
-	@echo $(OK_STRING) created necessary directories
+	@echo $(OK_STRING) Greated necessary directories
 
 
 ##################################################################
@@ -171,7 +172,7 @@ dir:
 
 docs: cleandocs
 	@doxygen Doxyfile > /dev/null 2>&1
-	@echo $(OK_STRING) generated documentation
+	@echo $(OK_STRING) Generated documentation
 
 
 ##################################################################
