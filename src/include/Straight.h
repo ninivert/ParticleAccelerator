@@ -19,7 +19,7 @@ class Renderer;
  * It is used to bind 2 differents magnets and avoid an overlap of magnetic leakage fields
  */
 
-class Straight : public virtual Element {
+class Straight : public Element {
 public:
 
 	/****************************************************************

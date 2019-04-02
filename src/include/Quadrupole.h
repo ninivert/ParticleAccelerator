@@ -17,7 +17,7 @@ class Renderer;
  * The Quadrupole Element focuses a Particle beam towards their ideal trajectory using 4 magnets
  */
 
-class Quadrupole : public virtual Element {
+class Quadrupole : public Element {
 public:
 
 	/****************************************************************

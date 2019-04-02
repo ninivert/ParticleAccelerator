@@ -9,11 +9,9 @@
 #include <sstream>
 
 // Forward declaration
-class Vector3D;
 class Particle;
+class Vector3D;
 class Element;
-class Quadrupole;
-class Straight;
 class Drawable;
 class Renderer;
 
