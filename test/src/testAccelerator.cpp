@@ -159,7 +159,7 @@ int main() {
 	Particle * part_e = new Particle(Vector3D(1.25, -11.2, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272);
 	Particle * part_f = new Particle(Vector3D(-2, -1, 0), Vector3D(1e8, 1e8, 0), 0.938272);
 	Particle * part_g = new Particle(Vector3D(-2.015, -1.01, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272);
-	Particle * part_h = new Particle(Vector3D(7.015, 4.21, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272);
+	Particle * part_h = new Particle(Vector3D(-2, -1, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272);
 	Particle * part_i = new Particle(Vector3D(3.015, -1.2, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272);
 	Particle * part_j = new Particle(Vector3D(7.015, 4.21, 4), Vector3D(-210200, -2.64754e8, 0), 0.938272);
 
