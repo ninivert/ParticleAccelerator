@@ -75,7 +75,7 @@ public:
 	 * Returns true if the Particle p is outside the straight element (touched the wall)
 	 */
 
-	virtual bool isInWall(Particle const& p) const override;
+	// virtual bool isInWall(Particle const& p) const override;
 
 	/**
 	 * Returns a string representation of the straight element

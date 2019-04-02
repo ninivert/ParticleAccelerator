@@ -44,10 +44,6 @@ Vector3D Frodo::getField(Vector3D const& pos) const {
  * Virtual methods
  ****************************************************************/
 
-bool Frodo::isInWall(Particle const& p) const {
-	return false;
-}
-
 string Frodo::to_string() const {
 	stringstream stream;
 	stream << setprecision(STYLES::PRECISION);
@@ -102,6 +98,7 @@ string Frodo::to_string() const {
 		<< setw(STYLES::PADDING_XSM) << ""
 		<< lastStraight
 		<< endl;
+
 	return stream.str();
 }
 
