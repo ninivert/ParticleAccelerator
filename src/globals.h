@@ -47,6 +47,17 @@ namespace STYLES {
 	inline constexpr unsigned int PADDING_LG(32);
 	inline constexpr unsigned int PADDING_XLG(64);
 	inline constexpr unsigned int PRECISION(8);
+	inline constexpr char COLOR_BLACK[]("\033[30m");
+	inline constexpr char COLOR_RED[]("\033[31m");
+	inline constexpr char COLOR_GREEN[]("\033[32m");
+	inline constexpr char COLOR_YELLOW[]("\033[33m");
+	inline constexpr char COLOR_BLUE[]("\033[34m");
+	inline constexpr char COLOR_PURPLE[]("\033[35m");
+	inline constexpr char COLOR_CYAN[]("\033[36m");
+	inline constexpr char COLOR_WHITE[]("\033[37m");
+	inline constexpr char FORMAT_BOLD[]("\033[1m");
+	inline constexpr char FORMAT_UNDERLINE[]("\033[4m");
+	inline constexpr char NONE[]("\033[0m");
 }
 
 #endif

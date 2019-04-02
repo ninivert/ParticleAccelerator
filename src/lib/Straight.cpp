@@ -33,7 +33,11 @@ bool Straight::isInWall(Particle const& p) const {
 
 string Straight::to_string() const {
 	stringstream stream;
-	stream << "Straight : " << endl;
+	stream
+		<< STYLES::COLOR_CYAN
+		<< "Straight"
+		<< STYLES::NONE
+		<< endl;
 	stream << Element::to_string();
 	return stream.str();
 }

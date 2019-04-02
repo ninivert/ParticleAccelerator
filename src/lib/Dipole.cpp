@@ -29,7 +29,11 @@ void Dipole::setB(double const& _B) { B = _B; }
 
 string Dipole::to_string() const {
 	stringstream stream;
-	stream << "Dipole : " << endl;
+	stream
+		<< STYLES::COLOR_CYAN
+		<< "Dipole"
+		<< STYLES::NONE
+		<< endl;
 	stream << Element::to_string();
 	stream << setprecision(STYLES::PRECISION);
 	stream << left;

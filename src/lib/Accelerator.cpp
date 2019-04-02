@@ -90,9 +90,18 @@ string Accelerator::to_string() const {
 	stringstream stream;
 	stream << setprecision(STYLES::PRECISION);
 	stream << left;
-	stream << "Accelerator contains " << elements.size() << " element(s)" << endl;
+	stream
+		<< STYLES::COLOR_YELLOW
+		<< STYLES::FORMAT_BOLD
+		<< "Accelerator contains " << elements.size() << " element(s)"
+		<< STYLES::NONE
+		<< endl;
 	for (shared_ptr<Element> const& element : elements) stream << *element << endl;
-	stream << "Accelerator contains " << particles.size() << " particle(s)" << endl;
+	stream
+		<< STYLES::COLOR_YELLOW
+		<< STYLES::FORMAT_BOLD
+		<< "Accelerator contains " << particles.size() << " particle(s)" << endl
+		<< STYLES::NONE;
 	for (unique_ptr<Particle> const& particle : particles) stream << *particle << endl;
 	return stream.str();
 }

@@ -43,7 +43,11 @@ bool Quadrupole::isInWall(Particle const& p) const {
 
 string Quadrupole::to_string() const {
 	stringstream stream;
-	stream << "Quadrupole : " << endl;
+	stream
+		<< STYLES::COLOR_CYAN
+		<< "Dipole"
+		<< STYLES::NONE
+		<< endl;
 	stream << Element::to_string();
 	stream << setprecision(STYLES::PRECISION);
 	stream << left;
