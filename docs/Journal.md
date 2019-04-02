@@ -98,4 +98,3 @@
 
 - Add relativist mass to Particle ?
 - Do we need to specify a virtual destructor on all parent classes (aka `Drawable`) for destruction to correctly take place ?
-- In the makefile, why does `$<` sometimes add the path (when called from terminal) and not when called internally
