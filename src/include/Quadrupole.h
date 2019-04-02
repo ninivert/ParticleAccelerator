@@ -6,7 +6,7 @@
 // Forward declaration
 class Vector3D;
 class Particle;
-class Element;
+class Straight;
 class Drawable;
 class Renderer;
 
@@ -17,7 +17,7 @@ class Renderer;
  * The Quadrupole Element focuses a Particle beam towards their ideal trajectory using 4 magnets
  */
 
-class Quadrupole : public Element {
+class Quadrupole : public Straight {
 public:
 
 	/****************************************************************

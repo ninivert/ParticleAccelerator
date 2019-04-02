@@ -7,11 +7,11 @@ using namespace std;
  ****************************************************************/
 
 Quadrupole::Quadrupole(Vector3D const& posIn, Vector3D const& posOut, double const& radius, double const& b)
-: Element(posIn, posOut, radius), b(b)
+: Straight(posIn, posOut, radius), b(b)
 {}
 
 Quadrupole::Quadrupole(Vector3D const& posIn, double const& length, Vector3D direction, double const& radius, double const& b)
-: Element(posIn, posIn + length * ~direction, radius), b(b)
+: Straight(posIn, length, direction, radius), b(b)
 {}
 
 /****************************************************************
@@ -45,7 +45,7 @@ string Quadrupole::to_string() const {
 	stringstream stream;
 	stream
 		<< STYLES::COLOR_CYAN
-		<< "Dipole"
+		<< "Quadrupole"
 		<< STYLES::NONE
 		<< endl;
 	stream << Element::to_string();
