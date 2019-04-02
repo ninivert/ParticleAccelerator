@@ -50,6 +50,12 @@ namespace EXCEPTIONS {
 	inline constexpr char BAD_ORIENTATION[]("Input and output positions are colinear");
 
 	/**
+	 * Class Element : Element is going into the wrong direction
+	 */
+
+	inline constexpr char BAD_DIRECTION[]("Element is facing the wrong direction");
+
+	/**
 	 * Class Accelerator : there is no element in which to add the particle
 	 */
 
