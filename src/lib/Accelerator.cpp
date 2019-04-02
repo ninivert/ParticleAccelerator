@@ -79,7 +79,13 @@ void Accelerator::addParticle(Particle * particle) {
 	}
 }
 
-void Accelerator::clearParticles() { particles.clear(); }
+void Accelerator::clearParticles() {
+	for (auto & ptr : particles) {
+		cout << "test !" <<endl;
+		cout << &(*ptr) << endl;
+	}
+	particles.clear();
+}
 void Accelerator::clearElements() { elements.clear(); }
 void Accelerator::clear() {
 	clearParticles();

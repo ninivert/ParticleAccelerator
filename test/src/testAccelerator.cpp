@@ -103,6 +103,7 @@ int main() {
 	/****************************************************************
 	 * updateParticleElement
 	 ****************************************************************/
+{
 	Straight * straight1 = new Straight (Vector3D(3, 0, 0), Vector3D(3.01, -1, 0), 0.1);
 	Straight * straight2 = new Straight (Vector3D(3.01, -1, 0), Vector3D(3.02, -2, 0), 0.1);
  	Particle * p = new Particle(Vector3D(3.015, -1.2, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272);
@@ -120,10 +121,11 @@ int main() {
 	/**
 	 * To see the results : compare the output (position) with the output (position) of
 	 */
-	// cout << acc << endl;
+	cout << acc << endl;
 
 	acc.clear();
-
+}
+	cout << acc << endl;
 	/****************************************************************
 	 * closeElementLoop
 	 ****************************************************************/
@@ -159,7 +161,7 @@ int main() {
 	Particle * part_e = new Particle(Vector3D(1.25, -11.2, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272);
 	Particle * part_f = new Particle(Vector3D(-2, -1, 0), Vector3D(1e8, 1e8, 0), 0.938272);
 	Particle * part_g = new Particle(Vector3D(-2.015, -1.01, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272);
-	Particle * part_h = new Particle(Vector3D(7.015, 4.21, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272);
+	Particle * part_h = new Particle(Vector3D(-2, -1, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272);
 	Particle * part_i = new Particle(Vector3D(3.015, -1.2, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272);
 	Particle * part_j = new Particle(Vector3D(7.015, 4.21, 4), Vector3D(-210200, -2.64754e8, 0), 0.938272);
 
@@ -192,6 +194,8 @@ int main() {
 
 	acc.step();
 
+	cout << "sbsbvisd" << std::endl;;
+
 	assert(part_a->getElementPtr() == straight6);
 	assert(part_b->getElementPtr() == straight6);
 	assert(part_d->getElementPtr() == straight6);
@@ -201,6 +205,12 @@ int main() {
 	// cout << acc << endl;
 
 	acc.clear();
+	// part_g = nullptr;
+
+	cout << "bavio" << endl;
+	cout << "bavio" << endl;
+
+	// cout << "bavio" << endl;
 
 	return 0;
 }
