@@ -38,12 +38,7 @@ Particle::Particle(Vector3D const& pos, double const& energy, Vector3D speed, do
  * Destructor
  ****************************************************************/
 
-Particle::~Particle() {
-	cout << this << endl;
-	element = nullptr;
-	cout << element << endl;
-	cout << "particle destroyed" << endl;
-}
+Particle::~Particle() { element = nullptr; }
 
 /****************************************************************
  * Getters
