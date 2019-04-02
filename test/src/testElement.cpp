@@ -55,8 +55,9 @@ int main() {
 
 	// Badly Oriented (anti-clockwise) => will exchange the posIn and posOut
 	// Made on purpose
-	Quadrupole quadru(Vector3D(3, -1, 0), -1, Vector3D(0, -1, 0), 0.1, -1.2);
+	ASSERT_EXCEPTION(Quadrupole quadru(Vector3D(3, -1, 0), -1, Vector3D(0, -1, 0), 0.1, -1.2), EXCEPTIONS::BAD_DIRECTION);
 
+	Quadrupole quadru(Vector3D(3, 0, 0), Vector3D(3, -1, 0), 0.1, -1.2);
 	assert(quadru.getPosIn() == Vector3D(3, 0, 0));
 	assert(quadru.getPosOut() == Vector3D(3, -1, 0));
 	assert(Test::eq(quadru.getRadius(), 0.1));
