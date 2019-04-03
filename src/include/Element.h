@@ -34,9 +34,12 @@ public:
 	 * - `Vector3D posIn`: initial position of the element
 	 * - `Vector3D posOut`: final position of the element
 	 * - `double radius`: internal radius of the vacuum chamber of the element
+	 * - `Renderer * engine` : initialization of the `Renderer` if given, nullptr by default
+	 *
+	 * The constructor is explicit to prevent accidental type casting.
 	 */
 
-	Element(Vector3D const& posIn, Vector3D const& posOut, double const& radius);
+	explicit Element(Vector3D const& posIn, Vector3D const& posOut, double const& radius, Renderer * engine = nullptr);
 
 	/****************************************************************
 	 * Copy constructor and operator =

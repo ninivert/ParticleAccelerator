@@ -90,6 +90,7 @@
 - Implement `FODO`
 	- Constructor
 	- String representation
+- Update every constructor that inherits from `Drawable` to also init `Renderer * engine`
 
 ## Todo
 
@@ -97,7 +98,6 @@
 - `FODO`
 	- `getField`
 	- Link elements together
-- Update every constructor that inherits from `Drawable` to also init `Renderer * engine`
 - init_Particles for the pointer of Particles to be initialized with the 1st Element (or the closest one)
 
 ## Questions

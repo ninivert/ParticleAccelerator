@@ -29,18 +29,22 @@ public:
 	/**
 	 * Default behavior: initialization with `(0.0, 0.0, 0.0)`
 	 *
-	 * The constructor is explicit to prevent accidental type casting.
-	 */
-
-	explicit Vector3D();
-
-	/**
-	 * Initialises the vector with a triplet of `double`s representing the vector parameters
+	 * Initialization of the engine (if given), nullptr by default
 	 *
 	 * The constructor is explicit to prevent accidental type casting.
 	 */
 
-	explicit Vector3D(double const& _x, double const& _y, double const& _z);
+	explicit Vector3D(Renderer * engine = nullptr);
+
+	/**
+	 * Initialises the vector with a triplet of `double`s representing the vector parameters
+	 *
+	 * Initialization of the engine (if given), nullptr by default
+	 *
+	 * The constructor is explicit to prevent accidental type casting.
+	 */
+
+	explicit Vector3D(double const& _x, double const& _y, double const& _z, Renderer * engine = nullptr);
 
 	/****************************************************************
 	 * Getters

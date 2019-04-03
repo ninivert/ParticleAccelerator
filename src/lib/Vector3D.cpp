@@ -6,12 +6,12 @@ using namespace std;
  * Constructors
  ****************************************************************/
 
-Vector3D::Vector3D()
-	: Vector3D(0.0, 0.0, 0.0)
+Vector3D::Vector3D(Renderer * engine)
+	: Vector3D(0.0, 0.0, 0.0, engine)
 	{}
 
-Vector3D::Vector3D(double const& _x, double const& _y, double const& _z)
-	: x(_x), y(_y), z(_z)
+Vector3D::Vector3D(double const& _x, double const& _y, double const& _z, Renderer * engine)
+	: Drawable(engine), x(_x), y(_y), z(_z)
 	{}
 
 /****************************************************************

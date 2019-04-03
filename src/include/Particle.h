@@ -36,11 +36,14 @@ public:
 	 * - `double mass`: mass of the particle
 	 * - `int charge = 1`: charge of the particle in multiples of the elementary charge (i.e. multiples of 1 eV, charge of the electron)
 	 * - `bool unitGeV = true`: specify the units of the scalars given to the constructor
+	 * - `Renderer * engine` : initialization of the `Renderer` if given, nullptr by default
 	 *
 	 * By default, units are expected in GeV. To specify units in the SI system, add `false` at the end of the argument list.
+	 *
+	 * The constructor is explicit to prevent accidental type casting.
 	 */
 
-	Particle(Vector3D const& pos, Vector3D const& speed, double const& mass, int const& charge = 1, bool const& unitGeV = true);
+	explicit Particle(Vector3D const& pos, Vector3D const& speed, double const& mass, int const& charge = 1, bool const& unitGeV = true, Renderer * engine = nullptr);
 
 	/**
 	 * Constructor for initialisation with energy and direction vector velocity
@@ -51,11 +54,14 @@ public:
 	 * - `double mass`: mass of the particle
 	 * - `int charge = 1`: charge of the particle in multiples of the elementary charge (i.e. multiples of 1 eV, charge of the electron)
 	 * - `bool unitGeV = true`: specify the units of the scalars given to the constructor
+	 * - `Renderer * engine` : initialization of the `Renderer` if given, nullptr by default
 	 *
 	 * By default, units are expected in GeV. To specify units in the SI system, add `false` at the end of the argument list.
+	 *
+	 * The constructor is explicit to prevent accidental type casting.
 	 */
 
-	Particle(Vector3D const& pos, double const& energy, Vector3D speed, double const& mass, int const& charge = 1, bool const& unitGeV = true);
+	explicit Particle(Vector3D const& pos, double const& energy, Vector3D speed, double const& mass, int const& charge = 1, bool const& unitGeV = true, Renderer * engine = nullptr);
 
 	/****************************************************************
 	 * Destructor

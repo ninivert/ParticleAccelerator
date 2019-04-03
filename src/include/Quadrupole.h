@@ -38,9 +38,12 @@ public:
 	 * - `Vector3D posOut`: final position of the Quadrupole element
 	 * - `double radius`: internal radius of the vacuum chamber of the Quadrupole element
 	 * - `double b`: proper internal magnetic field of the Quadrupole (for propotional recall force)
+	 * - `Renderer * engine` : initialization of the `Renderer` if given, nullptr by default
+	 *
+	 * The constructor is explicit to prevent accidental type casting.
 	 */
 
-	Quadrupole(Vector3D const& posIn, Vector3D const& posOut, double const& radius, double const& b);
+	explicit Quadrupole(Vector3D const& posIn, Vector3D const& posOut, double const& radius, double const& b, Renderer * engine = nullptr);
 
 	/**
 	 * Constructor for initialisation of a simple Quadrupole element
@@ -52,9 +55,12 @@ public:
 	 * - `Vector3D direction`: direction of the Quadrupole element (from initial position) copy in order to normalize it
 	 * - `double radius`: internal radius of the vacuum chamber of the Quadrupole element
 	 * - `double b`: proper internal magnetic field of the Quadrupole (for propotional recall force)
+	 * - `Renderer * engine` : initialization of the `Renderer` if given, nullptr by default
+	 *
+	 * The constructor is explicit to prevent accidental type casting.
 	 */
 
-	Quadrupole(Vector3D const& posIn, double const& length, Vector3D direction, double const& radius, double const& b);
+	explicit Quadrupole(Vector3D const& posIn, double const& length, Vector3D direction, double const& radius, double const& b, Renderer * engine = nullptr);
 
 	/****************************************************************
 	 * Getter (virtual)

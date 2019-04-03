@@ -6,30 +6,30 @@ using namespace std;
  * Constructors
  ****************************************************************/
 
-Frodo::Frodo(Vector3D const& posIn, Vector3D const& posOut, double const& radius, double const& b, double const& straightLength)
-: Straight(posIn, posOut, radius), b(b), straightLength(straightLength),
+Frodo::Frodo(Vector3D const& posIn, Vector3D const& posOut, double const& radius, double const& b, double const& straightLength, Renderer * engine)
+: Straight(posIn, posOut, radius, engine), b(b), straightLength(straightLength),
   lensLength((posOut - posIn).norm() / 2 - straightLength),
   direction((posOut - posIn) / (posIn - posOut).norm()),
   intersect1(posIn + direction * (lensLength)),
   intersect2(posIn + direction * (lensLength + straightLength)),
   intersect3(posIn + direction * (2*lensLength + straightLength)),
-  focalizer(posIn, intersect1, radius, b),
-  firstStraight(intersect1, intersect2, radius),
-  defocalizer(intersect2, intersect3, radius, -b),
-  lastStraight(intersect3, posOut, radius)
+  focalizer(posIn, intersect1, radius, b, engine),
+  firstStraight(intersect1, intersect2, radius, engine),
+  defocalizer(intersect2, intersect3, radius, -b, engine),
+  lastStraight(intersect3, posOut, radius, engine)
 {}
 
-Frodo::Frodo(Vector3D const& posIn, double const& totalLength, Vector3D direction, double const& radius, double const& b, double const& straightLength)
-: Straight(posIn, totalLength, direction, radius), b(b), straightLength(straightLength),
+Frodo::Frodo(Vector3D const& posIn, double const& totalLength, Vector3D direction, double const& radius, double const& b, double const& straightLength, Renderer * engine)
+: Straight(posIn, totalLength, direction, radius, engine), b(b), straightLength(straightLength),
   lensLength(totalLength / 2 - straightLength),
   direction(~direction),
   intersect1(posIn + direction * (lensLength)),
   intersect2(posIn + direction * (lensLength + straightLength)),
   intersect3(posIn + direction * (2*lensLength + straightLength)),
-  focalizer(posIn, intersect1, radius, b),
-  firstStraight(intersect1, intersect2, radius),
-  defocalizer(intersect2, intersect3, radius, -b),
-  lastStraight(intersect3, posOut, radius)
+  focalizer(posIn, intersect1, radius, b, engine),
+  firstStraight(intersect1, intersect2, radius, engine),
+  defocalizer(intersect2, intersect3, radius, -b, engine),
+  lastStraight(intersect3, posOut, radius, engine)
 {}
 
 /****************************************************************

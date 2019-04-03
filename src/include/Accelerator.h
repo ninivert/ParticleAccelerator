@@ -27,14 +27,18 @@ class Renderer;
 class Accelerator : public Drawable {
 public:
 	/****************************************************************
-	 * Constructors
+	 * Constructor
 	 ****************************************************************/
 
 	/**
-	 * Default constructor
+	 * Constructor with init of the pointer to a `Renderer` inherited from `Drawable`
+	 *
+	 * The constructor is explicit to prevent accidental type casting.
+	 *
+	 * Can be used as a default constructor
 	 */
 
-	Accelerator();
+	explicit Accelerator(Renderer * engine = nullptr);
 
 	/**
 	 * Destructor calls the Accelerator::clear() method

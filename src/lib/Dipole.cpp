@@ -6,8 +6,8 @@ using namespace std;
  * Constructors
  ****************************************************************/
 
-Dipole::Dipole(Vector3D const& posIn, Vector3D const& posOut, double const& radius, double const& curvature, double const& B)
-: Element(posIn, posOut, radius), curvature(curvature), B(B),
+Dipole::Dipole(Vector3D const& posIn, Vector3D const& posOut, double const& radius, double const& curvature, double const& B, Renderer * engine)
+: Element(posIn, posOut, radius, engine), curvature(curvature), B(B),
   posCenter (0.5 * (posOut + posIn) + 1 / (curvature) * sqrt(1 - curvature * curvature * (posOut - posIn).normSquared()/ 4.0) * ((posOut - posIn) ^ Vector3D(0, 0, 1)) / (posOut - posIn).norm())
 {}
 

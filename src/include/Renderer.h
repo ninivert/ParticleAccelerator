@@ -23,7 +23,7 @@ public:
 	 * Constructors and destructors
 	 ****************************************************************/
 
-	Renderer();
+	explicit Renderer();
 
 	/**
 	 * We don't want to copy a rendering engine

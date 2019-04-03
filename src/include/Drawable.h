@@ -28,7 +28,7 @@ public:
 	 * Default is nullptr because if the user does not bother, then that shouldn't yield an error
 	 */
 
-	Drawable(Renderer * engine = nullptr);
+	explicit Drawable(Renderer * engine = nullptr);
 
 	/**
 	 * We need to explicitly specify the virtual destructor

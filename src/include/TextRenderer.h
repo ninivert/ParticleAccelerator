@@ -25,9 +25,11 @@ public:
 	/**
 	 * `TextRenderer` will by default print to `std::cout`
 	 * but the user can specify any other stream (i.e. file system streams)
+	 *
+	 * The constructor is explicit to prevent accidental type casting.
 	 */
 
-	TextRenderer(std::ostream * streamPtr = &std::cout);
+	explicit TextRenderer(std::ostream * streamPtr = &std::cout);
 
 	/**
 	 * Get the default destructor but allow it to be overridden

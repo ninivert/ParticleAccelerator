@@ -6,7 +6,9 @@ using namespace std;
  * Constructor
  ****************************************************************/
 
-Accelerator::Accelerator() {};
+Accelerator::Accelerator(Renderer * engine)
+: Drawable(engine)
+{}
 
 /****************************************************************
  * Destructor

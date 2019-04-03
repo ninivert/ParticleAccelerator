@@ -6,8 +6,8 @@ using namespace std;
  * Constructors
  ****************************************************************/
 
-Element::Element(Vector3D const& posIn, Vector3D const& posOut, double const& radius)
-: posIn(posIn), posOut(posOut), radius(radius), next(nullptr), prev(nullptr)
+Element::Element(Vector3D const& posIn, Vector3D const& posOut, double const& radius, Renderer * engine)
+: Drawable(engine), posIn(posIn), posOut(posOut), radius(radius), next(nullptr), prev(nullptr)
 {
 	double orientation = Vector3D::tripleProduct(Vector3D(0, 0, 1), posIn, posOut);
 	if (abs(orientation) < GLOBALS::DELTA) {

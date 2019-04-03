@@ -6,12 +6,12 @@ using namespace std;
  * Constructors
  ****************************************************************/
 
-Straight::Straight(Vector3D const& posIn, Vector3D const& posOut, double const& radius)
-: Element(posIn, posOut, radius)
+Straight::Straight(Vector3D const& posIn, Vector3D const& posOut, double const& radius, Renderer * engine)
+: Element(posIn, posOut, radius, engine)
 {}
 
-Straight::Straight(Vector3D const& posIn, double const& length, Vector3D direction, double const& radius)
-: Element(posIn, posIn + length * ~direction, radius)
+Straight::Straight(Vector3D const& posIn, double const& length, Vector3D direction, double const& radius, Renderer * engine)
+: Element(posIn, posIn + length * ~direction, radius, engine)
 {}
 
 /****************************************************************

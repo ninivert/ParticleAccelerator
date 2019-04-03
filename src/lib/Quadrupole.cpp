@@ -6,12 +6,12 @@ using namespace std;
  * Constructors
  ****************************************************************/
 
-Quadrupole::Quadrupole(Vector3D const& posIn, Vector3D const& posOut, double const& radius, double const& b)
-: Straight(posIn, posOut, radius), b(b)
+Quadrupole::Quadrupole(Vector3D const& posIn, Vector3D const& posOut, double const& radius, double const& b, Renderer * engine)
+: Straight(posIn, posOut, radius, engine), b(b)
 {}
 
-Quadrupole::Quadrupole(Vector3D const& posIn, double const& length, Vector3D direction, double const& radius, double const& b)
-: Straight(posIn, length, direction, radius), b(b)
+Quadrupole::Quadrupole(Vector3D const& posIn, double const& length, Vector3D direction, double const& radius, double const& b, Renderer * engine)
+: Straight(posIn, length, direction, radius, engine), b(b)
 {}
 
 /****************************************************************
