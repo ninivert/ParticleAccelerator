@@ -38,14 +38,14 @@ public:
 	 * - `double radius`: internal radius of the vacuum chamber of the dipole element
 	 * - `double curvature`: curvature of the vacuum chamber of the dipole (curvature = 1 / R where R is the radius of curvature)
 	 * - `double B`: the magnetic field of the dipole will change according to the particles that the user wants to keep (depending on their energy)
-	 * - `Renderer * engine` : initialization of the `Renderer` if given, nullptr by default
+	 * - `Renderer * engine_ptr` : initialization of the `Renderer` if given, nullptr by default
 	 *
 	 * The constructor is explicit to prevent accidental type casting.
 	 *
 	 * The center of curvature is initialized with the CONVENTION that when k is positive, the direction of the arc from the initial position to the final position is CLOCKWISE (anti-trigonometric)
 	 */
 
-	explicit Dipole(Vector3D const& posIn, Vector3D const& posOut, double const& radius, double const& curvature, double const& B, Renderer * engine = nullptr);
+	explicit Dipole(Vector3D const& posIn, Vector3D const& posOut, double const& radius, double const& curvature, double const& B, Renderer * engine_ptr = nullptr);
 
 	/****************************************************************
 	 * Getter (virtual)
@@ -99,7 +99,7 @@ public:
 	 * Draw the vector using a given renderer
 	 */
 
-	virtual void drawTo(Renderer * engine) const override;
+	virtual void drawTo(Renderer * engine_ptr) const override;
 
 private:
 

@@ -8,8 +8,8 @@ using namespace std;
 
 // Constructor for init with velocity
 
-Particle::Particle(Vector3D const& pos, Vector3D const& speed, double const& _mass, int const& charge, bool const& unitGeV, Renderer * engine)
-: Drawable(engine), pos(pos), mass(_mass), charge(charge), forces(Vector3D()), element(nullptr)
+Particle::Particle(Vector3D const& pos, Vector3D const& speed, double const& _mass, int const& charge, bool const& unitGeV, Renderer * engine_ptr)
+: Drawable(engine_ptr), pos(pos), mass(_mass), charge(charge), forces(Vector3D()), element_ptr(nullptr)
 {
 	if (unitGeV) mass = CONVERT::MassGeVtoSI(mass);
 	momentum = speed * mass;
@@ -17,8 +17,8 @@ Particle::Particle(Vector3D const& pos, Vector3D const& speed, double const& _ma
 
 // Constructor for init with velocity and energy
 
-Particle::Particle(Vector3D const& pos, double const& energy, Vector3D speed, double const& _mass, int const& charge, bool const& unitGeV, Renderer * engine)
-: Drawable(engine), pos(pos), mass(_mass), charge(charge), forces(Vector3D()), element(nullptr)
+Particle::Particle(Vector3D const& pos, double const& energy, Vector3D speed, double const& _mass, int const& charge, bool const& unitGeV, Renderer * engine_ptr)
+: Drawable(engine_ptr), pos(pos), mass(_mass), charge(charge), forces(Vector3D()), element_ptr(nullptr)
 {
 	double factor(0);
 
@@ -38,7 +38,7 @@ Particle::Particle(Vector3D const& pos, double const& energy, Vector3D speed, do
  * Destructor
  ****************************************************************/
 
-Particle::~Particle() { element = nullptr; }
+Particle::~Particle() { element_ptr = nullptr; }
 
 /****************************************************************
  * Getters
@@ -63,8 +63,8 @@ Vector3D Particle::getMoment() const { return momentum; }
 Vector3D Particle::getPos() const { return pos; }
 
 Element const * const Particle::getElementPtr() const {
-	if (element != nullptr) {
-		return element;
+	if (element_ptr != nullptr) {
+		return element_ptr;
 	} else {
 		ERROR(EXCEPTIONS::NULLPTR);
 	}
@@ -74,10 +74,10 @@ Element const * const Particle::getElementPtr() const {
  * Setters
  ****************************************************************/
 
-void Particle::setElement(Element * _element) {
+void Particle::setElement(Element * _element_ptr) {
 	// Protection against empty pointers
-	if (_element != nullptr) {
-		element = _element;
+	if (_element_ptr != nullptr) {
+		element_ptr = _element_ptr;
 	} else {
 		ERROR(EXCEPTIONS::NULLPTR);
 	}
@@ -137,7 +137,7 @@ string Particle::to_string() const {
 		// // Element
 		// << setw(STYLES::PADDING_XSM) << ""
 		// << setw(STYLES::PADDING_MD) << "Element adr."
-		// << setw(STYLES::PADDING_LG) << element
+		// << setw(STYLES::PADDING_LG) << element_ptr
 		<< endl;
 	return stream.str();
 }
@@ -155,8 +155,8 @@ void Particle::step(double const& dt) {
 
 	// A particle can live freely without an Element so no return of EXCEPTIONS::NULLPTR in the other case
 	// In that case you have to do a Particle::exertLorentzForce by yourself
-	if (element != nullptr) {
-		exertLorentzForce(element->getField(pos), dt);
+	if (element_ptr != nullptr) {
+		exertLorentzForce(element_ptr->getField(pos), dt);
 	}
 
 	momentum += getMass() * dt * lambda * getForces();
@@ -197,11 +197,11 @@ ostream& operator << (ostream& stream, Particle const& p) {
  ****************************************************************/
 
 void Particle::draw() const {
-	if (engine == nullptr) ERROR(EXCEPTIONS::NULLPTR);
-	engine->draw(*this);
+	if (engine_ptr == nullptr) ERROR(EXCEPTIONS::NULLPTR);
+	engine_ptr->draw(*this);
 }
 
-void Particle::drawTo(Renderer * engine) const {
-	if (engine == nullptr) ERROR(EXCEPTIONS::NULLPTR);
-	engine->draw(*this);
+void Particle::drawTo(Renderer * engine_ptr) const {
+	if (engine_ptr == nullptr) ERROR(EXCEPTIONS::NULLPTR);
+	engine_ptr->draw(*this);
 }

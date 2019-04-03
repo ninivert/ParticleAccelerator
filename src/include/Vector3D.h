@@ -34,7 +34,7 @@ public:
 	 * The constructor is explicit to prevent accidental type casting.
 	 */
 
-	explicit Vector3D(Renderer * engine = nullptr);
+	explicit Vector3D(Renderer * engine_ptr = nullptr);
 
 	/**
 	 * Initialises the vector with a triplet of `double`s representing the vector parameters
@@ -44,7 +44,7 @@ public:
 	 * The constructor is explicit to prevent accidental type casting.
 	 */
 
-	explicit Vector3D(double const& _x, double const& _y, double const& _z, Renderer * engine = nullptr);
+	explicit Vector3D(double const& _x, double const& _y, double const& _z, Renderer * engine_ptr = nullptr);
 
 	/****************************************************************
 	 * Getters
@@ -202,7 +202,7 @@ public:
 	 * Draw the vector using a given renderer
 	 */
 
-	virtual void drawTo(Renderer * engine) const override;
+	virtual void drawTo(Renderer * engine_ptr) const override;
 
 private:
 

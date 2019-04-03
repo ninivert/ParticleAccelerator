@@ -34,12 +34,12 @@ public:
 	 * - `Vector3D posIn`: initial position of the element
 	 * - `Vector3D posOut`: final position of the element
 	 * - `double radius`: internal radius of the vacuum chamber of the element
-	 * - `Renderer * engine` : initialization of the `Renderer` if given, nullptr by default
+	 * - `Renderer * engine_ptr` : initialization of the `Renderer` if given, nullptr by default
 	 *
 	 * The constructor is explicit to prevent accidental type casting.
 	 */
 
-	explicit Element(Vector3D const& posIn, Vector3D const& posOut, double const& radius, Renderer * engine = nullptr);
+	explicit Element(Vector3D const& posIn, Vector3D const& posOut, double const& radius, Renderer * engine_ptr = nullptr);
 
 	/****************************************************************
 	 * Copy constructor and operator =
@@ -104,7 +104,7 @@ public:
 	 ****************************************************************/
 
 	/**
-	 * Make the pointer next of the current element point at the _next and reciprocally the pointer prev of the _next element point at the current element
+	 * Make the pointer next_ptr of the current element point at the _next and reciprocally the pointer prev_ptr of the _next element point at the current element
 	 *
 	 * Useful in Accelerator in order to make a full circle (link the last one with the first element)
 	 */
@@ -118,7 +118,7 @@ public:
 	bool isInNextElement(Particle const& p) const;
 
 	/**
-	 * Make the pointer "element" of the Particle p point to the new element in which the particle is
+	 * Make the pointer "element_ptr" of the Particle p point to the new element in which the particle is
 	 *
 	 * Used primarily in Accelerator::updateParticleElement(Particle&)
 	 *
@@ -153,8 +153,8 @@ protected:
 	Vector3D posIn;
 	Vector3D posOut;
 	double const radius;
-	Element * next;		// initialised to nullptr
-	Element * prev;		// initialised to nullptr
+	Element * next_ptr;		// initialised to nullptr
+	Element * prev_ptr;		// initialised to nullptr
 };
 
 /**

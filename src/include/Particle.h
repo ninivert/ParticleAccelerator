@@ -36,14 +36,14 @@ public:
 	 * - `double mass`: mass of the particle
 	 * - `int charge = 1`: charge of the particle in multiples of the elementary charge (i.e. multiples of 1 eV, charge of the electron)
 	 * - `bool unitGeV = true`: specify the units of the scalars given to the constructor
-	 * - `Renderer * engine` : initialization of the `Renderer` if given, nullptr by default
+	 * - `Renderer * engine_ptr` : initialization of the `Renderer` if given, nullptr by default
 	 *
 	 * By default, units are expected in GeV. To specify units in the SI system, add `false` at the end of the argument list.
 	 *
 	 * The constructor is explicit to prevent accidental type casting.
 	 */
 
-	explicit Particle(Vector3D const& pos, Vector3D const& speed, double const& mass, int const& charge = 1, bool const& unitGeV = true, Renderer * engine = nullptr);
+	explicit Particle(Vector3D const& pos, Vector3D const& speed, double const& mass, int const& charge = 1, bool const& unitGeV = true, Renderer * engine_ptr = nullptr);
 
 	/**
 	 * Constructor for initialisation with energy and direction vector velocity
@@ -54,14 +54,14 @@ public:
 	 * - `double mass`: mass of the particle
 	 * - `int charge = 1`: charge of the particle in multiples of the elementary charge (i.e. multiples of 1 eV, charge of the electron)
 	 * - `bool unitGeV = true`: specify the units of the scalars given to the constructor
-	 * - `Renderer * engine` : initialization of the `Renderer` if given, nullptr by default
+	 * - `Renderer * engine_ptr` : initialization of the `Renderer` if given, nullptr by default
 	 *
 	 * By default, units are expected in GeV. To specify units in the SI system, add `false` at the end of the argument list.
 	 *
 	 * The constructor is explicit to prevent accidental type casting.
 	 */
 
-	explicit Particle(Vector3D const& pos, double const& energy, Vector3D speed, double const& mass, int const& charge = 1, bool const& unitGeV = true, Renderer * engine = nullptr);
+	explicit Particle(Vector3D const& pos, double const& energy, Vector3D speed, double const& mass, int const& charge = 1, bool const& unitGeV = true, Renderer * engine_ptr = nullptr);
 
 	/****************************************************************
 	 * Destructor
@@ -152,7 +152,7 @@ public:
 	 * Make the particle point a given element pointer
 	 */
 
-	void setElement(Element * elmt);
+	void setElement(Element * element_ptr);
 
 	/****************************************************************
 	 * Methods
@@ -210,7 +210,7 @@ public:
 	 * Draw the vector using a given renderer
 	 */
 
-	virtual void drawTo(Renderer * engine) const override;
+	virtual void drawTo(Renderer * engine_ptr) const override;
 
 private:
 
@@ -222,7 +222,7 @@ private:
 	Vector3D momentum;	// stored in [m * kg / s]	(GeV / c)
 	Vector3D forces;
 	double mass;		// stored in [kg]			(GeV / c²)
-	Element * element;
+	Element * element_ptr;
 
 	/**
 	 * Integer because physically, only whole multiples of elementary charges make sense

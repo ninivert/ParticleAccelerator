@@ -6,7 +6,9 @@ using namespace std;
  * Constructors and destructors
  ****************************************************************/
 
-TextRenderer::TextRenderer(ostream * streamPtr) : streamPtr(streamPtr) {}
+TextRenderer::TextRenderer(ostream * stream_ptr)
+: stream_ptr(stream_ptr)
+{}
 
 TextRenderer::~TextRenderer() {}
 
@@ -19,7 +21,7 @@ TextRenderer::~TextRenderer() {}
  */
 
 void TextRenderer::draw(Accelerator const& acc) {
-	*streamPtr << acc;
+	*stream_ptr << acc;
 }
 
 /**
@@ -27,7 +29,7 @@ void TextRenderer::draw(Accelerator const& acc) {
  */
 
 void TextRenderer::draw(Dipole const& dipole) {
-	*streamPtr << dipole;
+	*stream_ptr << dipole;
 }
 
 /**
@@ -35,7 +37,7 @@ void TextRenderer::draw(Dipole const& dipole) {
  */
 
 void TextRenderer::draw(Quadrupole const& quadrupole) {
-	*streamPtr << quadrupole;
+	*stream_ptr << quadrupole;
 }
 
 /**
@@ -43,7 +45,7 @@ void TextRenderer::draw(Quadrupole const& quadrupole) {
  */
 
 void TextRenderer::draw(Straight const& straight) {
-	*streamPtr << straight;
+	*stream_ptr << straight;
 }
 
 /**
@@ -51,7 +53,7 @@ void TextRenderer::draw(Straight const& straight) {
  */
 
 void TextRenderer::draw(Particle const& particle) {
-	*streamPtr << particle;
+	*stream_ptr << particle;
 }
 
 /**
@@ -59,7 +61,7 @@ void TextRenderer::draw(Particle const& particle) {
  */
 
 void TextRenderer::draw(Vector3D const& vec) {
-	*streamPtr << vec;
+	*stream_ptr << vec;
 }
 
 // that's all folks !

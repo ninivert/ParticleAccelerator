@@ -14,7 +14,7 @@ class Renderer;
 
 class Drawable {
 protected:
-	Renderer * engine;
+	Renderer * engine_ptr;
 
 public:
 
@@ -28,7 +28,7 @@ public:
 	 * Default is nullptr because if the user does not bother, then that shouldn't yield an error
 	 */
 
-	explicit Drawable(Renderer * engine = nullptr);
+	explicit Drawable(Renderer * engine_ptr = nullptr);
 
 	/**
 	 * We need to explicitly specify the virtual destructor
@@ -50,7 +50,7 @@ public:
 	 * Virtual method that is required to be overwritten
 	 */
 
-	virtual void drawTo(Renderer * engine) const = 0;
+	virtual void drawTo(Renderer * engine_ptr) const = 0;
 };
 
 #endif

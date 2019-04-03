@@ -6,8 +6,8 @@ using namespace std;
  * Constructors
  ****************************************************************/
 
-Dipole::Dipole(Vector3D const& posIn, Vector3D const& posOut, double const& radius, double const& curvature, double const& B, Renderer * engine)
-: Element(posIn, posOut, radius, engine), curvature(curvature), B(B),
+Dipole::Dipole(Vector3D const& posIn, Vector3D const& posOut, double const& radius, double const& curvature, double const& B, Renderer * engine_ptr)
+: Element(posIn, posOut, radius, engine_ptr), curvature(curvature), B(B),
   posCenter (0.5 * (posOut + posIn) + 1 / (curvature) * sqrt(1 - curvature * curvature * (posOut - posIn).normSquared()/ 4.0) * ((posOut - posIn) ^ Vector3D(0, 0, 1)) / (posOut - posIn).norm())
 {}
 
@@ -70,11 +70,11 @@ bool Dipole::isInWall(Particle const& p) const {
  ****************************************************************/
 
 void Dipole::draw() const {
-	if (engine == nullptr) ERROR(EXCEPTIONS::NULLPTR);
-	engine->draw(*this);
+	if (engine_ptr == nullptr) ERROR(EXCEPTIONS::NULLPTR);
+	engine_ptr->draw(*this);
 }
 
-void Dipole::drawTo(Renderer * engine) const {
-	if (engine == nullptr) ERROR(EXCEPTIONS::NULLPTR);
-	engine->draw(*this);
+void Dipole::drawTo(Renderer * engine_ptr) const {
+	if (engine_ptr == nullptr) ERROR(EXCEPTIONS::NULLPTR);
+	engine_ptr->draw(*this);
 }

@@ -6,12 +6,12 @@ using namespace std;
  * Constructors
  ****************************************************************/
 
-Vector3D::Vector3D(Renderer * engine)
-	: Vector3D(0.0, 0.0, 0.0, engine)
+Vector3D::Vector3D(Renderer * engine_ptr)
+	: Vector3D(0.0, 0.0, 0.0, engine_ptr)
 	{}
 
-Vector3D::Vector3D(double const& _x, double const& _y, double const& _z, Renderer * engine)
-	: Drawable(engine), x(_x), y(_y), z(_z)
+Vector3D::Vector3D(double const& _x, double const& _y, double const& _z, Renderer * engine_ptr)
+	: Drawable(engine_ptr), x(_x), y(_y), z(_z)
 	{}
 
 /****************************************************************
@@ -179,11 +179,11 @@ ostream& operator << (ostream& stream, Vector3D const& v) {
  ****************************************************************/
 
 void Vector3D::draw() const {
-	if (engine == nullptr) ERROR(EXCEPTIONS::NULLPTR);
-	engine->draw(*this);
+	if (engine_ptr == nullptr) ERROR(EXCEPTIONS::NULLPTR);
+	engine_ptr->draw(*this);
 }
 
-void Vector3D::drawTo(Renderer * engine) const {
-	if (engine == nullptr) ERROR(EXCEPTIONS::NULLPTR);
-	engine->draw(*this);
+void Vector3D::drawTo(Renderer * engine_ptr) const {
+	if (engine_ptr == nullptr) ERROR(EXCEPTIONS::NULLPTR);
+	engine_ptr->draw(*this);
 }

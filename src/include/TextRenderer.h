@@ -29,7 +29,7 @@ public:
 	 * The constructor is explicit to prevent accidental type casting.
 	 */
 
-	explicit TextRenderer(std::ostream * streamPtr = &std::cout);
+	explicit TextRenderer(std::ostream * stream_ptr = &std::cout);
 
 	/**
 	 * Get the default destructor but allow it to be overridden
@@ -42,7 +42,7 @@ public:
 	 * We don't want to copy a rendering engine
 	 */
 
-	// TextRenderer(TextRenderer const& engine) = delete;
+	TextRenderer(TextRenderer const& engine) = delete;
 
 
 	/****************************************************************
@@ -53,7 +53,7 @@ public:
 	 * We don't want to copy/assign a rendering engine
 	 */
 
-	// TextRenderer& operator = (TextRenderer const& engine) = delete;
+	TextRenderer& operator = (TextRenderer const& engine) = delete;
 
 	/****************************************************************
 	 * Drawing methods
@@ -96,7 +96,7 @@ public:
 	virtual void draw(Vector3D const& vec) override;
 
 private:
-	std::ostream * streamPtr;
+	std::ostream * stream_ptr;
 };
 
 #endif

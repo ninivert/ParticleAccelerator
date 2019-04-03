@@ -6,12 +6,12 @@ using namespace std;
  * Constructors
  ****************************************************************/
 
-Quadrupole::Quadrupole(Vector3D const& posIn, Vector3D const& posOut, double const& radius, double const& b, Renderer * engine)
-: Straight(posIn, posOut, radius, engine), b(b)
+Quadrupole::Quadrupole(Vector3D const& posIn, Vector3D const& posOut, double const& radius, double const& b, Renderer * engine_ptr)
+: Straight(posIn, posOut, radius, engine_ptr), b(b)
 {}
 
-Quadrupole::Quadrupole(Vector3D const& posIn, double const& length, Vector3D direction, double const& radius, double const& b, Renderer * engine)
-: Straight(posIn, length, direction, radius, engine), b(b)
+Quadrupole::Quadrupole(Vector3D const& posIn, double const& length, Vector3D direction, double const& radius, double const& b, Renderer * engine_ptr)
+: Straight(posIn, length, direction, radius, engine_ptr), b(b)
 {}
 
 /****************************************************************
@@ -59,11 +59,11 @@ string Quadrupole::to_string() const {
  ****************************************************************/
 
 void Quadrupole::draw() const {
-	if (engine == nullptr) ERROR(EXCEPTIONS::NULLPTR);
-	engine->draw(*this);
+	if (engine_ptr == nullptr) ERROR(EXCEPTIONS::NULLPTR);
+	engine_ptr->draw(*this);
 }
 
-void Quadrupole::drawTo(Renderer * engine) const {
-	if (engine == nullptr) ERROR(EXCEPTIONS::NULLPTR);
-	engine->draw(*this);
+void Quadrupole::drawTo(Renderer * engine_ptr) const {
+	if (engine_ptr == nullptr) ERROR(EXCEPTIONS::NULLPTR);
+	engine_ptr->draw(*this);
 }

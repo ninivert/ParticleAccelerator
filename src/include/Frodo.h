@@ -38,12 +38,12 @@ public:
 	 * - radius: radius of the vacuum chamber
 	 * - b: quadrupole magnetic field intensity
 	 * - straightLength: length of each straight element
-	 * - `Renderer * engine` : initialization of the `Renderer` if given, nullptr by default
+	 * - `Renderer * engine_ptr` : initialization of the `Renderer` if given, nullptr by default
 	 *
 	 * The constructor is explicit to prevent accidental type casting.
 	 */
 
-	explicit Frodo(Vector3D const& posIn, Vector3D const& posOut, double const& radius, double const& b, double const& straightLength, Renderer * engine = nullptr);
+	explicit Frodo(Vector3D const& posIn, Vector3D const& posOut, double const& radius, double const& b, double const& straightLength, Renderer * engine_ptr = nullptr);
 
 	/**
 	 * Constructor using
@@ -54,12 +54,12 @@ public:
 	 * - radius: radius of the vacuum chamber
 	 * - b: quadrupole magnetic field intensity
 	 * - straightLength: length of each straight element
-	 * - `Renderer * engine` : initialization of the `Renderer` if given, nullptr by default
+	 * - `Renderer * engine_ptr` : initialization of the `Renderer` if given, nullptr by default
 	 *
 	 * The constructor is explicit to prevent accidental type casting.
 	 */
 
-	explicit Frodo(Vector3D const& posIn, double const& totalLength, Vector3D direction, double const& radius, double const& b, double const& straightLength, Renderer * engine = nullptr);
+	explicit Frodo(Vector3D const& posIn, double const& totalLength, Vector3D direction, double const& radius, double const& b, double const& straightLength, Renderer * engine_ptr = nullptr);
 
 	/****************************************************************
 	 * Getter (virtual)
@@ -103,7 +103,7 @@ public:
 	 * Draw the vector using a given renderer
 	 */
 
-	virtual void drawTo(Renderer * engine) const override;
+	virtual void drawTo(Renderer * engine_ptr) const override;
 
 private:
 

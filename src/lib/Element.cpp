@@ -6,8 +6,8 @@ using namespace std;
  * Constructors
  ****************************************************************/
 
-Element::Element(Vector3D const& posIn, Vector3D const& posOut, double const& radius, Renderer * engine)
-: Drawable(engine), posIn(posIn), posOut(posOut), radius(radius), next(nullptr), prev(nullptr)
+Element::Element(Vector3D const& posIn, Vector3D const& posOut, double const& radius, Renderer * engine_ptr)
+: Drawable(engine_ptr), posIn(posIn), posOut(posOut), radius(radius), next_ptr(nullptr), prev_ptr(nullptr)
 {
 	double orientation = Vector3D::tripleProduct(Vector3D(0, 0, 1), posIn, posOut);
 	if (abs(orientation) < GLOBALS::DELTA) {
@@ -25,14 +25,14 @@ Element::Element(Vector3D const& posIn, Vector3D const& posOut, double const& ra
  ****************************************************************/
 
 Element::~Element() {
-	if (next != nullptr) {
-		next->prev = nullptr;
-		next = nullptr;
+	if (next_ptr != nullptr) {
+		next_ptr->prev_ptr = nullptr;
+		next_ptr = nullptr;
 	}
 
-	if (prev != nullptr) {
-		prev->next = nullptr;
-		prev = nullptr;
+	if (prev_ptr != nullptr) {
+		prev_ptr->next_ptr = nullptr;
+		prev_ptr = nullptr;
 	}
 }
 
@@ -49,8 +49,8 @@ double Element::getRadius() const { return radius; }
  ****************************************************************/
 
 void Element::linkNext(Element & _next) {
-	next = &_next;
-	_next.prev = this;
+	next_ptr = &_next;
+	_next.prev_ptr = this;
 }
 
 bool Element::isInNextElement(Particle const& p) const {
@@ -59,24 +59,24 @@ bool Element::isInNextElement(Particle const& p) const {
 
 void Element::updatePointedElement(Particle & p) const {
 	// if both pointers are nullptr return without changing anything by CONVENTION
-	if (next == nullptr and prev == nullptr) { return; }
-	if (next == nullptr) {
-		p.setElement(prev);
+	if (next_ptr == nullptr and prev_ptr == nullptr) { return; }
+	if (next_ptr == nullptr) {
+		p.setElement(prev_ptr);
 		return;
 	}
-	if (prev == nullptr) {
-		p.setElement(next);
+	if (prev_ptr == nullptr) {
+		p.setElement(next_ptr);
 		return;
 	}
 
 	// now the 2 pointers are pointing to Element
-	double diffNext((p.getPos() - next->getPosIn()).normSquared());
-	double diffPrev((p.getPos() - prev->getPosOut()).normSquared());
+	double diffNext((p.getPos() - next_ptr->getPosIn()).normSquared());
+	double diffPrev((p.getPos() - prev_ptr->getPosOut()).normSquared());
 
 	if (diffNext < diffPrev) {
-		p.setElement(next);
+		p.setElement(next_ptr);
 	} else if (diffNext > diffPrev){
-		p.setElement(prev);
+		p.setElement(prev_ptr);
 	}
 
 	// If same distance we will return without changing anything by CONVENTION

@@ -6,12 +6,12 @@ using namespace std;
  * Constructors
  ****************************************************************/
 
-Straight::Straight(Vector3D const& posIn, Vector3D const& posOut, double const& radius, Renderer * engine)
-: Element(posIn, posOut, radius, engine)
+Straight::Straight(Vector3D const& posIn, Vector3D const& posOut, double const& radius, Renderer * engine_ptr)
+: Element(posIn, posOut, radius, engine_ptr)
 {}
 
-Straight::Straight(Vector3D const& posIn, double const& length, Vector3D direction, double const& radius, Renderer * engine)
-: Element(posIn, posIn + length * ~direction, radius, engine)
+Straight::Straight(Vector3D const& posIn, double const& length, Vector3D direction, double const& radius, Renderer * engine_ptr)
+: Element(posIn, posIn + length * ~direction, radius, engine_ptr)
 {}
 
 /****************************************************************
@@ -47,11 +47,11 @@ string Straight::to_string() const {
  ****************************************************************/
 
 void Straight::draw() const {
-	if (engine == nullptr) ERROR(EXCEPTIONS::NULLPTR);
-	engine->draw(*this);
+	if (engine_ptr == nullptr) ERROR(EXCEPTIONS::NULLPTR);
+	engine_ptr->draw(*this);
 }
 
-void Straight::drawTo(Renderer * engine) const {
-	if (engine == nullptr) ERROR(EXCEPTIONS::NULLPTR);
-	engine->draw(*this);
+void Straight::drawTo(Renderer * engine_ptr) const {
+	if (engine_ptr == nullptr) ERROR(EXCEPTIONS::NULLPTR);
+	engine_ptr->draw(*this);
 }

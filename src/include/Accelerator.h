@@ -38,7 +38,7 @@ public:
 	 * Can be used as a default constructor
 	 */
 
-	explicit Accelerator(Renderer * engine = nullptr);
+	explicit Accelerator(Renderer * engine_ptr = nullptr);
 
 	/**
 	 * Destructor calls the Accelerator::clear() method
@@ -50,7 +50,7 @@ public:
 	 * Delete copy constructor
 	 *
 	 * - To avoid to copy an accelerator (big object)
-	 * - To forbid the transmission of pointers on particles (std::unique_ptr) and elements
+	 * - To forbid the transmission of pointers on `Particle` (std::unique_ptr) and `Element` (std::shared_ptr)
 	 */
 
 	Accelerator(Accelerator const&) = delete;
@@ -59,7 +59,7 @@ public:
 	 * Delete assignment operator
 	 *
 	 * - To avoid to copy an accelerator (big object)
-	 * - To forbid the transmission of pointers on particles (std::unique_ptr) and elements
+	 * - To forbid the transmission of pointers on `Particle` (std::unique_ptr) and `Element` (std::shared_ptr)
 	 */
 
 	Accelerator& operator = (Accelerator const&) = delete;
@@ -75,18 +75,18 @@ public:
 	 ****************************************************************/
 
 	/**
-	 * Add an element (Dipole, Quadrupole, etc.) to the Accelerator
+	 * Add an Element (pointer to a Dipole, Quadrupole, etc.) to the Accelerator
 	 *
 	 * If another Element already exists, then this binds the two together
 	 */
 
-	void addElement(Element * element);
+	void addElement(Element * element_ptr);
 
 	/**
-	 * Adds a particle to the accelerator
+	 * Adds a particle (pointer) to the accelerator
 	 */
 
-	void addParticle(Particle * particle);
+	void addParticle(Particle * particle_ptr);
 
 	/**
 	 * Complete the accelerator by linking the first element and the last one
@@ -106,13 +106,13 @@ public:
 
 
 	/**
-	 * Removes all elements and particles from the accelerator
+	 * Removes all elements and particles from the accelerator and DELETE THEM
 	 */
 
 	void clear();
 
 	/**
-	 * Removes all particles from the accelerator
+	 * Removes all particles from the accelerator and DELETE THEM
 	 */
 
 	void clearParticles();
@@ -137,7 +137,7 @@ public:
 	 * Draw the vector using a given renderer
 	 */
 
-	virtual void drawTo(Renderer * engine) const override;
+	virtual void drawTo(Renderer * engine_ptr) const override;
 
 private:
 
@@ -146,7 +146,7 @@ private:
 	 ****************************************************************/
 
 	/**
-	 * Removes all elements from the accelerator
+	 * Removes all elements from the accelerator and DELETE THEM
 	 *
 	 * Private: the user is not allowed to remove elements while particles are still pointing on them
 	 */
@@ -156,15 +156,15 @@ private:
 	/**
 	 * Make a Particle point to the next Element if it has moved past its current Element
 	 *
-	 * Private: this method should only be used internally
-	 *
-	 * Used in Accelerator::step()
+	 * Private: this method should only be used internally in Accelerator::step()
 	 */
 
 	void updateParticleElement(Particle & particle) const;
 
 	/**
 	 * Remove Particle that are out of the Accelerator
+	 *
+	 * Private: this method should only be used internally in Accelerator::step()
 	 */
 
 	void clearDeadParticles();
@@ -179,15 +179,15 @@ private:
 	 * We chose std::unique_ptr because the Accelerator will be the only object to point on particles and the intelligent pointers offer a good feature for such usage (dynamical allocation)
 	 */
 
-	std::vector<std::unique_ptr<Particle>> particles;
+	std::vector<std::unique_ptr<Particle>> particles_ptr;
 
 	/**
 	 * Heterogeneous collection of shared_ptr on Element
 	 *
-	 * We chose std::shared_ptr because the Accelerator will NOT be the only object to point on particles so we cannot use std::unique_ptr here, and the intelligent pointers are recommended for this because of dynamical allocation (more convenient than C-pointers)
+	 * We chose std::shared_ptr because the Accelerator will NOT be the only object to point on elements (elements are pointing to each other) so we cannot use std::unique_ptr here, and the intelligent pointers are recommended for this because of dynamical allocation (more convenient than C-pointers)
 	 */
 
-	std::vector<std::shared_ptr<Element>> elements;
+	std::vector<std::shared_ptr<Element>> elements_ptr;
 };
 
 /**

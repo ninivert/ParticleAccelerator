@@ -23,6 +23,10 @@ public:
 	 * Constructors and destructors
 	 ****************************************************************/
 
+	/**
+	 * Default constructor
+	 */
+
 	explicit Renderer();
 
 	/**
