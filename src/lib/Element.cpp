@@ -70,6 +70,8 @@ void Element::updatePointedElement(Particle & p) const {
 	}
 
 	// now the 2 pointers are pointing to Element
+	// which one are we closer to ?
+
 	double diffNext((p.getPos() - next_ptr->getPosIn()).normSquared());
 	double diffPrev((p.getPos() - prev_ptr->getPosOut()).normSquared());
 

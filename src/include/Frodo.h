@@ -8,6 +8,7 @@
 #include <memory>
 #include <string>
 #include <sstream>
+#include <cmath>
 
 // Forward declaration
 class Vector3D;

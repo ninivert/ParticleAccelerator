@@ -56,6 +56,13 @@ namespace EXCEPTIONS {
 	inline constexpr char BAD_DIRECTION[]("Element is facing the wrong direction");
 
 	/**
+	 * Class Element : Some particle is not in the element and should therefore not have called
+	 * the Element's methods
+	 */
+
+	inline constexpr char NOT_INSIDE_ELEMENT[]("Position given is outside the Element");
+
+	/**
 	 * Class Accelerator : there is no element in which to add the particle
 	 */
 
