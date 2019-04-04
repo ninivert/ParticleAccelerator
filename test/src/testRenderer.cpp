@@ -24,7 +24,7 @@ int main() {
 	TextRenderer engineToFile(&fout);
 
 	// Make the accelerator
-	Accelerator acc;
+	Accelerator acc(&engine);
 	acc.addElement(new Dipole(Vector3D(1, 0, 0), Vector3D(0, -1, 0), 0.1, 1, 7));
 	acc.addElement(new Straight(Vector3D(0, -1, 0), Vector3D(-1, -1, 0), 0.1));
 	acc.addElement(new Quadrupole(Vector3D(-1, -1, 0), Vector3D(-2, -1, 0), 0.1, 1.2));
@@ -35,8 +35,10 @@ int main() {
 	ASSERT_EXCEPTION(acc.drawTo(nullptr), EXCEPTIONS::NULLPTR);
 
 	// Rendering
-	// acc.drawTo(&engine);
+	// Log to file engine using drawTo(Renderer * engine)
 	acc.drawTo(&engineToFile);
+	// Log to cout using draw()
+	acc.draw();
 
 	// Do this or chap chap will be very mad òwó
 	fout.close();
