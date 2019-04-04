@@ -95,6 +95,7 @@
 
 ## Todo
 
+- Move `Particle::step()` call to `exertLorentzForce` to `Accelerator::step()`
 - Transfer object property to inside the class
 - Polymorphic copy
 - Review exercice9 and `EXCEPTIONS::BAD_DIRECTION`

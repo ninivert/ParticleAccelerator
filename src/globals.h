@@ -57,6 +57,9 @@ namespace STYLES {
 	inline constexpr char COLOR_WHITE[]("\033[37m");
 	inline constexpr char FORMAT_BOLD[]("\033[1m");
 	inline constexpr char FORMAT_UNDERLINE[]("\033[4m");
+	inline constexpr char FORMAT_BLINK[]("\033[5m");
+	inline constexpr char FORMAT_REVERSE[]("\033[7m");
+	inline constexpr char FORMAT_CONCEALED[]("\033[8m");
 	inline constexpr char NONE[]("\033[0m");
 }
 
