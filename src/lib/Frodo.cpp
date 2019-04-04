@@ -52,20 +52,20 @@ using namespace std;
 
 Vector3D Frodo::getField(Vector3D const& pos) const {
 	Vector3D const X(pos - posIn);
-	Vector3D const d(posOut - posIn);
-	double const l(abs(X * d));
+	Vector3D d(posOut - posIn);
+	~d;
+	double const l(X * d);
 
 	Vector3D field;
 
 	if (l < lensLength) field = focalizer.getField(pos);
 	else if (l < lensLength + straightLength) field = Vector3D();
 	else if (l < 2*lensLength + straightLength) field = defocalizer.getField(pos);
-	else if (l < 2*lensLength + 2*straightLength) field = Vector3D();
+	else if (l < 2*lensLength + 2*straightLength+0.05) field = Vector3D();
 	else ERROR(EXCEPTIONS::NOT_INSIDE_ELEMENT);
 
-	cout << "Particle is at " << l << endl;
-	cout << "Field is " << field << endl;
-	cout << endl;
+	// cout << "Particle is at " << l << endl;
+	// cout << "Field is " << field << endl;
 
 	return field;
 }
