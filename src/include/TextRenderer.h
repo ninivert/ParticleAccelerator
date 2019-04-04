@@ -4,6 +4,8 @@
 #pragma once
 
 #include <iostream>
+#include <fstream>
+#include <string>
 
 // Forward declaration
 class Accelerator;
@@ -30,6 +32,12 @@ public:
 	 */
 
 	explicit TextRenderer(std::ostream * stream_ptr = &std::cout);
+
+	/**
+	 * Give `TextRenderer` a file name to print to
+	 */
+
+	explicit TextRenderer(std::string const& fileName);
 
 	/**
 	 * Get the default destructor but allow it to be overridden
@@ -97,6 +105,7 @@ public:
 
 private:
 	std::ostream * stream_ptr;
+	std::ofstream fileStream;
 };
 
 #endif

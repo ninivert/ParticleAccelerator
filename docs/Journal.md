@@ -92,20 +92,22 @@
 	- String representation
 - Update every constructor that inherits from `Drawable` to also init `Renderer * engine_ptr`
 - Added suffix `_ptr` to all pointers and vector of pointers
-
-## Todo
-
 - Move `Particle::step()` call to `exertLorentzForce` to `Accelerator::step()`
 - Transfer object property to inside the class
 - Polymorphic copy
+- Change `TextRenderer::TextRenderer()` to construct directly with a filename (or nothing)
+
+## Todo
+
 - Review exercice9 and `EXCEPTIONS::BAD_DIRECTION`
 - `FODO`
 	- `getField`
 	- Link elements together
 - init_Particles for the pointer of Particles to be initialized with the 1st Element (or the closest one)
 - Update `README.md`
-- je veux me tuer !
-- Change textRenderer::textRenderer() to construct directly with a filename (or nothing)
+- FIX DAT FUCKING WHERE PARTICLE GOES BACKWARDS
+- Fix `Element::isInNextElement` function
+- Rewrite `Element::updatePointedElement()`
 
 ## Questions
 

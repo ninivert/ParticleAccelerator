@@ -79,6 +79,12 @@ namespace EXCEPTIONS {
 	 */
 
 	inline constexpr char ELEMENT_LOOP_INCOMPLETE[]("The last element needs to have the same output position as the input position of the first element of the accelerator");
+
+	/**
+	 * Class TextRenderer : opening fstream for writing to a file did not succeed
+	 */
+
+	inline constexpr char FILE_EXCEPTION[]("Something went wrong while opening the file");
 }
 
 /**

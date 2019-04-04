@@ -10,7 +10,6 @@
 #include "test/lib/Test.h"
 
 #include <iostream>
-#include <fstream>
 
 using namespace std;
 
@@ -19,9 +18,7 @@ int main() {
 	TextRenderer engine;
 
 	// File stream engine
-	ofstream fout("./log/testRenderer.log");
-	if (fout.fail()) cerr << "Well, that didn't really go as planned..." << endl;
-	TextRenderer engineToFile(&fout);
+	TextRenderer engineToFile("accelerator.log");
 
 
 	// Make the elements
@@ -49,9 +46,6 @@ int main() {
 	acc.drawTo(&engineToFile);
 	// Log to cout using draw()
 	// acc.draw();
-
-	// Do this or chap chap will be very mad òwó
-	fout.close();
 
 	return 0;
 }

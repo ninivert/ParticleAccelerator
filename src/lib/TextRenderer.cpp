@@ -10,7 +10,15 @@ TextRenderer::TextRenderer(ostream * stream_ptr)
 : stream_ptr(stream_ptr)
 {}
 
-TextRenderer::~TextRenderer() {}
+TextRenderer::TextRenderer(string const& fileName) {
+	fileStream = ofstream(fileName);
+	if (fileStream.fail()) ERROR(EXCEPTIONS::FILE_EXCEPTION);
+	stream_ptr = &fileStream;
+}
+
+TextRenderer::~TextRenderer() {
+	fileStream.close();
+}
 
 /****************************************************************
  * Drawing
