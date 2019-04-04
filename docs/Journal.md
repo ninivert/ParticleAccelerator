@@ -103,9 +103,13 @@
 ## Todo
 
 - FIX DAT FUCKING WHERE PARTICLE GOES BACKWARDS
-- Fix `Element::isInNextElement` function
 - Rewrite `Element::updatePointedElement()`
 - Update `README.md`
+- Reimplement the method `Element::isInNextElement()`
+	- pure virtual in `Element`
+	- projection and length (compare with middle point) in `Straight`
+	- method with angles and tan (compare with the one between the input and output position) in `Dipole`
+- Change `Frodo::getField()` : remove the +0.05 at the end (needed for compilation uwu)
 - `Beam` class
 
 ## Questions
