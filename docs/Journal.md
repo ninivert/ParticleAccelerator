@@ -103,6 +103,8 @@
 	- Link elements together
 - init_Particles for the pointer of Particles to be initialized with the 1st Element (or the closest one)
 - Update `README.md`
+- je veux me tuer !
+- Change textRenderer::textRenderer() to construct directly with a filename (or nothing)
 
 ## Questions
 
