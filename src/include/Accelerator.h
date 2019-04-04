@@ -26,6 +26,7 @@ class Renderer;
 
 class Accelerator : public Drawable {
 public:
+
 	/****************************************************************
 	 * Constructor
 	 ****************************************************************/
@@ -44,6 +45,10 @@ public:
 	 * Destructor calls the Accelerator::clear() method
 	 */
 
+	/****************************************************************
+	 * Destructor
+	 ****************************************************************/
+
 	~Accelerator();
 
 	/**
@@ -52,6 +57,10 @@ public:
 	 * - To avoid to copy an accelerator (big object)
 	 * - To forbid the transmission of pointers on `Particle` (std::unique_ptr) and `Element` (std::shared_ptr)
 	 */
+
+	/****************************************************************
+	 * Copy constructor and operator =
+	 ****************************************************************/
 
 	Accelerator(Accelerator const&) = delete;
 
@@ -75,18 +84,18 @@ public:
 	 ****************************************************************/
 
 	/**
-	 * Add an Element (pointer to a Dipole, Quadrupole, etc.) to the Accelerator
+	 * Add an Element (Dipole, Quadrupole, etc.) to the Accelerator
 	 *
 	 * If another Element already exists, then this binds the two together
 	 */
 
-	void addElement(Element * element_ptr);
+	void addElement(Element const& element);
 
 	/**
-	 * Adds a particle (pointer) to the accelerator
+	 * Adds a particle to the accelerator
 	 */
 
-	void addParticle(Particle * particle_ptr);
+	void addParticle(Particle const& particle);
 
 	/**
 	 * Complete the accelerator by linking the first element and the last one
@@ -98,6 +107,8 @@ public:
 
 	/**
 	 * Simulate the particle accelerator over a timestep `dt`
+	 *
+	 * Make a Particle point to the next Element if it has moved past its current Element
 	 *
 	 * If `dt` is null (aka inferior to GLOBALS::DELTA), then this doesn't do anything
 	 */
@@ -152,14 +163,6 @@ private:
 	 */
 
 	void clearElements();
-
-	/**
-	 * Make a Particle point to the next Element if it has moved past its current Element
-	 *
-	 * Private: this method should only be used internally in Accelerator::step()
-	 */
-
-	void updateParticleElement(Particle & particle) const;
 
 	/**
 	 * Remove Particle that are out of the Accelerator

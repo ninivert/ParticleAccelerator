@@ -29,29 +29,37 @@ void Accelerator::step(double const& dt) {
 	// Step through all the particles
 	for (unique_ptr<Particle> & particle_ptr : particles_ptr) {
 		// Change the element if the particle goes out
-		updateParticleElement(*particle_ptr);
+		if (particle_ptr->getElementPtr()->isInNextElement(*particle_ptr)) {
+			// Particle is in next element
+			particle_ptr->getElementPtr()->updatePointedElement(*particle_ptr);
+		}
 
 		particle_ptr->step(dt);
 	}
 }
 
-void Accelerator::addElement(Element * element_ptr) {
-	// Protection against empty pointers
-	if (element_ptr != nullptr) {
-		// Protection against empty vector elements
-		if (elements_ptr.size() > 0) {
-			// Protection against non-touching elements
-			if (elements_ptr[elements_ptr.size() - 1]->getPosOut() == element_ptr->getPosIn()) {
-				elements_ptr[elements_ptr.size() - 1]->linkNext(*element_ptr);
-				elements_ptr.push_back(shared_ptr<Element>(element_ptr));
-			} else {
-				ERROR(EXCEPTIONS::ELEMENTS_NOT_TOUCHING);
-			}
+void Accelerator::addElement(Element const& element) {
+	// Protection against empty vector elements
+	if (elements_ptr.size() > 0) {
+		// Protection against non-touching elements
+		if (elements_ptr[elements_ptr.size() - 1]->getPosOut() == element.getPosIn()) {
+			elements_ptr.push_back(element.copy());
+			elements_ptr[elements_ptr.size() - 2]->linkNext(*elements_ptr[elements_ptr.size() - 1]);
 		} else {
-			elements_ptr.push_back(shared_ptr<Element>(element_ptr));
+			ERROR(EXCEPTIONS::ELEMENTS_NOT_TOUCHING);
 		}
 	} else {
-		ERROR(EXCEPTIONS::NULLPTR);
+		elements_ptr.push_back(element.copy());
+	}
+}
+
+void Accelerator::addParticle(Particle const& particle) {
+	// Protection against no element to point to
+	if (elements_ptr.size() > 0) {
+		particles_ptr.push_back(particle.copy());
+		particles_ptr[particles_ptr.size() - 1]->setElement(elements_ptr[0].get());
+	} else {
+		ERROR(EXCEPTIONS::NO_ELEMENTS);
 	}
 }
 
@@ -63,21 +71,6 @@ void Accelerator::closeElementLoop() {
 		} else {
 			ERROR(EXCEPTIONS::ELEMENT_LOOP_INCOMPLETE);
 		}
-	}
-}
-
-void Accelerator::addParticle(Particle * particle) {
-	// Protection against empty pointers
-	if (particle != nullptr) {
-		// Protection against no element to point to
-		if (elements_ptr.size() > 0) {
-			particle->setElement(elements_ptr[0].get());
-			particles_ptr.push_back(unique_ptr<Particle>(particle));
-		} else {
-			ERROR(EXCEPTIONS::NO_ELEMENTS);
-		}
-	} else {
-		ERROR(EXCEPTIONS::NULLPTR);
 	}
 }
 
@@ -106,13 +99,6 @@ string Accelerator::to_string() const {
 		<< STYLES::NONE;
 	for (unique_ptr<Particle> const& particle_ptr : particles_ptr) stream << *particle_ptr << endl;
 	return stream.str();
-}
-
-void Accelerator::updateParticleElement(Particle & particle) const {
-	if (particle.getElementPtr()->isInNextElement(particle)) {
-		// Particle is in next element
-		particle.getElementPtr()->updatePointedElement(particle);
-	}
 }
 
 void Accelerator::clearDeadParticles() {
