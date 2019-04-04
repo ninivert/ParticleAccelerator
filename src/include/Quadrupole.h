@@ -5,6 +5,7 @@
 
 #include <iomanip>
 #include <iostream>
+#include <memory>
 #include <string>
 #include <sstream>
 
@@ -63,6 +64,20 @@ public:
 	explicit Quadrupole(Vector3D const& posIn, double const& length, Vector3D direction, double const& radius, double const& b, Renderer * engine_ptr = nullptr);
 
 	/****************************************************************
+	 * Polymorphic copy for Accelerator
+	 ****************************************************************/
+
+	/**
+	 * Returns a new shared_ptr constructed dynamically (to be DELETED).
+	 *
+	 * This new pointer contains a polymorphic copy of the current Quadrupole element.
+	 *
+	 * We are returning a pointer on Element because in Accelerator we store them as shared_ptr<Element> (for polymorphism)
+	 */
+
+	virtual std::shared_ptr<Element> copy() const override;
+
+	/****************************************************************
 	 * Getter (virtual)
 	 ****************************************************************/
 
@@ -99,6 +114,16 @@ public:
 	virtual void drawTo(Renderer * engine_ptr) const override;
 
 private:
+
+	/****************************************************************
+	 * Private methods (Polymorphic copy)
+	 ****************************************************************/
+
+	/**
+	 * Returns a pointer to a copy of the current FODO element (this)
+	 */
+
+	std::shared_ptr<Quadrupole> cloneThis() const;
 
 	/****************************************************************
 	 * Attributes

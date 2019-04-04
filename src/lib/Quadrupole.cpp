@@ -15,6 +15,16 @@ Quadrupole::Quadrupole(Vector3D const& posIn, double const& length, Vector3D dir
 {}
 
 /****************************************************************
+ * Polymorphic copy for Accelerator
+ ****************************************************************/
+
+shared_ptr<Element> Quadrupole::copy() const { return cloneThis(); }
+
+shared_ptr<Quadrupole> Quadrupole::cloneThis() const {
+	return shared_ptr<Quadrupole>(new Quadrupole(*this));
+}
+
+/****************************************************************
  * Getter (virtual)
  ****************************************************************/
 

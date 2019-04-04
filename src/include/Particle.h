@@ -5,6 +5,7 @@
 
 #include <cmath>
 #include <iomanip>
+#include <memory>
 #include <string>
 #include <sstream>
 
@@ -75,6 +76,20 @@ public:
 	 */
 
 	~Particle();
+
+	/****************************************************************
+	 * Polymorphic copy for Accelerator
+	 ****************************************************************/
+
+	/**
+	 * Returns a new unique_ptr constructed dynamically (to be DELETED).
+	 *
+	 * This new pointer contains a polymorphic copy of the current Particle.
+	 *
+	 * We are returning a pointer on Particule because in Accelerator we store them as unique_ptr<Element>
+	 */
+
+	virtual std::unique_ptr<Particle> copy() const;
 
 	/****************************************************************
 	 * Getters (SI units)

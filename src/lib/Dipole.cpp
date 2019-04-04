@@ -12,6 +12,16 @@ Dipole::Dipole(Vector3D const& posIn, Vector3D const& posOut, double const& radi
 {}
 
 /****************************************************************
+ * Polymorphic copy for Accelerator
+ ****************************************************************/
+
+shared_ptr<Element> Dipole::copy() const { return cloneThis(); }
+
+shared_ptr<Dipole> Dipole::cloneThis() const {
+	return shared_ptr<Dipole>(new Dipole(*this));
+}
+
+/****************************************************************
  * Getters (virtual)
  ****************************************************************/
 

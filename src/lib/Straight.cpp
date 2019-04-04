@@ -15,6 +15,16 @@ Straight::Straight(Vector3D const& posIn, double const& length, Vector3D directi
 {}
 
 /****************************************************************
+ * Polymorphic copy for Accelerator
+ ****************************************************************/
+
+shared_ptr<Element> Straight::copy() const { return cloneThis(); }
+
+shared_ptr<Straight> Straight::cloneThis() const {
+	return shared_ptr<Straight>(new Straight(*this));
+}
+
+/****************************************************************
  * Getter (virtual)
  ****************************************************************/
 

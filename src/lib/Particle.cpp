@@ -35,6 +35,14 @@ Particle::Particle(Vector3D const& pos, double const& energy, Vector3D speed, do
 }
 
 /****************************************************************
+ * Polymorphic copy for Accelerator
+ ****************************************************************/
+
+unique_ptr<Particle> Particle::copy() const {
+	return unique_ptr<Particle>(new Particle(*this));
+}
+
+/****************************************************************
  * Destructor
  ****************************************************************/
 

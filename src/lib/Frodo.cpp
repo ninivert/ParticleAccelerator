@@ -33,6 +33,16 @@ Frodo::Frodo(Vector3D const& posIn, double const& totalLength, Vector3D directio
 {}
 
 /****************************************************************
+ * Polymorphic copy for Accelerator
+ ****************************************************************/
+
+shared_ptr<Element> Frodo::copy() const { return cloneThis(); }
+
+shared_ptr<Frodo> Frodo::cloneThis() const {
+	return shared_ptr<Frodo>(new Frodo(*this));
+}
+
+/****************************************************************
  * Getter (virtual)
  ****************************************************************/
 

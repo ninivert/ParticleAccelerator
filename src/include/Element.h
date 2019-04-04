@@ -5,6 +5,7 @@
 
 #include <iomanip>
 #include <iostream>
+#include <memory>
 #include <string>
 #include <sstream>
 
@@ -42,22 +43,6 @@ public:
 	explicit Element(Vector3D const& posIn, Vector3D const& posOut, double const& radius, Renderer * engine_ptr = nullptr);
 
 	/****************************************************************
-	 * Copy constructor and operator =
-	 ****************************************************************/
-
-	/**
-	 * Copy Constructor deleted because copying an element has no physical meaning (superposition ? how do you modify the pointers ?) and to avoid copying pointers without knowing it
-	 */
-
-	Element(Element const&) = delete;
-
-	/**
-	 * operator = deleted for the same reasons as the copy constructor (Element::Element(Element const&))
-	 */
-
-	Element& operator = (Element const&) = delete;
-
-	/****************************************************************
 	 * Destructor
 	 ****************************************************************/
 
@@ -66,6 +51,36 @@ public:
 	 */
 
 	virtual ~Element();
+
+	/****************************************************************
+	 * Copy constructor and operator =
+	 ****************************************************************/
+
+	/**
+	 * Copy Constructor deleted because copying an element has no physical meaning (superposition ? how do you modify the pointers ?) and to avoid copying pointers without knowing it
+	 */
+
+	// Element(Element const&) = delete;
+
+	/**
+	 * operator = deleted for the same reasons as the copy constructor (Element::Element(Element const&))
+	 */
+
+	Element& operator = (Element const&) = delete;
+
+	/****************************************************************
+	 * Polymorphic copy for Accelerator
+	 ****************************************************************/
+
+	/**
+	 * Returns a new shared_ptr constructed dynamically (to be DELETED).
+	 *
+	 * This new pointer contains a polymorphic copy of the current element.
+	 *
+	 * We are returning a pointer on Element because in Accelerator we store them as shared_ptr<Element> (for polymorphism)
+	 */
+
+	virtual std::shared_ptr<Element> copy() const = 0;
 
 	/****************************************************************
 	 * Getters
