@@ -95,6 +95,8 @@
 
 ## Todo
 
+- Transfer object property to inside the class
+- Polymorphic copy
 - Review exercice9 and `EXCEPTIONS::BAD_DIRECTION`
 - `FODO`
 	- `getField`
