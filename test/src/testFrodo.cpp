@@ -5,30 +5,31 @@
 #include "src/include/bundle/TextRenderer.bundle.h"
 #include "test/lib/Test.h"
 
-#include <iostream>
-
 using namespace std;
 
 int main() {
 	TextRenderer engine;
-	Accelerator acc;
 
-	acc.addElement(new Frodo(
+	Frodo FRODO(
 		Vector3D(1, 0, 0),
 		Vector3D(1, -1, 0),
 		1,
 		1,
 		0.25
-	));
+	);
 
-	acc.addElement(new Frodo(
+	Frodo SAM(
 		Vector3D(1, -1, 0),
 		1,
 		Vector3D(0, -1, 0),
 		1,
 		1,
 		0.25
-	));
+	);
 
-	cout << acc << endl;
+	Accelerator acc(&engine);
+	acc.addElement(FRODO);
+	acc.addElement(SAM);
+
+	// acc.draw();
 }
