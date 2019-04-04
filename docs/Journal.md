@@ -89,6 +89,7 @@
 - Make `README.md`
 - Implement `FODO`
 	- Constructor
+	- `getField`
 	- String representation
 - Update every constructor that inherits from `Drawable` to also init `Renderer * engine_ptr`
 - Added suffix `_ptr` to all pointers and vector of pointers
@@ -96,21 +97,18 @@
 - Transfer object property to inside the class
 - Polymorphic copy
 - Change `TextRenderer::TextRenderer()` to construct directly with a filename (or nothing)
+- `Accelerator::addParticle` bind the Particle to the first element of the Accelerator
+- Review `exerciceP9`
 
 ## Todo
 
-- Review exercice9 and `EXCEPTIONS::BAD_DIRECTION`
-- `FODO`
-	- `getField`
-	- Link elements together
-- init_Particles for the pointer of Particles to be initialized with the 1st Element (or the closest one)
-- Update `README.md`
 - FIX DAT FUCKING WHERE PARTICLE GOES BACKWARDS
 - Fix `Element::isInNextElement` function
 - Rewrite `Element::updatePointedElement()`
+- Update `README.md`
+- `Beam` class
 
 ## Questions
 
 - Add relativist mass to Particle ?
 - Do we need to specify a virtual destructor on all parent classes (aka `Drawable`) for destruction to correctly take place ?
-- Problem with exerciceP9 ?

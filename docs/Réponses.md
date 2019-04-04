@@ -128,3 +128,7 @@ Il faire attention à la gestion de mémoire, lors de
 - L'initialisation: allocation de la mémoire en utilisant `new`
 - L'utilisation: utiliser la syntaxe `instance_ptr->method` au lieu de `instance.method`
 - La destruction: désallouer la mémoire correctement avec `delete` ou `smart_ptr.reset()`. Aussi mettre le destructeur en `virtual`, afin que les sous-classes puissent se détruire correctement
+
+## Partie 6
+
+> Comment avez-vous implémenté ces différentes caractéristiques : comme attribut ou comme méthode ?
