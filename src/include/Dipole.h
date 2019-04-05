@@ -95,6 +95,16 @@ public:
 	virtual bool isInWall(Particle const& p) const override;
 
 	/**
+	 * Returns the percentage of the trajectory effected by the particle in the Element
+	 *
+	 * - < 0 : the Particle might be in the previous Element (if it exists)
+	 * - Between 0 and 1 : the Particle in inside the Element
+	 * - > 1 : the Particle might be in the next Element (if it exists)
+	 */
+
+	virtual double getParticleProgress(Vector3D const& pos) const override;
+
+	/**
 	 * Returns a string representation of the dipole
 	 */
 

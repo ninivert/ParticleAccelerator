@@ -41,6 +41,12 @@ bool Straight::isInWall(Particle const& p) const {
 	return ((X - (X * d) * d).norm() > getRadius());
 }
 
+double Straight::getParticleProgress(Vector3D const& pos) const {
+	Vector3D relativePos(pos - getPosIn());
+	Vector3D directionElement(getPosOut() - getPosIn());
+	return (relativePos * directionElement) / directionElement.normSquared();
+}
+
 string Straight::to_string() const {
 	stringstream stream;
 	stream

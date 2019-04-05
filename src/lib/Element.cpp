@@ -53,36 +53,27 @@ void Element::linkNext(Element & _next) {
 	_next.prev_ptr = this;
 }
 
-bool Element::isInNextElement(Particle const& p) const {
-	return (Vector3D::tripleProduct(Vector3D(0, 0, 1), p.getPos(), getPosOut()) > 0);
+double Element::getParticleProgress(Vector3D const& pos) const {
+	return 1;
 }
 
+
 void Element::updatePointedElement(Particle & p) const {
-	// if both pointers are nullptr return without changing anything by CONVENTION
-	if (next_ptr == nullptr and prev_ptr == nullptr) { return; }
-	if (next_ptr == nullptr) {
-		p.setElement(prev_ptr);
-		return;
+	double dist(getParticleProgress(p.getPos()));
+
+	if (dist < 0) {
+		if (prev_ptr != nullptr) {
+			p.setElement(prev_ptr);
+		} else {
+			EXCEPTIONS::OUTSIDE_ACCELERATOR;
+		}
+	} else if (dist > 1) {
+		if (next_ptr != nullptr) {
+			p.setElement(next_ptr);
+		} else {
+			EXCEPTIONS::OUTSIDE_ACCELERATOR;
+		}
 	}
-	if (prev_ptr == nullptr) {
-		p.setElement(next_ptr);
-		return;
-	}
-
-	// now the 2 pointers are pointing to Element
-	// which one are we closer to ?
-
-	double diffNext((p.getPos() - next_ptr->getPosIn()).normSquared());
-	double diffPrev((p.getPos() - prev_ptr->getPosOut()).normSquared());
-
-	if (diffNext < diffPrev) {
-		p.setElement(next_ptr);
-	} else if (diffNext > diffPrev){
-		p.setElement(prev_ptr);
-	}
-
-	// If same distance we will return without changing anything by CONVENTION
-	// but it should never happen normaly
 }
 
 string Element::to_string() const {

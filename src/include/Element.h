@@ -114,6 +114,16 @@ public:
 
 	virtual Vector3D getField(Vector3D const& pos) const = 0;
 
+	/**
+	 * Returns the percentage of the trajectory effected by the particle in the Element
+	 *
+	 * - < 0 : the Particle might be in the previous Element (if it exists)
+	 * - Between 0 and 1 : the Particle in inside the Element
+	 * - > 1 : the Particle might be in the next Element (if it exists)
+	 */
+
+	virtual double getParticleProgress(Vector3D const& pos) const = 0;
+
 	/****************************************************************
 	 * Methods
 	 ****************************************************************/
@@ -125,12 +135,6 @@ public:
 	 */
 
 	void linkNext(Element & _next);
-
-	/**
-	 * Returns true if the Particle p has surpassed the current element and is in the next Element
-	 */
-
-	bool isInNextElement(Particle const& p) const;
 
 	/**
 	 * Make the pointer "element_ptr" of the Particle p point to the new element in which the particle is

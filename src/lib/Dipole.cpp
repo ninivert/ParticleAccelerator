@@ -34,8 +34,18 @@ Vector3D Dipole::getField(Vector3D const& pos) const { return Vector3D(0, 0, B);
 void Dipole::setB(double const& _B) { B = _B; }
 
 /****************************************************************
- * Methods
+ * Virtual methods
  ****************************************************************/
+
+double Dipole::getParticleProgress(Vector3D const& pos) const {
+	double ix(getPosIn().getX());
+	double iy(getPosIn().getY());
+
+	double totalAngle(atan2(getPosOut().getX(), getPosOut().getY()) - atan2(ix, iy));
+	double angle(atan2(pos.getX(), pos.getY()) - atan2(ix, iy));
+
+	return angle / totalAngle;
+}
 
 string Dipole::to_string() const {
 	stringstream stream;
