@@ -63,6 +63,12 @@ namespace EXCEPTIONS {
 	inline constexpr char NOT_INSIDE_ELEMENT[]("Position given is outside the Element");
 
 	/**
+	 * Class Element : The particle is out of the Accelerator (outside the first / last Element)
+	 */
+
+	inline constexpr char OUTSIDE_ACCELERATOR[]("The Particle is now outside the accelerator (out of the first / last element)");
+
+	/**
 	 * Class Accelerator : there is no element in which to add the particle
 	 */
 

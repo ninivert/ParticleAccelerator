@@ -29,10 +29,7 @@ void Accelerator::step(double const& dt) {
 	// Step through all the particles
 	for (unique_ptr<Particle> & particle_ptr : particles_ptr) {
 		// Change the element if the particle goes out
-		if (particle_ptr->getElementPtr()->isInNextElement(*particle_ptr)) {
-			// Particle is in next element
-			particle_ptr->getElementPtr()->updatePointedElement(*particle_ptr);
-		}
+		particle_ptr->getElementPtr()->updatePointedElement(*particle_ptr);
 
 		particle_ptr->step(dt);
 	}
