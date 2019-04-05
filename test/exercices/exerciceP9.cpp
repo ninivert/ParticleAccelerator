@@ -33,13 +33,17 @@ int main() {
 		1.2
 	);
 
-	Particle p1(Vector3D(1.00984, -0.191837, 0), 2,
-				Vector3D(-210200, -2.64754e+08, 0),
-				CONSTANTS::M_PROTON);
+	Particle p1(
+		Vector3D(1.00984, -0.191837, 0), 2,
+		Vector3D(-210200, -2.64754e+08, 0),
+		CONSTANTS::M_PROTON
+	);
 
-	Particle p2(Vector3D(0.99016, -0.191837, 0), 2,
-				Vector3D(210200, -2.64754e+08, 0),
-				CONSTANTS::M_PROTON);
+	Particle p2(
+		Vector3D(0.99016, -0.191837, 0), 2,
+		Vector3D(210200, -2.64754e+08, 0),
+		CONSTANTS::M_PROTON
+	);
 
 
 	// Create accelerator

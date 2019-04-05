@@ -13,7 +13,7 @@ using namespace std;
 int main() {
 	TextRenderer engine;
 
-	Particle p1(Vector3D(1, -0.2, 0), 10, Vector3D(0.03, -1, 0.03), 0.93);
+	Particle p1(Vector3D(1, -0.2, 0), 10, Vector3D(0.03, -1, 0.03), CONSTANTS::M_PROTON);
 
 	Frodo FRODO(
 		Vector3D(1, 0, 0),

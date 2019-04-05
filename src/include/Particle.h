@@ -82,7 +82,7 @@ public:
 	 ****************************************************************/
 
 	/**
-	 * Returns a new unique_ptr constructed dynamically (to be DELETED).
+	 * Returns a new unique_ptr constructed dynamically
 	 *
 	 * This new pointer contains a polymorphic copy of the current Particle.
 	 *

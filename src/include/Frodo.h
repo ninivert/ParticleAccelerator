@@ -68,7 +68,7 @@ public:
 	 ****************************************************************/
 
 	/**
-	 * Returns a new shared_ptr constructed dynamically (to be DELETED).
+	 * Returns a new shared_ptr constructed dynamically
 	 * This new pointer contains a polymorphic copy of the current FODO element.
 	 * We are returning a pointer on Element because in Accelerator we store them as shared_ptr<Element> (for polymorphism)
 	 */
