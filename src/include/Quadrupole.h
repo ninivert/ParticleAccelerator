@@ -68,7 +68,7 @@ public:
 	 ****************************************************************/
 
 	/**
-	 * Returns a new shared_ptr constructed dynamically (to be DELETED).
+	 * Returns a new shared_ptr constructed dynamically
 	 *
 	 * This new pointer contains a polymorphic copy of the current Quadrupole element.
 	 *
