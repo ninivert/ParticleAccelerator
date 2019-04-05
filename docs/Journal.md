@@ -91,26 +91,27 @@
 	- Constructor
 	- `getField`
 	- String representation
-- Update every constructor that inherits from `Drawable` to also init `Renderer * engine_ptr`
+- Updated every constructor that inherits from `Drawable` to also init `Renderer * engine_ptr`
 - Added suffix `_ptr` to all pointers and vector of pointers
-- Move `Particle::step()` call to `exertLorentzForce` to `Accelerator::step()`
-- Transfer object property to inside the class
+- Moved `Particle::step()` call to `exertLorentzForce` to `Accelerator::step()`
+- Transfered object property to inside the class
 - Polymorphic copy
-- Change `TextRenderer::TextRenderer()` to construct directly with a filename (or nothing)
+- Changed `TextRenderer::TextRenderer()` to construct directly with a filename (or nothing)
 - `Accelerator::addParticle` bind the Particle to the first element of the Accelerator
-- Review `exerciceP9`
+- Reviewed `exerciceP9`
+- Reimplemented the method `Element::isInNextElement()` not here anymore
+	- pure virtual in `Element`
+	- projection in `Straight`
+	- method with angles and tan (compare with the one between the input and output position) in `Dipole`
+- Changed `Frodo::getField()` : remove the +0.05 at the end (needed for compilation uwu)
+- Rewrote `Element::updatePointedElement()`
 
 ## Todo
 
-- FIX DAT FUCKING WHERE PARTICLE GOES BACKWARDS
-- Rewrite `Element::updatePointedElement()`
-- Update `README.md`
-- Reimplement the method `Element::isInNextElement()`
-	- pure virtual in `Element`
-	- projection and length (compare with middle point) in `Straight`
-	- method with angles and tan (compare with the one between the input and output position) in `Dipole`
-- Change `Frodo::getField()` : remove the +0.05 at the end (needed for compilation uwu)
 - `Beam` class
+- ExerciceP10
+- Update `README.md`
+- Sextupole
 
 ## Questions
 
