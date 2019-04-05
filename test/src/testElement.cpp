@@ -35,7 +35,8 @@ int main() {
 
 	assert(p1.getElementPtr() == &dipole);
 	// We can see with that with the parameters given the particle is still in the same element
-	assert(not dipole.isInNextElement(p1));
+	double dist(dipole.getParticleProgress(p1.getPos()));
+	assert(dist <=1 and dist >= 0);
 
 	// We have to "reduce" the speed or our `operator ==` won't evaluate it correctly
 	// We are working at high speed (10e8) so small errors are way larger than our EPSILON (in globals.h)
@@ -72,7 +73,8 @@ int main() {
 
 	assert(p3.getElementPtr() == &quadru);
 	// Using exemple of P10 exercise, the particle should still be in the current element
-	assert(not quadru.isInNextElement(p3));
+	dist = quadru.getParticleProgress(p3.getPos());
+	assert(dist <=1 and dist >= 0);
 
 	// We have to "reduce" the speed or our `operator ==` won't evaluate it correctly
 	// We are working at high speed (10e8) so small errors are way larger than our EPSILON (in globals.h)
@@ -108,7 +110,9 @@ int main() {
 	p5.step();
 
 	assert(p5.getElementPtr() == &straight1);
-	assert(straight1.isInNextElement(p5));
+
+	dist = straight1.getParticleProgress(p5.getPos());
+	assert(not (dist <=1 and dist >= 0));
 
 	// We have to "reduce" the speed or our `operator ==` won't evaluate it correctly
 	// We are working at high speed (10e8) so small errors are way larger than our EPSILON (in globals.h)
@@ -130,9 +134,11 @@ int main() {
 	Particle p7(Vector3D(3.015, -1.2, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272);
 	straight2.linkNext(straight3);
 
-	assert(straight2.isInNextElement(p7));
+	dist = straight2.getParticleProgress(p7.getPos());
+	assert(not (dist <=1 and dist >= 0));
 	straight2.updatePointedElement(p7);
-	assert(not straight3.isInNextElement(p7));
+	dist = straight3.getParticleProgress(p7.getPos());
+	assert(dist <=1 and dist >= 0);
 
 	/**
 	 * For manual comparaison with the testAccelerator.cpp in the updateParticleElement test (near the end)

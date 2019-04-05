@@ -18,7 +18,7 @@ int main() {
 	TextRenderer engine;
 
 	// File stream engine
-	TextRenderer engineToFile("accelerator.log");
+	TextRenderer engineToFile("log/accelerator.log");
 
 
 	// Make the elements
@@ -45,7 +45,6 @@ int main() {
 	// Log to file engine using drawTo(Renderer * engine)
 	acc.drawTo(&engineToFile);
 	// Log to cout using draw()
-	// acc.draw();
 
 	return 0;
 }
