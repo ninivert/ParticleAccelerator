@@ -78,6 +78,10 @@ testException.o: testException.cpp
 	@$(CXX) $(CXXFLAGS) -c $< -o $(OPATH)/$@ -I ./
 	@echo $(OK_STRING) $(COMPILED_STRING) $<
 
+testCircular.o: testCircular.cpp
+	@$(CXX) $(CXXFLAGS) -c $< -o $(OPATH)/$@ -I ./
+	@echo $(OK_STRING) $(COMPILED_STRING) $<
+
 exerciceP9.o: exerciceP9.cpp
 	@$(CXX) $(CXXFLAGS) -c $< -o $(OPATH)/$@ -I ./
 	@echo $(OK_STRING) $(COMPILED_STRING) $<
@@ -116,6 +120,10 @@ testException.bin: testException.o Test.o
 	@echo $(OK_STRING) $(LINKED_STRING) $@
 
 testRenderer.bin: testRenderer.o Test.o Renderer.o TextRenderer.o Drawable.o Accelerator.o Element.o Dipole.o Particle.o Convert.o Quadrupole.o Straight.o Frodo.o Vector3D.o
+	@$(CXX) $(CXXFLAGS) $(addprefix $(OPATH)/, $(notdir $^)) -o $(BPATH)/$@
+	@echo $(OK_STRING) $(LINKED_STRING) $@
+
+testCircular.bin: testCircular.o Test.o Renderer.o TextRenderer.o Drawable.o Accelerator.o Element.o Dipole.o Particle.o Convert.o Quadrupole.o Straight.o Frodo.o Vector3D.o
 	@$(CXX) $(CXXFLAGS) $(addprefix $(OPATH)/, $(notdir $^)) -o $(BPATH)/$@
 	@echo $(OK_STRING) $(LINKED_STRING) $@
 
