@@ -172,6 +172,14 @@ private:
 
 	void clearDeadParticles();
 
+	/**
+	 * Initialization of a particle by searching which element is the closest
+	 *
+	 * Private: this method should only be used internally in Accelerator::addParticle()
+	 */
+
+	void initOneParticle(Particle & particle) const;
+
 	/****************************************************************
 	 * Attributes
 	 ****************************************************************/

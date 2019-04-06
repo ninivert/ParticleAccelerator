@@ -24,8 +24,6 @@ void Accelerator::step(double const& dt) {
 	// Do nothing if dt is null
 	if (abs(dt) < GLOBALS::DELTA) { return; }
 
-	clearDeadParticles();
-
 	// Step through all the particles
 	for (unique_ptr<Particle> & particle_ptr : particles_ptr) {
 		// Change the element if the particle goes out
@@ -33,6 +31,9 @@ void Accelerator::step(double const& dt) {
 
 		particle_ptr->step(dt);
 	}
+
+	// At the end because we can't initialize particles outside the accelerator
+	clearDeadParticles();
 }
 
 void Accelerator::addElement(Element const& element) {
@@ -54,7 +55,7 @@ void Accelerator::addParticle(Particle const& particle) {
 	// Protection against no element to point to
 	if (elements_ptr.size() > 0) {
 		particles_ptr.push_back(particle.copy());
-		particles_ptr[particles_ptr.size() - 1]->setElement(elements_ptr[0].get());
+		initOneParticle(*particles_ptr[particles_ptr.size() - 1]);
 	} else {
 		ERROR(EXCEPTIONS::NO_ELEMENTS);
 	}
@@ -68,6 +69,24 @@ void Accelerator::closeElementLoop() {
 		} else {
 			ERROR(EXCEPTIONS::ELEMENT_LOOP_INCOMPLETE);
 		}
+	}
+}
+
+void Accelerator::initOneParticle(Particle & particle) const {
+	bool found(false);
+	size_t index(0);
+	do {
+		double const pos(elements_ptr[index]->getParticleProgress(particle.getPos()));
+		bool const inWall(elements_ptr[index]->isInWall(particle));
+		if ((pos >= 0 and pos <= 1) and (not inWall)) {
+			found = true;
+			particle.setElement(elements_ptr[index].get());
+		}
+		++index;
+	} while ((not found) and index < elements_ptr.size());
+
+	if (not found) {
+		ERROR(EXCEPTIONS::PARTICLE_NOT_IN_ACCELERATOR);
 	}
 }
 

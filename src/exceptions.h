@@ -87,6 +87,12 @@ namespace EXCEPTIONS {
 	inline constexpr char ELEMENT_LOOP_INCOMPLETE[]("The last element needs to have the same output position as the input position of the first element of the accelerator");
 
 	/**
+	 * Class Accelerator : the particle given to initialize is outside the accelerator
+	 */
+
+	inline constexpr char PARTICLE_NOT_IN_ACCELERATOR[]("The particle to initialize is outside the Accelerator");
+
+	/**
 	 * Class TextRenderer : opening fstream for writing to a file did not succeed
 	 */
 
