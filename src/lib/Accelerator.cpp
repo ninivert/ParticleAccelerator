@@ -55,7 +55,7 @@ void Accelerator::addParticle(Particle const& particle) {
 	// Protection against no element to point to
 	if (elements_ptr.size() > 0) {
 		particles_ptr.push_back(particle.copy());
-		initOneParticle(*particles_ptr[particles_ptr.size() - 1]);
+		initParticleToClosestElement(*particles_ptr[particles_ptr.size() - 1]);
 	} else {
 		ERROR(EXCEPTIONS::NO_ELEMENTS);
 	}
@@ -72,7 +72,7 @@ void Accelerator::closeElementLoop() {
 	}
 }
 
-void Accelerator::initOneParticle(Particle & particle) const {
+void Accelerator::initParticleToClosestElement(Particle & particle) const {
 	bool found(false);
 	size_t index(0);
 	do {

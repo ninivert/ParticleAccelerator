@@ -178,7 +178,7 @@ private:
 	 * Private: this method should only be used internally in Accelerator::addParticle()
 	 */
 
-	void initOneParticle(Particle & particle) const;
+	void initParticleToClosestElement(Particle & particle) const;
 
 	/****************************************************************
 	 * Attributes
