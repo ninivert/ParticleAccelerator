@@ -36,7 +36,7 @@ int main() {
 		acc.addElement(Dipole(
 			pos_dep,
 			pos_fin,
-			0.1, 1, 5
+			0.1, 1, 5.89158
 			));
 
 		pos_dep = pos_fin;
@@ -63,7 +63,9 @@ int main() {
 	// Render the accelerator
 	// acc.draw();
 
-	for (int i = 0; i < 1150; ++i) {
+	//1 : 4660 value near which the second particle added goes out
+	//2 : 4869 value near which the first particle added goes out
+	for (int i = 0; i < 4661; ++i) {
 		acc.step();
 	}
 
