@@ -18,20 +18,20 @@ int main() {
 		// Tests for Elements and Particles
 	Dipole dipole_1(Vector3D(1, 0, 0), Vector3D(0, -1, 0), 0.1, -1, 7);
 		// clearDeadParticles
-	Straight straight_4(Vector3D(3, 0, 0), Vector3D(-2, -1, 0), 0.1);
+	Straight straight_4(Vector3D(3, 0, 0), Vector3D(-2, -1, 0), 0.08);
 
 	// Make particles
  	Particle part_1(Vector3D(3.015, -1.2, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272);
-	Particle part_2(Vector3D(1.00984, -0.191837, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272);
+	Particle part_2(Vector3D(1.00984, -0.091837, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272);
 	Particle part_3(Vector3D(0.99016, -0.191837, 0), 2, Vector3D(-210200, -2.64754e8, 0), 0.938272);
 	Particle part_4(Vector3D(2.99, -0.01, 0), Vector3D(0, 0, 0), 0.938272);
 	Particle part_5(Vector3D(-2, -1, 0), Vector3D(1e8, 1e8, 0), 0.938272);
-	Particle part_6(Vector3D(3.015, -1.2, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272);
-	Particle part_7(Vector3D(0.5, -0.513, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272);
-	Particle part_8(Vector3D(1.25, -11.2, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272);
-	Particle part_9(Vector3D(7.015, 4.21, 4), Vector3D(-210200, -2.64754e8, 0), 0.938272);
-	Particle part_10(Vector3D(-2.015, -1.01, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272);
-	Particle part_11(Vector3D(-2, -1, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272);
+	Particle part_6(Vector3D(2.55, -0.0099, 0), Vector3D(-2.64e7, 2.64754e8, 0), 0.938272);
+	Particle part_7(Vector3D(0.5, -0.501, 0), Vector3D(-210200, 64754, 0), 0.938272);
+	Particle part_8(Vector3D(0.5, -0.58, 0), Vector3D(2e7, -2.754e8, 0), 0.938272);
+	Particle part_9(Vector3D(-2, -0.92, 0), Vector3D(2.99e7, 2.45e8, 0), 0.938272);
+	Particle part_10(Vector3D(-1.95, -0.95, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272);
+	Particle part_11(Vector3D(-2, -1, 0), Vector3D(0, 2, 0), 0.938272);
 
 	/****************************************************************
 	 * Tests for EXCEPTIONS
@@ -61,16 +61,12 @@ int main() {
 	 ****************************************************************/
 
 	acc.addElement(dipole_1);
-	acc.addParticle(part_1);
 	acc.addParticle(part_2);
-
-	// Tests Particle and Dipole
 
 	// Manual comparaison because we are not allowed
 	// to access directly to the particles stored in acc
 
 	// cout << acc << endl;
-	// cout << part_1 << endl;
 	// cout << part_2 << endl;
 
 	acc.clearParticles();
@@ -95,7 +91,35 @@ int main() {
 
 	// Manual comparaison because we are not allowed
 	// to access directly to the particles stored in acc
-	// We can just count the number of particles which are still in the acc
+
+	// We can just count the number of particles
+	// which are still in the acc after 1 step
+
+	// cout << acc << endl;
+	acc.step();
+	// cout << acc << endl;
+
+	acc.clear();
+
+	/****************************************************************
+	 * Particle not in accelerator
+	 ****************************************************************/
+
+	acc.addElement(Dipole(Vector3D(1, 0, 0), Vector3D(0, -1, 0), 0.0001, 1, 7));
+	acc.addElement(Straight(Vector3D(0, -1, 0), Vector3D(-2, -1, 0), 0.1));
+
+	// Juuust outside dipole
+	ASSERT_EXCEPTION(acc.addParticle(Particle(Vector3D(1, 0.1, 0), Vector3D(), CONSTANTS::M_PROTON)), EXCEPTIONS::PARTICLE_NOT_IN_ACCELERATOR);
+
+	acc.clearParticles();
+	// Juuuust inside dipole
+	acc.addParticle(Particle(Vector3D(1, 0, 0), 10, Vector3D(-1, -1, 0), CONSTANTS::M_PROTON));
+	// Just in the the dipole
+	acc.addParticle(Particle(Vector3D(sqrt(2) / 2, -sqrt(2) / 2, 0), Vector3D(0.5, 2, 2), CONSTANTS::M_PROTON));
+	// Just in the the dipole (go out after 1 acc.step())
+	acc.addParticle(Particle(Vector3D(sqrt(2) / 2 + 0.00007, -sqrt(2) / 2 - 0.00007, 0), 10, Vector3D(0.5, 2, 0), CONSTANTS::M_PROTON));
+	// At the edge between the dipole and straight
+	acc.addParticle(Particle(Vector3D(0, -1, 0), Vector3D(-1e8, 0, 0), CONSTANTS::M_PROTON));
 
 	// cout << acc << endl;
 	acc.step();

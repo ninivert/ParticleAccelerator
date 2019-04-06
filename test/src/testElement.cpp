@@ -141,7 +141,7 @@ int main() {
 	assert(dist <=1 and dist >= 0);
 
 	/**
-	 * For manual comparaison with the testAccelerator.cpp in the updateParticleElement test (near the end)
+	 * For manual comparaison
 	 */
 
 	// p7.step();
