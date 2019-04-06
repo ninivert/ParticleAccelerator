@@ -30,7 +30,7 @@ ERROR_STRING := "\033[32m"ERROR"\033[0m"
 # and where to put exec files (TARGET)
 ##################################################################
 
-TARGETS := testVector3D testParticle testElement testAccelerator testConvert testException testRenderer testFrodo exerciceP9
+TARGETS := testVector3D testParticle testElement testAccelerator testConvert testException testRenderer testFrodo exerciceP9 exerciceP10
 OPATH := build
 BPATH := bin
 DOXYPATH := doxydocs
@@ -86,6 +86,10 @@ exerciceP9.o: exerciceP9.cpp
 	@$(CXX) $(CXXFLAGS) -c $< -o $(OPATH)/$@ -I ./
 	@echo $(OK_STRING) $(COMPILED_STRING) $<
 
+exerciceP10.o: exerciceP10.cpp
+	@$(CXX) $(CXXFLAGS) -c $< -o $(OPATH)/$@ -I ./
+	@echo $(OK_STRING) $(COMPILED_STRING) $<
+
 
 ##################################################################
 # Links editor and creation of executables
@@ -128,6 +132,10 @@ testCircular.bin: testCircular.o Test.o Renderer.o TextRenderer.o Drawable.o Acc
 	@echo $(OK_STRING) $(LINKED_STRING) $@
 
 exerciceP9.bin: Vector3D.o Particle.o Convert.o Element.o Dipole.o Quadrupole.o Straight.o Accelerator.o Drawable.o Renderer.o TextRenderer.o exerciceP9.o
+	@$(CXX) $(CXXFLAGS) $(addprefix $(OPATH)/, $(notdir $^)) -o $(BPATH)/$@
+	@echo $(OK_STRING) $(LINKED_STRING) $@
+
+exerciceP10.bin: Vector3D.o Particle.o Convert.o Element.o Dipole.o Quadrupole.o Straight.o Frodo.o Accelerator.o Drawable.o Renderer.o TextRenderer.o exerciceP10.o
 	@$(CXX) $(CXXFLAGS) $(addprefix $(OPATH)/, $(notdir $^)) -o $(BPATH)/$@
 	@echo $(OK_STRING) $(LINKED_STRING) $@
 
