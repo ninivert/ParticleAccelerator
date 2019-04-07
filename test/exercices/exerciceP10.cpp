@@ -63,9 +63,12 @@ int main() {
 	// Render the accelerator
 	// acc.draw();
 
-	//1 : 4660 value near which the second particle added goes out
-	//2 : 4869 value near which the first particle added goes out
-	for (int i = 0; i < 300000; ++i) {
+	//1 : 4661 value near which the second particle added goes out
+	//2 : 4870 value near which the first particle added goes out
+
+	// 451244 second one goes out
+	// 461779 first one goes out
+	for (int i = 0; i < 451243; ++i) {
 		acc.step();
 	}
 

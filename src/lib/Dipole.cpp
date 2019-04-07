@@ -25,7 +25,7 @@ shared_ptr<Dipole> Dipole::cloneThis() const {
  * Getters (virtual)
  ****************************************************************/
 
-Vector3D Dipole::getField(Vector3D const& pos) const { return Vector3D(0, 0, B); }
+Vector3D Dipole::getField(Vector3D const& pos, bool const& methodChapi) const { return Vector3D(0, 0, B); }
 
 /****************************************************************
  * Setters
@@ -37,7 +37,7 @@ void Dipole::setB(double const& _B) { B = _B; }
  * Virtual methods
  ****************************************************************/
 
-double Dipole::getParticleProgress(Vector3D const& pos) const {
+double Dipole::getParticleProgress(Vector3D const& pos, bool const& methodChapi) const {
 	double ix(getPosIn().getX());
 	double iy(getPosIn().getY());
 

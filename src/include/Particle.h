@@ -189,7 +189,7 @@ public:
 	 * If `dt` is null (aka inferior to GLOBALS::DELTA), then this doesn't do anything
 	 */
 
-	void step(double const& dt = GLOBALS::DT);
+	void step(double const& dt = GLOBALS::DT, bool const& methodChapi = false);
 
 	/**
 	 * Exerts a force onto a particle until the next `step` is called.

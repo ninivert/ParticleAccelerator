@@ -39,7 +39,7 @@ public:
 	 * Can be used as a default constructor
 	 */
 
-	explicit Accelerator(Renderer * engine_ptr = nullptr);
+	explicit Accelerator(Renderer * engine_ptr = nullptr, bool const& methodChapi = true);
 
 	/**
 	 * Destructor calls the Accelerator::clear() method
@@ -199,6 +199,8 @@ private:
 	 */
 
 	std::vector<std::shared_ptr<Element>> elements_ptr;
+
+	bool const methodChapi;
 };
 
 /**

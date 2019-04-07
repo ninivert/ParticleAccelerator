@@ -50,29 +50,26 @@ shared_ptr<Frodo> Frodo::cloneThis() const {
 
 using namespace std;
 
-Vector3D Frodo::getField(Vector3D const& pos) const {
-	if (not focalizer.isInNextElement(pos)) {
-		return focalizer.getField(pos);
-	} else if (firstStraight.isInNextElement(pos)) {
-		return Vector3D();
-	} else if (not defocalizer.isInNextElement(pos)) {
-		return defocalizer.getField(pos);
+Vector3D Frodo::getField(Vector3D const& pos, bool const& methodChapi) const {
+
+	if (methodChapi) {
+		if (not (Vector3D::tripleProduct(Vector3D(0, 0, 1), pos, focalizer.getPosOut()) >= 0)) {
+			return focalizer.getField(pos);
+		} else if (not (Vector3D::tripleProduct(Vector3D(0, 0, 1), pos, firstStraight.getPosOut()) >= 0)) {
+			return Vector3D();
+		} else if (not (Vector3D::tripleProduct(Vector3D(0, 0, 1), pos, defocalizer.getPosOut()) >= 0)) {
+			return defocalizer.getField(pos);
+		}
 	} else {
-		return Vector3D();
+		double dist(getParticleProgress(pos));	// Linear for straight
+		double length(2 * (lensLength + straightLength));
+		if (dist >= 0 and dist <= lensLength / length) {
+			return focalizer.getField(pos);
+		} else if (dist >= (lensLength + straightLength) / length and (dist <= 2 * lensLength + straightLength) / length) {
+			return defocalizer.getField(pos);
+		}
 	}
-
-	// double dist(getParticleProgress(pos));	// Linear for straight
-	// double length(2 * (lensLength + straightLength));
-	// if (dist >= 0 and dist <= lensLength / length) {
-	// 	return focalizer.getField(pos);
-	// } else if (dist >= (lensLength + straightLength) / length and (dist <= 2 * lensLength + straightLength) / length) {
-	// 	return defocalizer.getField(pos);
-	// }
-
-	// cout << "Particle is at " << l << endl;
-	// cout << "Field is " << field << endl;
-
-	// return Vector3D();
+	return Vector3D();
 }
 
 /****************************************************************

@@ -112,7 +112,7 @@ public:
 	 * Returns a Vector3D representing the magnetic field at the position pos
 	 */
 
-	virtual Vector3D getField(Vector3D const& pos) const = 0;
+	virtual Vector3D getField(Vector3D const& pos, bool const& methodChapi = false) const = 0;
 
 	/**
 	 * Returns the percentage of the trajectory effected by the particle in the Element
@@ -122,10 +122,7 @@ public:
 	 * - > 1 : the Particle might be in the next Element (if it exists)
 	 */
 
-	virtual double getParticleProgress(Vector3D const& pos) const = 0;
-
-
-	bool isInNextElement(Vector3D const& p) const;
+	virtual double getParticleProgress(Vector3D const& pos, bool const& methodChapi = false) const = 0;
 
 	/****************************************************************
 	 * Methods
@@ -150,7 +147,7 @@ public:
 	 * If the distance are the same are both prev and next are nullptr we will return the ancient element without doing anything by CONVENTION, but it should never happen normally
 	 */
 
-	void updatePointedElement(Particle & p) const;
+	void updatePointedElement(Particle & p, bool const& methodChapi = false) const;
 
 	/****************************************************************
 	 * Virtual methods

@@ -6,8 +6,8 @@ using namespace std;
  * Constructor
  ****************************************************************/
 
-Accelerator::Accelerator(Renderer * engine_ptr)
-: Drawable(engine_ptr)
+Accelerator::Accelerator(Renderer * engine_ptr, bool const& methodChapi)
+: Drawable(engine_ptr), methodChapi(methodChapi)
 {}
 
 /****************************************************************
@@ -27,9 +27,9 @@ void Accelerator::step(double const& dt) {
 	// Step through all the particles
 	for (unique_ptr<Particle> & particle_ptr : particles_ptr) {
 		// Change the element if the particle goes out
-		particle_ptr->getElementPtr()->updatePointedElement(*particle_ptr);
+		particle_ptr->getElementPtr()->updatePointedElement(*particle_ptr, methodChapi);
 
-		particle_ptr->step(dt);
+		particle_ptr->step(dt, methodChapi);
 	}
 
 	// At the end because we can't initialize particles outside the accelerator
@@ -76,7 +76,7 @@ void Accelerator::initParticleToClosestElement(Particle & particle) const {
 	bool found(false);
 	size_t index(0);
 	do {
-		double const pos(elements_ptr[index]->getParticleProgress(particle.getPos()));
+		double const pos(elements_ptr[index]->getParticleProgress(particle.getPos(), methodChapi));
 		bool const inWall(elements_ptr[index]->isInWall(particle));
 		if ((pos >= 0 and pos <= 1) and (not inWall)) {
 			found = true;

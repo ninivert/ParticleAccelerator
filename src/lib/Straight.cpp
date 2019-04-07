@@ -28,7 +28,7 @@ shared_ptr<Straight> Straight::cloneThis() const {
  * Getter (virtual)
  ****************************************************************/
 
-Vector3D Straight::getField(Vector3D const& pos) const { return Vector3D(0, 0, 0); }
+Vector3D Straight::getField(Vector3D const& pos, bool const& methodChapi) const { return Vector3D(0, 0, 0); }
 
 /****************************************************************
  * Virtual methods
@@ -41,7 +41,7 @@ bool Straight::isInWall(Particle const& p) const {
 	return ((X - (X * d) * d).norm() > getRadius());
 }
 
-double Straight::getParticleProgress(Vector3D const& pos) const {
+double Straight::getParticleProgress(Vector3D const& pos, bool const& methodChapi) const {
 	Vector3D relativePos(pos - getPosIn());
 	Vector3D directionElement(getPosOut() - getPosIn());
 	return (relativePos * directionElement) / directionElement.normSquared();

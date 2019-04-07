@@ -85,7 +85,7 @@ public:
 	 * Returns a Vector3D representing the magnetic field at the position pos
 	 */
 
-	virtual Vector3D getField(Vector3D const& pos) const override;
+	virtual Vector3D getField(Vector3D const& pos, bool const& methodChapi = false) const override;
 
 	/****************************************************************
 	 * Virtual methods

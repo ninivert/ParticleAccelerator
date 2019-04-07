@@ -72,7 +72,7 @@ public:
 	 * By convention the magnetic field is alongside the direction of the third vector of the canonical basis (Vector3D(0, 0, 1))
 	 */
 
-	virtual Vector3D getField(Vector3D const& pos) const override;
+	virtual Vector3D getField(Vector3D const& pos, bool const& methodChapi = false) const override;
 
 	/****************************************************************
 	 * Setter
@@ -102,7 +102,7 @@ public:
 	 * - > 1 : the Particle might be in the next Element (if it exists)
 	 */
 
-	virtual double getParticleProgress(Vector3D const& pos) const override;
+	virtual double getParticleProgress(Vector3D const& pos, bool const& methodChapi = false) const override;
 
 	/**
 	 * Returns a string representation of the dipole

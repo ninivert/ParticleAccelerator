@@ -154,7 +154,7 @@ string Particle::to_string() const {
  * Physics engine
  ****************************************************************/
 
-void Particle::step(double const& dt) {
+void Particle::step(double const& dt, bool const& methodChapi) {
 	// Do nothing if dt is null
 	if (abs(dt) < GLOBALS::DELTA) { return; }
 
@@ -164,7 +164,7 @@ void Particle::step(double const& dt) {
 	// A particle can live freely without an Element so no return of EXCEPTIONS::NULLPTR in the other case
 	// In that case you have to do a Particle::exertLorentzForce by yourself
 	if (element_ptr != nullptr) {
-		exertLorentzForce(element_ptr->getField(pos), dt);
+		exertLorentzForce(element_ptr->getField(pos, methodChapi), dt);
 	}
 
 	momentum += getMass() * dt * lambda * getForces();

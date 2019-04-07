@@ -83,7 +83,7 @@ public:
 	 * In the Straight class the Electric and Magnetic fields are null so it returns the 0 vector
 	 */
 
-	virtual Vector3D getField(Vector3D const& pos) const override;
+	virtual Vector3D getField(Vector3D const& pos, bool const& methodChapi = false) const override;
 
 	/****************************************************************
 	 * Virtual methods
@@ -103,7 +103,7 @@ public:
 	 * - > 1 : the Particle might be in the next Element (if it exists)
 	 */
 
-	virtual double getParticleProgress(Vector3D const& pos) const override;
+	virtual double getParticleProgress(Vector3D const& pos, bool const& methodChapi = false) const override;
 
 	/**
 	 * Returns a string representation of the straight element

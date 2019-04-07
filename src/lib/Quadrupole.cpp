@@ -28,7 +28,7 @@ shared_ptr<Quadrupole> Quadrupole::cloneThis() const {
  * Getter (virtual)
  ****************************************************************/
 
-Vector3D Quadrupole::getField(Vector3D const& pos) const {
+Vector3D Quadrupole::getField(Vector3D const& pos, bool const& methodChapi) const {
 	Vector3D Jean_Albert(pos - getPosIn());				// X
 	Vector3D Gertrude(getPosOut() - getPosIn());		// d
 	~Gertrude;

@@ -85,7 +85,7 @@ public:
 	 * In the Straight class the Electric and Magnetic fields are null so it returns the 0 vector
 	 */
 
-	virtual Vector3D getField(Vector3D const& pos) const override;
+	virtual Vector3D getField(Vector3D const& pos, bool const& methodChapi = false) const override;
 
 	/****************************************************************
 	 * Virtual methods
