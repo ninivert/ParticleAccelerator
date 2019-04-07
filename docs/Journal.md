@@ -114,6 +114,7 @@
 - Sextupole
 - Modify Particle::step() -> deplacer le exertLorentzForce()
 	- what if it is just a particle and an Element ? -> not in Accelerator
+- Improve `Drawable`: fuse `draw` and `drawTo` to automatically search for the good engine
 
 ## Questions
 

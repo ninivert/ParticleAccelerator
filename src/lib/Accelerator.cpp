@@ -159,6 +159,28 @@ void Accelerator::draw() const {
 }
 
 void Accelerator::drawTo(Renderer * engine_ptr) const {
-	if (engine_ptr == nullptr) ERROR(EXCEPTIONS::NULLPTR);
+	// No engine specified, try to substitute it ?
+	if (engine_ptr == nullptr) {
+		// Do we have another engine ?
+		if (this->engine_ptr == nullptr) {
+			ERROR(EXCEPTIONS::NULLPTR);
+		} else {
+			engine_ptr = this->engine_ptr;
+		}
+	}
 	engine_ptr->draw(*this);
+}
+
+void Accelerator::drawParticles() const {
+	if (engine_ptr == nullptr) ERROR(EXCEPTIONS::NULLPTR);
+	for (unique_ptr<Particle> const& particle_ptr : particles_ptr) {
+		particle_ptr->drawTo(engine_ptr);
+	}
+}
+
+void Accelerator::drawElements() const {
+	if (engine_ptr == nullptr) ERROR(EXCEPTIONS::NULLPTR);
+	for (shared_ptr<Element> const& element_ptr : elements_ptr) {
+		element_ptr->drawTo(engine_ptr);
+	}
 }

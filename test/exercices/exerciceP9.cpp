@@ -47,7 +47,7 @@ int main() {
 
 
 	// Create accelerator
-	Accelerator acc;
+	Accelerator acc(&engine);
 	acc.addElement(D1);
 	acc.addElement(S1);
 	acc.addElement(Q1);
@@ -55,7 +55,7 @@ int main() {
 	acc.addParticle(p2);
 
 	// Render the accelerator
-	// acc.drawTo(&engine);
+	acc.drawTo();
 
 	acc.clear();
 

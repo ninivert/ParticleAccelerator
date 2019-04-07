@@ -153,7 +153,19 @@ public:
 	 * Draw the vector using a given renderer
 	 */
 
-	virtual void drawTo(Renderer * engine_ptr) const override;
+	virtual void drawTo(Renderer * engine_ptr = nullptr) const override;
+
+	/**
+	 * Draw particles only
+	 */
+
+	void drawParticles() const;
+
+	/**
+	 * Draw elements only
+	 */
+
+	void drawElements() const;
 
 private:
 
@@ -204,6 +216,10 @@ private:
 	 */
 
 	std::vector<std::shared_ptr<Element>> elements_ptr;
+
+	/**
+	 * SALE TRES SALE BEURK
+	 */
 
 	bool const methodChapi;
 };
