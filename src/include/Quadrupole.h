@@ -83,6 +83,8 @@ public:
 
 	/**
 	 * Returns a Vector3D representing the magnetic field at the position pos
+	 *
+	 * methodChapi is useless here, but we need to put it in order to avoid Quadrupole to be an abstract class
 	 */
 
 	virtual Vector3D getField(Vector3D const& pos, bool const& methodChapi = false) const override;

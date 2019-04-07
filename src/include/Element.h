@@ -110,12 +110,16 @@ public:
 
 	/**
 	 * Returns a Vector3D representing the magnetic field at the position pos
+	 *
+	 * The methodChapi is only used in Frodo::getField()
 	 */
 
 	virtual Vector3D getField(Vector3D const& pos, bool const& methodChapi = false) const = 0;
 
 	/**
 	 * Returns the percentage of the trajectory effected by the particle in the Element
+	 *
+	 * Possibility to choose between the method wanted by Chap (returned value is always positive) or a method that does not approximate the accelerator by a circle
 	 *
 	 * - < 0 : the Particle might be in the previous Element (if it exists)
 	 * - Between 0 and 1 : the Particle in inside the Element
@@ -138,6 +142,8 @@ public:
 
 	/**
 	 * Make the pointer "element_ptr" of the Particle p point to the new element in which the particle is
+	 *
+	 * Depends on the method wanted (approximation of the accelerator by a circle or not)
 	 *
 	 * Used primarily in Accelerator::updateParticleElement(Particle&)
 	 *

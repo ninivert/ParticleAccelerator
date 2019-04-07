@@ -113,6 +113,7 @@
 - Update `README.md`
 - Sextupole
 - Modify Particle::step() -> deplacer le exertLorentzForce()
+	- what if it is just a particle and an Element ? -> not in Accelerator
 
 ## Questions
 

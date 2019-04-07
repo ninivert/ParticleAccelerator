@@ -82,7 +82,7 @@ public:
 	/**
 	 * Returns a Vector3D Field at the position pos
 	 *
-	 * In the Straight class the Electric and Magnetic fields are null so it returns the 0 vector
+	 * Possibility to choose between the method wanted by Chap (returned value is always positive) or a method that does not approximate the accelerator by a circle
 	 */
 
 	virtual Vector3D getField(Vector3D const& pos, bool const& methodChapi = false) const override;
@@ -90,12 +90,6 @@ public:
 	/****************************************************************
 	 * Virtual methods
 	 ****************************************************************/
-
-	/**
-	 * Returns true if the Particle p is outside the straight element (touched the wall)
-	 */
-
-	// virtual bool isInWall(Particle const& p) const override;
 
 	/**
 	 * Returns a string representation of the straight element

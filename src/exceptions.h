@@ -44,16 +44,16 @@ namespace EXCEPTIONS {
 	inline constexpr char NULLPTR[]("Pointer may not be a nullptr");
 
 	/**
-	 * Class Element : Input and output positions are colinear
+	 * Class Element : Input and output positions are colinear on the line passing through the origin
 	 */
 
-	inline constexpr char BAD_ORIENTATION[]("Input and output positions are colinear");
+	inline constexpr char BAD_ORIENTATION[]("Input and output positions are colinear on the line passing through the origin");
 
 	/**
-	 * Class Element : Element is going into the wrong direction
+	 * Class Element : Element is going into the wrong direction (counter-clockwise)
 	 */
 
-	inline constexpr char BAD_DIRECTION[]("Element is facing the wrong direction");
+	inline constexpr char BAD_DIRECTION[]("Element is facing the wrong direction (counter-clockwise)");
 
 	/**
 	 * Class Element : Some particle is not in the element and should therefore not have called

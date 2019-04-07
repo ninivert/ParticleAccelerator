@@ -69,6 +69,8 @@ public:
 	/**
 	 * Returns a Vector3D representing the magnetic field at the position pos
 	 *
+	 * methodChapi is useless here, but we need to put it in order to avoid Quadrupole to be an abstract class
+	 *
 	 * By convention the magnetic field is alongside the direction of the third vector of the canonical basis (Vector3D(0, 0, 1))
 	 */
 
@@ -96,6 +98,8 @@ public:
 
 	/**
 	 * Returns the percentage of the trajectory effected by the particle in the Element
+	 *
+	 * Possibility to choose between the method wanted by Chap (returned value is always positive) or a method that does not approximate the accelerator by a circle
 	 *
 	 * - < 0 : the Particle might be in the previous Element (if it exists)
 	 * - Between 0 and 1 : the Particle in inside the Element

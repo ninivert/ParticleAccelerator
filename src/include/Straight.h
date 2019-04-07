@@ -80,6 +80,8 @@ public:
 	/**
 	 * Returns a Vector3D Field at the position pos
 	 *
+	 * methodChapi is useless here, but we need to put it in order to avoid Straight to be an abstract class
+	 *
 	 * In the Straight class the Electric and Magnetic fields are null so it returns the 0 vector
 	 */
 
@@ -97,6 +99,8 @@ public:
 
 	/**
 	 * Returns the percentage of the trajectory effected by the particle in the Element
+	 *
+	 * Possibility to choose between the method wanted by Chap (returned value is always positive) or a method that does not approximate the accelerator by a circle
 	 *
 	 * - < 0 : the Particle might be in the previous Element (if it exists)
 	 * - Between 0 and 1 : the Particle in inside the Element

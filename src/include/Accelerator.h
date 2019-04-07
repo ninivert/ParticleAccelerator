@@ -34,6 +34,11 @@ public:
 	/**
 	 * Constructor with init of the pointer to a `Renderer` inherited from `Drawable`
 	 *
+	 * Possibility to choose which representation of the accelerator we want (methodChapi)
+	 *
+	 * - true : The accelerator is represented by a circle
+	 * - false : It is represented as it would look in real life
+	 *
 	 * The constructor is explicit to prevent accidental type casting.
 	 *
 	 * Can be used as a default constructor
