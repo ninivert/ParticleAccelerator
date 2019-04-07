@@ -186,6 +186,8 @@ public:
 	/**
 	 * Integrates the movement equations over a time step `dt`, which defaults to `GLOBALS::DT(1e-11)`.
 	 *
+	 * We need the methodChapi for the getField (if it's a FODO element)
+	 *
 	 * If `dt` is null (aka inferior to GLOBALS::DELTA), then this doesn't do anything
 	 */
 

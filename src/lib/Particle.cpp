@@ -124,23 +124,23 @@ string Particle::to_string() const {
 		<< setw(STYLES::PADDING_LG) << CONVERT::EnergySItoGeV(getEnergy())
 		<< " (" << UNITS::ENERGY << ")"
 		<< endl
-		// Mass
-		<< setw(STYLES::PADDING_XSM) << ""
-		<< setw(STYLES::PADDING_MD) << "Mass"
-		<< setw(STYLES::PADDING_LG) << CONVERT::MassSItoGeV(mass)
-		<< " (" << UNITS::MASS << ")"
-		<< endl
-		// Charge
-		<< setw(STYLES::PADDING_XSM) << ""
-		<< setw(STYLES::PADDING_MD) << "Charge"
-		<< setw(STYLES::PADDING_LG) << getCharge()
-		<< " (" << UNITS::CHARGE << ")"
-		<< endl
-		// Forces
-		<< setw(STYLES::PADDING_XSM) << ""
-		<< setw(STYLES::PADDING_MD) << "Forces"
-		<< setw(STYLES::PADDING_LG) << getForces()
-		<< " (" << UNITS::FORCE << ")"
+		// // Mass
+		// << setw(STYLES::PADDING_XSM) << ""
+		// << setw(STYLES::PADDING_MD) << "Mass"
+		// << setw(STYLES::PADDING_LG) << CONVERT::MassSItoGeV(mass)
+		// << " (" << UNITS::MASS << ")"
+		// << endl
+		// // Charge
+		// << setw(STYLES::PADDING_XSM) << ""
+		// << setw(STYLES::PADDING_MD) << "Charge"
+		// << setw(STYLES::PADDING_LG) << getCharge()
+		// << " (" << UNITS::CHARGE << ")"
+		// << endl
+		// // Forces
+		// << setw(STYLES::PADDING_XSM) << ""
+		// << setw(STYLES::PADDING_MD) << "Forces"
+		// << setw(STYLES::PADDING_LG) << getForces()
+		// << " (" << UNITS::FORCE << ")"
 		// << endl
 		// // Element
 		// << setw(STYLES::PADDING_XSM) << ""

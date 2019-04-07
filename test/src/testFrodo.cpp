@@ -38,9 +38,9 @@ int main() {
 	Straight s2(Vector3D(1, -13/16.0, 0), Vector3D(1, -1, 0), 1);
 	Quadrupole q3(Vector3D(1, 0, 0), Vector3D(1, -1, 0), 1, 1);
 
-	Accelerator acc(&engine);
-	Accelerator accbis(&engine);
-	Accelerator acctri(&engine);
+	Accelerator acc(&engine, false);
+	Accelerator accbis(&engine, false);
+	Accelerator acctri(&engine, false);
 
 	accbis.addElement(q1);
 	accbis.addElement(s1);

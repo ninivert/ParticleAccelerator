@@ -113,7 +113,7 @@ int main() {
 
 	acc.clearParticles();
 	// Juuuust inside dipole
-	acc.addParticle(Particle(Vector3D(1, 0, 0), 10, Vector3D(-1, -1, 0), CONSTANTS::M_PROTON));
+	acc.addParticle(Particle(Vector3D(1, 0, 0), 1, Vector3D(0, -1, 0), CONSTANTS::M_PROTON));
 	// Just in the the dipole
 	acc.addParticle(Particle(Vector3D(sqrt(2) / 2, -sqrt(2) / 2, 0), Vector3D(0.5, 2, 2), CONSTANTS::M_PROTON));
 	// Just in the the dipole (go out after 1 acc.step())
@@ -121,9 +121,9 @@ int main() {
 	// At the edge between the dipole and straight
 	acc.addParticle(Particle(Vector3D(0, -1, 0), Vector3D(-1e8, 0, 0), CONSTANTS::M_PROTON));
 
-	// cout << acc << endl;
+	// cout << acc << endl;	// 4 particles
 	acc.step();
-	// cout << acc << endl;
+	// cout << acc << endl;	// 3 particles
 
 	acc.clear();
 
