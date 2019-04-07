@@ -65,7 +65,7 @@ int main() {
 
 	//1 : 4660 value near which the second particle added goes out
 	//2 : 4869 value near which the first particle added goes out
-	for (int i = 0; i < 4661; ++i) {
+	for (int i = 0; i < 300000; ++i) {
 		acc.step();
 	}
 

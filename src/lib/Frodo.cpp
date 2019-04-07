@@ -51,18 +51,28 @@ shared_ptr<Frodo> Frodo::cloneThis() const {
 using namespace std;
 
 Vector3D Frodo::getField(Vector3D const& pos) const {
-	double dist(getParticleProgress(pos));	// Linear for straight
-	double length(2 * (lensLength + straightLength));
-	if (dist >= 0 and dist <= lensLength / length) {
+	if (not focalizer.isInNextElement(pos)) {
 		return focalizer.getField(pos);
-	} else if (dist >= (lensLength + straightLength) / length and (dist <= 2 * lensLength + straightLength) / length) {
+	} else if (firstStraight.isInNextElement(pos)) {
+		return Vector3D();
+	} else if (not defocalizer.isInNextElement(pos)) {
 		return defocalizer.getField(pos);
+	} else {
+		return Vector3D();
 	}
+
+	// double dist(getParticleProgress(pos));	// Linear for straight
+	// double length(2 * (lensLength + straightLength));
+	// if (dist >= 0 and dist <= lensLength / length) {
+	// 	return focalizer.getField(pos);
+	// } else if (dist >= (lensLength + straightLength) / length and (dist <= 2 * lensLength + straightLength) / length) {
+	// 	return defocalizer.getField(pos);
+	// }
 
 	// cout << "Particle is at " << l << endl;
 	// cout << "Field is " << field << endl;
 
-	return Vector3D();
+	// return Vector3D();
 }
 
 /****************************************************************

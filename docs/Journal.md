@@ -112,6 +112,7 @@
 - ExerciceP10
 - Update `README.md`
 - Sextupole
+- Modify Particle::step() -> deplacer le exertLorentzForce()
 
 ## Questions
 

@@ -124,6 +124,9 @@ public:
 
 	virtual double getParticleProgress(Vector3D const& pos) const = 0;
 
+
+	bool isInNextElement(Vector3D const& p) const;
+
 	/****************************************************************
 	 * Methods
 	 ****************************************************************/

@@ -53,27 +53,43 @@ void Element::linkNext(Element & _next) {
 	_next.prev_ptr = this;
 }
 
-double Element::getParticleProgress(Vector3D const& pos) const {
-	return 1;
+
+
+bool Element::isInNextElement(Vector3D const& p) const {
+	return (Vector3D::tripleProduct(Vector3D(0, 0, 1), p, getPosOut()) >= 0);
 }
 
 
-void Element::updatePointedElement(Particle & p) const {
-	double dist(getParticleProgress(p.getPos()));
 
-	if (dist < 0) {
-		if (prev_ptr != nullptr) {
-			p.setElement(prev_ptr);
-		} else {
-			EXCEPTIONS::OUTSIDE_ACCELERATOR;
-		}
-	} else if (dist > 1) {
+
+
+void Element::updatePointedElement(Particle & p) const {
+	bool dist(isInNextElement(p.getPos()));
+	if (dist) {
 		if (next_ptr != nullptr) {
 			p.setElement(next_ptr);
 		} else {
 			EXCEPTIONS::OUTSIDE_ACCELERATOR;
 		}
 	}
+
+
+
+	// double dist(getParticleProgress(p.getPos(), true));
+
+	// if (dist < 0) {
+	// 	if (prev_ptr != nullptr) {
+	// 		p.setElement(prev_ptr);
+	// 	} else {
+	// 		EXCEPTIONS::OUTSIDE_ACCELERATOR;
+	// 	}
+	// } else if (dist > 1) {
+	// 	if (next_ptr != nullptr) {
+	// 		p.setElement(next_ptr);
+	// 	} else {
+	// 		EXCEPTIONS::OUTSIDE_ACCELERATOR;
+	// 	}
+	// }
 }
 
 string Element::to_string() const {
