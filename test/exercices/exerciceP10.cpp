@@ -15,7 +15,7 @@ int main() {
 	// Create the default TextRenderer engine which prints to std::cout
 	TextRenderer engine;
 
-	Accelerator acc(&engine);
+	Accelerator acc(&engine, false);
 
 	Vector3D pos_dep(3, 2, 0);
 	Vector3D dir_frodo(0, -1, 0);
@@ -63,16 +63,19 @@ int main() {
 	// Render the accelerator
 	// acc.draw();
 
-	//1 : 4661 value near which the second particle added goes out
-	//2 : 4870 value near which the first particle added goes out
+	// Niels & Hugo method
+	// 4593 first particle goes out
+	// 4634 second particle goes out
 
-	// 451244 second one goes out
-	// 461779 first one goes out
-	for (int i = 0; i < 451243; ++i) {
+	// methodChapi = true
+	// 451244 first one goes out
+	// 461779 second one goes out
+
+	for (int i = 0; i < 4592; ++i) {
 		acc.step();
 	}
 
-	acc.draw();
+	// acc.draw();
 	acc.clear();
 
 	return 0;

@@ -42,9 +42,18 @@ bool Straight::isInWall(Particle const& p) const {
 }
 
 double Straight::getParticleProgress(Vector3D const& pos, bool const& methodChapi) const {
-	Vector3D relativePos(pos - getPosIn());
-	Vector3D directionElement(getPosOut() - getPosIn());
-	return (relativePos * directionElement) / directionElement.normSquared();
+	if (methodChapi) {
+		bool const isInNextElement(Vector3D::tripleProduct(Vector3D(0, 0, 1), pos, getPosOut()) >= 0);
+		if (isInNextElement) {
+			return 2;
+		} else {
+			return 0.5;
+		}
+	} else {
+		Vector3D relativePos(pos - getPosIn());
+		Vector3D directionElement(getPosOut() - getPosIn());
+		return (relativePos * directionElement) / directionElement.normSquared();
+	}
 }
 
 string Straight::to_string() const {

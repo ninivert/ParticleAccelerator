@@ -8,7 +8,7 @@
 using namespace std;
 
 int main() {
-	Accelerator acc;
+	Accelerator acc(nullptr, false);
 
 	// Make elements
 		// Exception

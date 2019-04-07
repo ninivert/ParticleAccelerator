@@ -54,30 +54,18 @@ void Element::linkNext(Element & _next) {
 }
 
 void Element::updatePointedElement(Particle & p, bool const& methodChapi) const {
-	if (methodChapi) {
-		bool dist(Vector3D::tripleProduct(Vector3D(0, 0, 1), p.getPos(), getPosOut()) >= 0);
-		if (dist) {
-			if (next_ptr != nullptr) {
-				p.setElement(next_ptr);
-			} else {
-				EXCEPTIONS::OUTSIDE_ACCELERATOR;
-			}
+	double dist(getParticleProgress(p.getPos(), methodChapi));
+	if (dist < 0) {
+		if (prev_ptr != nullptr) {
+			p.setElement(prev_ptr);
+		} else {
+			EXCEPTIONS::OUTSIDE_ACCELERATOR;
 		}
-	} else {
-		double dist(getParticleProgress(p.getPos(), false));
-
-		if (dist < 0) {
-			if (prev_ptr != nullptr) {
-				p.setElement(prev_ptr);
-			} else {
-				EXCEPTIONS::OUTSIDE_ACCELERATOR;
-			}
-		} else if (dist > 1) {
-			if (next_ptr != nullptr) {
-				p.setElement(next_ptr);
-			} else {
-				EXCEPTIONS::OUTSIDE_ACCELERATOR;
-			}
+	} else if (dist > 1) {
+		if (next_ptr != nullptr) {
+			p.setElement(next_ptr);
+		} else {
+			EXCEPTIONS::OUTSIDE_ACCELERATOR;
 		}
 	}
 }
