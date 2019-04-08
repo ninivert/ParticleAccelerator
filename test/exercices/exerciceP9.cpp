@@ -55,7 +55,7 @@ int main() {
 	acc.addParticle(p2);
 
 	// Render the accelerator
-	acc.drawTo();
+	acc.draw();
 
 	acc.clear();
 

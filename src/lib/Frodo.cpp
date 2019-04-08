@@ -138,12 +138,15 @@ string Frodo::to_string() const {
  * Drawing
  ****************************************************************/
 
-void Frodo::draw() const {
-	if (engine_ptr == nullptr) ERROR(EXCEPTIONS::NULLPTR);
-	engine_ptr->draw(*this);
-}
-
-void Frodo::drawTo(Renderer * engine_ptr) const {
-	if (engine_ptr == nullptr) ERROR(EXCEPTIONS::NULLPTR);
+void Frodo::draw(Renderer * engine_ptr) const {
+	// No engine specified, try to substitute it ?
+	if (engine_ptr == nullptr) {
+		// Do we have another engine ?
+		if (this->engine_ptr == nullptr) {
+			ERROR(EXCEPTIONS::NULLPTR);
+		} else {
+			engine_ptr = this->engine_ptr;
+		}
+	}
 	engine_ptr->draw(*this);
 }

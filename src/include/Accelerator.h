@@ -147,13 +147,7 @@ public:
 	 * Reroute the drawing call (double dispatching)
 	 */
 
-	virtual void draw() const override;
-
-	/**
-	 * Draw the vector using a given renderer
-	 */
-
-	virtual void drawTo(Renderer * engine_ptr = nullptr) const override;
+	virtual void draw(Renderer * engine_ptr = nullptr) const override;
 
 	/**
 	 * Draw particles only

@@ -44,13 +44,7 @@ public:
 	 * Virtual method that is required to be overwritten
 	 */
 
-	virtual void draw() const = 0;
-
-	/**
-	 * Virtual method that is required to be overwritten
-	 */
-
-	virtual void drawTo(Renderer * engine_ptr) const = 0;
+	virtual void draw(Renderer * engine_ptr = nullptr) const = 0;
 };
 
 #endif

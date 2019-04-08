@@ -71,12 +71,15 @@ string Straight::to_string() const {
  * Drawing
  ****************************************************************/
 
-void Straight::draw() const {
-	if (engine_ptr == nullptr) ERROR(EXCEPTIONS::NULLPTR);
-	engine_ptr->draw(*this);
-}
-
-void Straight::drawTo(Renderer * engine_ptr) const {
-	if (engine_ptr == nullptr) ERROR(EXCEPTIONS::NULLPTR);
+void Straight::draw(Renderer * engine_ptr) const {
+	// No engine specified, try to substitute it ?
+	if (engine_ptr == nullptr) {
+		// Do we have another engine ?
+		if (this->engine_ptr == nullptr) {
+			ERROR(EXCEPTIONS::NULLPTR);
+		} else {
+			engine_ptr = this->engine_ptr;
+		}
+	}
 	engine_ptr->draw(*this);
 }

@@ -39,11 +39,12 @@ int main() {
 	acc.addParticle(P2);
 
 	// Test exceptions
-	ASSERT_EXCEPTION(acc.drawTo(nullptr), EXCEPTIONS::NULLPTR);
+	Accelerator accNoRenderer;
+	ASSERT_EXCEPTION(accNoRenderer.draw(), EXCEPTIONS::NULLPTR);
 
 	// Rendering
-	// Log to file engine using drawTo(Renderer * engine)
-	acc.drawTo(&engineToFile);
+	// Log to file engine using draw(Renderer * engine)
+	acc.draw(&engineToFile);
 	// Log to cout using draw()
 
 	return 0;
