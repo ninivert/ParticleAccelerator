@@ -15,10 +15,10 @@ using namespace std;
 
 int main() {
 	// Default engine
-	TextRenderer engine;
+	// TextRenderer engine;
 
 	// File stream engine
-	TextRenderer engineToFile("log/accelerator.log");
+	TextRenderer engineToFile("log/testRenderer.log");
 
 
 	// Make the elements
@@ -31,7 +31,7 @@ int main() {
 	Particle P2(Vector3D(0.99016, -0.191837, 0), 2, Vector3D(210200, -2.64754e+08, 0), CONSTANTS::M_PROTON);
 
 	// Make the accelerator
-	Accelerator acc(&engine);
+	Accelerator acc(&engineToFile);
 	acc.addElement(D1);
 	acc.addElement(S1);
 	acc.addElement(Q1);
@@ -44,8 +44,9 @@ int main() {
 
 	// Rendering
 	// Log to file engine using draw(Renderer * engine)
-	acc.draw(&engineToFile);
-	// Log to cout using draw()
+	acc.draw();
+	// Log to terminal
+	// acc.draw(&engine);
 
 	return 0;
 }
