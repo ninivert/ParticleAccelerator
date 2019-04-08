@@ -120,6 +120,10 @@ public:
 
 	/**
 	 * Reroute the drawing call (double dispatching)
+	 *
+	 * - Use renderer in argument if given
+	 * - Else use class renderer
+	 * - Else throw EXCEPTIONS::NULLPTR
 	 */
 
 	virtual void draw(Renderer * engine_ptr = nullptr) const override;
