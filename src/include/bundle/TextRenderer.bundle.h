@@ -10,5 +10,6 @@
 #include "src/include/Dipole.h"
 #include "src/include/Quadrupole.h"
 #include "src/include/Accelerator.h"
+#include "src/include/Beam.h"
 
 #include "src/include/TextRenderer.h"

@@ -111,7 +111,7 @@ testAccelerator.bin: testAccelerator.o Test.o Vector3D.o Particle.o Convert.o El
 	@$(CXX) $(CXXFLAGS) $(addprefix $(OPATH)/, $(notdir $^)) -o $(BPATH)/$@
 	@echo $(OK_STRING) $(LINKED_STRING) $@
 
-testFrodo.bin: testFrodo.o Test.o Vector3D.o Particle.o Convert.o Element.o Dipole.o Quadrupole.o Straight.o Frodo.o Accelerator.o Drawable.o Renderer.o TextRenderer.o
+testFrodo.bin: testFrodo.o Test.o Vector3D.o Particle.o Convert.o Element.o Dipole.o Quadrupole.o Straight.o Frodo.o Accelerator.o Drawable.o Renderer.o TextRenderer.o Beam.o
 	@$(CXX) $(CXXFLAGS) $(addprefix $(OPATH)/, $(notdir $^)) -o $(BPATH)/$@
 	@echo $(OK_STRING) $(LINKED_STRING) $@
 
@@ -123,19 +123,19 @@ testException.bin: testException.o Test.o
 	@$(CXX) $(CXXFLAGS) $(addprefix $(OPATH)/, $(notdir $^)) -o $(BPATH)/$@
 	@echo $(OK_STRING) $(LINKED_STRING) $@
 
-testRenderer.bin: testRenderer.o Test.o Renderer.o TextRenderer.o Drawable.o Accelerator.o Element.o Dipole.o Particle.o Convert.o Quadrupole.o Straight.o Frodo.o Vector3D.o
+testRenderer.bin: testRenderer.o Test.o Renderer.o TextRenderer.o Beam.o Drawable.o Accelerator.o Element.o Dipole.o Particle.o Convert.o Quadrupole.o Straight.o Frodo.o Vector3D.o
 	@$(CXX) $(CXXFLAGS) $(addprefix $(OPATH)/, $(notdir $^)) -o $(BPATH)/$@
 	@echo $(OK_STRING) $(LINKED_STRING) $@
 
-testCircular.bin: testCircular.o Test.o Renderer.o TextRenderer.o Drawable.o Accelerator.o Element.o Dipole.o Particle.o Convert.o Quadrupole.o Straight.o Frodo.o Vector3D.o
+testCircular.bin: testCircular.o Test.o Renderer.o TextRenderer.o Beam.o Drawable.o Accelerator.o Element.o Dipole.o Particle.o Convert.o Quadrupole.o Straight.o Frodo.o Vector3D.o
 	@$(CXX) $(CXXFLAGS) $(addprefix $(OPATH)/, $(notdir $^)) -o $(BPATH)/$@
 	@echo $(OK_STRING) $(LINKED_STRING) $@
 
-exerciceP9.bin: Vector3D.o Particle.o Convert.o Element.o Dipole.o Quadrupole.o Straight.o Accelerator.o Drawable.o Renderer.o TextRenderer.o exerciceP9.o
+exerciceP9.bin: Vector3D.o Particle.o Convert.o Element.o Dipole.o Quadrupole.o Straight.o Accelerator.o Drawable.o Renderer.o TextRenderer.o Beam.o exerciceP9.o
 	@$(CXX) $(CXXFLAGS) $(addprefix $(OPATH)/, $(notdir $^)) -o $(BPATH)/$@
 	@echo $(OK_STRING) $(LINKED_STRING) $@
 
-exerciceP10.bin: Vector3D.o Particle.o Convert.o Element.o Dipole.o Quadrupole.o Straight.o Frodo.o Accelerator.o Drawable.o Renderer.o TextRenderer.o exerciceP10.o
+exerciceP10.bin: Vector3D.o Particle.o Convert.o Element.o Dipole.o Quadrupole.o Straight.o Frodo.o Accelerator.o Drawable.o Renderer.o TextRenderer.o Beam.o exerciceP10.o
 	@$(CXX) $(CXXFLAGS) $(addprefix $(OPATH)/, $(notdir $^)) -o $(BPATH)/$@
 	@echo $(OK_STRING) $(LINKED_STRING) $@
 

@@ -8,6 +8,7 @@
 #include <string>
 
 // Forward declaration
+class Beam;
 class Accelerator;
 class Element;
 class Dipole;
@@ -66,6 +67,12 @@ public:
 	/****************************************************************
 	 * Drawing methods
 	 ****************************************************************/
+
+	/**
+	 * Draw a Beam
+	 */
+
+	virtual void draw(Beam const& beam) override;
 
 	/**
 	 * Draw an entire Accelerator

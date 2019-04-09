@@ -4,6 +4,7 @@
 #pragma once
 
 // Forward declaration
+class Beam;
 class Accelerator;
 class Element;
 class Dipole;
@@ -61,6 +62,12 @@ public:
 	 */
 
 	virtual void draw(Accelerator const& acc) = 0;
+
+	/**
+	 * Draw a Beam
+	 */
+
+	virtual void draw(Beam const& beam) = 0;
 
 	/**
 	 * We do not want to draw an abstract type

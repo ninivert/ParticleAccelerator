@@ -25,6 +25,14 @@ TextRenderer::~TextRenderer() {
  ****************************************************************/
 
 /**
+ * Draw a Beam
+ */
+
+void TextRenderer::draw(Beam const& beam) {
+	*stream_ptr << beam;
+}
+
+/**
  * Draw an entire Accelerator
  */
 
