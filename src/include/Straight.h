@@ -110,6 +110,14 @@ public:
 	virtual double getParticleProgress(Vector3D const& pos, bool const& methodChapi = false) const override;
 
 	/**
+	 * Returns the HORIZONTAL direction perpendicular to the Straight Element at a certain position
+	 *
+	 * The position is useless here but we need it for polymorphism
+	 */
+
+	virtual Vector3D const perpDirection(Vector3D const& pos) const override;
+
+	/**
 	 * Returns a string representation of the straight element
 	 */
 

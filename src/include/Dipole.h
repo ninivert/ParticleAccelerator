@@ -109,6 +109,12 @@ public:
 	virtual double getParticleProgress(Vector3D const& pos, bool const& methodChapi = false) const override;
 
 	/**
+	 * Returns the HORIZONTAL direction perpendicular to the Dipole Element (curved) at a certain position
+	 */
+
+	virtual Vector3D const perpDirection(Vector3D const& pos) const override;
+
+	/**
 	 * Returns a string representation of the dipole
 	 */
 

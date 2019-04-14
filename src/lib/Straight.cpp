@@ -56,6 +56,12 @@ double Straight::getParticleProgress(Vector3D const& pos, bool const& methodChap
 	}
 }
 
+Vector3D const Straight::perpDirection(Vector3D const& pos) const {
+	Vector3D d(getPosOut() - getPosIn());
+	~d;
+	return (Vector3D(0, 0, 1) ^ d);
+}
+
 string Straight::to_string() const {
 	stringstream stream;
 	stream

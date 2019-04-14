@@ -56,6 +56,12 @@ double Dipole::getParticleProgress(Vector3D const& pos, bool const& methodChapi)
 	}
 }
 
+Vector3D const Dipole::perpDirection(Vector3D const& pos) const {
+	Vector3D X(pos - posCenter);
+	Vector3D u(X - pos.getZ() * Vector3D(0, 0, 1));
+	return ~u;
+}
+
 string Dipole::to_string() const {
 	stringstream stream;
 	stream

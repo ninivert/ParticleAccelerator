@@ -3,7 +3,7 @@
 using namespace std;
 
 /****************************************************************
- * Constructor
+ * Constructors
  ****************************************************************/
 
 // Constructor for init with velocity

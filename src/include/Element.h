@@ -166,6 +166,12 @@ public:
 	virtual bool isInWall(Particle const& p) const = 0;
 
 	/**
+	 * Returns the HORIZONTAL direction perpendicular to the Element at a certain position
+	 */
+
+	virtual Vector3D const perpDirection(Vector3D const& pos) const = 0;
+
+	/**
 	 * Returns a string representation of the element
 	 */
 
