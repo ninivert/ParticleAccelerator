@@ -106,15 +106,23 @@
 - Changed `Frodo::getField()` : remove the +0.05 at the end (needed for compilation uwu)
 - Rewrote `Element::updatePointedElement()`
 
+## Stage 7
+
+- `Beam` class
+- Improve `Drawable`: fuse `draw` and `drawTo` to automatically search for the good engine
+
+
 ## Todo
 
 - `Beam` class
+	- creation of the `Beam` (constructor)
+	- convention if emittance is 0 (ask Chap)
+	- adapt the `Accelerator` class
 - ExerciceP10
 - Update `README.md`
 - Sextupole
 - Modify Particle::step() -> deplacer le exertLorentzForce()
 	- what if it is just a particle and an Element ? -> not in Accelerator
-- Improve `Drawable`: fuse `draw` and `drawTo` to automatically search for the good engine
 - Return const string in `to_string`
 
 ## Questions

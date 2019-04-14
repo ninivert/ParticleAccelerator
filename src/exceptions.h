@@ -69,31 +69,43 @@ namespace EXCEPTIONS {
 	inline constexpr char OUTSIDE_ACCELERATOR[]("The Particle is now outside the accelerator (out of the first / last element)");
 
 	/**
-	 * Class Accelerator : there is no element in which to add the particle
+	 * Class Beam : The coefficient lambda (scaling factor) given is less than 1
+	 */
+
+	inline constexpr char BAD_LAMBDA[]("The coefficient lambda (scaling factor) given is less than 1");
+
+	/**
+	 * Class Beam : There is no particle : particleCount = 0
+	 */
+
+	inline constexpr char NO_PARTICLES[]("Beam needs to contain at least one particle");
+
+	/**
+	 * Class Accelerator : There is no element in which to add the particle
 	 */
 
 	inline constexpr char NO_ELEMENTS[]("Accelerator needs to contain at least one element before adding a particle");
 
 	/**
-	 * Class Accelerator : the input position of the new element does not coincide with the output position of the last element of the accelerator
+	 * Class Accelerator : The input position of the new element does not coincide with the output position of the last element of the accelerator
 	 */
 
 	inline constexpr char ELEMENTS_NOT_TOUCHING[]("The new element needs to have the same input position as the output position of the last element of the accelerator");
 
 	/**
-	 * Class Accelerator : the position output of the last element does not coincide with the input position of the first element of the accelerator
+	 * Class Accelerator : The position output of the last element does not coincide with the input position of the first element of the accelerator
 	 */
 
 	inline constexpr char ELEMENT_LOOP_INCOMPLETE[]("The last element needs to have the same output position as the input position of the first element of the accelerator");
 
 	/**
-	 * Class Accelerator : the particle given to initialize is outside the accelerator
+	 * Class Accelerator : The particle given to initialize is outside the accelerator
 	 */
 
 	inline constexpr char PARTICLE_NOT_IN_ACCELERATOR[]("The particle to initialize is outside the Accelerator");
 
 	/**
-	 * Class TextRenderer : opening fstream for writing to a file did not succeed
+	 * Class TextRenderer : Opening fstream for writing to a file did not succeed
 	 */
 
 	inline constexpr char FILE_EXCEPTION[]("Something went wrong while opening the file");

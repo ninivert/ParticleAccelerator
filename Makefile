@@ -30,7 +30,7 @@ ERROR_STRING := "\033[32m"ERROR"\033[0m"
 # and where to put exec files (TARGET)
 ##################################################################
 
-TARGETS := testVector3D testParticle testElement testAccelerator testConvert testException testRenderer testFrodo exerciceP9 exerciceP10
+TARGETS := testVector3D testParticle testElement testAccelerator testConvert testException testRenderer testFrodo testBeam exerciceP9 exerciceP10
 OPATH := build
 BPATH := bin
 DOXYPATH := doxydocs
@@ -108,6 +108,10 @@ testElement.bin: testElement.o Test.o Vector3D.o Particle.o Convert.o Element.o 
 	@echo $(OK_STRING) $(LINKED_STRING) $@
 
 testAccelerator.bin: testAccelerator.o Test.o Vector3D.o Particle.o Convert.o Element.o Dipole.o Quadrupole.o Straight.o Frodo.o Accelerator.o Drawable.o Renderer.o
+	@$(CXX) $(CXXFLAGS) $(addprefix $(OPATH)/, $(notdir $^)) -o $(BPATH)/$@
+	@echo $(OK_STRING) $(LINKED_STRING) $@
+
+testBeam.bin: testBeam.o Test.o Vector3D.o Particle.o Convert.o Element.o Dipole.o Quadrupole.o Straight.o Frodo.o Beam.o Accelerator.o Drawable.o Renderer.o
 	@$(CXX) $(CXXFLAGS) $(addprefix $(OPATH)/, $(notdir $^)) -o $(BPATH)/$@
 	@echo $(OK_STRING) $(LINKED_STRING) $@
 
