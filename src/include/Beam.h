@@ -21,15 +21,20 @@ class Renderer;
 
 class Beam : public Drawable {
 public:
+
 	/****************************************************************
 	 * Constructors and destructors
 	 ****************************************************************/
 
 	/**
 	 * Constructor
+	 *
+	 * - `Particle defaultParticle`: represents the default settings
+	 * - `size_t particleCount`: number of total particles
+	 * - `double lambda`: scaling factor for the macroparticles (> 1)
 	 */
 
-	Beam();
+	Beam(Particle const& defaultParticle, size_t const& particleCount, double const& lambda = 1);
 
 	/**
 	 * Destructor: we are storing pointers (smart pointers but ok)
@@ -43,7 +48,6 @@ public:
 	 * - To avoid to copy a Beam (big object)
 	 * - To forbid the transmission of pointers on `Particle` (std::unique_ptr)
 	 */
-
 
 	Beam(Beam const& b) = delete;
 
@@ -61,24 +65,42 @@ public:
 	 ****************************************************************/
 
 	/**
-	 * Mean energy of the `Particle`s in the Beam
+	 * Mean energy of the `Particle`s in the Beam in GeV
 	 */
 
 	double getMeanEnergy() const;
 
 	/**
-	 * Get the emittance epsilon_r
+	 * Get the emittance epsilon_r along the horizontal axis
 	 */
 
 	double getEmittanceR() const;
 
 	/**
-	 * Get the emittance epsilon_z
+	 * Get the emittance epsilon_z along the vertical axis
 	 */
 
 	double getEmittanceZ() const;
 
-	Vector3D getEllipsePhaseCoef() const;
+	/**
+	 * Get the emittance coefficients along the horizontal axis
+	 *
+	 * X-coord : A11_R
+	 * Z-coord : A12_R
+	 * Y-coord : A22_R
+	 */
+
+	Vector3D const getEllipsePhaseCoefR() const;
+
+	/**
+	 * Get the emittance coefficients along the vertical axis
+	 *
+	 * X-coord : A11_Z
+	 * Y-coord : A22_Z
+	 * Z-coord : A12_Z
+	 */
+
+	Vector3D const getEllipsePhaseCoefZ() const;
 
 	/****************************************************************
 	 * Methods
@@ -102,6 +124,34 @@ public:
 
 private:
 
+	/****************************************************************
+	 * Private methods
+	 ****************************************************************/
+
+	/**
+	 * Returns the means necessary for the getEmittanceR and getEllipsePhaseCoefR
+	 *
+	 * - X-coor : <r²>
+	 * - Y-coor : <vr²>
+	 * - Z-coor : <r * vr>
+	 */
+
+	Vector3D const getRMeans() const;
+
+	/**
+	 * Returns the means necessary for the getEmittanceR and getEllipsePhaseCoefR
+	 *
+	 * - X-coor : <z²>
+	 * - Y-coor : <vz²>
+	 * - Z-coor : <z * vz>
+	 */
+
+	Vector3D const getZMeans() const;
+
+	/****************************************************************
+	 * Attributes
+	 ****************************************************************/
+
 	/**
 	 * Default particle indicates the default
 	 *
@@ -114,19 +164,19 @@ private:
 	 * for each particle in the Beam
 	 */
 
-	Particle defaultParticle;
+	std::unique_ptr<Particle> defaultParticle_ptr;
 
 	/**
 	 * Number of Particles in the Beam
 	 */
 
-	size_t particleCount;
+	size_t const particleCount;
 
 	/**
 	 * Scaling factor for the macroparticles
 	 */
 
-	double lambda;
+	double const lambda;
 
 	/**
 	 * Collection of the stored Particles of the same "nature"
