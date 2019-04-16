@@ -115,7 +115,7 @@ public:
 	 * The position is useless here but we need it for polymorphism
 	 */
 
-	virtual Vector3D const perpDirection(Vector3D const& pos) const override;
+	virtual Vector3D const getNormalDirection(Vector3D const& pos) const override;
 
 	/**
 	 * Returns a string representation of the straight element
