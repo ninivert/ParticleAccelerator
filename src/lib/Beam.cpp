@@ -3,7 +3,7 @@
 using namespace std;
 
 /****************************************************************
- * Constructor
+ * Constructors
  ****************************************************************/
 
 Beam::Beam(Particle const& defaultParticle, size_t const& particleCount, double const& lambda)
@@ -17,6 +17,10 @@ Beam::Beam(Particle const& defaultParticle, size_t const& particleCount, double 
 	}
 	particles_ptr.push_back(defaultParticle.copy());
 }
+
+Beam::Beam(Particle const& defaultParticle)
+: Beam(defaultParticle, 1, 1)
+{}
 
 /****************************************************************
  * Destructor
@@ -43,22 +47,24 @@ double Beam::getMeanEnergy() const {
 double Beam::getEmittanceR() const {
 	Vector3D means(getRMeans());
 
-	double A11_R(means.getX());
-	double A22_R(means.getY());
-	double A12_R(means.getZ());
-	double emittanceR(A11_R * A22_R - A12_R * A12_R);
+	double moyR_Squared(means.getX());
+	double moyVr_Squared(means.getY());
+	double moyR_Vr(means.getZ());
+	double emittanceR(moyR_Squared * moyVr_Squared - moyR_Vr * moyR_Vr);
 
+	if (emittanceR < GLOBALS::DELTA) { emittanceR = 0; }
 	return sqrt(emittanceR);
 }
 
 double Beam::getEmittanceZ() const {
 	Vector3D means(getZMeans());
 
-	double A11_Z(means.getX());
-	double A22_Z(means.getY());
-	double A12_Z(means.getZ());
-	double emittanceZ(A11_Z * A22_Z - A12_Z * A12_Z);
+	double moyZ_Squared(means.getX());
+	double moyVz_Squared(means.getY());
+	double moyZ_Vz(means.getZ());
+	double emittanceZ(moyZ_Squared * moyVz_Squared - moyZ_Vz * moyZ_Vz);
 
+	if (emittanceZ < GLOBALS::DELTA) { emittanceZ = 0; }
 	return sqrt(emittanceZ);
 }
 
@@ -68,7 +74,7 @@ Vector3D const Beam::getEllipsePhaseCoefR() const {
 	// No deviation along the R-axis
 	// => the area of the ellipse is 0
 	// => all R-coeff are 0
-	if (emittanceR < GLOBALS::DELTA) {
+	if (abs(emittanceR) < GLOBALS::DELTA) {
 		return Vector3D();
 	}
 
@@ -78,9 +84,7 @@ Vector3D const Beam::getEllipsePhaseCoefR() const {
 	// A22_R = <r²> / emittanceR
 	// A12_R = <r * vr> / emittanceR
 
-	Vector3D coeff(means.getY(), means.getX(), - means.getZ());
-	coeff /= emittanceR;
-	return coeff;
+	return Vector3D(means.getY(), means.getX(), - means.getZ()) / emittanceR;
 }
 
 Vector3D const Beam::getEllipsePhaseCoefZ() const {
@@ -89,7 +93,7 @@ Vector3D const Beam::getEllipsePhaseCoefZ() const {
 	// No deviation along the Z-axis
 	// => the area of the ellipse is 0
 	// => all Z-coeff are 0
-	if (emittanceZ < GLOBALS::DELTA) {
+	if (abs(emittanceZ) < GLOBALS::DELTA) {
 		return Vector3D();
 	}
 
@@ -99,9 +103,7 @@ Vector3D const Beam::getEllipsePhaseCoefZ() const {
 	// A22_Z = <z²> / emittanceZ
 	// A12_Z = <z * vz> / emittanceZ
 
-	Vector3D coeff(means.getY(), means.getX(), - means.getZ());
-
-	return coeff;
+	return Vector3D(means.getY(), means.getX(), - means.getZ()) / emittanceZ;
 }
 
 Vector3D const Beam::getRMeans() const {
@@ -113,7 +115,7 @@ Vector3D const Beam::getRMeans() const {
 	Vector3D perpDirectionElement;
 
 	for (unique_ptr<Particle> const& particle_ptr : particles_ptr) {
-		perpDirectionElement = particle_ptr->getElementPtr()->perpDirection(particle_ptr->getPos());
+		perpDirectionElement = particle_ptr->getElementPtr()->getNormalDirection(particle_ptr->getPos());
 		r = (particle_ptr->getPos() - particle_ptr->getElementPtr()->getPosIn()) * perpDirectionElement;
 		vr = particle_ptr->getSpeed() * perpDirectionElement;
 
@@ -122,10 +124,7 @@ Vector3D const Beam::getRMeans() const {
 		moyR_Vr 		+= r * vr;
 	}
 
-	Vector3D means(moyR_Squared, moyVr_Squared, moyR_Vr);
-	means /= particleCount;
-
-	return means;
+	return (Vector3D(moyR_Squared, moyVr_Squared, moyR_Vr) /= particleCount);
 }
 
 Vector3D const Beam::getZMeans() const {
@@ -138,20 +137,26 @@ Vector3D const Beam::getZMeans() const {
 	for (unique_ptr<Particle> const& particle_ptr : particles_ptr) {
 		z = particle_ptr->getPos().getZ();
 		vz = particle_ptr->getSpeed().getZ();
+
 		moyZ_Squared	+= z * z;
 		moyVz_Squared	+= vz * vz;
 		moyZ_Vz 		+= z * vz;
 	}
 
-	Vector3D means(moyZ_Squared, moyVz_Squared, moyZ_Vz);
-	means /= particleCount;
-
-	return means;
+	return (Vector3D(moyZ_Squared, moyVz_Squared, moyZ_Vz) /= particleCount);
 }
 
 /****************************************************************
  * Methods
  ****************************************************************/
+
+void Beam::step(double const& dt, bool const& methodChapi) {
+	if (abs(dt) < GLOBALS::DELTA) { return; }
+
+	for (unique_ptr<Particle> const& particle_ptr : particles_ptr) {
+		particle_ptr->step(dt, methodChapi);
+	}
+}
 
 string Beam::to_string() const {
 	stringstream stream;
@@ -181,6 +186,7 @@ string Beam::to_string() const {
 		<< " (" << UNITS::SCALAR << ")"
 		<< endl;
 	Vector3D coeff(getEllipsePhaseCoefR());
+	// cout << coeff.getX() * coeff.getY() - coeff.getZ() * coeff.getZ() << endl;
 	stream
 		// Coeff of Phase Ellipse R
 		<< setw(STYLES::PADDING_XSM) << ""
@@ -193,8 +199,8 @@ string Beam::to_string() const {
 		<< setw(STYLES::PADDING_XSM) << "" << setw(STYLES::PADDING_MD) << ""
 		<< setw(STYLES::PADDING_MD) << "A12 R : " << coeff.getZ()
 		<< endl;
-	cout << coeff.getX() * coeff.getY() -coeff.getZ() * coeff.getZ() << endl;
 	coeff = getEllipsePhaseCoefZ();
+	// cout << coeff.getX() * coeff.getY() - coeff.getZ() * coeff.getZ() << endl;
 	stream
 		// Coeff of Phase Ellipse Z
 		<< setw(STYLES::PADDING_XSM) << ""

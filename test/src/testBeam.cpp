@@ -10,9 +10,9 @@ using namespace std;
 
 int main() {
 	Straight straight_1(Vector3D(3, 0, 0), Vector3D(-2, -1, 0), 0.08);
-	Particle part_1(Vector3D(2.99, -0.01, 0), 2, Vector3D(-0.5, -0.5, 0.001), 0.938272);
+	Particle part_1(Vector3D(2.99, 0.01, 0.04), 2, Vector3D(-0.5, -0.5, 0.01), 0.938272);
 	part_1.setElement(&straight_1);
-	Beam beam_1(part_1, 1, 1);
+	Beam beam_1(part_1);
 
 	// cout << beam_1 << endl;
 

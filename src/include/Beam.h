@@ -37,6 +37,14 @@ public:
 	Beam(Particle const& defaultParticle, size_t const& particleCount, double const& lambda = 1);
 
 	/**
+	 * Constructor with only one particle
+	 *
+	 * - `Particle defaultParticle`: represents the default settings
+	 */
+
+	Beam(Particle const& defaultParticle);
+
+	/**
 	 * Destructor: we are storing pointers (smart pointers but ok)
 	 */
 
@@ -105,6 +113,16 @@ public:
 	/****************************************************************
 	 * Methods
 	 ****************************************************************/
+
+	/**
+	 * Integrates the movement equations over a time step `dt`, which defaults to `GLOBALS::DT(1e-11)`.
+	 *
+	 * We need the methodChapi for the getField (if it's a FODO element)
+	 *
+	 * If `dt` is null (aka inferior to GLOBALS::DELTA), then this doesn't do anything
+	 */
+
+	void step(double const& dt = GLOBALS::DT, bool const& methodChapi = false);
 
 	std::string to_string() const;
 

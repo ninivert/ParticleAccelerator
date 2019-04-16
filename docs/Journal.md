@@ -115,7 +115,7 @@
 ## Todo
 
 - `Beam` class
-	- creation of the `Beam` (constructor)
+	- creation of the `Beam` (constructor initializing the particles_ptr -> 1st)
 	- convention if emittance is 0 (ask Chap)
 	- adapt the `Accelerator` class
 - ExerciceP10
