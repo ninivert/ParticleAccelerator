@@ -6,8 +6,34 @@ using namespace std;
  * Constructors
  ****************************************************************/
 
-Beam::Beam(Particle const& defaultParticle, size_t const& particleCount, double const& lambda)
+Beam::Beam(Particle const& defaultParticle, size_t const& particleCount, double const& lambda, Accelerator const& acc)
 : defaultParticle_ptr(defaultParticle.copy()), particleCount(particleCount), lambda(lambda)
+{
+	if (particleCount == 0) {
+		ERROR(EXCEPTIONS::NO_PARTICLES);
+	}
+	if (lambda < 1) {
+		ERROR(EXCEPTIONS::BAD_LAMBDA);
+	}
+
+	double orientation = Vector3D::tripleProduct(Vector3D(0, 0, 1), defaultParticle_ptr->getPos(), defaultParticle_ptr->getPos() + defaultParticle_ptr->getSpeed());
+	bool clockwise((orientation < 0));
+	int lastPart(particleCount / lambda);
+
+	for (int i(0); i < lastPart; ++i) {
+		double progress(i / lastPart);
+		this->particles_ptr.push_back(unique_ptr<Particle>(new Particle
+			(acc.getPosAtProgress(progress),
+			lambda * CONVERT::EnergySItoGeV(defaultParticle_ptr->getEnergy()),
+			acc.getVelAtProgress(progress, clockwise),
+			lambda * defaultParticle_ptr->getMass(),
+			lambda * defaultParticle_ptr->getChargeNumber()
+		)));
+	}
+}
+
+Beam::Beam(Particle const& defaultParticle)
+: defaultParticle_ptr(defaultParticle.copy()), particleCount(1), lambda(1)
 {
 	if (particleCount == 0) {
 		ERROR(EXCEPTIONS::NO_PARTICLES);
@@ -17,10 +43,6 @@ Beam::Beam(Particle const& defaultParticle, size_t const& particleCount, double 
 	}
 	particles_ptr.push_back(defaultParticle.copy());
 }
-
-Beam::Beam(Particle const& defaultParticle)
-: Beam(defaultParticle, 1, 1)
-{}
 
 /****************************************************************
  * Destructor
@@ -162,6 +184,8 @@ string Beam::to_string() const {
 	stringstream stream;
 	stream << setprecision(STYLES::PRECISION);
 	stream << left;
+	double emittanceR(getEmittanceR());
+	double emittanceZ(getEmittanceZ());
 	stream
 		<< STYLES::COLOR_YELLOW
 		<< STYLES::FORMAT_BOLD
@@ -176,43 +200,59 @@ string Beam::to_string() const {
 		// EmittanceR
 		<< setw(STYLES::PADDING_XSM) << ""
 		<< setw(STYLES::PADDING_MD) << "EmittanceR"
-		<< setw(STYLES::PADDING_LG) << getEmittanceR()
+		<< setw(STYLES::PADDING_LG) << emittanceR
 		<< " (" << UNITS::SCALAR << ")"
 		<< endl
 		// EmittanceZ
 		<< setw(STYLES::PADDING_XSM) << ""
 		<< setw(STYLES::PADDING_MD) << "EmittanceZ"
-		<< setw(STYLES::PADDING_LG) << getEmittanceZ()
+		<< setw(STYLES::PADDING_LG) << emittanceZ
 		<< " (" << UNITS::SCALAR << ")"
 		<< endl;
+	// Coeff of Phase Ellipse R
 	Vector3D coeff(getEllipsePhaseCoefR());
-	// cout << coeff.getX() * coeff.getY() - coeff.getZ() * coeff.getZ() << endl;
-	stream
-		// Coeff of Phase Ellipse R
-		<< setw(STYLES::PADDING_XSM) << ""
-		<< setw(STYLES::PADDING_MD) << "Coeff EllipseR"
-		<< setw(STYLES::PADDING_MD) << "A11 R : " << coeff.getX()
-		<< endl
-		<< setw(STYLES::PADDING_XSM) << "" << setw(STYLES::PADDING_MD) << ""
-		<< setw(STYLES::PADDING_MD) << "A22 R : " << coeff.getY()
-		<< endl
-		<< setw(STYLES::PADDING_XSM) << "" << setw(STYLES::PADDING_MD) << ""
-		<< setw(STYLES::PADDING_MD) << "A12 R : " << coeff.getZ()
-		<< endl;
+	if (emittanceR < GLOBALS::DELTA) {
+		stream
+			<< setw(STYLES::PADDING_XSM) << ""
+			<< setw(STYLES::PADDING_MD) << "Coeff EllipseR"
+			<< setw(STYLES::PADDING_MD) << "The emittance in R <= 0, the coefficients are undefined for such behaviour";
+	} else {
+		// cout << coeff.getX() * coeff.getY() - coeff.getZ() * coeff.getZ() << endl;
+		stream
+			// Coeff of Phase Ellipse R
+			<< setw(STYLES::PADDING_XSM) << ""
+			<< setw(STYLES::PADDING_MD) << "Coeff EllipseR"
+			<< setw(STYLES::PADDING_MD) << "A11 R : " << coeff.getX()
+			<< endl
+			<< setw(STYLES::PADDING_XSM) << "" << setw(STYLES::PADDING_MD) << ""
+			<< setw(STYLES::PADDING_MD) << "A22 R : " << coeff.getY()
+			<< endl
+			<< setw(STYLES::PADDING_XSM) << "" << setw(STYLES::PADDING_MD) << ""
+			<< setw(STYLES::PADDING_MD) << "A12 R : " << coeff.getZ()
+			<< endl;
+	}
+
 	coeff = getEllipsePhaseCoefZ();
-	// cout << coeff.getX() * coeff.getY() - coeff.getZ() * coeff.getZ() << endl;
-	stream
-		// Coeff of Phase Ellipse Z
-		<< setw(STYLES::PADDING_XSM) << ""
-		<< setw(STYLES::PADDING_MD) << "Coeff EllipseZ"
-		<< setw(STYLES::PADDING_MD) << "A11 Z : " << coeff.getX()
-		<< endl
-		<< setw(STYLES::PADDING_XSM) << "" << setw(STYLES::PADDING_MD) << ""
-		<< setw(STYLES::PADDING_MD) << "A22 Z : " << coeff.getY()
-		<< endl
-		<< setw(STYLES::PADDING_XSM) << "" << setw(STYLES::PADDING_MD) << ""
-		<< setw(STYLES::PADDING_MD) << "A12 Z : " << coeff.getZ()
-		<< endl;
+	// Coeff of Phase Ellipse Z
+	if (emittanceZ < GLOBALS::DELTA) {
+		stream
+			<< setw(STYLES::PADDING_XSM) << ""
+			<< setw(STYLES::PADDING_MD) << "Coeff EllipseZ"
+			<< setw(STYLES::PADDING_MD) << "The emittance in Z <= 0, the coefficients are undefined for such behaviour";
+	} else {
+		// cout << coeff.getX() * coeff.getY() - coeff.getZ() * coeff.getZ() << endl;
+		stream
+			<< setw(STYLES::PADDING_XSM) << ""
+			<< setw(STYLES::PADDING_MD) << "Coeff EllipseZ"
+			<< setw(STYLES::PADDING_MD) << "A11 Z : " << coeff.getX()
+			<< endl
+			<< setw(STYLES::PADDING_XSM) << "" << setw(STYLES::PADDING_MD) << ""
+			<< setw(STYLES::PADDING_MD) << "A22 Z : " << coeff.getY()
+			<< endl
+			<< setw(STYLES::PADDING_XSM) << "" << setw(STYLES::PADDING_MD) << ""
+			<< setw(STYLES::PADDING_MD) << "A12 Z : " << coeff.getZ()
+			<< endl;
+	}
 	return stream.str();
 }
 

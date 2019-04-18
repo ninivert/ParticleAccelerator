@@ -12,6 +12,7 @@
 class Vector3D;
 class Particle;
 class Element;
+class Accelerator;
 class Drawable;
 class Renderer;
 
@@ -34,7 +35,7 @@ public:
 	 * - `double lambda`: scaling factor for the macroparticles (> 1)
 	 */
 
-	Beam(Particle const& defaultParticle, size_t const& particleCount, double const& lambda = 1);
+	Beam(Particle const& defaultParticle, size_t const& particleCount, double const& lambda, Accelerator const& acc);
 
 	/**
 	 * Constructor with only one particle

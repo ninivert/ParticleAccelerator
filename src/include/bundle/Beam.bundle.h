@@ -8,5 +8,6 @@
 #include "src/include/Element.h"
 #include "src/include/Convert.h"
 #include "src/include/Particle.h"
+#include "src/include/Accelerator.h"
 
 #include "src/include/Beam.h"
