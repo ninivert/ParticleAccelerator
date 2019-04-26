@@ -97,6 +97,52 @@ void Accelerator::clear() {
 	clearElements();
 }
 
+Vector3D Accelerator::getPosAtProgress(double const& progress) const {
+	double length(getTotalLength() * progress);
+	size_t i(0);
+	size_t size(elements_ptr.size());
+	if (size == 0) { return Vector3D(); }
+
+	do {
+		length -= elements_ptr[i]->getLength();
+		++i;
+	} while (length >= 0 and i < size);
+	--i;
+
+	double lengthElement(elements_ptr[i]->getLength());
+	length += lengthElement;
+
+	double prog(length / lengthElement);
+	return elements_ptr[i]->getPosAtProgress(prog);
+}
+
+Vector3D Accelerator::getVelAtProgress(double const& progress, bool const& clockwise) const {
+	double length(getTotalLength() * progress);
+	size_t i(0);
+	size_t size(elements_ptr.size());
+	if (size == 0) { return Vector3D(); }
+
+	do {
+		length -= elements_ptr[i]->getLength();
+		++i;
+	} while(length >= 0 and i < size);
+	--i;
+
+	double lengthElement(elements_ptr[i]->getLength());
+	length += lengthElement;
+
+	double prog(length / lengthElement);
+	return elements_ptr[i]->getVelAtProgress(prog, clockwise);
+}
+
+double Accelerator::getTotalLength() const {
+	double length(0);
+	for (shared_ptr<Element> const& element_ptr : elements_ptr) {
+		length += element_ptr->getLength();
+	}
+	return length;
+}
+
 string Accelerator::to_string() const {
 	stringstream stream;
 	stream << setprecision(STYLES::PRECISION);
