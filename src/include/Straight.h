@@ -87,6 +87,12 @@ public:
 
 	virtual Vector3D getField(Vector3D const& pos, bool const& methodChapi = false) const override;
 
+	virtual double getLength() const override;
+
+	virtual Vector3D getPosAtProgress(double const& progress) const override;
+
+	virtual Vector3D getVelAtProgress(double const& progress, bool const& clockwise) const override;
+
 	/****************************************************************
 	 * Virtual methods
 	 ****************************************************************/

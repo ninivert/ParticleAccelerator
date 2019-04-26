@@ -30,6 +30,23 @@ shared_ptr<Straight> Straight::cloneThis() const {
 
 Vector3D Straight::getField(Vector3D const& pos, bool const& methodChapi) const { return Vector3D(0, 0, 0); }
 
+double Straight::getLength() const {
+	return (getPosOut() - getPosIn()).norm();
+}
+
+Vector3D Straight::getPosAtProgress(double const& progress) const {
+	return ((getPosOut() - getPosIn()) * progress + getPosIn());
+}
+
+Vector3D Straight::getVelAtProgress(double const& progress, bool const& clockwise) const {
+	Vector3D direction(getPosOut() - getPosIn());
+	~direction;
+	if (not clockwise) {
+		direction *= -1;
+	}
+	return direction;
+}
+
 /****************************************************************
  * Virtual methods
  ****************************************************************/

@@ -128,6 +128,12 @@ public:
 
 	virtual double getParticleProgress(Vector3D const& pos, bool const& methodChapi = false) const = 0;
 
+	virtual double getLength() const = 0;
+
+	virtual Vector3D getPosAtProgress(double const& progress) const = 0;
+
+	virtual Vector3D getVelAtProgress(double const& progress, bool const& clockwise) const = 0;
+
 	/****************************************************************
 	 * Methods
 	 ****************************************************************/

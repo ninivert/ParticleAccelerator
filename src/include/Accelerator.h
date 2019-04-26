@@ -120,7 +120,6 @@ public:
 
 	void step(double const& dt = GLOBALS::DT);
 
-
 	/**
 	 * Removes all elements and particles from the accelerator and DELETE THEM
 	 */
@@ -132,6 +131,12 @@ public:
 	 */
 
 	void clearParticles();
+
+	Vector3D getPosAtProgress(double const& progress) const;
+
+	Vector3D getVelAtProgress(double const& progress, bool const& clockwise) const;
+
+	void initParticleToClosestElement(Particle & particle) const;
 
 	/**
 	 * Generates a string representation of the accelerator
@@ -193,7 +198,8 @@ private:
 	 * Private: this method should only be used internally in Accelerator::addParticle()
 	 */
 
-	void initParticleToClosestElement(Particle & particle) const;
+
+	double getTotalLength() const;
 
 	/****************************************************************
 	 * Attributes
