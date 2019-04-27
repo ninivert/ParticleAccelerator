@@ -5,12 +5,15 @@
 #include "src/include/bundle/Straight.bundle.h"
 #include "src/include/bundle/Dipole.bundle.h"
 #include "src/include/bundle/Beam.bundle.h"
+#include "src/include/bundle/TextRenderer.bundle.h"
 #include "test/lib/Test.h"
 
 using namespace std;
 
 int main() {
-	Accelerator acc;
+	TextRenderer engine;
+
+	Accelerator acc(&engine);
 
 	Dipole dipole_1(Vector3D(1, 0, 0), Vector3D(0, -1, 0), 0.1, 1, 7);
 	acc.addElement(dipole_1);
@@ -20,16 +23,28 @@ int main() {
 
 	acc.closeElementLoop();
 
-	cout << acc << endl;
-
-
+	// acc.draw();
 
 	Particle part_1(Vector3D(1.01, -0.01, -0.04), 2, Vector3D(-1, -0, 0.01), 0.938272);
 	part_1.setElement(&dipole_1);
 
 	Beam beam_1(part_1, 4, 2, acc);
 
-	cout << beam_1 << endl;
+	// cout << beam_1;
+
+	acc.addBeam(part_1, 4, 2);
+
+	// acc.drawBeams();
+
+	acc.addParticle(part_1);
+	// acc.drawBeams();
+
+	acc.clearBeams();
+	// acc.draw();
+
+	Beam beam_2(part_1, 10000, 500, acc);
+
+	// cout << beam_2;
 
 	return 0;
 }

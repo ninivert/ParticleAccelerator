@@ -24,7 +24,7 @@ class Beam : public Drawable {
 public:
 
 	/****************************************************************
-	 * Constructors and destructors
+	 * Constructors
 	 ****************************************************************/
 
 	/**
@@ -45,11 +45,19 @@ public:
 
 	Beam(Particle const& defaultParticle);
 
+	/****************************************************************
+	 * Destructor
+	 ****************************************************************/
+
 	/**
 	 * Destructor: we are storing pointers (smart pointers but ok)
 	 */
 
 	~Beam();
+
+	/****************************************************************
+	 * Copy constructor and operator =
+	 ****************************************************************/
 
 	/**
 	 * Delete copy constructor
@@ -125,6 +133,24 @@ public:
 
 	void step(double const& dt = GLOBALS::DT, bool const& methodChapi = false);
 
+	/**
+	 * Returns true if there is no Particle left in the Beam
+	 *
+	 * Returns false otherwise
+	 */
+
+	bool noParticle() const;
+
+	/**
+	 * Calls Element::updatePointedElement() (with polymorphism) on all particles of the Beam
+	 */
+
+	void updatePointedElement(bool const& methodChapi = false) const;
+
+	/**
+	 * Returns a string representation of the Beam
+	 */
+
 	std::string to_string() const;
 
 	/****************************************************************
@@ -166,6 +192,14 @@ private:
 	 */
 
 	Vector3D const getZMeans() const;
+
+	/**
+	 * Remove the Particle of the Beam that are out of the Accelerator
+	 *
+	 * Private: this method should only be used internally in Beam::step()
+	 */
+
+	void clearDeadParticles();
 
 	/****************************************************************
 	 * Attributes

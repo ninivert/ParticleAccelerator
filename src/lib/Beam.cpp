@@ -15,6 +15,8 @@ Beam::Beam(Particle const& defaultParticle, size_t const& particleCount, double 
 	if (lambda < 1) {
 		ERROR(EXCEPTIONS::BAD_LAMBDA);
 	}
+	// To trigger the exception if the initial particle is outside the accelerator
+	acc.initParticleToClosestElement(*defaultParticle_ptr);
 
 	double orientation(Vector3D::tripleProduct(Vector3D(0, 0, 1), defaultParticle_ptr->getPos(), defaultParticle_ptr->getPos() + defaultParticle_ptr->getSpeed()));
 	bool clockwise((orientation < 0));
@@ -76,8 +78,46 @@ double Beam::getMeanEnergy() const {
 void Beam::step(double const& dt, bool const& methodChapi) {
 	if (abs(dt) < GLOBALS::DELTA) { return; }
 
-	for (unique_ptr<Particle> const& particle_ptr : particles_ptr) {
+	for (unique_ptr<Particle> & particle_ptr : particles_ptr) {
 		particle_ptr->step(dt, methodChapi);
+	}
+
+	// At the end because we can't initialize particles (basis of beams) outside the accelerator
+	clearDeadParticles();
+}
+
+void Beam::clearDeadParticles() {
+	// Remove particles that are out of the simulation
+	size_t size(particles_ptr.size());
+	for (size_t i(0); i < size; ++i) {
+		if (particles_ptr[i]->getElementPtr()->isInWall(*particles_ptr[i])) {
+			particles_ptr[i].reset();
+
+			// using swap + pop_back
+			// faster but changes indexes
+			swap(particles_ptr[i], particles_ptr[size - 1]);
+			particles_ptr.pop_back();
+
+			// using erase
+			// slower but preserves indexes
+			// particles_ptr.erase(particles_ptr.begin() + i);
+
+			// We resized the vector so we need to take it into account
+			--size;
+			// We need to evalute the new `particles_ptr[i]` that has been swapped
+			--i;
+		}
+	}
+}
+
+bool Beam::noParticle() const {
+	if (particles_ptr.size() > 0) { return false; }
+	else { return true; }
+}
+
+void Beam::updatePointedElement(bool const& methodChapi) const {
+	for (unique_ptr<Particle> const& particle_ptr : particles_ptr) {
+		particle_ptr->getElementPtr()->updatePointedElement(*particle_ptr, methodChapi);
 	}
 }
 
@@ -86,7 +126,7 @@ string Beam::to_string() const {
 	stream << setprecision(STYLES::PRECISION);
 	stream << left;
 	stream
-		<< STYLES::COLOR_YELLOW
+		<< STYLES::COLOR_CYAN
 		<< STYLES::FORMAT_BOLD
 		<< "Beam contains " << particles_ptr.size() << " macroparticle(s)"
 		<< STYLES::NONE << endl
@@ -95,7 +135,13 @@ string Beam::to_string() const {
 		<< setw(STYLES::PADDING_LG) << "Mean energy (macro) "
 		<< setw(STYLES::PADDING_MD) << getMeanEnergy()
 		<< " (" << UNITS::ENERGY << ")"
-		<< endl;
+		<< endl
+		// Default Particle
+		<< setw(STYLES::PADDING_MD) << "Default Particle "
+		<< endl
+		<< setw(STYLES::PADDING_LG) << *defaultParticle_ptr;
+
+	// for (auto const& particle_ptr : particles_ptr) { stream << *particle_ptr; }
 	return stream.str();
 }
 
