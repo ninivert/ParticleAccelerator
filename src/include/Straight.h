@@ -87,21 +87,13 @@ public:
 
 	virtual Vector3D getField(Vector3D const& pos, bool const& methodChapi = false) const override;
 
-	virtual double getLength() const override;
-
-	virtual Vector3D getPosAtProgress(double const& progress) const override;
-
-	virtual Vector3D getVelAtProgress(double const& progress, bool const& clockwise) const override;
-
-	/****************************************************************
-	 * Virtual methods
-	 ****************************************************************/
-
 	/**
-	 * Returns true if the Particle p is outside the straight element (touched the wall)
+	 * Returns the HORIZONTAL direction perpendicular to the Straight Element at a certain position
+	 *
+	 * The position is useless here but we need it for polymorphism
 	 */
 
-	virtual bool isInWall(Particle const& p) const override;
+	virtual Vector3D const getNormalDirection(Vector3D const& pos) const override;
 
 	/**
 	 * Returns the percentage of the trajectory effected by the particle in the Element
@@ -116,12 +108,32 @@ public:
 	virtual double getParticleProgress(Vector3D const& pos, bool const& methodChapi = false) const override;
 
 	/**
-	 * Returns the HORIZONTAL direction perpendicular to the Straight Element at a certain position
-	 *
-	 * The position is useless here but we need it for polymorphism
+	 * Returns the total length of the Straight Element
 	 */
 
-	virtual Vector3D const getNormalDirection(Vector3D const& pos) const override;
+	virtual double getLength() const override;
+
+	/**
+	 * Returns a Vector3D containing the position (e.g. of a Particle) at a certain pourcentage of the Straight Element (between 0 and 1)
+	 */
+
+	virtual Vector3D getPosAtProgress(double const& progress) const override;
+
+	/**
+	 * Returns a Vector3D containing the direction (not normalized) of the Straight Element at a certain pourcentage of the Straight Element (between 0 and 1)
+	 */
+
+	virtual Vector3D getVelAtProgress(double const& progress, bool const& clockwise) const override;
+
+	/****************************************************************
+	 * Virtual methods
+	 ****************************************************************/
+
+	/**
+	 * Returns true if the Particle p is outside the straight element (touched the wall)
+	 */
+
+	virtual bool isInWall(Particle const& p) const override;
 
 	/**
 	 * Returns a string representation of the straight element

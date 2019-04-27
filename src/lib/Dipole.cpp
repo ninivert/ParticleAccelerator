@@ -27,21 +27,11 @@ shared_ptr<Dipole> Dipole::cloneThis() const {
 
 Vector3D Dipole::getField(Vector3D const& pos, bool const& methodChapi) const { return Vector3D(0, 0, B); }
 
-double Dipole::getLength() const {
-	double totalAngle(atan2(getPosOut().getX(), getPosOut().getY()) - atan2(getPosIn().getX(), getPosIn().getY()));
-	if (totalAngle < 0) { totalAngle += 2 * M_PI; }
-	return totalAngle / curvature;
+Vector3D const Dipole::getNormalDirection(Vector3D const& pos) const {
+	Vector3D X(pos - posCenter);
+	Vector3D u(X - pos.getZ() * Vector3D(0, 0, 1));
+	return ~u;
 }
-
-/****************************************************************
- * Setters
- ****************************************************************/
-
-void Dipole::setB(double const& _B) { B = _B; }
-
-/****************************************************************
- * Virtual methods
- ****************************************************************/
 
 double Dipole::getParticleProgress(Vector3D const& pos, bool const& methodChapi) const {
 	if (methodChapi) {
@@ -62,28 +52,52 @@ double Dipole::getParticleProgress(Vector3D const& pos, bool const& methodChapi)
 	}
 }
 
-Vector3D const Dipole::getNormalDirection(Vector3D const& pos) const {
-	Vector3D X(pos - posCenter);
-	Vector3D u(X - pos.getZ() * Vector3D(0, 0, 1));
-	return ~u;
+double Dipole::getLength() const {
+	double totalAngle(atan2(getPosOut().getX(), getPosOut().getY()) - atan2(getPosIn().getX(), getPosIn().getY()));
+	if (totalAngle < 0) { totalAngle += 2 * M_PI; }
+	return totalAngle / curvature;
 }
 
 Vector3D Dipole::getPosAtProgress(double const& progress) const {
+	if (progress < 0 or progress > 1) { ERROR(EXCEPTIONS::BAD_PROGRESS); }
+
 	double angle(atan2(getPosOut().getX(), getPosOut().getY()) - atan2(getPosIn().getX(), getPosIn().getY()));
+	if (angle < 0) { angle += 2 * M_PI; }
+
 	angle *= progress;
 	Vector3D pos(getPosIn() - posCenter);
+
 	pos.rotate(Vector3D(0, 0, -1), angle);
 	pos += posCenter;
 	return pos;
 }
 
 Vector3D Dipole::getVelAtProgress(double const& progress, bool const& clockwise) const {
+	if (progress < 0 or progress > 1) { ERROR(EXCEPTIONS::BAD_PROGRESS); }
+
 	Vector3D dir(getNormalDirection(getPosAtProgress(progress)));
 
 	// 90° rotation (clockwise)
 	dir ^= Vector3D(0, 0, 1);
 	if (not clockwise) { dir *= -1; }
 	return dir;
+}
+
+/****************************************************************
+ * Setters
+ ****************************************************************/
+
+void Dipole::setB(double const& _B) { B = _B; }
+
+/****************************************************************
+ * Virtual methods
+ ****************************************************************/
+
+bool Dipole::isInWall(Particle const& p) const {
+	Vector3D X(p.getPos() - posCenter);
+	Vector3D u(X - p.getPos().getZ() * Vector3D(0, 0, 1));
+	~u;
+	return ((X - 1 / abs(curvature) * u).norm() > getRadius());
 }
 
 string Dipole::to_string() const {
@@ -116,13 +130,6 @@ string Dipole::to_string() const {
 		<< " (" << UNITS::DISTANCE << ")"
 		<< endl;
 	return stream.str();
-}
-
-bool Dipole::isInWall(Particle const& p) const {
-	Vector3D X(p.getPos() - posCenter);
-	Vector3D u(X - p.getPos().getZ() * Vector3D(0, 0, 1));
-	~u;
-	return ((X - 1 / abs(curvature) * u).norm() > getRadius());
 }
 
 /****************************************************************

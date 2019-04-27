@@ -30,32 +30,10 @@ shared_ptr<Straight> Straight::cloneThis() const {
 
 Vector3D Straight::getField(Vector3D const& pos, bool const& methodChapi) const { return Vector3D(0, 0, 0); }
 
-double Straight::getLength() const {
-	return (getPosOut() - getPosIn()).norm();
-}
-
-Vector3D Straight::getPosAtProgress(double const& progress) const {
-	return ((getPosOut() - getPosIn()) * progress + getPosIn());
-}
-
-Vector3D Straight::getVelAtProgress(double const& progress, bool const& clockwise) const {
-	Vector3D direction(getPosOut() - getPosIn());
-	~direction;
-	if (not clockwise) {
-		direction *= -1;
-	}
-	return direction;
-}
-
-/****************************************************************
- * Virtual methods
- ****************************************************************/
-
-bool Straight::isInWall(Particle const& p) const {
-	Vector3D X(p.getPos() - getPosIn());
+Vector3D const Straight::getNormalDirection(Vector3D const& pos) const {
 	Vector3D d(getPosOut() - getPosIn());
 	~d;
-	return ((X - (X * d) * d).norm() > getRadius());
+	return (Vector3D(0, 0, 1) ^ d);
 }
 
 double Straight::getParticleProgress(Vector3D const& pos, bool const& methodChapi) const {
@@ -73,10 +51,36 @@ double Straight::getParticleProgress(Vector3D const& pos, bool const& methodChap
 	}
 }
 
-Vector3D const Straight::getNormalDirection(Vector3D const& pos) const {
+double Straight::getLength() const {
+	return (getPosOut() - getPosIn()).norm();
+}
+
+Vector3D Straight::getPosAtProgress(double const& progress) const {
+	if (progress < 0 or progress > 1) { ERROR(EXCEPTIONS::BAD_PROGRESS); }
+
+	return ((getPosOut() - getPosIn()) * progress + getPosIn());
+}
+
+Vector3D Straight::getVelAtProgress(double const& progress, bool const& clockwise) const {
+	if (progress < 0 or progress > 1) { ERROR(EXCEPTIONS::BAD_PROGRESS); }
+
+	Vector3D direction(getPosOut() - getPosIn());
+	~direction;
+	if (not clockwise) {
+		direction *= -1;
+	}
+	return direction;
+}
+
+/****************************************************************
+ * Virtual methods
+ ****************************************************************/
+
+bool Straight::isInWall(Particle const& p) const {
+	Vector3D X(p.getPos() - getPosIn());
 	Vector3D d(getPosOut() - getPosIn());
 	~d;
-	return (Vector3D(0, 0, 1) ^ d);
+	return ((X - (X * d) * d).norm() > getRadius());
 }
 
 string Straight::to_string() const {

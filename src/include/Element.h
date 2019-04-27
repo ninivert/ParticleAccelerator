@@ -56,14 +56,10 @@ public:
 	 * Copy constructor and operator =
 	 ****************************************************************/
 
-	/**
-	 * Copy Constructor deleted because copying an element has no physical meaning (superposition ? how do you modify the pointers ?) and to avoid copying pointers without knowing it
-	 */
-
-	// Element(Element const&) = delete;
+	// The copy constructor is used for the polymorphic copy
 
 	/**
-	 * operator = deleted for the same reasons as the copy constructor (Element::Element(Element const&))
+	 * operator = deleted because copying an element has no physical meaning (superposition ? how do you modify the pointers ?) and to avoid copying pointers without knowing it
 	 */
 
 	Element& operator = (Element const&) = delete;
@@ -117,6 +113,12 @@ public:
 	virtual Vector3D getField(Vector3D const& pos, bool const& methodChapi = false) const = 0;
 
 	/**
+	 * Returns the HORIZONTAL direction perpendicular to the Element at a certain position
+	 */
+
+	virtual Vector3D const getNormalDirection(Vector3D const& pos) const = 0;
+
+	/**
 	 * Returns the percentage of the trajectory effected by the particle in the Element
 	 *
 	 * Possibility to choose between the method wanted by Chap (returned value is always positive) or a method that does not approximate the accelerator by a circle
@@ -128,9 +130,21 @@ public:
 
 	virtual double getParticleProgress(Vector3D const& pos, bool const& methodChapi = false) const = 0;
 
+	/**
+	 * Returns the total length of the Element
+	 */
+
 	virtual double getLength() const = 0;
 
+	/**
+	 * Returns a Vector3D containing the position (e.g. of a Particle) at a certain pourcentage of the Element (between 0 and 1)
+	 */
+
 	virtual Vector3D getPosAtProgress(double const& progress) const = 0;
+
+	/**
+	 * Returns a Vector3D containing the direction (not normalized) of the Element at a certain pourcentage of the Element (between 0 and 1)
+	 */
 
 	virtual Vector3D getVelAtProgress(double const& progress, bool const& clockwise) const = 0;
 
@@ -170,12 +184,6 @@ public:
 	 */
 
 	virtual bool isInWall(Particle const& p) const = 0;
-
-	/**
-	 * Returns the HORIZONTAL direction perpendicular to the Element at a certain position
-	 */
-
-	virtual Vector3D const getNormalDirection(Vector3D const& pos) const = 0;
 
 	/**
 	 * Returns a string representation of the element

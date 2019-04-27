@@ -76,9 +76,39 @@ public:
 
 	virtual Vector3D getField(Vector3D const& pos, bool const& methodChapi = false) const override;
 
+	/**
+	 * Returns the HORIZONTAL direction perpendicular to the Dipole Element (curved) at a certain position
+	 */
+
+	virtual Vector3D const getNormalDirection(Vector3D const& pos) const override;
+
+	/**
+	 * Returns the percentage of the trajectory effected by the particle in the Element
+	 *
+	 * Possibility to choose between the method wanted by Chap (returned value is always positive) or a method that does not approximate the accelerator by a circle
+	 *
+	 * - < 0 : the Particle might be in the previous Element (if it exists)
+	 * - Between 0 and 1 : the Particle in inside the Element
+	 * - > 1 : the Particle might be in the next Element (if it exists)
+	 */
+
+	virtual double getParticleProgress(Vector3D const& pos, bool const& methodChapi = false) const override;
+
+	/**
+	 * Returns the total length of the Dipole
+	 */
+
 	virtual double getLength() const override;
 
+	/**
+	 * Returns a Vector3D containing the position (e.g. of a Particle) at a certain pourcentage of the Dipole (between 0 and 1)
+	 */
+
 	virtual Vector3D getPosAtProgress(double const& progress) const override;
+
+	/**
+	 * Returns a Vector3D containing the direction (not normalized) of the Dipole at a certain pourcentage of the Dipole (between 0 and 1)
+	 */
 
 	virtual Vector3D getVelAtProgress(double const& progress, bool const& clockwise) const override;
 
@@ -103,24 +133,6 @@ public:
 	virtual bool isInWall(Particle const& p) const override;
 
 	/**
-	 * Returns the percentage of the trajectory effected by the particle in the Element
-	 *
-	 * Possibility to choose between the method wanted by Chap (returned value is always positive) or a method that does not approximate the accelerator by a circle
-	 *
-	 * - < 0 : the Particle might be in the previous Element (if it exists)
-	 * - Between 0 and 1 : the Particle in inside the Element
-	 * - > 1 : the Particle might be in the next Element (if it exists)
-	 */
-
-	virtual double getParticleProgress(Vector3D const& pos, bool const& methodChapi = false) const override;
-
-	/**
-	 * Returns the HORIZONTAL direction perpendicular to the Dipole Element (curved) at a certain position
-	 */
-
-	virtual Vector3D const getNormalDirection(Vector3D const& pos) const override;
-
-	/**
 	 * Returns a string representation of the dipole
 	 */
 
@@ -141,7 +153,6 @@ public:
 	virtual void draw(Renderer * engine_ptr = nullptr) const override;
 
 private:
-
 
 	/****************************************************************
 	 * Private methods (Polymorphic copy)
