@@ -20,22 +20,6 @@ Accelerator::~Accelerator() { this->clear(); };
  * Methods
  ****************************************************************/
 
-void Accelerator::step(double const& dt) {
-	// Do nothing if dt is null
-	if (abs(dt) < GLOBALS::DELTA) { return; }
-
-	// Step through all the particles
-	for (unique_ptr<Particle> & particle_ptr : particles_ptr) {
-		// Change the element if the particle goes out
-		particle_ptr->getElementPtr()->updatePointedElement(*particle_ptr, methodChapi);
-
-		particle_ptr->step(dt, methodChapi);
-	}
-
-	// At the end because we can't initialize particles outside the accelerator
-	clearDeadParticles();
-}
-
 void Accelerator::addElement(Element const& element) {
 	// Protection against empty vector elements
 	if (elements_ptr.size() > 0) {
@@ -51,24 +35,24 @@ void Accelerator::addElement(Element const& element) {
 	}
 }
 
-void Accelerator::addParticle(Particle const& particle) {
+void Accelerator::addBeam(Particle const& defaultParticle, size_t const& particleCount, double const& lambda) {
 	// Protection against no element to point to
 	if (elements_ptr.size() > 0) {
-		particles_ptr.push_back(particle.copy());
-		initParticleToClosestElement(*particles_ptr[particles_ptr.size() - 1]);
+		beams_ptr.push_back(unique_ptr<Beam>(new Beam(defaultParticle, particleCount, lambda, *this)));
+		// Beam is automatically initialize
 	} else {
 		ERROR(EXCEPTIONS::NO_ELEMENTS);
 	}
 }
 
-void Accelerator::closeElementLoop() {
-	// We need 2 elements
-	if (elements_ptr.size() > 1) {
-		if (elements_ptr[elements_ptr.size() - 1]->getPosOut() == elements_ptr[0]->getPosIn()) {
-			elements_ptr[elements_ptr.size() - 1]->linkNext(*elements_ptr[0]);
-		} else {
-			ERROR(EXCEPTIONS::ELEMENT_LOOP_INCOMPLETE);
-		}
+void Accelerator::addParticle(Particle particle) {
+	// Protection against no element to point to
+	if (elements_ptr.size() > 0) {
+		// If there is only one particle, the beam is not automatically initialized !
+		initParticleToClosestElement(particle);
+		beams_ptr.push_back(unique_ptr<Beam>(new Beam(particle)));
+	} else {
+		ERROR(EXCEPTIONS::NO_ELEMENTS);
 	}
 }
 
@@ -90,14 +74,53 @@ void Accelerator::initParticleToClosestElement(Particle & particle) const {
 	}
 }
 
-void Accelerator::clearParticles() { particles_ptr.clear(); }
+void Accelerator::closeElementLoop() {
+	// We need 2 elements
+	if (elements_ptr.size() > 1) {
+		if (elements_ptr[elements_ptr.size() - 1]->getPosOut() == elements_ptr[0]->getPosIn()) {
+			elements_ptr[elements_ptr.size() - 1]->linkNext(*elements_ptr[0]);
+		} else {
+			ERROR(EXCEPTIONS::ELEMENT_LOOP_INCOMPLETE);
+		}
+	}
+}
+
+void Accelerator::clearBeams() { beams_ptr.clear(); }
+
 void Accelerator::clearElements() { elements_ptr.clear(); }
+
 void Accelerator::clear() {
-	clearParticles();
+	clearBeams();
 	clearElements();
 }
 
+void Accelerator::clearDeadBeams() {
+	// Remove beams that does not contain any particles from the simulation
+	size_t size(beams_ptr.size());
+	for (size_t i(0); i < size; ++i) {
+		if (beams_ptr[i]->noParticle()) {
+			beams_ptr[i].reset();
+
+			// using swap + pop_back
+			// faster but changes indexes
+			swap(beams_ptr[i], beams_ptr[size - 1]);
+			beams_ptr.pop_back();
+
+			// using erase
+			// slower but preserves indexes
+			// beams_ptr.erase(beams_ptr.begin() + i);
+
+			// We resized the vector so we need to take it into account
+			--size;
+			// We need to evalute the new `beams_ptr[i]` that has been swapped
+			--i;
+		}
+	}
+}
+
 Vector3D Accelerator::getPosAtProgress(double const& progress) const {
+	if (progress < 0 or progress > 1) { ERROR(EXCEPTIONS::BAD_PROGRESS); }
+
 	double length(getTotalLength() * progress);
 	size_t i(0);
 	size_t size(elements_ptr.size());
@@ -117,6 +140,8 @@ Vector3D Accelerator::getPosAtProgress(double const& progress) const {
 }
 
 Vector3D Accelerator::getVelAtProgress(double const& progress, bool const& clockwise) const {
+	if (progress < 0 or progress > 1) { ERROR(EXCEPTIONS::BAD_PROGRESS); }
+
 	double length(getTotalLength() * progress);
 	size_t i(0);
 	size_t size(elements_ptr.size());
@@ -143,6 +168,21 @@ double Accelerator::getTotalLength() const {
 	return length;
 }
 
+void Accelerator::step(double const& dt) {
+	// Do nothing if dt is null
+	if (abs(dt) < GLOBALS::DELTA) { return; }
+
+	// Step through all the particles
+	for (unique_ptr<Beam> & beam_ptr : beams_ptr) {
+		// Change the element if the particle goes out
+		beam_ptr->updatePointedElement(methodChapi);
+
+		beam_ptr->step(dt, methodChapi);
+	}
+
+	clearDeadBeams();
+}
+
 string Accelerator::to_string() const {
 	stringstream stream;
 	stream << setprecision(STYLES::PRECISION);
@@ -157,34 +197,11 @@ string Accelerator::to_string() const {
 	stream
 		<< STYLES::COLOR_YELLOW
 		<< STYLES::FORMAT_BOLD
-		<< "Accelerator contains " << particles_ptr.size() << " particle(s)" << endl
+		<< "Accelerator contains " << beams_ptr.size() << " beam(s)" << endl
 		<< STYLES::NONE;
-	for (unique_ptr<Particle> const& particle_ptr : particles_ptr) stream << *particle_ptr << endl;
+	for (unique_ptr<Beam> const& beam_ptr : beams_ptr) stream << *beam_ptr;
+		stream << endl;
 	return stream.str();
-}
-
-void Accelerator::clearDeadParticles() {
-	// Remove particles that are out of the simulation
-	size_t size(particles_ptr.size());
-	for (size_t i(0); i < size; ++i) {
-		if (particles_ptr[i]->getElementPtr()->isInWall(*particles_ptr[i])) {
-			particles_ptr[i].reset();
-
-			// using swap + pop_back
-			// faster but changes indexes
-			swap(particles_ptr[i], particles_ptr[size - 1]);
-			particles_ptr.pop_back();
-
-			// using erase
-			// slower but preserves indexes
-			// particles_ptr.erase(particles_ptr.begin() + i);
-
-			// We resized the vector so we need to take it into account
-			--size;
-			// We need to evalute the new `particles_ptr[i]` that has been swapped
-			--i;
-		}
-	}
 }
 
 /****************************************************************
@@ -212,10 +229,10 @@ void Accelerator::draw(Renderer * engine_ptr) const {
 	engine_ptr->draw(*this);
 }
 
-void Accelerator::drawParticles() const {
+void Accelerator::drawBeams() const {
 	if (engine_ptr == nullptr) ERROR(EXCEPTIONS::NULLPTR);
-	for (unique_ptr<Particle> const& particle_ptr : particles_ptr) {
-		particle_ptr->draw(engine_ptr);
+	for (unique_ptr<Beam> const& beam_ptr : beams_ptr) {
+		beam_ptr->draw(engine_ptr);
 	}
 }
 

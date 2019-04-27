@@ -69,6 +69,12 @@ namespace EXCEPTIONS {
 	inline constexpr char OUTSIDE_ACCELERATOR[]("The Particle is now outside the accelerator (out of the first / last element)");
 
 	/**
+	 * Class Element : The progress given is not between 0 and 1
+	 */
+
+	inline constexpr char BAD_PROGRESS[]("The pourcentage (progress) must be between 0 and 1");
+
+	/**
 	 * Class Beam : The coefficient lambda (scaling factor) given is less than 1
 	 */
 

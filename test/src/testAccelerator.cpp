@@ -38,7 +38,6 @@ int main() {
 	 ****************************************************************/
 
 	ASSERT_EXCEPTION(acc.addParticle(part_1), EXCEPTIONS::NO_ELEMENTS);
-
 	ASSERT_EXCEPTION(
 		acc.addElement(straight_1);
 		acc.addElement(straight_3);
@@ -69,7 +68,7 @@ int main() {
 	// cout << acc << endl;
 	// cout << part_2 << endl;
 
-	acc.clearParticles();
+	acc.clearBeams();
 	// cout << acc << endl;
 
 	acc.clear();
@@ -95,9 +94,9 @@ int main() {
 	// We can just count the number of particles
 	// which are still in the acc after 1 step
 
-	// cout << acc << endl;
+	// cout << acc << endl;		// 8 beams
 	acc.step();
-	// cout << acc << endl;
+	// cout << acc << endl;		// 5 beams
 
 	acc.clear();
 
@@ -111,7 +110,7 @@ int main() {
 	// Juuust outside dipole
 	ASSERT_EXCEPTION(acc.addParticle(Particle(Vector3D(1, 0.1, 0), Vector3D(), CONSTANTS::M_PROTON)), EXCEPTIONS::PARTICLE_NOT_IN_ACCELERATOR);
 
-	acc.clearParticles();
+	acc.clearBeams();
 	// Juuuust inside dipole
 	acc.addParticle(Particle(Vector3D(1, 0, 0), 1, Vector3D(0, -1, 0), CONSTANTS::M_PROTON));
 	// Just in the the dipole

@@ -14,6 +14,7 @@
 class Vector3D;
 class Particle;
 class Element;
+class Beam;
 class Drawable;
 class Renderer;
 
@@ -46,15 +47,19 @@ public:
 
 	explicit Accelerator(Renderer * engine_ptr = nullptr, bool const& methodChapi = true);
 
-	/**
-	 * Destructor calls the Accelerator::clear() method
-	 */
-
 	/****************************************************************
 	 * Destructor
 	 ****************************************************************/
 
+	/**
+	 * Destructor calls the Accelerator::clear() method
+	 */
+
 	~Accelerator();
+
+	/****************************************************************
+	 * Copy constructor and operator =
+	 ****************************************************************/
 
 	/**
 	 * Delete copy constructor
@@ -62,10 +67,6 @@ public:
 	 * - To avoid to copy an accelerator (big object)
 	 * - To forbid the transmission of pointers on `Particle` (std::unique_ptr) and `Element` (std::shared_ptr)
 	 */
-
-	/****************************************************************
-	 * Copy constructor and operator =
-	 ****************************************************************/
 
 	Accelerator(Accelerator const&) = delete;
 
@@ -97,10 +98,28 @@ public:
 	void addElement(Element const& element);
 
 	/**
-	 * Adds a particle to the accelerator
+	 * Adds a copy of a new Beam created at the moment to the Accelerator
+	 *
+	 * It dynamically creates space for a new Beam
+	 * We don't add Beam, because a Beam requires an Accelerator to be instantiated so it is easier for the user to just add Particles which will be transformed into Beams
+	 *
 	 */
 
-	void addParticle(Particle const& particle);
+	void addBeam(Particle const& defaultParticle, size_t const& particleCount, double const& lambda);
+
+	/**
+	 * Adds a Particle to the Accelerator, transform it into a Beam before storing it
+	 */
+
+	void addParticle(Particle particle);
+
+	/**
+	 * Initialization of a particle by searching which element is the closest
+	 *
+	 * This method is used in Accelerator::addParticle() and Beam::Beam()
+	 */
+
+	void initParticleToClosestElement(Particle & particle) const;
 
 	/**
 	 * Complete the accelerator by linking the first element and the last one
@@ -111,6 +130,30 @@ public:
 	void closeElementLoop();
 
 	/**
+	 * Removes all Elements and Beams from the accelerator and DELETE THEM
+	 */
+
+	void clear();
+
+	/**
+	 * Removes all Beams from the accelerator and DELETE THEM
+	 */
+
+	void clearBeams();
+
+	/**
+	 * Returns a Vector3D containing the position (e.g. of a Particle) at a certain pourcentage of the Accelerator (between 0 and 1)
+	 */
+
+	Vector3D getPosAtProgress(double const& progress) const;
+
+	/**
+	 * Returns a Vector3D containing the direction (not normalized) of the Dipole at a certain pourcentage of the Accelerator (between 0 and 1)
+	 */
+
+	Vector3D getVelAtProgress(double const& progress, bool const& clockwise) const;
+
+	/**
 	 * Simulate the particle accelerator over a timestep `dt`
 	 *
 	 * Make a Particle point to the next Element if it has moved past its current Element
@@ -119,24 +162,6 @@ public:
 	 */
 
 	void step(double const& dt = GLOBALS::DT);
-
-	/**
-	 * Removes all elements and particles from the accelerator and DELETE THEM
-	 */
-
-	void clear();
-
-	/**
-	 * Removes all particles from the accelerator and DELETE THEM
-	 */
-
-	void clearParticles();
-
-	Vector3D getPosAtProgress(double const& progress) const;
-
-	Vector3D getVelAtProgress(double const& progress, bool const& clockwise) const;
-
-	void initParticleToClosestElement(Particle & particle) const;
 
 	/**
 	 * Generates a string representation of the accelerator
@@ -162,7 +187,7 @@ public:
 	 * Draw particles only
 	 */
 
-	void drawParticles() const;
+	void drawBeams() const;
 
 	/**
 	 * Draw elements only
@@ -177,27 +202,24 @@ private:
 	 ****************************************************************/
 
 	/**
-	 * Removes all elements from the accelerator and DELETE THEM
+	 * Removes all Elements from the Accelerator and DELETE THEM
 	 *
-	 * Private: the user is not allowed to remove elements while particles are still pointing on them
+	 * Private: the user is not allowed to remove Elements while Particles are still pointing on them
 	 */
 
 	void clearElements();
 
 	/**
-	 * Remove Particle that are out of the Accelerator
-	 *
-	 * Private: this method should only be used internally in Accelerator::step()
+	 * Removes all dead Beams (i.e. containing 0 macroparticles) from the accelerator and DELETE THEM
 	 */
 
-	void clearDeadParticles();
+	void clearDeadBeams();
 
 	/**
-	 * Initialization of a particle by searching which element is the closest
+	 * Returns the total length of the Accelerator (sum of the length of each element)
 	 *
-	 * Private: this method should only be used internally in Accelerator::addParticle()
+	 * Used only in Accelerator::getPosAtProgress() and Accelerator::getVelAtProgress()
 	 */
-
 
 	double getTotalLength() const;
 
@@ -206,12 +228,12 @@ private:
 	 ****************************************************************/
 
 	/**
-	 * Homogeneous collection of std::unique_ptr on Particle
+	 * Homogeneous collection of std::unique_ptr on Beam
 	 *
-	 * We chose std::unique_ptr because the Accelerator will be the only object to point on particles and the intelligent pointers offer a good feature for such usage (dynamical allocation)
+	 * We chose std::unique_ptr because the Accelerator will be the only object to point on beams and the intelligent pointers offer a good feature for such usage (dynamical allocation)
 	 */
 
-	std::vector<std::unique_ptr<Particle>> particles_ptr;
+	std::vector<std::unique_ptr<Beam>> beams_ptr;
 
 	/**
 	 * Heterogeneous collection of shared_ptr on Element
