@@ -58,16 +58,16 @@ public:
 	 ****************************************************************/
 
 	/**
-	 * Draw an entire Accelerator
-	 */
-
-	virtual void draw(Accelerator const& acc) = 0;
-
-	/**
 	 * Draw a Beam
 	 */
 
 	virtual void draw(Beam const& beam) = 0;
+
+	/**
+	 * Draw an entire Accelerator
+	 */
+
+	virtual void draw(Accelerator const& acc) = 0;
 
 	/**
 	 * We do not want to draw an abstract type

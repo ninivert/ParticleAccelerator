@@ -151,12 +151,6 @@ public:
 	 ****************************************************************/
 
 	/**
-	 * Returns a string representation of the vector
-	 */
-
-	std::string to_string() const;
-
-	/**
 	 * Returns the norm of the vector, using the square root of `Vector3D::normSquared()`
 	 */
 
@@ -177,6 +171,12 @@ public:
 	 */
 
 	Vector3D& rotate(Vector3D axis, double const& alpha);
+
+	/**
+	 * Returns a string representation of the vector
+	 */
+
+	std::string to_string() const;
 
 	/****************************************************************
 	 * Static methods
@@ -228,17 +228,6 @@ Vector3D const operator + (Vector3D v1, Vector3D const& v2);
 Vector3D const operator - (Vector3D v1, Vector3D const& v2);
 
 /**
- * Returns the vector product of the lhs and rhs
- *
- * This operator has a low priority and is evaluated after relational operators.
- * Use parantheses to prioritize the evaluation of `^`
- *
- * See [the reference](https://en.cppreference.com/w/cpp/language/operator_precedence) for more information.
- */
-
-Vector3D const operator ^ (Vector3D v1, Vector3D const& v2);
-
-/**
  * Multiplies a vector by a scalar.
  *
  * Note that this operation is commutative.
@@ -261,6 +250,17 @@ Vector3D const operator * (double const& lambda, Vector3D v);
  */
 
 Vector3D const operator / (Vector3D v, double const& lambda);
+
+/**
+ * Returns the vector product of the lhs and rhs
+ *
+ * This operator has a low priority and is evaluated after relational operators.
+ * Use parantheses to prioritize the evaluation of `^`
+ *
+ * See [the reference](https://en.cppreference.com/w/cpp/language/operator_precedence) for more information.
+ */
+
+Vector3D const operator ^ (Vector3D v1, Vector3D const& v2);
 
 /**
  * Returns the dot product of the lhs and the rhs

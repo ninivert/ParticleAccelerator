@@ -107,11 +107,11 @@ testElement.bin: testElement.o Test.o Vector3D.o Particle.o Convert.o Element.o 
 	@$(CXX) $(CXXFLAGS) $(addprefix $(OPATH)/, $(notdir $^)) -o $(BPATH)/$@
 	@echo $(OK_STRING) $(LINKED_STRING) $@
 
-testAccelerator.bin: testAccelerator.o Test.o Vector3D.o Particle.o Convert.o Element.o Dipole.o Quadrupole.o Straight.o Frodo.o Accelerator.o Drawable.o Renderer.o
+testAccelerator.bin: testAccelerator.o Test.o Vector3D.o Particle.o Convert.o Element.o Dipole.o Quadrupole.o Straight.o Frodo.o Accelerator.o Beam.o Drawable.o Renderer.o
 	@$(CXX) $(CXXFLAGS) $(addprefix $(OPATH)/, $(notdir $^)) -o $(BPATH)/$@
 	@echo $(OK_STRING) $(LINKED_STRING) $@
 
-testBeam.bin: testBeam.o Test.o Vector3D.o Particle.o Convert.o Element.o Dipole.o Quadrupole.o Straight.o Frodo.o Beam.o Accelerator.o Drawable.o Renderer.o
+testBeam.bin: testBeam.o Test.o Vector3D.o Particle.o Convert.o Element.o Dipole.o Quadrupole.o Straight.o Frodo.o Beam.o Accelerator.o Drawable.o Renderer.o TextRenderer.o
 	@$(CXX) $(CXXFLAGS) $(addprefix $(OPATH)/, $(notdir $^)) -o $(BPATH)/$@
 	@echo $(OK_STRING) $(LINKED_STRING) $@
 

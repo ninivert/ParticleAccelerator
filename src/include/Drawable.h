@@ -40,6 +40,10 @@ public:
 
 	virtual ~Drawable() = default;
 
+	/****************************************************************
+	 * Virtual methods
+	 ****************************************************************/
+
 	/**
 	 * Virtual method that is required to be overwritten
 	 */

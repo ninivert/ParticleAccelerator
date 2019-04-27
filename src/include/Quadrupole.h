@@ -120,7 +120,7 @@ private:
 	 ****************************************************************/
 
 	/**
-	 * Returns a pointer to a copy of the current FODO element (this)
+	 * Returns a pointer to a copy of the current Quadrupole element (this)
 	 */
 
 	std::shared_ptr<Quadrupole> cloneThis() const;

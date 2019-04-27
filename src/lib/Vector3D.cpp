@@ -130,6 +130,20 @@ bool const operator != (Vector3D const& v1, Vector3D const& v2) {
  * Methods
  ****************************************************************/
 
+double Vector3D::norm() const {
+	return sqrt(normSquared());
+}
+
+double Vector3D::normSquared() const {
+	return getX() * getX() + getY() * getY() + getZ() * getZ();
+}
+
+Vector3D& Vector3D::rotate(Vector3D axis, double const& alpha) {
+	~axis;
+	(*this) = cos(alpha) * (*this) + (axis ^ (*this)) * sin(alpha) + (axis * ((*this) * axis)) * (1 - cos(alpha));
+	return (*this);
+}
+
 string Vector3D::to_string() const {
 	stringstream stream;
 	stream << setprecision(STYLES::PRECISION);
@@ -141,21 +155,6 @@ string Vector3D::to_string() const {
 		// z
 		<< ", " << getZ() << ")";
 	return stream.str();
-}
-
-double Vector3D::norm() const {
-	return sqrt(normSquared());
-}
-
-double Vector3D::normSquared() const {
-	return getX() * getX() + getY() * getY() + getZ() * getZ();
-}
-
-Vector3D& Vector3D::rotate(Vector3D axis, double const& alpha) {
-	~axis;
-	(*this) *= cos(alpha);
-	(*this) += (axis ^ (*this)) * sin(alpha) + (axis * ((*this) * axis)) * (1 - cos(alpha));
-	return (*this);
 }
 
 /****************************************************************
