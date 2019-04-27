@@ -35,18 +35,18 @@ Particle::Particle(Vector3D const& pos, double const& energy, Vector3D speed, do
 }
 
 /****************************************************************
- * Polymorphic copy for Accelerator
+ * Destructor
+ ****************************************************************/
+
+Particle::~Particle() { element_ptr = nullptr; }
+
+/****************************************************************
+ * Polymorphic copy for Beam
  ****************************************************************/
 
 unique_ptr<Particle> Particle::copy() const {
 	return unique_ptr<Particle>(new Particle(*this));
 }
-
-/****************************************************************
- * Destructor
- ****************************************************************/
-
-Particle::~Particle() { element_ptr = nullptr; }
 
 /****************************************************************
  * Getters
@@ -61,13 +61,18 @@ double Particle::getGamma() const {
 	return 1 / sqrt(1 - tmp * tmp);
 }
 
-int Particle::getChargeNumber() const { return charge; }
-double Particle::getCharge() const { return getChargeNumber() * CONSTANTS::EV; }
 double Particle::getMass() const { return mass; }
 
+double Particle::getCharge() const { return getChargeNumber() * CONSTANTS::EV; }
+
+int Particle::getChargeNumber() const { return charge; }
+
 Vector3D Particle::getSpeed() const { return getMoment() / getMass(); }
+
 Vector3D Particle::getForces() const { return forces; }
+
 Vector3D Particle::getMoment() const { return momentum; }
+
 Vector3D Particle::getPos() const { return pos; }
 
 Element const * const Particle::getElementPtr() const {
@@ -125,17 +130,17 @@ string Particle::to_string() const {
 		<< " (" << UNITS::ENERGY << ")"
 		<< endl
 		// // Mass
-		// << setw(STYLES::PADDING_XSM) << ""
-		// << setw(STYLES::PADDING_MD) << "Mass"
-		// << setw(STYLES::PADDING_LG) << CONVERT::MassSItoGeV(mass)
-		// << " (" << UNITS::MASS << ")"
-		// << endl
-		// // Charge
-		// << setw(STYLES::PADDING_XSM) << ""
-		// << setw(STYLES::PADDING_MD) << "Charge"
-		// << setw(STYLES::PADDING_LG) << getCharge()
-		// << " (" << UNITS::CHARGE << ")"
-		// << endl
+		<< setw(STYLES::PADDING_XSM) << ""
+		<< setw(STYLES::PADDING_MD) << "Mass"
+		<< setw(STYLES::PADDING_LG) << CONVERT::MassSItoGeV(mass)
+		<< " (" << UNITS::MASS << ")"
+		<< endl
+		// Charge
+		<< setw(STYLES::PADDING_XSM) << ""
+		<< setw(STYLES::PADDING_MD) << "Charge"
+		<< setw(STYLES::PADDING_LG) << getCharge()
+		<< " (" << UNITS::CHARGE << ")"
+		<< endl
 		// // Forces
 		// << setw(STYLES::PADDING_XSM) << ""
 		// << setw(STYLES::PADDING_MD) << "Forces"
