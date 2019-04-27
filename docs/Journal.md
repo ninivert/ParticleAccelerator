@@ -109,23 +109,20 @@
 ## Stage 7
 
 - `Beam` class
-- Improve `Drawable`: fuse `draw` and `drawTo` to automatically search for the good engine
-
-
-## Todo
-
-- `Beam` class
 	- creation of the `Beam` (constructor initializing the particles_ptr -> 1st)
 	- convention if emittance is 0 (ask Chap)
 	- adapt the `Accelerator` class
+- Improve `Drawable`: fuse `draw` and `drawTo` to automatically search for the good engine
 - ExerciceP10
+
+## Todo
+
+- Review the modifs
+- Graphism
+- ExerciceP13
+- ExerciceP14
 - Update `README.md`
 - Sextupole
-- Modify Particle::step() -> deplacer le exertLorentzForce()
-	- what if it is just a particle and an Element ? -> not in Accelerator
 - Return const string in `to_string`
 
 ## Questions
-
-- Add relativist mass to Particle ?
-- Do we need to specify a virtual destructor on all parent classes (aka `Drawable`) for destruction to correctly take place ?
