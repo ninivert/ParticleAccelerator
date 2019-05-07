@@ -154,10 +154,10 @@ public:
 	 *
 	 * Used primarily in Accelerator::updateParticleElement()
 	 *
-	 * Return: const pointer on a constant Element to prevent mistakes (and hoping not to transgress the principles of the OOP)
+	 * Return: pointer on a constant Element to prevent mistakes (and hoping not to transgress the principles of the OOP)
 	 */
 
-	Element const * const getElementPtr() const;
+	Element const * getElementPtr() const;
 
 	/****************************************************************
 	 * Setters
@@ -233,17 +233,43 @@ private:
 	 * Attributes
 	 ****************************************************************/
 
-	Vector3D pos;
-	Vector3D momentum;	// stored in [m * kg / s]	(GeV / c)
-	Vector3D forces;
-	double mass;		// stored in [kg]			(GeV / c²)
-	Element * element_ptr;
+	/**
+	 * Mass of the Particle (stored in [kg] (GeV / c²))
+	 */
+
+	double mass;
 
 	/**
+	 * Charge of the Particle
+	 *
 	 * Integer because physically, only whole multiples of elementary charges make sense
 	 */
 
 	int const charge;
+
+	/**
+	 * Position of the Particle
+	 */
+
+	Vector3D pos;
+
+	/**
+	 * Momentum of the Particle (stored in [m * kg / s] (GeV / c))
+	 */
+
+	Vector3D momentum;
+
+	/**
+	 * Sum of forces exterted on the Particle
+	 */
+
+	Vector3D forces;
+
+	/**
+	 * Pointer on the Element the Particle is in
+	 */
+
+	Element * element_ptr;
 
 };
 

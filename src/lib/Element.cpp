@@ -59,13 +59,13 @@ void Element::updatePointedElement(Particle & p, bool const& methodChapi) const 
 		if (prev_ptr != nullptr) {
 			p.setElement(prev_ptr);
 		} else {
-			EXCEPTIONS::OUTSIDE_ACCELERATOR;
+			ERROR(EXCEPTIONS::OUTSIDE_ACCELERATOR);
 		}
 	} else if (dist > 1) {
 		if (next_ptr != nullptr) {
 			p.setElement(next_ptr);
 		} else {
-			EXCEPTIONS::OUTSIDE_ACCELERATOR;
+			ERROR(EXCEPTIONS::OUTSIDE_ACCELERATOR);
 		}
 	}
 }

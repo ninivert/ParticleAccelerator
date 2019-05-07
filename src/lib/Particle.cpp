@@ -9,7 +9,7 @@ using namespace std;
 // Constructor for init with velocity
 
 Particle::Particle(Vector3D const& pos, Vector3D const& speed, double const& _mass, int const& charge, bool const& unitGeV, Renderer * engine_ptr)
-: Drawable(engine_ptr), pos(pos), mass(_mass), charge(charge), forces(Vector3D()), element_ptr(nullptr)
+: Drawable(engine_ptr), mass(_mass), charge(charge), pos(pos), forces(Vector3D()), element_ptr(nullptr)
 {
 	if (unitGeV) mass = CONVERT::MassGeVtoSI(mass);
 	momentum = speed * mass;
@@ -18,7 +18,7 @@ Particle::Particle(Vector3D const& pos, Vector3D const& speed, double const& _ma
 // Constructor for init with velocity and energy
 
 Particle::Particle(Vector3D const& pos, double const& energy, Vector3D speed, double const& _mass, int const& charge, bool const& unitGeV, Renderer * engine_ptr)
-: Drawable(engine_ptr), pos(pos), mass(_mass), charge(charge), forces(Vector3D()), element_ptr(nullptr)
+: Drawable(engine_ptr), mass(_mass), charge(charge), pos(pos), forces(Vector3D()), element_ptr(nullptr)
 {
 	double factor(0);
 
@@ -75,7 +75,7 @@ Vector3D Particle::getMoment() const { return momentum; }
 
 Vector3D Particle::getPos() const { return pos; }
 
-Element const * const Particle::getElementPtr() const {
+Element const * Particle::getElementPtr() const {
 	if (element_ptr != nullptr) {
 		return element_ptr;
 	} else {

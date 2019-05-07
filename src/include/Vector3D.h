@@ -266,19 +266,19 @@ Vector3D const operator ^ (Vector3D v1, Vector3D const& v2);
  * Returns the dot product of the lhs and the rhs
  */
 
-double const operator * (Vector3D const& v1, Vector3D const& v2);
+double operator * (Vector3D const& v1, Vector3D const& v2);
 
 /**
  * Returns whether two vectors are identical, within the error range of `GLOBALS::EPSILON`
  */
 
-bool const operator == (Vector3D const& v1, Vector3D const& v2);
+bool operator == (Vector3D const& v1, Vector3D const& v2);
 
 /**
  * Returns whether two vectors are different, within the error range of `GLOBALS::EPSILON`
  */
 
-bool const operator != (Vector3D const& v1, Vector3D const& v2);
+bool operator != (Vector3D const& v1, Vector3D const& v2);
 
 /****************************************************************
  * Cout overloading

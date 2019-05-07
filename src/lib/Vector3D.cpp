@@ -109,20 +109,20 @@ Vector3D const operator ^ (Vector3D v1, Vector3D const& v2) {
 	return (v1 ^= v2);
 }
 
-double const operator * (Vector3D const& v1, Vector3D const& v2) {
+double operator * (Vector3D const& v1, Vector3D const& v2) {
 	return v1.getX() * v2.getX() +
 		   v1.getY() * v2.getY() +
 		   v1.getZ() * v2.getZ();
 }
 
-bool const operator == (Vector3D const& v1, Vector3D const& v2) {
+bool operator == (Vector3D const& v1, Vector3D const& v2) {
 	bool a = abs(v1.getX() - v2.getX()) < GLOBALS::EPSILON;
 	bool b = abs(v1.getY() - v2.getY()) < GLOBALS::EPSILON;
 	bool c = abs(v1.getZ() - v2.getZ()) < GLOBALS::EPSILON;
 	return a and b and c;
 }
 
-bool const operator != (Vector3D const& v1, Vector3D const& v2) {
+bool operator != (Vector3D const& v1, Vector3D const& v2) {
 	return !(v1 == v2);
 }
 

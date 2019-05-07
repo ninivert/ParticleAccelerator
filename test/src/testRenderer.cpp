@@ -18,7 +18,7 @@ int main() {
 	// TextRenderer engine;
 
 	// File stream engine
-	TextRenderer engineToFile("log/testRenderer.log");
+	TextRenderer engineToFile("../log/testRenderer.log");
 
 
 	// Make the elements

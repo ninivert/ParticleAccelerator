@@ -25,8 +25,8 @@ public:
 	const char * error() const throw() { return exceptionCode.c_str(); }
 
 private:
-	std::string exceptionCode;
 	std::string msg;
+	std::string exceptionCode;
 };
 
 namespace EXCEPTIONS {

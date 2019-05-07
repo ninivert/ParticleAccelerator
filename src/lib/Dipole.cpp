@@ -7,7 +7,7 @@ using namespace std;
  ****************************************************************/
 
 Dipole::Dipole(Vector3D const& posIn, Vector3D const& posOut, double const& radius, double const& curvature, double const& B, Renderer * engine_ptr)
-: Element(posIn, posOut, radius, engine_ptr), curvature(curvature), B(B),
+: Element(posIn, posOut, radius, engine_ptr), B(B), curvature(curvature),
   posCenter (0.5 * (posOut + posIn) + 1 / (curvature) * sqrt(1 - curvature * curvature * (posOut - posIn).normSquared()/ 4.0) * ((posOut - posIn) ^ Vector3D(0, 0, 1)) / (posOut - posIn).norm())
 {}
 
@@ -25,7 +25,12 @@ shared_ptr<Dipole> Dipole::cloneThis() const {
  * Getters (virtual)
  ****************************************************************/
 
-Vector3D Dipole::getField(Vector3D const& pos, bool const& methodChapi) const { return Vector3D(0, 0, B); }
+Vector3D Dipole::getField(Vector3D const& pos, bool const& methodChapi) const {
+	// We don't use arguments in this overidden function
+	(void) pos;
+	(void) methodChapi;
+	return Vector3D(0, 0, B);
+}
 
 Vector3D const Dipole::getNormalDirection(Vector3D const& pos) const {
 	Vector3D X(pos - posCenter);

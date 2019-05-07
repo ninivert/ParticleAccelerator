@@ -28,9 +28,16 @@ shared_ptr<Straight> Straight::cloneThis() const {
  * Getter (virtual)
  ****************************************************************/
 
-Vector3D Straight::getField(Vector3D const& pos, bool const& methodChapi) const { return Vector3D(0, 0, 0); }
+Vector3D Straight::getField(Vector3D const& pos, bool const& methodChapi) const {
+	// We don't use arguments in this overidden function
+	(void) pos;
+	(void) methodChapi;
+	return Vector3D(0, 0, 0);
+}
 
 Vector3D const Straight::getNormalDirection(Vector3D const& pos) const {
+	// We don't use pos in this overidden function
+	(void) pos;
 	Vector3D d(getPosOut() - getPosIn());
 	~d;
 	return (Vector3D(0, 0, 1) ^ d);

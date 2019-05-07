@@ -114,13 +114,13 @@ public:
 	virtual double getLength() const override;
 
 	/**
-	 * Returns a Vector3D containing the position (e.g. of a Particle) at a certain pourcentage of the Straight Element (between 0 and 1)
+	 * Returns a Vector3D containing the position (e.g. of a Particle) at a certain purrcentage of the Straight Element (between 0 and 1)
 	 */
 
 	virtual Vector3D getPosAtProgress(double const& progress) const override;
 
 	/**
-	 * Returns a Vector3D containing the direction (not normalized) of the Straight Element at a certain pourcentage of the Straight Element (between 0 and 1)
+	 * Returns a Vector3D containing the direction (not normalized) of the Straight Element at a certain pourrcentage of the Straight Element (between 0 and 1)
 	 */
 
 	virtual Vector3D getVelAtProgress(double const& progress, bool const& clockwise) const override;

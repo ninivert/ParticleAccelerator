@@ -128,6 +128,12 @@ private:
 	 ****************************************************************/
 
 	/**
+	 * Quadrupole magnetic field intensity
+	 */
+
+	double b;
+
+	/**
 	 * Length of the straight neutral sections
 	 */
 
@@ -162,12 +168,6 @@ private:
 	 */
 
 	Vector3D intersect3;
-
-	/**
-	 * Quadrupole magnetic field intensity
-	 */
-
-	double b;
 
 	// posIn, posOut, radius -> inherited from Straight
 

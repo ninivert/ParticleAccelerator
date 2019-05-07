@@ -168,14 +168,24 @@ private:
 	 * Attributes
 	 ****************************************************************/
 
-	double const curvature;
-	Vector3D const posCenter;
-
 	/**
 	 * Magnetic field intensity
 	 */
 
 	double B;
+
+	/**
+	 * Curvature (defined clockwise positive as `1/radius)
+	 */
+
+	double const curvature;
+
+	/**
+	 * Position of the center of curvature
+	 */
+
+	Vector3D const posCenter;
+
 };
 
 #endif

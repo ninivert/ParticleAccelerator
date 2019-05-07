@@ -14,8 +14,8 @@ Frodo::Frodo(Vector3D const& posIn, Vector3D const& posOut, double const& radius
   intersect2(posIn + direction * (lensLength + straightLength)),
   intersect3(posIn + direction * (2*lensLength + straightLength)),
   focalizer(posIn, intersect1, radius, b, engine_ptr),
-  firstStraight(intersect1, intersect2, radius, engine_ptr),
   defocalizer(intersect2, intersect3, radius, -b, engine_ptr),
+  firstStraight(intersect1, intersect2, radius, engine_ptr),
   lastStraight(intersect3, posOut, radius, engine_ptr)
 {}
 
@@ -27,8 +27,8 @@ Frodo::Frodo(Vector3D const& posIn, double const& totalLength, Vector3D directio
   intersect2(posIn + direction * (lensLength + straightLength)),
   intersect3(posIn + direction * (2*lensLength + straightLength)),
   focalizer(posIn, intersect1, radius, b, engine_ptr),
-  firstStraight(intersect1, intersect2, radius, engine_ptr),
   defocalizer(intersect2, intersect3, radius, -b, engine_ptr),
+  firstStraight(intersect1, intersect2, radius, engine_ptr),
   lastStraight(intersect3, posOut, radius, engine_ptr)
 {}
 
