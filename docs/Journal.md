@@ -115,6 +115,7 @@
 - Improve `Drawable`: fuse `draw` and `drawTo` to automatically search for the good engine
 - ExerciceP10
 - Removed useless consts in `Vector3D` and `Particle` according to warnings (non-class type rvalues are not modifiable (inherited from C), and thus the Standard says non-class type rvalues are never const-qualified (right-most const was ignored even tho specified by you) since the const would be kinda redundant.) [link1](https://stackoverflow.com/questions/1607188/why-is-a-type-qualifier-on-a-return-type-meaningless) and [link2](https://stackoverflow.com/questions/1134237/pedantic-gcc-warning-type-qualifiers-on-function-return-type)
+- Move Makefile to qmake
 
 ## Todo
 
@@ -125,7 +126,18 @@
 - Update `README.md`
 - Sextupole
 - Return const string in `to_string`
-- Move Makefile to qmake
+- Graphics documentation
+- Move Geometry.h to .cpp implementation
+- Cleanup the facking extra dependencies
+- use proper QTimer.dt() for movement: Ponderate movement by frame dt
+- update correct dependencies in header files -> use bundles
+- lock camera angle
+- emittance graph
+- add floor/sky box
+- add target framerate
+- add pasta texture
+- research performance optimizations: index buffer
+- modelToWorldLocation is not useful
 
 ## Questions
 

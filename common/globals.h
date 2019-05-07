@@ -63,4 +63,25 @@ namespace STYLES {
 	inline constexpr char NONE[]("\033[0m");
 }
 
+/****************************************************************
+ * Graphic settings
+ ****************************************************************/
+
+namespace GRAPHICS {
+	inline constexpr double FOV(60); // 60 degrees
+	inline constexpr double CLOSE_PLANE(0.1);
+	inline constexpr double FAR_PLANE(1000);
+	inline constexpr unsigned int PRECISION(32); // 32 steps per circle
+}
+
+/****************************************************************
+ * Control settings
+ ****************************************************************/
+
+namespace CONTROLS {
+	inline constexpr double TRANSLATION_SPEED(0.02);
+	inline constexpr double ROTATION_SPEED(0.2);
+	inline constexpr double SLOWMO(0.2);
+}
+
 #endif

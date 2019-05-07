@@ -1,3 +1,7 @@
+QT += core gui
+TEMPLATE = app
+CONFIG -= app_bundle
+
 TARGET = app.bin
 DESTDIR = ../../bin
 OBJECTS_DIR += ../../build
@@ -8,3 +12,6 @@ VPATH += include include/bundle lib shaders
 
 CONFIG += c++1z
 SOURCES = app.cpp
+
+RESOURCES += \
+	../../resources.qrc

@@ -3,6 +3,7 @@
 *.log
 *.a
 doxydocs/*
+moc/*
 Makefile
 */Makefile
 .qmake.stash

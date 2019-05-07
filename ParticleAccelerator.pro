@@ -1,10 +1,5 @@
 QT += core gui
 
-TARGET = app.bin
-DESTDIR = bin
-OBJECTS_DIR += build
-MOC_DIR += moc
-
 CONFIG -= app_bundle
 TEMPLATE = subdirs
 
@@ -37,6 +32,3 @@ apps/tests/testParticle.depends = common
 apps/tests/testRenderer.depends = common
 apps/tests/testVector3D.depends = common
 apps/app.depends = common
-
-RESOURCES += \
-	resources.qrc
