@@ -23,6 +23,7 @@ SOURCES += \
 	Drawable.cpp \
 	Renderer.cpp \
 	TextRenderer.cpp \
+	# Geometry.cpp \
 	Camera3D.cpp \
 	Transform3D.cpp \
 	Input.cpp \

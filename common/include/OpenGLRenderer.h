@@ -17,24 +17,27 @@
 
 #include <vector>
 
-class Accelerator;
-class Beam;
-class Accelerator;
+class Vector3D;
+class Particle;
 class Element;
+class Straight;
 class Dipole;
 class Quadrupole;
-class Straight;
-class Particle;
-class Vector3D;
+class Beam;
+class Accelerator;
 class Renderer;
 
+class Transform3D;
+class Camera3D;
+
+// Use class inheritance, needed where because we have 2 different circular definitions
+// one with Window, one with Renderer and Drawable, and one with Accelerator and co.
+#include "include/bundle/Renderer.bundle.h"
+// Use class field size (otherwise compiler-chan in vewwy confusion)
+#include "include/bundle/Transform3D.bundle.h"
+#include "include/bundle/Camera3D.bundle.h"
+
 #include "globals.h"
-#include "include/Vertex.h"
-#include "include/Transform3D.h"
-#include "include/Camera3D.h"
-#include "include/Input.h"
-#include "include/Geometry.h"
-#include "include/Renderer.h"
 
 class OpenGLRenderer : public Renderer, protected QOpenGLFunctions {
 public:

@@ -16,8 +16,10 @@ class OpenGLRenderer;
 class Accelerator;
 
 // Needed because the compiler needs to know the size of the class
-#include "include/OpenGLRenderer.h"
+#include "include/bundle/OpenGLRenderer.bundle.h"
 #include "include/bundle/Accelerator.bundle.h"
+
+#include "globals.h"
 
 class Window : public QOpenGLWindow {
 	// If it finds one or more class declarations that contain the Q_OBJECT macro, it produces a C++ source file containing the meta-object code for those classes.
