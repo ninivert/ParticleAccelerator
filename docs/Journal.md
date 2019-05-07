@@ -126,3 +126,5 @@
 - Return const string in `to_string`
 
 ## Questions
+
+- Return type for getters: const, reference, const reference ?
