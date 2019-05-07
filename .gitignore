@@ -1,4 +1,8 @@
 *.o
 *.bin
 *.log
+*.a
 doxydocs/*
+Makefile
+*/Makefile
+.qmake.stash

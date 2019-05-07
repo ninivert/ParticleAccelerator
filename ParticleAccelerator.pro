@@ -1,50 +1,42 @@
 QT += core gui
 
 TARGET = app.bin
-
 DESTDIR = bin
 OBJECTS_DIR += build
 MOC_DIR += moc
 
 CONFIG -= app_bundle
-VPATH += src/include src/include/bundle src/lib src/shaders src
+TEMPLATE = subdirs
 
-TEMPLATE = app
+SUBDIRS = \
+	common \
+	apps/exercices/exerciceP9 \
+	apps/exercices/exerciceP10 \
+	apps/tests/testAccelerator \
+	apps/tests/testBeam \
+	apps/tests/testCircular \
+	apps/tests/testConvert \
+	apps/tests/testElement \
+	apps/tests/testException \
+	apps/tests/testFrodo \
+	apps/tests/testParticle \
+	apps/tests/testRenderer \
+	apps/tests/testVector3D \
+	apps/app
 
-CONFIG += c++1z
-
-SOURCES += \
-	main.cpp \
-	Vector3D.cpp \
-	Particle.cpp \
-	Element.cpp \
-	Straight.cpp \
-	Quadrupole.cpp \
-	Frodo.cpp \
-	Dipole.cpp \
-	Accelerator.cpp \
-	Drawable.cpp \
-	Renderer.cpp \
-	TextRenderer.cpp \
-	Beam.cpp \
-	Convert.cpp
-
-HEADERS += \
-	Vector3D.h \
-	Particle.h \
-	Element.h \
-	Straight.h \
-	Quadrupole.h \
-	Frodo.h \
-	Dipole.h \
-	Accelerator.h \
-	Drawable.h \
-	Renderer.h \
-	TextRenderer.h \
-	Beam.h \
-	Convert.h \
-	globals.h \
-	exceptions.h
+test/exercices/exerciceP9.depends = common
+test/exercices/exerciceP10.depends = common
+apps/tests/testAccelerator.depends = common
+apps/tests/testBeam.depends = common
+apps/tests/testCircular.depends = common
+apps/tests/testConvert.depends = common
+apps/tests/testElement.depends = common
+apps/tests/testException.depends = common
+apps/tests/testFrodo.depends = common
+apps/tests/testParticle.depends = common
+apps/tests/testRenderer.depends = common
+apps/tests/testVector3D.depends = common
+apps/app.depends = common
 
 RESOURCES += \
 	resources.qrc
