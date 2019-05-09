@@ -38,7 +38,7 @@ void Accelerator::addElement(Element const& element) {
 void Accelerator::addBeam(Particle const& defaultParticle, size_t const& particleCount, double const& lambda) {
 	// Protection against no element to point to
 	if (elements_ptr.size() > 0) {
-		beams_ptr.push_back(unique_ptr<Beam>(new Beam(defaultParticle, particleCount, lambda, *this)));
+		beams_ptr.push_back(unique_ptr<Beam>(new Beam(defaultParticle, particleCount, lambda, *this, engine_ptr)));
 		// Beam is automatically initialize
 	} else {
 		ERROR(EXCEPTIONS::NO_ELEMENTS);
@@ -50,7 +50,7 @@ void Accelerator::addParticle(Particle particle) {
 	if (elements_ptr.size() > 0) {
 		// If there is only one particle, the beam is not automatically initialized !
 		initParticleToClosestElement(particle);
-		beams_ptr.push_back(unique_ptr<Beam>(new Beam(particle)));
+		beams_ptr.push_back(unique_ptr<Beam>(new Beam(particle, engine_ptr)));
 	} else {
 		ERROR(EXCEPTIONS::NO_ELEMENTS);
 	}

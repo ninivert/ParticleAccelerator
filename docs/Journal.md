@@ -120,8 +120,8 @@
 
 ## Todo
 
-- Review the modifs
-- Graphism
+- bug with methodChapi = false
+- add draw for vector3d
 - ExerciceP13
 - ExerciceP14
 - test destructors

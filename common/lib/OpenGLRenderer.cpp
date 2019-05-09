@@ -29,6 +29,7 @@ void OpenGLRenderer::init() {
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_LINE_SMOOTH);
+	glEnable(GL_POINT_SMOOTH);
 	// Set global information
 	glClearColor(236/256.0, 240/256.0, 241/256.0, 1.0);
 
@@ -51,6 +52,7 @@ void OpenGLRenderer::init() {
 	buffer.bind();
 	buffer.setUsagePattern(QOpenGLBuffer::StaticDraw); // We never change the data => static
 	// Take a byte out of every dish !
+	int peaBytes(sizeof(GEOMETRY::PEA[0]) * GEOMETRY::PEA.size());
 	int spaghettiBytes(sizeof(GEOMETRY::SPAGHETTI[0]) * GEOMETRY::SPAGHETTI.size());
 	int penneBytes(sizeof(GEOMETRY::PENNE[0]) * GEOMETRY::PENNE.size());
 	int macaroniBytes(sizeof(GEOMETRY::MACARONI[0]) * GEOMETRY::MACARONI.size());
@@ -58,22 +60,32 @@ void OpenGLRenderer::init() {
 	int cubeBytes(sizeof(GEOMETRY::CUBE[0]) * GEOMETRY::CUBE.size());
 	int offsetBytes(0), offsetSlots(0);
 	buffer.allocate(spaghettiBytes + penneBytes + macaroniBytes + pancakeBytes + cubeBytes);
+	// Point
+	buffer.write(offsetBytes, &GEOMETRY::PEA.front(), peaBytes);
+	offsetPea = offsetSlots;
+	offsetBytes += peaBytes;
+	offsetSlots += GEOMETRY::PEA.size();
+	// Spaghetti
 	buffer.write(offsetBytes, &GEOMETRY::SPAGHETTI.front(), spaghettiBytes);
 	offsetSpaghetti = offsetSlots;
 	offsetBytes += spaghettiBytes;
 	offsetSlots += GEOMETRY::SPAGHETTI.size();
+	// Penne
 	buffer.write(offsetBytes, &GEOMETRY::PENNE.front(), penneBytes);
 	offsetPenne = offsetSlots;
 	offsetBytes += penneBytes;
 	offsetSlots += GEOMETRY::PENNE.size();
+	// Macaroni
 	buffer.write(offsetBytes, &GEOMETRY::MACARONI.front(), macaroniBytes);
 	offsetMacaroni = offsetSlots;
 	offsetBytes += macaroniBytes;
 	offsetSlots += GEOMETRY::MACARONI.size();
+	// Pancake
 	buffer.write(offsetBytes, &GEOMETRY::PANCAKE.front(), pancakeBytes);
 	offsetPancake = offsetSlots;
 	offsetBytes += pancakeBytes;
 	offsetSlots += GEOMETRY::PANCAKE.size();
+	// Cube
 	buffer.write(offsetBytes, &GEOMETRY::CUBE.front(), cubeBytes);
 	offsetCube = offsetSlots;
 
@@ -150,8 +162,6 @@ void OpenGLRenderer::begin() {
 	program->setUniformValue("cameraToView", projection);
 	program->setUniformValue("modelToWorld", transform.getMatrix());
 	program->setUniformValue("color", 0, 0, 0);
-
-	qDebug() << "============================================= REDRAW =============================================";
 }
 
 /**
@@ -175,14 +185,11 @@ void OpenGLRenderer::draw(Accelerator const& acc) {
 }
 
 void OpenGLRenderer::draw(Beam const& beam) {
-	Q_UNUSED(beam);
+	beam.drawParticles();
 }
 
 void OpenGLRenderer::draw(Dipole const& dipole) {
-
 	program->setUniformValue("color", 0.5, 1.0, 0.5);
-
-	// drawTorus(center.toQVector3D(), posIn.toQVector3D(), posOut.toQVector3D(), totalAngle, curvature, innerRadius);
 
 	transform.save();
 	transform.reset();
@@ -196,7 +203,7 @@ void OpenGLRenderer::draw(Dipole const& dipole) {
 	double innerRadius(dipole.getRadius());
 	double curvature(dipole.getCurvature());
 
-	drawTorus(center, inAngle, outAngle, totalAngle, curvature, innerRadius);
+	drawTorus(center, (curvature > 0 ? outAngle : inAngle), totalAngle, curvature, innerRadius);
 }
 
 void OpenGLRenderer::draw(Quadrupole const& quadrupole) {
@@ -224,7 +231,11 @@ void OpenGLRenderer::draw(Frodo const& frodo) {
 }
 
 void OpenGLRenderer::draw(Particle const& particle) {
-	Q_UNUSED(particle);
+	program->setUniformValue("color", 0.0, 0.0, 0.0);
+
+	qDebug() << particle.getElementPtr();
+
+	drawPoint((particle.getPos()).toQVector3D());
 }
 
 void OpenGLRenderer::draw(Vector3D const& vec) {
@@ -235,6 +246,23 @@ void OpenGLRenderer::draw(Vector3D const& vec) {
 /****************************************************************
  * Drawing figures
  ****************************************************************/
+
+/**
+ * Drawing points
+ */
+
+void OpenGLRenderer::drawPoint(QVector3D const& pos) {
+	transform.save();
+	transform.translate(pos);
+
+	glPointSize(10.0);
+
+	program->setUniformValue("modelToWorld", transform.getMatrix());
+	object.bind();
+	glDrawArrays(GL_POINTS, offsetPea, GEOMETRY::PEA.size());
+
+	transform.restore();
+}
 
 /**
  * Drawing axes
@@ -272,27 +300,16 @@ void OpenGLRenderer::drawCylinder(QVector3D const& posIn, QVector3D const& posOu
 
 	program->setUniformValue("modelToWorld", transform.getMatrix());
 	object.bind();
-	glDrawArrays(GL_TRIANGLES, offsetPenne, GEOMETRY::PENNE.size());
+	glDrawArrays(GL_LINES, offsetPenne, GEOMETRY::PENNE.size());
 
 	transform.restore();
 }
 
-void OpenGLRenderer::drawTorus(QVector3D const& center, double inAngle, double outAngle, double totalAngle, double curvature, double innerRadius) {
+void OpenGLRenderer::drawTorus(QVector3D const& center, double startAngle, double totalAngle, double curvature, double innerRadius) {
 	transform.save();
 
-	// TORUS NEEDS TO TAKE CURVATURE INTO ACCOUNT
-
-	qDebug() << "\nTORUS BEGIN";
-
-	qDebug() << "inAngle " << inAngle;
-	qDebug() << "outAngle " << outAngle;
-	qDebug() << "totalAngle " << totalAngle;
-
-	qDebug() << transform.getMatrix();
-	QQuaternion quat(QQuaternion::fromAxisAndAngle(Transform3D::LocalUp, outAngle * 180 / M_PI));
-	qDebug() << "quat " << quat;
+	QQuaternion quat(QQuaternion::fromAxisAndAngle(Transform3D::LocalUp, startAngle * 180 / M_PI));
 	transform.rotate(quat);
-	qDebug() << transform.getMatrix();
 
 	// Here we assume that the curvature is non-zero,
 	// because otherwise the physics engine would have already died
@@ -305,7 +322,7 @@ void OpenGLRenderer::drawTorus(QVector3D const& center, double inAngle, double o
 
 	program->setUniformValue("modelToWorld", transform.getMatrix());
 	object.bind();
-	glDrawArrays(GL_TRIANGLES, offsetMacaroni, int(GEOMETRY::MACARONI.size() * lambda));
+	glDrawArrays(GL_LINES, offsetMacaroni, int(GEOMETRY::MACARONI.size() * lambda));
 
 	transform.restore();
 }

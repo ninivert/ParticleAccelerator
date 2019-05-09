@@ -6,8 +6,9 @@ using namespace std;
  * Constructors
  ****************************************************************/
 
-Beam::Beam(Particle const& defaultParticle, size_t const& particleCount, double const& lambda, Accelerator const& acc)
-: defaultParticle_ptr(defaultParticle.copy()), particleCount(particleCount), lambda(lambda)
+Beam::Beam(Particle const& defaultParticle, size_t const& particleCount, double const& lambda, Accelerator const& acc, Renderer * engine)
+: Drawable(engine),
+  defaultParticle_ptr(defaultParticle.copy()), particleCount(particleCount), lambda(lambda)
 {
 	if (particleCount == 0) {
 		ERROR(EXCEPTIONS::NO_PARTICLES);
@@ -37,8 +38,9 @@ Beam::Beam(Particle const& defaultParticle, size_t const& particleCount, double 
 	}
 }
 
-Beam::Beam(Particle const& defaultParticle)
-: defaultParticle_ptr(defaultParticle.copy()), particleCount(1), lambda(1)
+Beam::Beam(Particle const& defaultParticle, Renderer * engine)
+: Drawable(engine),
+  defaultParticle_ptr(defaultParticle.copy()), particleCount(1), lambda(1)
 {
 	if (particleCount == 0) {
 		ERROR(EXCEPTIONS::NO_PARTICLES);
@@ -332,4 +334,11 @@ void Beam::draw(Renderer * engine_ptr) const {
 		}
 	}
 	engine_ptr->draw(*this);
+}
+
+void Beam::drawParticles() const {
+	if (engine_ptr == nullptr) ERROR(EXCEPTIONS::NULLPTR);
+	for (unique_ptr<Particle> const& particle_ptr : particles_ptr) {
+		particle_ptr->draw(engine_ptr);
+	}
 }

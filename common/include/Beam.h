@@ -35,7 +35,7 @@ public:
 	 * - `double lambda`: scaling factor for the macroparticles (> 1)
 	 */
 
-	Beam(Particle const& defaultParticle, size_t const& particleCount, double const& lambda, Accelerator const& acc);
+	Beam(Particle const& defaultParticle, size_t const& particleCount, double const& lambda, Accelerator const& acc, Renderer * engine = nullptr);
 
 	/**
 	 * Constructor with only one particle
@@ -43,7 +43,7 @@ public:
 	 * - `Particle defaultParticle`: represents the default settings
 	 */
 
-	Beam(Particle const& defaultParticle);
+	Beam(Particle const& defaultParticle, Renderer * engine = nullptr);
 
 	/****************************************************************
 	 * Destructor
@@ -166,6 +166,12 @@ public:
 	 */
 
 	virtual void draw(Renderer * engine_ptr = nullptr) const override;
+
+	/**
+	 * Draw particles
+	 */
+
+	void drawParticles() const;
 
 private:
 

@@ -4,7 +4,7 @@
  * General stuffs
  ****************************************************************/
 
-Window::Window() : focus(true), acc(&engine) {
+Window::Window() : focus(true), acc(&engine, false) {
 	// Cursor
 	QCursor c;
 	c.setPos(mapToGlobal(QPoint(width() / 2, height() / 2)));
@@ -45,11 +45,11 @@ Window::Window() : focus(true), acc(&engine) {
 
 	acc.closeElementLoop();
 
-	acc.addParticle(Particle(
-		Vector3D(3.01, 0, 0), 2,
-		Vector3D(0, -2.64754e+08, 0),
-		CONSTANTS::M_PROTON
-	));
+	// acc.addParticle(Particle(
+	// 	Vector3D(3.01, 0, 0), 2,
+	// 	Vector3D(0, -2.64754e+08, 0),
+	// 	CONSTANTS::M_PROTON
+	// ));
 
 	acc.addParticle(Particle(
 		Vector3D(2.99, 0, 0), 2,
@@ -60,6 +60,10 @@ Window::Window() : focus(true), acc(&engine) {
 
 void Window::update() {
 	if (focus) {
+		// Physics engine
+		for (size_t i(0); i < 1; ++i) acc.step();
+
+		// Input and rendering
 		Input::update();
 		engine.update();
 

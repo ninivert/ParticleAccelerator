@@ -63,9 +63,10 @@ public:
 	virtual void draw(Particle const& particle) override;
 	virtual void draw(Vector3D const& vec) override;
 
+	void drawPoint(QVector3D const& pos);
 	void drawAxes();
 	void drawCylinder(QVector3D const& posIn, QVector3D const& posOut, double radius);
-	void drawTorus(QVector3D const& center, double inAngle, double outAngle, double totalAngle, double curvature, double innerRadius);
+	void drawTorus(QVector3D const& center, double startAngle, double totalAngle, double curvature, double innerRadius);
 
 private:
 	// OpenGL state information (buffers and vertex array objects)
@@ -74,6 +75,7 @@ private:
 	QOpenGLShaderProgram * program;
 
 	// Different offsets
+	int offsetPea;
 	int offsetSpaghetti;
 	int offsetPenne;
 	int offsetMacaroni;
