@@ -125,11 +125,12 @@
 - ExerciceP13
 - ExerciceP14
 - Update `README.md`
-- Add pause button
 - Sextupole
 - Return const string in `to_string`
 
 - Graphics documentation
+- Add pause button
+- Transparency
 - Move Geometry.h to .cpp implementation (?)
 - use proper QTimer.dt() for movement: Ponderate movement by frame dt
 - update correct dependencies in header files -> use bundles
