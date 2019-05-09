@@ -270,6 +270,12 @@ Vector3D const operator / (Vector3D v, double const& lambda);
 Vector3D const operator ^ (Vector3D v1, Vector3D const& v2);
 
 /**
+ * Returns the opposite of the vector
+ */
+
+Vector3D const operator - (Vector3D v);
+
+/**
  * Returns the dot product of the lhs and the rhs
  */
 

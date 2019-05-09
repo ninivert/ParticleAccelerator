@@ -124,10 +124,11 @@
 - add draw for vector3d
 - ExerciceP13
 - ExerciceP14
-- test destructors
 - Update `README.md`
+- Add pause button
 - Sextupole
 - Return const string in `to_string`
+
 - Graphics documentation
 - Move Geometry.h to .cpp implementation (?)
 - use proper QTimer.dt() for movement: Ponderate movement by frame dt
@@ -146,4 +147,4 @@
 
 ## Questions
 
-- Return type for getters: const, reference, const reference ?
+- Return type for getters: const, const reference ?

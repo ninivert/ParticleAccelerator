@@ -182,12 +182,33 @@ Vector3D const Beam::getZMeans() const {
 void Beam::step(double const& dt, bool const& methodChapi) {
 	if (abs(dt) < GLOBALS::DELTA) { return; }
 
+	exertInteractions();
+
 	for (unique_ptr<Particle> & particle_ptr : particles_ptr) {
 		particle_ptr->step(dt, methodChapi);
 	}
 
 	// At the end because we can't initialize particles (basis of beams) outside the accelerator
 	clearDeadParticles();
+}
+
+void Beam::exertInteractions() {
+	if (particles_ptr.size() < 2) { return; }
+
+	double charge(lambda * defaultParticle_ptr->getCharge());
+	double cst(charge * charge / (4 * M_PI * CONSTANTS::EPISLON0));
+
+	for (size_t i(0); i < particles_ptr.size() - 1; ++i) {
+		for (size_t j(i + 1); j < particles_ptr.size(); ++j) {
+			Vector3D force(particles_ptr[j]->getPos() - particles_ptr[i]->getPos());
+			double r(force.norm());
+			// Arbitrary gamma because of small relative speed
+			double gamma(particles_ptr[i]->getGamma());
+			force *= cst / (r * r * r * gamma * gamma);
+			particles_ptr[j]->exertForce(force);
+			particles_ptr[i]->exertForce(-force);
+		}
+	}
 }
 
 void Beam::clearDeadParticles() {

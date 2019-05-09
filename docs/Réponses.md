@@ -132,3 +132,9 @@ Il faire attention à la gestion de mémoire, lors de
 ## Partie 6
 
 > Comment avez-vous implémenté ces différentes caractéristiques : comme attribut ou comme méthode ?
+
+## Partie 7
+
+> Quelle est la complexité de ces deux algorithmes ?
+
+> Comment et où avez-vous implémenté cette nouvelle façon de calculer les interactions entre particules ?

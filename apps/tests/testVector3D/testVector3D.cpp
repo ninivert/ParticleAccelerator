@@ -38,6 +38,8 @@ int main() {
 	assert((v2 /= 3) == Vector3D(3, -7, -2));
 	assert((v2 /= 1) == Vector3D(3, -7, -2));
 
+	assert(-v2 == v2 * (-1));
+
 	assert((v1 * v2) == 29);
 	assert((v2 * v1) == 29);
 
