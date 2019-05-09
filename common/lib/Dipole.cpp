@@ -51,8 +51,8 @@ double Dipole::getParticleProgress(Vector3D const& pos, bool const& methodChapi)
 			return 0.5;
 		}
 	} else {
-		double x1(posIn.getX());
-		double y1(posIn.getY());
+		double x1((posIn - posCenter).getX());
+		double y1((posIn - posCenter).getY());
 		double x2((pos - posCenter).getX());
 		double y2((pos - posCenter).getY());
 

@@ -64,18 +64,19 @@ int main() {
 	// acc.draw();
 
 	// Niels & Hugo method
-	// 4593 first particle goes out
-	// 4634 second particle goes out
+	// 4241 first particle goes out (previously 4593)
+	// 4345 second particle goes out (previously 4634)
 
 	// methodChapi = true
 	// 451244 first one goes out
 	// 461779 second one goes out
 
-	for (int i = 0; i < 4592; ++i) {
+	for (int i = 0; i < 4344; ++i) {
 		acc.step();
+		// acc.drawBeams();
 	}
 
-	// acc.draw();
+	// acc.drawBeams();
 	acc.clear();
 
 	return 0;
