@@ -16,6 +16,7 @@
 #include <QMatrix4x4>
 
 #include <vector>
+#include <cmath>
 
 class Vector3D;
 class Particle;
@@ -23,6 +24,7 @@ class Element;
 class Straight;
 class Dipole;
 class Quadrupole;
+class Frodo;
 class Beam;
 class Accelerator;
 class Renderer;
@@ -47,6 +49,9 @@ public:
 	void init();
 	void reset();
 	void update();
+	void clear();
+	void begin();
+	void end();
 	void resize(int width, int height);
 
 	virtual void draw(Accelerator const& acc) override;
@@ -54,16 +59,26 @@ public:
 	virtual void draw(Dipole const& dipole) override;
 	virtual void draw(Quadrupole const& quadrupole) override;
 	virtual void draw(Straight const& straight) override;
+	virtual void draw(Frodo const& frodo) override;
 	virtual void draw(Particle const& particle) override;
 	virtual void draw(Vector3D const& vec) override;
 
 	void drawAxes();
+	void drawCylinder(QVector3D const& posIn, QVector3D const& posOut, double radius);
+	void drawTorus(QVector3D const& center, double inAngle, double outAngle, double totalAngle, double curvature, double innerRadius);
 
 private:
 	// OpenGL state information (buffers and vertex array objects)
 	QOpenGLBuffer buffer;
 	QOpenGLVertexArrayObject object;
 	QOpenGLShaderProgram * program;
+
+	// Different offsets
+	int offsetSpaghetti;
+	int offsetPenne;
+	int offsetMacaroni;
+	int offsetPancake;
+	int offsetCube;
 
 	// Model to world matrix
 	Transform3D transform;

@@ -236,6 +236,7 @@ void Accelerator::drawBeams() const {
 	}
 }
 
+
 void Accelerator::drawElements() const {
 	if (engine_ptr == nullptr) ERROR(EXCEPTIONS::NULLPTR);
 	for (shared_ptr<Element> const& element_ptr : elements_ptr) {

@@ -112,6 +112,36 @@ public:
 
 	virtual Vector3D getVelAtProgress(double const& progress, bool const& clockwise) const override;
 
+	/**
+	 * Get the position of the center of curvature
+	 */
+
+	Vector3D const& getCenter() const;
+
+	/**
+	 * Get arc of the dipole
+	 */
+
+	double getTotalAngle() const;
+
+	/**
+	 * Get curvature
+	 */
+
+	double getCurvature() const;
+
+	/**
+	 * Get input angle
+	 */
+
+	double getInAngle() const;
+
+	/**
+	 * Get output angle
+	 */
+
+	double getOutAngle() const;
+
 	/****************************************************************
 	 * Setter
 	 ****************************************************************/
@@ -186,6 +216,35 @@ private:
 
 	Vector3D const posCenter;
 
+	/**
+	 * Position of the input relative to the center
+	 */
+
+	Vector3D relPosIn;
+
+	/**
+	 * Position of the output relative to the center
+	 */
+
+	Vector3D relPosOut;
+
+	/**
+	 * Angle of the input wrt (1, 0, 0)
+	 */
+
+	double const inAngle;
+
+	/**
+	 * Angle of the output wrt (1, 0, 0)
+	 */
+
+	double const outAngle;
+
+	/**
+	 * Total angle of the dipole
+	 */
+
+	double const totalAngle;
 };
 
 #endif

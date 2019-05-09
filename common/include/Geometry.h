@@ -45,6 +45,8 @@ namespace GEOMETRY {
 	 * Penne (cylinder)
 	 ****************************************************************/
 
+	// Penne is oriented along the x-axis
+
 	static Vertices getCyclinderVertices() {
 		Vertices vertices;
 		double step(2*M_PI/GRAPHICS::PRECISION);
@@ -54,20 +56,20 @@ namespace GEOMETRY {
 			double x1(std::cos(angle1)), x2(std::cos(angle2)), y1(std::sin(angle1)), y2(std::sin(angle2));
 
 			// Outside
-			vertices.push_back(SimpleVertex(QVector3D(x1, -0.5, y1)));
-			vertices.push_back(SimpleVertex(QVector3D(x1, 0.5, y1)));
-			vertices.push_back(SimpleVertex(QVector3D(x2, 0.5, y2)));
-			vertices.push_back(SimpleVertex(QVector3D(x1, -0.5, y1)));
-			vertices.push_back(SimpleVertex(QVector3D(x2, 0.5, y2)));
-			vertices.push_back(SimpleVertex(QVector3D(x2, -0.5, y2)));
+			vertices.push_back(SimpleVertex(QVector3D(-0.5, x1, y1)));
+			vertices.push_back(SimpleVertex(QVector3D(0.5, x1, y1)));
+			vertices.push_back(SimpleVertex(QVector3D(0.5, x2, y2)));
+			vertices.push_back(SimpleVertex(QVector3D(-0.5, x1, y1)));
+			vertices.push_back(SimpleVertex(QVector3D(0.5, x2, y2)));
+			vertices.push_back(SimpleVertex(QVector3D(-0.5, x2, y2)));
 
 			// Inside
-			vertices.push_back(SimpleVertex(QVector3D(x1, -0.5, y1)));
-			vertices.push_back(SimpleVertex(QVector3D(x2, 0.5, y2)));
-			vertices.push_back(SimpleVertex(QVector3D(x1, 0.5, y1)));
-			vertices.push_back(SimpleVertex(QVector3D(x1, -0.5, y1)));
-			vertices.push_back(SimpleVertex(QVector3D(x2, -0.5, y2)));
-			vertices.push_back(SimpleVertex(QVector3D(x2, 0.5, y2)));
+			vertices.push_back(SimpleVertex(QVector3D(-0.5, x1, y1)));
+			vertices.push_back(SimpleVertex(QVector3D(0.5, x2, y2)));
+			vertices.push_back(SimpleVertex(QVector3D(0.5, x1, y1)));
+			vertices.push_back(SimpleVertex(QVector3D(-0.5, x1, y1)));
+			vertices.push_back(SimpleVertex(QVector3D(-0.5, x2, y2)));
+			vertices.push_back(SimpleVertex(QVector3D(0.5, x2, y2)));
 		}
 
 		return vertices;
@@ -93,8 +95,8 @@ namespace GEOMETRY {
 
 			for (size_t j(0); j < GRAPHICS::PRECISION; ++j) {
 				double beta1(stepJ * j), beta2(stepJ * (j + 1));
-				QVector3D pos11(0, std::sin(beta1) * radius, 1 + std::cos(beta1) * radius);
-				QVector3D pos12(0, std::sin(beta2) * radius, 1 + std::cos(beta2) * radius);
+				QVector3D pos11(1 + std::cos(beta1) * radius, std::sin(beta1) * radius, 0);
+				QVector3D pos12(1 + std::cos(beta2) * radius, std::sin(beta2) * radius, 0);
 				pos11 = bigRot * pos11;
 				pos12 = bigRot * pos12;
 				QVector3D pos21 = smallRot * pos11;
@@ -119,7 +121,7 @@ namespace GEOMETRY {
 		return vertices;
 	}
 
-	Vertices const MACARONI(getTorusVertices(0.5, M_PI*2));
+	Vertices const MACARONI(getTorusVertices(0.1, M_PI*2));
 
 	/****************************************************************
 	 * Cube

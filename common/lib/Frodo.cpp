@@ -150,3 +150,11 @@ void Frodo::draw(Renderer * engine_ptr) const {
 	}
 	engine_ptr->draw(*this);
 }
+
+void Frodo::drawElements() const {
+	if (engine_ptr == nullptr) ERROR(EXCEPTIONS::NULLPTR);
+	focalizer.draw(engine_ptr);
+	defocalizer.draw(engine_ptr);
+	firstStraight.draw(engine_ptr);
+	lastStraight.draw(engine_ptr);
+}

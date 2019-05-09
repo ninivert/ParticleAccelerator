@@ -9,6 +9,7 @@
 #include "include/Straight.h"
 #include "include/Dipole.h"
 #include "include/Quadrupole.h"
+#include "include/Frodo.h"
 #include "include/Beam.h"
 #include "include/Accelerator.h"
 

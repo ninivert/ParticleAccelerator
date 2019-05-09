@@ -1,6 +1,5 @@
 QT += core gui
 TEMPLATE = app
-CONFIG -= app_bundle
 
 TARGET = app.bin
 DESTDIR = ../../bin

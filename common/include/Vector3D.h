@@ -7,6 +7,7 @@
 #include <sstream>
 #include <iomanip>
 #include <cmath>
+#include <QVector3D>
 
 // Forward declaration
 class Drawable;
@@ -67,6 +68,12 @@ public:
 	 */
 
 	double getZ() const;
+
+	/**
+	 * Returns QVector3D suitable for graphics (x, z, y)
+	 */
+
+	QVector3D toQVector3D() const;
 
 	/****************************************************************
 	 * Setters

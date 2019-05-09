@@ -65,6 +65,14 @@ void TextRenderer::draw(Straight const& straight) {
 }
 
 /**
+ * Draw a Frodo element
+ */
+
+void TextRenderer::draw(Frodo const& frodo) {
+	*stream_ptr << frodo;
+}
+
+/**
  * Draw a Particle
  */
 

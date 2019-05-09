@@ -124,6 +124,7 @@
 - Graphism
 - ExerciceP13
 - ExerciceP14
+- test destructors
 - Update `README.md`
 - Sextupole
 - Return const string in `to_string`
@@ -138,6 +139,10 @@
 - add pasta texture
 - research performance optimizations: index buffer
 - modelToWorldLocation is not useful
+- use move semantics for `Vector3D::toQVector3D()`
+- move documentation generation to .pro file
+- solve problem where app.pro does not update when something in commom updates
+- add party mode
 
 ## Questions
 

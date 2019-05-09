@@ -1,5 +1,5 @@
 #include <QGuiApplication>
-#include "include/Window.h"
+#include "include/bundle/Window.bundle.h"
 
 /**
  * Following this tutorial

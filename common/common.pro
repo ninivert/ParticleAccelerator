@@ -23,7 +23,6 @@ SOURCES += \
 	Drawable.cpp \
 	Renderer.cpp \
 	TextRenderer.cpp \
-	# Geometry.cpp \
 	Camera3D.cpp \
 	Transform3D.cpp \
 	Input.cpp \
@@ -59,4 +58,27 @@ HEADERS += \
 	Convert.h \
 	Test.h \
 	globals.h \
-	exceptions.h
+	exceptions.h \
+	# Bundles
+	# Physics simulation
+	Vector3D.bundle.h \
+	Particle.bundle.h \
+	Element.bundle.h \
+	Straight.bundle.h \
+	Quadrupole.bundle.h \
+	Frodo.bundle.h \
+	Dipole.bundle.h \
+	Accelerator.bundle.h \
+	Beam.bundle.h \
+	# Graphics
+	Drawable.bundle.h \
+	Renderer.bundle.h \
+	TextRenderer.bundle.h \
+	Camera3D.bundle.h \
+	Transform3D.bundle.h \
+	Input.bundle.h \
+	OpenGLRenderer.bundle.h \
+	Window.bundle.h \
+	# Utility
+	Convert.bundle.h \
+	Test.bundle.h

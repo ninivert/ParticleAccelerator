@@ -111,6 +111,12 @@ public:
 
 	virtual void draw(Renderer * engine_ptr = nullptr) const override;
 
+	/**
+	 * Draw elements in the Frodo element (Quadrupole and Straight)
+	 */
+
+	void drawElements() const;
+
 private:
 
 	/****************************************************************

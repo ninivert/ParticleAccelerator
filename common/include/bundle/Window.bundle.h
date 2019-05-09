@@ -6,6 +6,10 @@
 #include "include/Vector3D.h"
 #include "include/Particle.h"
 #include "include/Element.h"
+#include "include/Straight.h"
+#include "include/Quadrupole.h"
+#include "include/Frodo.h"
+#include "include/Dipole.h"
 #include "include/Beam.h"
 
 #include "include/Accelerator.h"

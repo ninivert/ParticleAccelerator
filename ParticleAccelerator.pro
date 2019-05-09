@@ -1,6 +1,3 @@
-QT += core gui
-
-CONFIG -= app_bundle
 TEMPLATE = subdirs
 
 SUBDIRS = \

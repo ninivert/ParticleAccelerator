@@ -21,6 +21,7 @@ Vector3D::Vector3D(double const& _x, double const& _y, double const& _z, Rendere
 double Vector3D::getX() const { return x; }
 double Vector3D::getY() const { return y; }
 double Vector3D::getZ() const { return z; }
+QVector3D Vector3D::toQVector3D() const { return QVector3D(x, z, -y); }
 
 /****************************************************************
  * Setters

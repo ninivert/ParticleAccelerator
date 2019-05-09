@@ -5,10 +5,57 @@
  ****************************************************************/
 
 Window::Window() : focus(true), acc(&engine) {
+	// Cursor
 	QCursor c;
 	c.setPos(mapToGlobal(QPoint(width() / 2, height() / 2)));
 	setCursor(c);
 	Input::resetMouseDelta();
+
+	// Accelerator initialization
+	Vector3D pos_dep(3, 2, 0);
+	Vector3D dir_frodo(0, -1, 0);
+	Vector3D pos_fin;
+	Vector3D dir_dipole(-1, -1, 0);
+
+	for (int i = 0; i < 4; ++i) {
+
+		pos_fin = pos_dep + 4 * dir_frodo;
+		acc.addElement(Frodo(
+			pos_dep, pos_fin,
+			0.1, 1.2, 1,
+			&engine
+		));
+
+		pos_dep = pos_fin;
+		pos_fin += dir_dipole;
+
+		acc.addElement(Dipole(
+			pos_dep,
+			pos_fin,
+			0.1, 1, 5.89158,
+			&engine
+		));
+
+		pos_dep = pos_fin;
+
+		// -90° rotation
+		dir_frodo ^= Vector3D(0, 0, 1);
+		dir_dipole ^= Vector3D(0, 0, 1);
+	}
+
+	acc.closeElementLoop();
+
+	acc.addParticle(Particle(
+		Vector3D(3.01, 0, 0), 2,
+		Vector3D(0, -2.64754e+08, 0),
+		CONSTANTS::M_PROTON
+	));
+
+	acc.addParticle(Particle(
+		Vector3D(2.99, 0, 0), 2,
+		Vector3D(0, -2.64754e+08, 0),
+		CONSTANTS::M_PROTON
+	));
 }
 
 void Window::update() {
@@ -64,7 +111,10 @@ void Window::resizeGL(int width, int height) {
  */
 
 void Window::paintGL() {
+	engine.begin();
+	engine.clear();
 	acc.draw();
+	engine.end();
 }
 
 /****************************************************************
