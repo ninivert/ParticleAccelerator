@@ -120,15 +120,13 @@
 
 ## Todo
 
-- Review the modifs
-- Graphism
 - ExerciceP13
 - ExerciceP14
 - Update `README.md`
 - Sextupole
 - Return const string in `to_string`
+
 - Graphics documentation
-- Move Geometry.h to .cpp implementation (?)
 - use proper QTimer.dt() for movement: Ponderate movement by frame dt
 - update correct dependencies in header files -> use bundles
 - lock camera angle
@@ -141,4 +139,4 @@
 
 ## Questions
 
-- Return type for getters: const, reference, const reference ?
+- Return type for getters: const, const reference ?

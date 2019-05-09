@@ -109,6 +109,10 @@ Vector3D const operator ^ (Vector3D v1, Vector3D const& v2) {
 	return (v1 ^= v2);
 }
 
+Vector3D const operator - (Vector3D v) {
+	return v *= -1;
+}
+
 double operator * (Vector3D const& v1, Vector3D const& v2) {
 	return v1.getX() * v2.getX() +
 		   v1.getY() * v2.getY() +

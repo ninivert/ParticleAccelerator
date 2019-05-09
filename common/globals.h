@@ -8,6 +8,7 @@
 namespace CONSTANTS {
 	inline constexpr double EV(1.60217653e-19); // J
 	inline constexpr double E(1.60217653e-19); // C
+	inline constexpr double EPISLON0(8.85e-12); // F/m
 	inline constexpr double C(299792458); // m/s
 	inline constexpr double M_PROTON(0.938272); // GeV/c^2
 	inline constexpr double M_ELECTRON(5.10999e-4); // GeV/c^2

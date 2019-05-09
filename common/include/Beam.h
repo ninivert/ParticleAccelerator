@@ -194,6 +194,12 @@ private:
 	Vector3D const getZMeans() const;
 
 	/**
+	 * Adds the interaction forces to each Particle
+	 */
+
+	void exertInteractions();
+
+	/**
 	 * Remove the Particle of the Beam that are out of the Accelerator
 	 *
 	 * Private: this method should only be used internally in Beam::step()
