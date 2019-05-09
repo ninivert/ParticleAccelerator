@@ -4,6 +4,7 @@ SUBDIRS = \
 	common \
 	apps/exercices/exerciceP9 \
 	apps/exercices/exerciceP10 \
+	apps/exercices/exerciceP13 \
 	apps/tests/testAccelerator \
 	apps/tests/testBeam \
 	apps/tests/testCircular \
@@ -18,6 +19,7 @@ SUBDIRS = \
 
 test/exercices/exerciceP9.depends = common
 test/exercices/exerciceP10.depends = common
+test/exercices/exerciceP13.depends = common
 apps/tests/testAccelerator.depends = common
 apps/tests/testBeam.depends = common
 apps/tests/testCircular.depends = common
