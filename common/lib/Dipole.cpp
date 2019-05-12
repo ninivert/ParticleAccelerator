@@ -48,7 +48,12 @@ double Dipole::getParticleProgress(Vector3D const& pos, bool const& methodChapi)
 		if (isInNextElement) {
 			return 2;
 		} else {
-			return 0.5;
+			bool const isInPrevElement(Vector3D::tripleProduct(Vector3D(0, 0, 1), pos, getPosIn()) < 0);
+			if (isInPrevElement) {
+				return -2;
+			} else {
+				return 0;
+			}
 		}
 	} else {
 		double x1((posIn - posCenter).getX());

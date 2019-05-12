@@ -233,7 +233,7 @@ void OpenGLRenderer::draw(Frodo const& frodo) {
 void OpenGLRenderer::draw(Particle const& particle) {
 	program->setUniformValue("color", 0.0, 0.0, 0.0);
 
-	qDebug() << particle.getElementPtr();
+	// qDebug() << particle.getElementPtr();
 
 	drawPoint((particle.getPos()).toQVector3D());
 }

@@ -49,7 +49,12 @@ double Straight::getParticleProgress(Vector3D const& pos, bool const& methodChap
 		if (isInNextElement) {
 			return 2;
 		} else {
-			return 0.5;
+			bool const isInPrevElement(Vector3D::tripleProduct(Vector3D(0, 0, 1), pos, getPosIn()) < 0);
+			if (isInPrevElement) {
+				return -2;
+			} else {
+				return 0;
+			}
 		}
 	} else {
 		Vector3D relativePos(pos - getPosIn());

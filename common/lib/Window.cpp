@@ -45,23 +45,25 @@ Window::Window() : focus(true), acc(&engine, false) {
 
 	acc.closeElementLoop();
 
-	// acc.addParticle(Particle(
-	// 	Vector3D(3.01, 0, 0), 2,
-	// 	Vector3D(0, -2.64754e+08, 0),
-	// 	CONSTANTS::M_PROTON
-	// ));
-
+	// clockwise
 	acc.addParticle(Particle(
-		Vector3D(2.99, 0, 0), 2,
+		Vector3D(3.01, 0, 0), 2,
 		Vector3D(0, -2.64754e+08, 0),
-		CONSTANTS::M_PROTON
+		CONSTANTS::M_PROTON, 1
+	));
+
+	// counter-clockwise
+	acc.addParticle(Particle(
+		Vector3D(2.99, 1.1, 0), 2,
+		Vector3D(0, 2.64754e+08, 0),
+		CONSTANTS::M_PROTON, -1
 	));
 }
 
 void Window::update() {
 	if (focus) {
 		// Physics engine
-		for (size_t i(0); i < 1; ++i) acc.step();
+		for (size_t i(0); i < 10; ++i) acc.step();
 
 		// Input and rendering
 		Input::update();

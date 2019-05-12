@@ -64,9 +64,9 @@ Vector3D Frodo::getField(Vector3D const& pos, bool const& methodChapi) const {
 		double dist(getParticleProgress(pos, methodChapi) * totLength);	// Linear for straight
 
 		if (dist >= 0 and dist <= lensLength) {
-			return focalizer.getField(pos);
+			return focalizer.getField(pos, methodChapi);
 		} else if (dist >= lensLength + straightLength and dist <= 2 * lensLength + straightLength) {
-			return defocalizer.getField(pos);
+			return defocalizer.getField(pos, methodChapi);
 		}
 	}
 	return Vector3D();

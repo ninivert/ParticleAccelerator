@@ -117,12 +117,15 @@
 - Removed useless consts in `Vector3D` and `Particle` according to warnings (non-class type rvalues are not modifiable (inherited from C), and thus the Standard says non-class type rvalues are never const-qualified (right-most const was ignored even tho specified by you) since the const would be kinda redundant.) [link1](https://stackoverflow.com/questions/1607188/why-is-a-type-qualifier-on-a-return-type-meaningless) and [link2](https://stackoverflow.com/questions/1134237/pedantic-gcc-warning-type-qualifiers-on-function-return-type)
 - Move Makefile to qmake
 - Cleanup the facking extra dependencies
+- ExerciceP13
+- add draw for vector3d
+- bug with methodChapi = false corrected
+- Particle can turn in both direction
+	- Do not work with all combination of speed and charge
+	- To change the direction, change BOTH signs of speed and charge
 
 ## Todo
 
-- bug with methodChapi = false
-- add draw for vector3d
-- ExerciceP13
 - ExerciceP14
 - Update `README.md`
 - Sextupole
