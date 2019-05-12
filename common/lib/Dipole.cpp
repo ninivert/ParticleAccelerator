@@ -69,16 +69,13 @@ double Dipole::getParticleProgress(Vector3D const& pos, bool const& methodChapi)
 
 
 double Dipole::getLength() const {
-	double totalAngle_(totalAngle);
-	if (totalAngle_ < 0) { totalAngle_ += 2 * M_PI; }
-	return totalAngle_ / curvature;
+	return abs(totalAngle / curvature);
 }
 
 Vector3D Dipole::getPosAtProgress(double const& progress) const {
 	if (progress < 0 or progress > 1) { ERROR(EXCEPTIONS::BAD_PROGRESS); }
 
-	double angle(atan2(getPosOut().getX(), getPosOut().getY()) - atan2(getPosIn().getX(), getPosIn().getY()));
-	if (angle < 0) { angle += 2 * M_PI; }
+	double angle(abs(totalAngle));
 
 	angle *= progress;
 	Vector3D pos(getPosIn() - posCenter);
@@ -106,6 +103,7 @@ double Dipole::getTotalAngle() const { return totalAngle; }
 double Dipole::getCurvature() const { return curvature; }
 
 double Dipole::getInAngle() const { return inAngle; }
+
 double Dipole::getOutAngle() const { return outAngle; }
 
 /****************************************************************

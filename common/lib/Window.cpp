@@ -4,7 +4,7 @@
  * General stuffs
  ****************************************************************/
 
-Window::Window() : focus(true), acc(&engine, false) {
+Window::Window() : focus(true), acc(&engine, true) {
 	// Cursor
 	QCursor c;
 	c.setPos(mapToGlobal(QPoint(width() / 2, height() / 2)));
@@ -45,19 +45,27 @@ Window::Window() : focus(true), acc(&engine, false) {
 
 	acc.closeElementLoop();
 
-	// clockwise
-	acc.addParticle(Particle(
-		Vector3D(3.01, 0, 0), 2,
-		Vector3D(0, -2.64754e+08, 0),
-		CONSTANTS::M_PROTON, 1
-	));
+	// // clockwise
+	// acc.addParticle(Particle(
+	// 	Vector3D(3.01, 0, 0), 2,
+	// 	Vector3D(0, -2.64754e+08, 0),
+	// 	CONSTANTS::M_PROTON, 1
+	// ));
 
-	// counter-clockwise
-	acc.addParticle(Particle(
+	// // counter-clockwise
+	// acc.addParticle(Particle(
+	// 	Vector3D(2.99, 1.1, 0), 2,
+	// 	Vector3D(0, 2.64754e+08, 0),
+	// 	CONSTANTS::M_PROTON, -1
+	// ));
+
+	acc.addBeam(Particle(
 		Vector3D(2.99, 1.1, 0), 2,
-		Vector3D(0, 2.64754e+08, 0),
-		CONSTANTS::M_PROTON, -1
-	));
+		Vector3D(0, -2.64754e+08, 0),
+		CONSTANTS::M_PROTON, 1),
+		50, 1
+	);
+
 }
 
 void Window::update() {
