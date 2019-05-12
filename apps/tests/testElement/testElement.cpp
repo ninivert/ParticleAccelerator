@@ -16,9 +16,9 @@ int main() {
 	 * Dipole
 	 ****************************************************************/
 
-	Dipole dipole(Vector3D(3, 0, 0), Vector3D(2, -1, 0), 0.1, -1, 5.12);
+	Dipole dipole(Vector3D(3, 0, 0), Vector3D(2, -1, 0), 0.1, 1, 5.12);
 
-	// posCenter : (3, -1, 0)
+	// posCenter : (2, 0, 0)
 
 	assert(dipole.getPosIn() == Vector3D(3, 0, 0));
 	assert(dipole.getPosOut() == Vector3D(2, -1, 0));

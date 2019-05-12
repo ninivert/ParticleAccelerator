@@ -22,7 +22,7 @@ int main() {
 
 	// Make particles
  	Particle part_1(Vector3D(3.015, -1.2, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272);
-	Particle part_2(Vector3D(1.00984, -0.091837, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272);
+	Particle part_2(Vector3D(0.90984, -0.091837, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272);
 	Particle part_3(Vector3D(0.99016, -0.191837, 0), 2, Vector3D(-210200, -2.64754e8, 0), 0.938272);
 	Particle part_4(Vector3D(2.99, -0.01, 0), Vector3D(0, 0, 0), 0.938272);
 	Particle part_5(Vector3D(-2, -1, 0), Vector3D(1e8, 1e8, 0), 0.938272);
