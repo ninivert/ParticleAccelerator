@@ -35,17 +35,22 @@ public:
 	/**
 	 * Constructor with init of the pointer to a `Renderer` inherited from `Drawable`
 	 *
-	 * Possibility to choose which representation of the accelerator we want (methodChapi)
+	 * Possibility to choose which representation of the Accelerator we want (methodChapi)
 	 *
-	 * - true : The accelerator is represented by a circle
+	 * - true  : The accelerator is represented by a circle
 	 * - false : It is represented as it would look in real life
+	 *
+	 * Possibility to choose which way we are constructing the Beams (beamFromParticle)
+	 *
+	 * - true  : The Beams are constructed using a physical source of Particle from the default Particle position by evolving a Particle a given number of times
+	 * - false : The Beams are constructed by spreading out a given number of Particles on the ideal trajectory
 	 *
 	 * The constructor is explicit to prevent accidental type casting.
 	 *
 	 * Can be used as a default constructor
 	 */
 
-	explicit Accelerator(Renderer * engine_ptr = nullptr, bool const& methodChapi = true);
+	explicit Accelerator(Renderer * engine_ptr = nullptr, bool methodChapi = true, bool beamFromParticle = false);
 
 	/****************************************************************
 	 * Destructor
@@ -81,9 +86,9 @@ public:
 
 	/****************************************************************
 	 * Getters
-	 *
-	 * ooooooooooh naw naw naw, that would break the encapsulation !
 	 ****************************************************************/
+
+	bool getBeamFromParticle() const;
 
 	/****************************************************************
 	 * Methods
@@ -236,6 +241,12 @@ private:
 	std::vector<std::unique_ptr<Beam>> beams_ptr;
 
 	/**
+	 * For each Particle in the Beams, we associate a progress of that Particle in the Accelerator which will be used to evaluate the interaction between the Particles
+	 */
+
+	std::vector<std::vector<size_t>> associatedProgresses;
+
+	/**
 	 * Heterogeneous collection of shared_ptr on Element
 	 *
 	 * We chose std::shared_ptr because the Accelerator will NOT be the only object to point on elements (elements are pointing to each other) so we cannot use std::unique_ptr here, and the intelligent pointers are recommended for this because of dynamical allocation (more convenient than C-pointers)
@@ -248,6 +259,15 @@ private:
 	 */
 
 	bool const methodChapi;
+
+	/**
+	 * Describe how we are constructing the Beams
+	 *
+	 * - true  : The Beams are constructed using a physical source of Particle from the default Particle position by evolving a Particle a given number of times
+	 * - false : The Beams are constructed by spreading out a given number of Particles on the ideal trajectory
+	 */
+
+	bool const beamFromParticle;
 };
 
 /**

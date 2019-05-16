@@ -6,8 +6,8 @@ using namespace std;
  * Constructor
  ****************************************************************/
 
-Accelerator::Accelerator(Renderer * engine_ptr, bool const& methodChapi)
-: Drawable(engine_ptr), methodChapi(methodChapi)
+Accelerator::Accelerator(Renderer * engine_ptr, bool methodChapi, bool beamFromParticle)
+: Drawable(engine_ptr), methodChapi(methodChapi), beamFromParticle(beamFromParticle)
 {}
 
 /****************************************************************
@@ -15,6 +15,12 @@ Accelerator::Accelerator(Renderer * engine_ptr, bool const& methodChapi)
  ****************************************************************/
 
 Accelerator::~Accelerator() { this->clear(); };
+
+/****************************************************************
+ * Getter
+ ****************************************************************/
+
+bool Accelerator::getBeamFromParticle() const { return beamFromParticle; }
 
 /****************************************************************
  * Methods
