@@ -1,8 +1,22 @@
 # Conception
 
-## Hiérarchie et dépendances
+## Hiérarchie, dépendances et documentation
 
-Description de la hiérarchie de classes utilisées (relations d'héritage et d'encapsulation)
+Dépendances: `doxygen` et `qt5-default`
+
+```shell
+rm doxydocs/* -r && doxygen Doxyfile
+# Optional to run from command line
+xdg-open doxydocs/html/index.html
+```
+
+## Tests
+
+Exécuter tous les tests
+
+```shell
+for i in bin/test*.bin; do $i; done
+```
 
 ## Interprétation physique
 
