@@ -6,11 +6,11 @@ using namespace std;
  * Constructors
  ****************************************************************/
 
-Straight::Straight(Vector3D const& posIn, Vector3D const& posOut, double const& radius, Renderer * engine_ptr)
+Straight::Straight(Vector3D const& posIn, Vector3D const& posOut, double radius, Renderer * engine_ptr)
 : Element(posIn, posOut, radius, engine_ptr)
 {}
 
-Straight::Straight(Vector3D const& posIn, double const& length, Vector3D direction, double const& radius, Renderer * engine_ptr)
+Straight::Straight(Vector3D const& posIn, double length, Vector3D direction, double radius, Renderer * engine_ptr)
 : Element(posIn, posIn + length * ~direction, radius, engine_ptr)
 {}
 
@@ -67,13 +67,13 @@ double Straight::getLength() const {
 	return (getPosOut() - getPosIn()).norm();
 }
 
-Vector3D Straight::getPosAtProgress(double const& progress) const {
+Vector3D Straight::getPosAtProgress(double progress) const {
 	if (progress < 0 or progress > 1) { ERROR(EXCEPTIONS::BAD_PROGRESS); }
 
 	return ((getPosOut() - getPosIn()) * progress + getPosIn());
 }
 
-Vector3D Straight::getVelAtProgress(double const& progress, bool const& clockwise) const {
+Vector3D Straight::getVelAtProgress(double progress, bool const& clockwise) const {
 	if (progress < 0 or progress > 1) { ERROR(EXCEPTIONS::BAD_PROGRESS); }
 
 	Vector3D direction(getPosOut() - getPosIn());

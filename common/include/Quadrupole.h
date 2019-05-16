@@ -44,7 +44,7 @@ public:
 	 * The constructor is explicit to prevent accidental type casting.
 	 */
 
-	explicit Quadrupole(Vector3D const& posIn, Vector3D const& posOut, double const& radius, double const& b, Renderer * engine_ptr = nullptr);
+	explicit Quadrupole(Vector3D const& posIn, Vector3D const& posOut, double radius, double b, Renderer * engine_ptr = nullptr);
 
 	/**
 	 * Constructor for initialisation of a simple Quadrupole element
@@ -61,7 +61,7 @@ public:
 	 * The constructor is explicit to prevent accidental type casting.
 	 */
 
-	explicit Quadrupole(Vector3D const& posIn, double const& length, Vector3D direction, double const& radius, double const& b, Renderer * engine_ptr = nullptr);
+	explicit Quadrupole(Vector3D const& posIn, double length, Vector3D direction, double radius, double b, Renderer * engine_ptr = nullptr);
 
 	/****************************************************************
 	 * Polymorphic copy for Accelerator

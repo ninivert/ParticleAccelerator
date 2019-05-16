@@ -35,7 +35,7 @@ public:
 	 * - `double lambda`: scaling factor for the macroparticles (> 1)
 	 */
 
-	Beam(Particle const& defaultParticle, size_t const& particleCount, double const& lambda, Accelerator const& acc, Renderer * engine = nullptr);
+	Beam(Particle const& defaultParticle, size_t const& particleCount, double lambda, Accelerator const& acc, Renderer * engine = nullptr);
 
 	/**
 	 * Constructor with only one particle
@@ -131,7 +131,7 @@ public:
 	 * If `dt` is null (aka inferior to GLOBALS::DELTA), then this doesn't do anything
 	 */
 
-	void step(double const& dt = GLOBALS::DT, bool const& methodChapi = false);
+	void step(double dt = GLOBALS::DT, bool const& methodChapi = false);
 
 	/**
 	 * Returns true if there is no Particle left in the Beam

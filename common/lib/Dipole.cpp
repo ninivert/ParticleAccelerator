@@ -6,7 +6,7 @@ using namespace std;
  * Constructors
  ****************************************************************/
 
-Dipole::Dipole(Vector3D const& posIn, Vector3D const& posOut, double const& radius, double const& curvature, double const& B, Renderer * engine_ptr)
+Dipole::Dipole(Vector3D const& posIn, Vector3D const& posOut, double radius, double curvature, double B, Renderer * engine_ptr)
 : Element(posIn, posOut, radius, engine_ptr), B(B), curvature(curvature),
   posCenter(0.5 * (posOut + posIn) + 1 / (curvature) * sqrt(1 - curvature * curvature * (posOut - posIn).normSquared()/ 4.0) * ((posOut - posIn) ^ Vector3D(0, 0, 1)) / (posOut - posIn).norm()),
   relPosIn(posIn - posCenter), relPosOut(posOut - posCenter),
@@ -72,7 +72,7 @@ double Dipole::getLength() const {
 	return abs(totalAngle / curvature);
 }
 
-Vector3D Dipole::getPosAtProgress(double const& progress) const {
+Vector3D Dipole::getPosAtProgress(double progress) const {
 	if (progress < 0 or progress > 1) { ERROR(EXCEPTIONS::BAD_PROGRESS); }
 
 	double angle(abs(totalAngle));
@@ -85,7 +85,7 @@ Vector3D Dipole::getPosAtProgress(double const& progress) const {
 	return pos;
 }
 
-Vector3D Dipole::getVelAtProgress(double const& progress, bool const& clockwise) const {
+Vector3D Dipole::getVelAtProgress(double progress, bool const& clockwise) const {
 	if (progress < 0 or progress > 1) { ERROR(EXCEPTIONS::BAD_PROGRESS); }
 
 	Vector3D dir(getNormalDirection(getPosAtProgress(progress)));
@@ -110,7 +110,7 @@ double Dipole::getOutAngle() const { return outAngle; }
  * Setters
  ****************************************************************/
 
-void Dipole::setB(double const& _B) { B = _B; }
+void Dipole::setB(double _B) { B = _B; }
 
 /****************************************************************
  * Virtual methods

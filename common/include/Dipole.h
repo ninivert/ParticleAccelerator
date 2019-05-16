@@ -46,7 +46,7 @@ public:
 	 * The center of curvature is initialized with the CONVENTION that when k is positive, the direction of the arc from the initial position to the final position is CLOCKWISE (anti-trigonometric)
 	 */
 
-	explicit Dipole(Vector3D const& posIn, Vector3D const& posOut, double const& radius, double const& curvature, double const& B, Renderer * engine_ptr = nullptr);
+	explicit Dipole(Vector3D const& posIn, Vector3D const& posOut, double radius, double curvature, double B, Renderer * engine_ptr = nullptr);
 
 	/****************************************************************
 	 * Polymorphic copy for Accelerator
@@ -104,13 +104,13 @@ public:
 	 * Returns a Vector3D containing the position (e.g. of a Particle) at a certain pourcentage of the Dipole (between 0 and 1)
 	 */
 
-	virtual Vector3D getPosAtProgress(double const& progress) const override;
+	virtual Vector3D getPosAtProgress(double progress) const override;
 
 	/**
 	 * Returns a Vector3D containing the direction (not normalized) of the Dipole at a certain pourcentage of the Dipole (between 0 and 1)
 	 */
 
-	virtual Vector3D getVelAtProgress(double const& progress, bool const& clockwise) const override;
+	virtual Vector3D getVelAtProgress(double progress, bool const& clockwise) const override;
 
 	/**
 	 * Get the position of the center of curvature
@@ -150,7 +150,7 @@ public:
 	 * Sets the magnetic field exerted by the Dipole
 	 */
 
-	void setB(double const& B);
+	void setB(double B);
 
 	/****************************************************************
 	 * Virtual methods

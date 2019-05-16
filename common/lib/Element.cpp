@@ -6,7 +6,7 @@ using namespace std;
  * Constructors
  ****************************************************************/
 
-Element::Element(Vector3D const& posIn, Vector3D const& posOut, double const& radius, Renderer * engine_ptr)
+Element::Element(Vector3D const& posIn, Vector3D const& posOut, double radius, Renderer * engine_ptr)
 : Drawable(engine_ptr), posIn(posIn), posOut(posOut), radius(radius), next_ptr(nullptr), prev_ptr(nullptr)
 {
 	double orientation(Vector3D::tripleProduct(Vector3D(0, 0, 1), posIn, posOut));

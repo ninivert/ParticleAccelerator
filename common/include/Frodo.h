@@ -45,7 +45,7 @@ public:
 	 * The constructor is explicit to prevent accidental type casting.
 	 */
 
-	explicit Frodo(Vector3D const& posIn, Vector3D const& posOut, double const& radius, double const& b, double const& straightLength, Renderer * engine_ptr = nullptr);
+	explicit Frodo(Vector3D const& posIn, Vector3D const& posOut, double radius, double b, double straightLength, Renderer * engine_ptr = nullptr);
 
 	/**
 	 * Constructor using
@@ -61,7 +61,7 @@ public:
 	 * The constructor is explicit to prevent accidental type casting.
 	 */
 
-	explicit Frodo(Vector3D const& posIn, double const& totalLength, Vector3D direction, double const& radius, double const& b, double const& straightLength, Renderer * engine_ptr = nullptr);
+	explicit Frodo(Vector3D const& posIn, double totalLength, Vector3D direction, double radius, double b, double straightLength, Renderer * engine_ptr = nullptr);
 
 	/****************************************************************
 	 * Polymorphic copy for Accelerator

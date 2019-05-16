@@ -110,7 +110,7 @@ public:
 	 *
 	 */
 
-	void addBeam(Particle const& defaultParticle, size_t const& particleCount, double const& lambda);
+	void addBeam(Particle const& defaultParticle, size_t const& particleCount, double lambda);
 
 	/**
 	 * Adds a Particle to the Accelerator, transform it into a Beam before storing it
@@ -150,13 +150,13 @@ public:
 	 * Returns a Vector3D containing the position (e.g. of a Particle) at a certain pourcentage of the Accelerator (between 0 and 1)
 	 */
 
-	Vector3D getPosAtProgress(double const& progress) const;
+	Vector3D getPosAtProgress(double progress) const;
 
 	/**
 	 * Returns a Vector3D containing the direction (not normalized) of the Dipole at a certain pourcentage of the Accelerator (between 0 and 1)
 	 */
 
-	Vector3D getVelAtProgress(double const& progress, bool const& clockwise) const;
+	Vector3D getVelAtProgress(double progress, bool const& clockwise) const;
 
 	/**
 	 * Simulate the particle accelerator over a timestep `dt`
@@ -166,7 +166,7 @@ public:
 	 * If `dt` is null (aka inferior to GLOBALS::DELTA), then this doesn't do anything
 	 */
 
-	void step(double const& dt = GLOBALS::DT);
+	void step(double dt = GLOBALS::DT);
 
 	/**
 	 * Generates a string representation of the accelerator

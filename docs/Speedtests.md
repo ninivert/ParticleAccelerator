@@ -12,7 +12,7 @@ Using the `array` library gave us horrible performance that couldn't even compet
 ```cpp
 class Vector {
 public:
-	Vector(double const& x, double const& y, double const& z) {
+	Vector(double x, double y, double z) {
 		coords[0] = x;
 		coords[1] = y;
 		coords[2] = z;
@@ -35,7 +35,7 @@ private:
 ```cpp
 class Vector {
 public:
-	Vector(double const& _x, double const& _y, double const& _z) {
+	Vector(double _x, double _y, double _z) {
 		x = _x;
 		y = _y;
 		z = _z;
@@ -79,7 +79,7 @@ Results: on 1e9 iterations, no significant difference.
 ```cpp
 class Vector {
 public:
-	Vector(double const& _x, double const& _y, double const& _z) {
+	Vector(double _x, double _y, double _z) {
 		x = _x;
 		y = _y;
 		z = _z;
@@ -103,7 +103,7 @@ private:
 ```cpp
 class Vector {
 public:
-	Vector(double const& _x, double const& _y, double const& _z) {
+	Vector(double _x, double _y, double _z) {
 		x = _x;
 		y = _y;
 		z = _z;

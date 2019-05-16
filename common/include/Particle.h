@@ -44,7 +44,7 @@ public:
 	 * The constructor is explicit to prevent accidental type casting.
 	 */
 
-	explicit Particle(Vector3D const& pos, Vector3D const& speed, double const& mass, int const& charge = 1, bool const& unitGeV = true, Renderer * engine_ptr = nullptr);
+	explicit Particle(Vector3D const& pos, Vector3D const& speed, double mass, int charge = 1, bool const& unitGeV = true, Renderer * engine_ptr = nullptr);
 
 	/**
 	 * Constructor for initialisation with energy and direction vector velocity
@@ -62,7 +62,7 @@ public:
 	 * The constructor is explicit to prevent accidental type casting.
 	 */
 
-	explicit Particle(Vector3D const& pos, double const& energy, Vector3D speed, double const& mass, int const& charge = 1, bool const& unitGeV = true, Renderer * engine_ptr = nullptr);
+	explicit Particle(Vector3D const& pos, double energy, Vector3D speed, double mass, int charge = 1, bool const& unitGeV = true, Renderer * engine_ptr = nullptr);
 
 	/****************************************************************
 	 * Destructor
@@ -191,7 +191,7 @@ public:
 	 * If `dt` is null (aka inferior to GLOBALS::DELTA), then this doesn't do anything
 	 */
 
-	void step(double const& dt = GLOBALS::DT, bool const& methodChapi = false);
+	void step(double dt = GLOBALS::DT, bool const& methodChapi = false);
 
 	/**
 	 * Exerts a force onto a particle until the next `step` is called.
@@ -211,7 +211,7 @@ public:
 	 * 2. Then F.rotate(Vector3D(0, 0, 0), alpha) tries to normalize Vector3D(0, 0, 0) which will scream at you
 	 */
 
-	void exertLorentzForce(Vector3D const& B, double const& dt = GLOBALS::DT);
+	void exertLorentzForce(Vector3D const& B, double dt = GLOBALS::DT);
 
 	/****************************************************************
 	 * Rendering engine

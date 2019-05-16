@@ -41,7 +41,7 @@ void Accelerator::addElement(Element const& element) {
 	}
 }
 
-void Accelerator::addBeam(Particle const& defaultParticle, size_t const& particleCount, double const& lambda) {
+void Accelerator::addBeam(Particle const& defaultParticle, size_t const& particleCount, double lambda) {
 	// Protection against no element to point to
 	if (elements_ptr.size() > 0) {
 		beams_ptr.push_back(unique_ptr<Beam>(new Beam(defaultParticle, particleCount, lambda, *this, engine_ptr)));
@@ -124,7 +124,7 @@ void Accelerator::clearDeadBeams() {
 	}
 }
 
-Vector3D Accelerator::getPosAtProgress(double const& progress) const {
+Vector3D Accelerator::getPosAtProgress(double progress) const {
 	if (progress < 0 or progress > 1) { ERROR(EXCEPTIONS::BAD_PROGRESS); }
 
 	double length(getTotalLength() * progress);
@@ -145,7 +145,7 @@ Vector3D Accelerator::getPosAtProgress(double const& progress) const {
 	return elements_ptr[i]->getPosAtProgress(prog);
 }
 
-Vector3D Accelerator::getVelAtProgress(double const& progress, bool const& clockwise) const {
+Vector3D Accelerator::getVelAtProgress(double progress, bool const& clockwise) const {
 	if (progress < 0 or progress > 1) { ERROR(EXCEPTIONS::BAD_PROGRESS); }
 
 	double length(getTotalLength() * progress);
@@ -174,7 +174,7 @@ double Accelerator::getTotalLength() const {
 	return length;
 }
 
-void Accelerator::step(double const& dt) {
+void Accelerator::step(double dt) {
 	// Do nothing if dt is null
 	if (abs(dt) < GLOBALS::DELTA) { return; }
 

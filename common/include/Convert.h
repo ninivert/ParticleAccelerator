@@ -18,10 +18,10 @@ namespace CONVERT {
 	/**
 	 * Mass
 	 */
-	double MassEVtoSI(double const& val);
-	double MassGeVtoSI(double const& val);
-	double MassSItoEV(double const& val);
-	double MassSItoGeV(double const& val);
+	double MassEVtoSI(double val);
+	double MassGeVtoSI(double val);
+	double MassSItoEV(double val);
+	double MassSItoGeV(double val);
 
 	/**
 	 * Momentum
@@ -34,10 +34,10 @@ namespace CONVERT {
 	/**
 	 * Energy
 	 */
-	double EnergyEVtoSI(double const& val);
-	double EnergyGeVtoSI(double const& val);
-	double EnergySItoEV(double const& val);
-	double EnergySItoGeV(double const& val);
+	double EnergyEVtoSI(double val);
+	double EnergyGeVtoSI(double val);
+	double EnergySItoEV(double val);
+	double EnergySItoGeV(double val);
 }
 
 #endif

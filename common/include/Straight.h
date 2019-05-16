@@ -43,7 +43,7 @@ public:
 	 * The constructor is explicit to prevent accidental type casting.
 	 */
 
-	explicit Straight(Vector3D const& posIn, Vector3D const& posOut, double const& radius, Renderer * engine_ptr = nullptr);
+	explicit Straight(Vector3D const& posIn, Vector3D const& posOut, double radius, Renderer * engine_ptr = nullptr);
 
 	/**
 	 * Constructor for initialisation of a simple Straight element (without linking to the previous one) with the initial position, the length of the element and the direction
@@ -57,7 +57,7 @@ public:
 	 * The constructor is explicit to prevent accidental type casting.
 	 */
 
-	explicit Straight(Vector3D const& posIn, double const& length, Vector3D direction, double const& radius, Renderer * engine_ptr = nullptr);
+	explicit Straight(Vector3D const& posIn, double length, Vector3D direction, double radius, Renderer * engine_ptr = nullptr);
 
 	/****************************************************************
 	 * Polymorphic copy for Accelerator
@@ -117,13 +117,13 @@ public:
 	 * Returns a Vector3D containing the position (e.g. of a Particle) at a certain purrcentage of the Straight Element (between 0 and 1)
 	 */
 
-	virtual Vector3D getPosAtProgress(double const& progress) const override;
+	virtual Vector3D getPosAtProgress(double progress) const override;
 
 	/**
 	 * Returns a Vector3D containing the direction (not normalized) of the Straight Element at a certain pourrcentage of the Straight Element (between 0 and 1)
 	 */
 
-	virtual Vector3D getVelAtProgress(double const& progress, bool const& clockwise) const override;
+	virtual Vector3D getVelAtProgress(double progress, bool const& clockwise) const override;
 
 	/****************************************************************
 	 * Virtual methods

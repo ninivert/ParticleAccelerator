@@ -45,7 +45,7 @@ public:
 	 * The constructor is explicit to prevent accidental type casting.
 	 */
 
-	explicit Vector3D(double const& _x, double const& _y, double const& _z, Renderer * engine_ptr = nullptr);
+	explicit Vector3D(double _x, double _y, double _z, Renderer * engine_ptr = nullptr);
 
 	/****************************************************************
 	 * Getters
@@ -87,19 +87,19 @@ public:
 	 * Sets private x to the given parameter
 	 */
 
-	void setX(double const& _x);
+	void setX(double _x);
 
 	/**
 	 * Sets private y to the given parameter
 	 */
 
-	void setY(double const& _y);
+	void setY(double _y);
 
 	/**
 	 * Sets private z to the given parameter
 	 */
 
-	void setZ(double const& _z);
+	void setZ(double _z);
 
 	/**
 	 * Sets all coordinates (x, y, z) to 0
@@ -139,7 +139,7 @@ public:
 	 * Multiplies *this by a given scalar (double or int)
 	 */
 
-	Vector3D& operator *= (double const& lambda);
+	Vector3D& operator *= (double lambda);
 
 	/**
 	 * Divides *this by a given scalar (double or int)
@@ -147,7 +147,7 @@ public:
 	 * If you try to divide by 0 (aka abs(lambda) < GLOBALS::DELTA), we _will_ yell at you
 	 */
 
-	Vector3D& operator /= (double const& lambda);
+	Vector3D& operator /= (double lambda);
 
 	/**
 	 * Normalizes *this such that its norm becomes 1, but its direction remains unchanged
@@ -181,7 +181,7 @@ public:
 	 * WARNING: the angles are given in __radians__
 	 */
 
-	Vector3D& rotate(Vector3D axis, double const& alpha);
+	Vector3D& rotate(Vector3D axis, double alpha);
 
 	/**
 	 * Returns a string representation of the vector
@@ -244,7 +244,7 @@ Vector3D const operator - (Vector3D v1, Vector3D const& v2);
  * Note that this operation is commutative.
  */
 
-Vector3D const operator * (Vector3D v, double const& lambda);
+Vector3D const operator * (Vector3D v, double lambda);
 
 /**
  * Multiplies a vector by a scalar.
@@ -252,7 +252,7 @@ Vector3D const operator * (Vector3D v, double const& lambda);
  * Note that this operation is commutative.
  */
 
-Vector3D const operator * (double const& lambda, Vector3D v);
+Vector3D const operator * (double lambda, Vector3D v);
 
 /**
  * Divides a vector by a scalar.
@@ -260,7 +260,7 @@ Vector3D const operator * (double const& lambda, Vector3D v);
  * Again, if you try to divide by 0, we _will_ yell at you.
  */
 
-Vector3D const operator / (Vector3D v, double const& lambda);
+Vector3D const operator / (Vector3D v, double lambda);
 
 /**
  * Returns the vector product of the lhs and rhs

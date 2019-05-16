@@ -4,10 +4,10 @@
  * Mass
  */
 
-double CONVERT::MassEVtoSI(double const& val) { return val * CONSTANTS::EV / std::pow(CONSTANTS::C, 2); }
-double CONVERT::MassGeVtoSI(double const& val) { return MassEVtoSI(val) * 1e9; }
-double CONVERT::MassSItoEV(double const& val) { return val * std::pow(CONSTANTS::C, 2) / CONSTANTS::EV; }
-double CONVERT::MassSItoGeV(double const& val) { return MassSItoEV(val) / 1e9; }
+double CONVERT::MassEVtoSI(double val) { return val * CONSTANTS::EV / std::pow(CONSTANTS::C, 2); }
+double CONVERT::MassGeVtoSI(double val) { return MassEVtoSI(val) * 1e9; }
+double CONVERT::MassSItoEV(double val) { return val * std::pow(CONSTANTS::C, 2) / CONSTANTS::EV; }
+double CONVERT::MassSItoGeV(double val) { return MassSItoEV(val) / 1e9; }
 
 /**
  * Momentum
@@ -22,7 +22,7 @@ Vector3D CONVERT::MomentumSItoGeV(Vector3D const& val) { return MomentumSItoEV(v
  * Energy
  */
 
-double CONVERT::EnergyEVtoSI(double const& val) { return val * CONSTANTS::EV; }
-double CONVERT::EnergyGeVtoSI(double const& val) { return EnergyEVtoSI(val) * 1e9; }
-double CONVERT::EnergySItoEV(double const& val) { return val / CONSTANTS::EV; }
-double CONVERT::EnergySItoGeV(double const& val) { return EnergySItoEV(val) / 1e9; }
+double CONVERT::EnergyEVtoSI(double val) { return val * CONSTANTS::EV; }
+double CONVERT::EnergyGeVtoSI(double val) { return EnergyEVtoSI(val) * 1e9; }
+double CONVERT::EnergySItoEV(double val) { return val / CONSTANTS::EV; }
+double CONVERT::EnergySItoGeV(double val) { return EnergySItoEV(val) / 1e9; }

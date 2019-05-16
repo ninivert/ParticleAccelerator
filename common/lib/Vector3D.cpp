@@ -10,7 +10,7 @@ Vector3D::Vector3D(Renderer * engine_ptr)
 	: Vector3D(0.0, 0.0, 0.0, engine_ptr)
 	{}
 
-Vector3D::Vector3D(double const& _x, double const& _y, double const& _z, Renderer * engine_ptr)
+Vector3D::Vector3D(double _x, double _y, double _z, Renderer * engine_ptr)
 	: Drawable(engine_ptr), x(_x), y(_y), z(_z)
 	{}
 
@@ -27,9 +27,9 @@ QVector3D Vector3D::toQVector3D() const { return QVector3D(x, z, -y); }
  * Setters
  ****************************************************************/
 
-void Vector3D::setX(double const& _x) { x = _x; }
-void Vector3D::setY(double const& _y) { y = _y; }
-void Vector3D::setZ(double const& _z) { z = _z; }
+void Vector3D::setX(double _x) { x = _x; }
+void Vector3D::setY(double _y) { y = _y; }
+void Vector3D::setZ(double _z) { z = _z; }
 void Vector3D::setNull() { x = 0; y = 0; z = 0; }
 
 /****************************************************************
@@ -60,14 +60,14 @@ Vector3D& Vector3D::operator ^= (Vector3D const& v) {
 	return *this;
 }
 
-Vector3D& Vector3D::operator *= (double const& lambda) {
+Vector3D& Vector3D::operator *= (double lambda) {
 	x *= lambda;
 	y *= lambda;
 	z *= lambda;
 	return *this;
 }
 
-Vector3D& Vector3D::operator /= (double const& lambda) {
+Vector3D& Vector3D::operator /= (double lambda) {
 	if (abs(lambda) < GLOBALS::DELTA) {
 		ERROR(EXCEPTIONS::DIV_0);
 	}
@@ -95,14 +95,14 @@ Vector3D const operator - (Vector3D v1, Vector3D const& v2) {
 	return (v1 -= v2);
 }
 
-Vector3D const operator * (Vector3D v, double const& lambda) {
+Vector3D const operator * (Vector3D v, double lambda) {
 	return (v *= lambda);
 }
-Vector3D const operator * (double const& lambda, Vector3D v) {
+Vector3D const operator * (double lambda, Vector3D v) {
 	return (v *= lambda);
 }
 
-Vector3D const operator / (Vector3D v, double const& lambda) {
+Vector3D const operator / (Vector3D v, double lambda) {
 	return (v /= lambda);
 }
 
@@ -143,7 +143,7 @@ double Vector3D::normSquared() const {
 	return getX() * getX() + getY() * getY() + getZ() * getZ();
 }
 
-Vector3D& Vector3D::rotate(Vector3D axis, double const& alpha) {
+Vector3D& Vector3D::rotate(Vector3D axis, double alpha) {
 	~axis;
 	(*this) = cos(alpha) * (*this) + (axis ^ (*this)) * sin(alpha) + (axis * ((*this) * axis)) * (1 - cos(alpha));
 	return (*this);

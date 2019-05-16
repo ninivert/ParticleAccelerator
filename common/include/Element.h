@@ -40,7 +40,7 @@ public:
 	 * The constructor is explicit to prevent accidental type casting.
 	 */
 
-	explicit Element(Vector3D const& posIn, Vector3D const& posOut, double const& radius, Renderer * engine_ptr = nullptr);
+	explicit Element(Vector3D const& posIn, Vector3D const& posOut, double radius, Renderer * engine_ptr = nullptr);
 
 	/****************************************************************
 	 * Destructor
@@ -140,13 +140,13 @@ public:
 	 * Returns a Vector3D containing the position (e.g. of a Particle) at a certain pourcentage of the Element (between 0 and 1)
 	 */
 
-	virtual Vector3D getPosAtProgress(double const& progress) const = 0;
+	virtual Vector3D getPosAtProgress(double progress) const = 0;
 
 	/**
 	 * Returns a Vector3D containing the direction (not normalized) of the Element at a certain pourcentage of the Element (between 0 and 1)
 	 */
 
-	virtual Vector3D getVelAtProgress(double const& progress, bool const& clockwise) const = 0;
+	virtual Vector3D getVelAtProgress(double progress, bool const& clockwise) const = 0;
 
 	/****************************************************************
 	 * Methods

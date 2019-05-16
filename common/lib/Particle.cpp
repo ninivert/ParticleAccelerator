@@ -8,7 +8,7 @@ using namespace std;
 
 // Constructor for init with velocity
 
-Particle::Particle(Vector3D const& pos, Vector3D const& speed, double const& _mass, int const& charge, bool const& unitGeV, Renderer * engine_ptr)
+Particle::Particle(Vector3D const& pos, Vector3D const& speed, double _mass, int charge, bool const& unitGeV, Renderer * engine_ptr)
 : Drawable(engine_ptr), mass(_mass), charge(charge), pos(pos), forces(Vector3D()), element_ptr(nullptr)
 {
 	if (unitGeV) mass = CONVERT::MassGeVtoSI(mass);
@@ -17,7 +17,7 @@ Particle::Particle(Vector3D const& pos, Vector3D const& speed, double const& _ma
 
 // Constructor for init with velocity and energy
 
-Particle::Particle(Vector3D const& pos, double const& energy, Vector3D speed, double const& _mass, int const& charge, bool const& unitGeV, Renderer * engine_ptr)
+Particle::Particle(Vector3D const& pos, double energy, Vector3D speed, double _mass, int charge, bool const& unitGeV, Renderer * engine_ptr)
 : Drawable(engine_ptr), mass(_mass), charge(charge), pos(pos), forces(Vector3D()), element_ptr(nullptr)
 {
 	double factor(0);
@@ -159,7 +159,7 @@ string Particle::to_string() const {
  * Physics engine
  ****************************************************************/
 
-void Particle::step(double const& dt, bool const& methodChapi) {
+void Particle::step(double dt, bool const& methodChapi) {
 	// Do nothing if dt is null
 	if (abs(dt) < GLOBALS::DELTA) { return; }
 
@@ -179,7 +179,7 @@ void Particle::step(double const& dt, bool const& methodChapi) {
 
 void Particle::exertForce(Vector3D const& force) { forces += force; }
 
-void Particle::exertLorentzForce(Vector3D const& B, double const& dt) {
+void Particle::exertLorentzForce(Vector3D const& B, double dt) {
 	// Do nothing if dt is null or B is null (for example in Straight elements)
 	if (dt < GLOBALS::DELTA or B == Vector3D(0, 0, 0)) { return; }
 

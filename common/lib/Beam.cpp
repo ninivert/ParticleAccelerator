@@ -6,7 +6,7 @@ using namespace std;
  * Constructors
  ****************************************************************/
 
-Beam::Beam(Particle const& defaultParticle, size_t const& particleCount, double const& lambda, Accelerator const& acc, Renderer * engine)
+Beam::Beam(Particle const& defaultParticle, size_t const& particleCount, double lambda, Accelerator const& acc, Renderer * engine)
 : Drawable(engine),
   defaultParticle_ptr(defaultParticle.copy()), particleCount(particleCount), lambda(lambda)
 {
@@ -212,7 +212,7 @@ Vector3D const Beam::getZMeans() const {
  * Methods
  ****************************************************************/
 
-void Beam::step(double const& dt, bool const& methodChapi) {
+void Beam::step(double dt, bool const& methodChapi) {
 	if (abs(dt) < GLOBALS::DELTA) { return; }
 
 	exertInteractions();

@@ -18,7 +18,7 @@
 
 class OurException : public std::runtime_error {
 public:
-	OurException(std::string const& arg, std::string const& file, int const& line)
+	OurException(std::string const& arg, std::string const& file, int line)
 	: std::runtime_error(arg),
 	  msg("At file " + file + ", line " + std::to_string(line) + "\n\t" + arg),
 	  exceptionCode(arg)

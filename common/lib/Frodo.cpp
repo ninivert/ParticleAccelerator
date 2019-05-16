@@ -6,7 +6,7 @@ using namespace std;
  * Constructors
  ****************************************************************/
 
-Frodo::Frodo(Vector3D const& posIn, Vector3D const& posOut, double const& radius, double const& b, double const& straightLength, Renderer * engine_ptr)
+Frodo::Frodo(Vector3D const& posIn, Vector3D const& posOut, double radius, double b, double straightLength, Renderer * engine_ptr)
 : Straight(posIn, posOut, radius, engine_ptr), b(b), straightLength(straightLength),
   lensLength((posOut - posIn).norm() / 2 - straightLength),
   direction((posOut - posIn) / (posIn - posOut).norm()),
@@ -19,7 +19,7 @@ Frodo::Frodo(Vector3D const& posIn, Vector3D const& posOut, double const& radius
   lastStraight(intersect3, posOut, radius, engine_ptr)
 {}
 
-Frodo::Frodo(Vector3D const& posIn, double const& totalLength, Vector3D direction, double const& radius, double const& b, double const& straightLength, Renderer * engine_ptr)
+Frodo::Frodo(Vector3D const& posIn, double totalLength, Vector3D direction, double radius, double b, double straightLength, Renderer * engine_ptr)
 : Straight(posIn, totalLength, direction, radius, engine_ptr), b(b), straightLength(straightLength),
   lensLength(totalLength / 2 - straightLength),
   direction(~direction),
