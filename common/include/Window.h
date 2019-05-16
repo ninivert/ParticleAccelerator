@@ -12,6 +12,9 @@
 // Timer
 #include <QTime>
 
+// Title generation
+#include <string>
+
 class OpenGLRenderer;
 class Accelerator;
 
@@ -72,6 +75,10 @@ private:
 
 	// Content to draw
 	Accelerator acc;
+
+	QTime timer;
+
+	unsigned int frames;
 };
 
 #endif

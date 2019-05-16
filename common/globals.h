@@ -72,7 +72,8 @@ namespace GRAPHICS {
 	inline constexpr double FOV(60); // n degrees
 	inline constexpr double CLOSE_PLANE(0.001);
 	inline constexpr double FAR_PLANE(1000);
-	inline constexpr unsigned int PRECISION(16); // n steps per circle
+	inline constexpr unsigned int PRECISION(64); // n steps per circle
+	inline constexpr unsigned int FRAMEDELTA_UPDATE(1000); // update framerate every n ms
 }
 
 /****************************************************************

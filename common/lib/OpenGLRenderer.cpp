@@ -28,8 +28,9 @@ void OpenGLRenderer::init() {
 	// Tell OpenGL that we will only draw faces which wind counter-clockwise
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
-	glEnable(GL_LINE_SMOOTH);
-	glEnable(GL_POINT_SMOOTH);
+	glDisable(GL_POINT_SMOOTH);
+	// glEnable(GL_LINE_SMOOTH);
+	// glEnable(GL_POINT_SMOOTH);
 	// Set global information
 	glClearColor(236/256.0, 240/256.0, 241/256.0, 1.0);
 
@@ -256,7 +257,7 @@ void OpenGLRenderer::drawPoint(QVector3D const& pos) {
 	transform.save();
 	transform.translate(pos);
 
-	glPointSize(10.0);
+	glPointSize(5.0);
 
 	program->setUniformValue("modelToWorld", transform.getMatrix());
 	object.bind();

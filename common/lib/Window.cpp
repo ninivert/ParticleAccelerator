@@ -4,7 +4,7 @@
  * General stuffs
  ****************************************************************/
 
-Window::Window() : focus(true), acc(&engine, true, false) {
+Window::Window() : focus(true), acc(&engine, true, false), frames(0) {
 	// Cursor
 	QCursor c;
 	c.setPos(mapToGlobal(QPoint(width() / 2, height() / 2)));
@@ -63,15 +63,17 @@ Window::Window() : focus(true), acc(&engine, true, false) {
 		Vector3D(2.99, 1.1, 0), 2,
 		Vector3D(0, -2.64754e+08, 0),
 		CONSTANTS::M_PROTON, 1),
-		50, 1
+		500, 1
 	);
 
+	// Timer
+	timer.start();
 }
 
 void Window::update() {
 	if (focus) {
 		// Physics engine
-		for (size_t i(0); i < 10; ++i) acc.step();
+		for (size_t i(0); i < 1; ++i) acc.step();
 
 		// Input and rendering
 		Input::update();
@@ -83,6 +85,17 @@ void Window::update() {
 		c.setShape(Qt::BlankCursor);
 		setCursor(c);
 		Input::resetMouseDelta();
+
+		// Frames
+		unsigned int timeDelta(timer.elapsed());
+		if (timeDelta > GRAPHICS::FRAMEDELTA_UPDATE) {
+			double frameDelta(double(timeDelta) / frames);
+			std::string title(std::to_string(frameDelta).substr(0, 5) + " ms/frame");
+			setTitle(reinterpret_cast<const char*>(title.c_str()));
+			frames = 0;
+			timer.start();
+		}
+		++frames;
 
 		// Schedule a redraw (VSync)
 		QOpenGLWindow::update();
