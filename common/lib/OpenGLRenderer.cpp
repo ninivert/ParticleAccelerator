@@ -112,7 +112,7 @@ void OpenGLRenderer::init() {
 void OpenGLRenderer::reset() {
 	camera.reset();
 	camera.translate(0, 5, 5);
-	camera.rotate(-45, 1, 0, 0);
+	camera.rotate(-50, 1, 0, 0);
 }
 
 /**
