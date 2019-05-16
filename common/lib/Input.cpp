@@ -14,12 +14,6 @@ ButtonContainer::iterator Input::findButton(Qt::MouseButton key) {
 	return std::find(buttonInstances.begin(), buttonInstances.end(), key);
 }
 
-/**
- * Update the current state of the keys
- * Registered -> Triggered -> Pressed
- * Unregistered -> Released
- */
-
 template <typename TPair> void Input::updateStates(TPair& instance) {
 	switch (instance.second) {
 		case InputRegistered:
@@ -37,18 +31,9 @@ template <typename TPair> void Input::updateStates(TPair& instance) {
 	}
 }
 
-/**
- * Check whether a key should be removed
- */
-
 template <typename TPair> bool Input::checkReleased(TPair const& instance) {
 	return instance.second == InputReleased;
 }
-
-/**
- * Modify the templated container (std::vector)
- * to remove keys as needed
- */
 
 template <typename Container> void Input::updateContainer(Container& container) {
 	// typename here is letting the compiler know that value_type is a type and not an attribute of Container

@@ -18,6 +18,9 @@ TextRenderer::TextRenderer(string const& fileName) {
 
 TextRenderer::~TextRenderer() {
 	fileStream.close();
+	// we do not delete stream_ptr because it does not belong to us
+	// and in the case where we initialized it, fileStream is a normal attribute,
+	// so the destructor is called automatically
 }
 
 /****************************************************************
