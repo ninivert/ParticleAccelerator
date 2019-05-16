@@ -29,7 +29,7 @@ shared_ptr<Dipole> Dipole::cloneThis() const {
  * Getters (virtual)
  ****************************************************************/
 
-Vector3D Dipole::getField(Vector3D const& pos, bool const& methodChapi) const {
+Vector3D Dipole::getField(Vector3D const& pos, bool methodChapi) const {
 	// We don't use arguments in this overidden function
 	(void) pos;
 	(void) methodChapi;
@@ -42,7 +42,7 @@ Vector3D const Dipole::getNormalDirection(Vector3D const& pos) const {
 	return ~u;
 }
 
-double Dipole::getParticleProgress(Vector3D const& pos, bool const& methodChapi) const {
+double Dipole::getParticleProgress(Vector3D const& pos, bool methodChapi) const {
 	if (methodChapi) {
 		bool const isInNextElement(Vector3D::tripleProduct(Vector3D(0, 0, 1), pos, getPosOut()) >= 0);
 		if (isInNextElement) {
@@ -85,7 +85,7 @@ Vector3D Dipole::getPosAtProgress(double progress) const {
 	return pos;
 }
 
-Vector3D Dipole::getVelAtProgress(double progress, bool const& clockwise) const {
+Vector3D Dipole::getVelAtProgress(double progress, bool clockwise) const {
 	if (progress < 0 or progress > 1) { ERROR(EXCEPTIONS::BAD_PROGRESS); }
 
 	Vector3D dir(getNormalDirection(getPosAtProgress(progress)));

@@ -28,7 +28,7 @@ shared_ptr<Straight> Straight::cloneThis() const {
  * Getter (virtual)
  ****************************************************************/
 
-Vector3D Straight::getField(Vector3D const& pos, bool const& methodChapi) const {
+Vector3D Straight::getField(Vector3D const& pos, bool methodChapi) const {
 	// We don't use arguments in this overidden function
 	(void) pos;
 	(void) methodChapi;
@@ -43,7 +43,7 @@ Vector3D const Straight::getNormalDirection(Vector3D const& pos) const {
 	return (Vector3D(0, 0, 1) ^ d);
 }
 
-double Straight::getParticleProgress(Vector3D const& pos, bool const& methodChapi) const {
+double Straight::getParticleProgress(Vector3D const& pos, bool methodChapi) const {
 	if (methodChapi) {
 		bool const isInNextElement(Vector3D::tripleProduct(Vector3D(0, 0, 1), pos, getPosOut()) >= 0);
 		if (isInNextElement) {
@@ -73,7 +73,7 @@ Vector3D Straight::getPosAtProgress(double progress) const {
 	return ((getPosOut() - getPosIn()) * progress + getPosIn());
 }
 
-Vector3D Straight::getVelAtProgress(double progress, bool const& clockwise) const {
+Vector3D Straight::getVelAtProgress(double progress, bool clockwise) const {
 	if (progress < 0 or progress > 1) { ERROR(EXCEPTIONS::BAD_PROGRESS); }
 
 	Vector3D direction(getPosOut() - getPosIn());

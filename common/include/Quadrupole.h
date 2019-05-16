@@ -87,7 +87,7 @@ public:
 	 * methodChapi is useless here, but we need to put it in order to avoid Quadrupole to be an abstract class
 	 */
 
-	virtual Vector3D getField(Vector3D const& pos, bool const& methodChapi = false) const override;
+	virtual Vector3D getField(Vector3D const& pos, bool methodChapi = false) const override;
 
 	/****************************************************************
 	 * Virtual methods

@@ -8,7 +8,7 @@ using namespace std;
 
 // Constructor for init with velocity
 
-Particle::Particle(Vector3D const& pos, Vector3D const& speed, double _mass, int charge, bool const& unitGeV, Renderer * engine_ptr)
+Particle::Particle(Vector3D const& pos, Vector3D const& speed, double _mass, int charge, bool unitGeV, Renderer * engine_ptr)
 : Drawable(engine_ptr), mass(_mass), charge(charge), pos(pos), forces(Vector3D()), element_ptr(nullptr)
 {
 	if (unitGeV) mass = CONVERT::MassGeVtoSI(mass);
@@ -17,7 +17,7 @@ Particle::Particle(Vector3D const& pos, Vector3D const& speed, double _mass, int
 
 // Constructor for init with velocity and energy
 
-Particle::Particle(Vector3D const& pos, double energy, Vector3D speed, double _mass, int charge, bool const& unitGeV, Renderer * engine_ptr)
+Particle::Particle(Vector3D const& pos, double energy, Vector3D speed, double _mass, int charge, bool unitGeV, Renderer * engine_ptr)
 : Drawable(engine_ptr), mass(_mass), charge(charge), pos(pos), forces(Vector3D()), element_ptr(nullptr)
 {
 	double factor(0);
@@ -159,7 +159,7 @@ string Particle::to_string() const {
  * Physics engine
  ****************************************************************/
 
-void Particle::step(double dt, bool const& methodChapi) {
+void Particle::step(double dt, bool methodChapi) {
 	// Do nothing if dt is null
 	if (abs(dt) < GLOBALS::DELTA) { return; }
 

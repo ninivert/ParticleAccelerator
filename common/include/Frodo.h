@@ -85,7 +85,7 @@ public:
 	 * Possibility to choose between the method wanted by Chap (returned value is always positive) or a method that does not approximate the accelerator by a circle
 	 */
 
-	virtual Vector3D getField(Vector3D const& pos, bool const& methodChapi = false) const override;
+	virtual Vector3D getField(Vector3D const& pos, bool methodChapi = false) const override;
 
 	/****************************************************************
 	 * Virtual methods

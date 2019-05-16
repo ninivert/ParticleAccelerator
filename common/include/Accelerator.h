@@ -156,7 +156,7 @@ public:
 	 * Returns a Vector3D containing the direction (not normalized) of the Dipole at a certain pourcentage of the Accelerator (between 0 and 1)
 	 */
 
-	Vector3D getVelAtProgress(double progress, bool const& clockwise) const;
+	Vector3D getVelAtProgress(double progress, bool clockwise) const;
 
 	/**
 	 * Simulate the particle accelerator over a timestep `dt`

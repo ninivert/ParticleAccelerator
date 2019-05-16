@@ -50,7 +50,7 @@ shared_ptr<Frodo> Frodo::cloneThis() const {
 
 using namespace std;
 
-Vector3D Frodo::getField(Vector3D const& pos, bool const& methodChapi) const {
+Vector3D Frodo::getField(Vector3D const& pos, bool methodChapi) const {
 	if (methodChapi) {
 		if (focalizer.getParticleProgress(pos, methodChapi) < 1) {
 			return focalizer.getField(pos);

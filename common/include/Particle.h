@@ -44,7 +44,7 @@ public:
 	 * The constructor is explicit to prevent accidental type casting.
 	 */
 
-	explicit Particle(Vector3D const& pos, Vector3D const& speed, double mass, int charge = 1, bool const& unitGeV = true, Renderer * engine_ptr = nullptr);
+	explicit Particle(Vector3D const& pos, Vector3D const& speed, double mass, int charge = 1, bool unitGeV = true, Renderer * engine_ptr = nullptr);
 
 	/**
 	 * Constructor for initialisation with energy and direction vector velocity
@@ -62,7 +62,7 @@ public:
 	 * The constructor is explicit to prevent accidental type casting.
 	 */
 
-	explicit Particle(Vector3D const& pos, double energy, Vector3D speed, double mass, int charge = 1, bool const& unitGeV = true, Renderer * engine_ptr = nullptr);
+	explicit Particle(Vector3D const& pos, double energy, Vector3D speed, double mass, int charge = 1, bool unitGeV = true, Renderer * engine_ptr = nullptr);
 
 	/****************************************************************
 	 * Destructor
@@ -191,7 +191,7 @@ public:
 	 * If `dt` is null (aka inferior to GLOBALS::DELTA), then this doesn't do anything
 	 */
 
-	void step(double dt = GLOBALS::DT, bool const& methodChapi = false);
+	void step(double dt = GLOBALS::DT, bool methodChapi = false);
 
 	/**
 	 * Exerts a force onto a particle until the next `step` is called.

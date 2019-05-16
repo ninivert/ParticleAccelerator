@@ -74,7 +74,7 @@ public:
 	 * By convention the magnetic field is alongside the direction of the third vector of the canonical basis (Vector3D(0, 0, 1))
 	 */
 
-	virtual Vector3D getField(Vector3D const& pos, bool const& methodChapi = false) const override;
+	virtual Vector3D getField(Vector3D const& pos, bool methodChapi = false) const override;
 
 	/**
 	 * Returns the HORIZONTAL direction perpendicular to the Dipole Element (curved) at a certain position
@@ -92,7 +92,7 @@ public:
 	 * - > 1 : the Particle might be in the next Element (if it exists)
 	 */
 
-	virtual double getParticleProgress(Vector3D const& pos, bool const& methodChapi = false) const override;
+	virtual double getParticleProgress(Vector3D const& pos, bool methodChapi = false) const override;
 
 	/**
 	 * Returns the total length of the Dipole
@@ -110,7 +110,7 @@ public:
 	 * Returns a Vector3D containing the direction (not normalized) of the Dipole at a certain pourcentage of the Dipole (between 0 and 1)
 	 */
 
-	virtual Vector3D getVelAtProgress(double progress, bool const& clockwise) const override;
+	virtual Vector3D getVelAtProgress(double progress, bool clockwise) const override;
 
 	/**
 	 * Get the position of the center of curvature

@@ -85,7 +85,7 @@ public:
 	 * In the Straight class the Electric and Magnetic fields are null so it returns the 0 vector
 	 */
 
-	virtual Vector3D getField(Vector3D const& pos, bool const& methodChapi = false) const override;
+	virtual Vector3D getField(Vector3D const& pos, bool methodChapi = false) const override;
 
 	/**
 	 * Returns the HORIZONTAL direction perpendicular to the Straight Element at a certain position
@@ -105,7 +105,7 @@ public:
 	 * - > 1 : the Particle might be in the next Element (if it exists)
 	 */
 
-	virtual double getParticleProgress(Vector3D const& pos, bool const& methodChapi = false) const override;
+	virtual double getParticleProgress(Vector3D const& pos, bool methodChapi = false) const override;
 
 	/**
 	 * Returns the total length of the Straight Element
@@ -123,7 +123,7 @@ public:
 	 * Returns a Vector3D containing the direction (not normalized) of the Straight Element at a certain pourrcentage of the Straight Element (between 0 and 1)
 	 */
 
-	virtual Vector3D getVelAtProgress(double progress, bool const& clockwise) const override;
+	virtual Vector3D getVelAtProgress(double progress, bool clockwise) const override;
 
 	/****************************************************************
 	 * Virtual methods

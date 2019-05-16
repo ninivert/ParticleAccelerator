@@ -131,7 +131,7 @@ public:
 	 * If `dt` is null (aka inferior to GLOBALS::DELTA), then this doesn't do anything
 	 */
 
-	void step(double dt = GLOBALS::DT, bool const& methodChapi = false);
+	void step(double dt = GLOBALS::DT, bool methodChapi = false);
 
 	/**
 	 * Returns true if there is no Particle left in the Beam
@@ -145,7 +145,7 @@ public:
 	 * Calls Element::updatePointedElement() (with polymorphism) on all particles of the Beam
 	 */
 
-	void updatePointedElement(bool const& methodChapi = false) const;
+	void updatePointedElement(bool methodChapi = false) const;
 
 	/**
 	 * Returns a string representation of the Beam

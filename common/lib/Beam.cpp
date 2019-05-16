@@ -212,7 +212,7 @@ Vector3D const Beam::getZMeans() const {
  * Methods
  ****************************************************************/
 
-void Beam::step(double dt, bool const& methodChapi) {
+void Beam::step(double dt, bool methodChapi) {
 	if (abs(dt) < GLOBALS::DELTA) { return; }
 
 	exertInteractions();
@@ -273,7 +273,7 @@ bool Beam::noParticle() const {
 	else { return true; }
 }
 
-void Beam::updatePointedElement(bool const& methodChapi) const {
+void Beam::updatePointedElement(bool methodChapi) const {
 	for (unique_ptr<Particle> const& particle_ptr : particles_ptr) {
 		particle_ptr->getElementPtr()->updatePointedElement(*particle_ptr, methodChapi);
 	}

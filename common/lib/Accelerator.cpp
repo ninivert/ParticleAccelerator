@@ -145,7 +145,7 @@ Vector3D Accelerator::getPosAtProgress(double progress) const {
 	return elements_ptr[i]->getPosAtProgress(prog);
 }
 
-Vector3D Accelerator::getVelAtProgress(double progress, bool const& clockwise) const {
+Vector3D Accelerator::getVelAtProgress(double progress, bool clockwise) const {
 	if (progress < 0 or progress > 1) { ERROR(EXCEPTIONS::BAD_PROGRESS); }
 
 	double length(getTotalLength() * progress);

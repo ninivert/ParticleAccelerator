@@ -53,7 +53,7 @@ void Element::linkNext(Element & _next) {
 	_next.prev_ptr = this;
 }
 
-void Element::updatePointedElement(Particle & p, bool const& methodChapi) const {
+void Element::updatePointedElement(Particle & p, bool methodChapi) const {
 	double dist(getParticleProgress(p.getPos(), methodChapi));
 	if (dist < 0) {
 		if (prev_ptr != nullptr) {

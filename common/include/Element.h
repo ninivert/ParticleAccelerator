@@ -110,7 +110,7 @@ public:
 	 * The methodChapi is only used in Frodo::getField()
 	 */
 
-	virtual Vector3D getField(Vector3D const& pos, bool const& methodChapi = false) const = 0;
+	virtual Vector3D getField(Vector3D const& pos, bool methodChapi = false) const = 0;
 
 	/**
 	 * Returns the HORIZONTAL direction perpendicular to the Element at a certain position
@@ -128,7 +128,7 @@ public:
 	 * - > 1 : the Particle might be in the next Element (if it exists)
 	 */
 
-	virtual double getParticleProgress(Vector3D const& pos, bool const& methodChapi = false) const = 0;
+	virtual double getParticleProgress(Vector3D const& pos, bool methodChapi = false) const = 0;
 
 	/**
 	 * Returns the total length of the Element
@@ -146,7 +146,7 @@ public:
 	 * Returns a Vector3D containing the direction (not normalized) of the Element at a certain pourcentage of the Element (between 0 and 1)
 	 */
 
-	virtual Vector3D getVelAtProgress(double progress, bool const& clockwise) const = 0;
+	virtual Vector3D getVelAtProgress(double progress, bool clockwise) const = 0;
 
 	/****************************************************************
 	 * Methods
@@ -173,7 +173,7 @@ public:
 	 * If the distance are the same are both prev and next are nullptr we will return the ancient element without doing anything by CONVENTION, but it should never happen normally
 	 */
 
-	void updatePointedElement(Particle & p, bool const& methodChapi = false) const;
+	void updatePointedElement(Particle & p, bool methodChapi = false) const;
 
 	/****************************************************************
 	 * Virtual methods
