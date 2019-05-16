@@ -16,6 +16,7 @@ int main(int argc, char *argv[]) {
 	format.setRenderableType(QSurfaceFormat::OpenGL);
 	format.setProfile(QSurfaceFormat::CoreProfile);
 	format.setVersion(3, 3);
+	format.setSamples(4); // antialising, 4 passes seems nice
 
 	// Set the window up
 	Window window;

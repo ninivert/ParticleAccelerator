@@ -128,6 +128,8 @@
 
 - bool beamFromParticle for Beam::Beam() (2 different representations of Beams)
 - update correct dependencies in header files -> use bundles
+- added fps counter
+- added antialising
 
 ## Todo
 

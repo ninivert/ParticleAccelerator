@@ -63,7 +63,7 @@ Window::Window() : focus(true), acc(&engine, true, false), frames(0) {
 		Vector3D(2.99, 1.1, 0), 2,
 		Vector3D(0, -2.64754e+08, 0),
 		CONSTANTS::M_PROTON, 1),
-		500, 1
+		50, 1
 	);
 
 	// Timer
@@ -73,7 +73,7 @@ Window::Window() : focus(true), acc(&engine, true, false), frames(0) {
 void Window::update() {
 	if (focus) {
 		// Physics engine
-		for (size_t i(0); i < 1; ++i) acc.step();
+		for (size_t i(0); i < 10; ++i) acc.step();
 
 		// Input and rendering
 		Input::update();

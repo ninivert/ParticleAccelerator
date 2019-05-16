@@ -25,12 +25,11 @@ OpenGLRenderer::~OpenGLRenderer() {
 void OpenGLRenderer::init() {
 	initializeOpenGLFunctions();
 
-	// Tell OpenGL that we will only draw faces which wind counter-clockwise
-	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_CULL_FACE);
-	glDisable(GL_POINT_SMOOTH);
-	// glEnable(GL_LINE_SMOOTH);
-	// glEnable(GL_POINT_SMOOTH);
+	glEnable(GL_DEPTH_TEST); // object layering
+	glEnable(GL_CULL_FACE); // only draw faces which wind counter-clockwise
+	glEnable(GL_MULTISAMPLE); // antialising
+	glEnable(GL_BLEND); // transparency
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // transparency
 	// Set global information
 	glClearColor(236/256.0, 240/256.0, 241/256.0, 1.0);
 
@@ -163,7 +162,7 @@ void OpenGLRenderer::begin() {
 	program->setUniformValue("worldToCamera", camera.getMatrix());
 	program->setUniformValue("cameraToView", projection);
 	program->setUniformValue("modelToWorld", transform.getMatrix());
-	program->setUniformValue("color", 0, 0, 0);
+	program->setUniformValue("color", 0, 0, 0, 1);
 }
 
 /**
@@ -182,8 +181,9 @@ void OpenGLRenderer::end() {
 void OpenGLRenderer::draw(Accelerator const& acc) {
 	drawAxes();
 
-	acc.drawElements();
+	// It is important for Particles to be drawn first for alpha blending to work
 	acc.drawBeams();
+	acc.drawElements();
 }
 
 void OpenGLRenderer::draw(Beam const& beam) {
@@ -191,7 +191,7 @@ void OpenGLRenderer::draw(Beam const& beam) {
 }
 
 void OpenGLRenderer::draw(Dipole const& dipole) {
-	program->setUniformValue("color", 0.5, 1.0, 0.5);
+	program->setUniformValue("color", 0.5, 1.0, 0.5, GRAPHICS::OPACITY);
 
 	transform.save();
 	transform.reset();
@@ -213,7 +213,7 @@ void OpenGLRenderer::draw(Quadrupole const& quadrupole) {
 	Vector3D posOut(quadrupole.getPosOut());
 	double radius(quadrupole.getRadius());
 
-	program->setUniformValue("color", 1.0, 0.5, 0.5);
+	program->setUniformValue("color", 1.0, 0.5, 0.5, GRAPHICS::OPACITY);
 
 	drawCylinder(posIn.toQVector3D(), posOut.toQVector3D(), radius);
 }
@@ -223,7 +223,7 @@ void OpenGLRenderer::draw(Straight const& straight) {
 	Vector3D posOut(straight.getPosOut());
 	double radius(straight.getRadius());
 
-	program->setUniformValue("color", 0.5, 0.5, 1.0);
+	program->setUniformValue("color", 0.5, 0.5, 1.0, GRAPHICS::OPACITY);
 
 	drawCylinder(posIn.toQVector3D(), posOut.toQVector3D(), radius);
 }
@@ -233,7 +233,7 @@ void OpenGLRenderer::draw(Frodo const& frodo) {
 }
 
 void OpenGLRenderer::draw(Particle const& particle) {
-	program->setUniformValue("color", 0.0, 0.0, 0.0);
+	program->setUniformValue("color", 0.0, 0.0, 0.0, 1.0);
 
 	// qDebug() << particle.getElementPtr();
 
@@ -274,19 +274,19 @@ void OpenGLRenderer::drawAxes() {
 	transform.save();
 	// X axis
 	glLineWidth(10.0);
-	program->setUniformValue("color", 1.0, 0.5, 0.5);
+	program->setUniformValue("color", 1.0, 0.5, 0.5, 1.0);
 	program->setUniformValue("modelToWorld", transform.getMatrix());
 	object.bind();
 	glDrawArrays(GL_LINES, offsetSpaghetti, GEOMETRY::SPAGHETTI.size());
 	// Y axis
 	transform.rotate(90, 0, 0, 1);
-	program->setUniformValue("color", 0.0, 0.8, 0.0);
+	program->setUniformValue("color", 0.0, 0.8, 0.0, 1.0);
 	program->setUniformValue("modelToWorld", transform.getMatrix());
 	object.bind();
 	glDrawArrays(GL_LINES, offsetSpaghetti, GEOMETRY::SPAGHETTI.size());
 	// Z axis
 	transform.rotate(90, 1, 0, 0);
-	program->setUniformValue("color", 0.5, 0.5, 1.0);
+	program->setUniformValue("color", 0.5, 0.5, 1.0, 1.0);
 	program->setUniformValue("modelToWorld", transform.getMatrix());
 	object.bind();
 	glDrawArrays(GL_LINES, offsetSpaghetti, GEOMETRY::SPAGHETTI.size());
@@ -302,7 +302,7 @@ void OpenGLRenderer::drawCylinder(QVector3D const& posIn, QVector3D const& posOu
 
 	program->setUniformValue("modelToWorld", transform.getMatrix());
 	object.bind();
-	glDrawArrays(GL_LINES, offsetPenne, GEOMETRY::PENNE.size());
+	glDrawArrays(GL_TRIANGLES, offsetPenne, GEOMETRY::PENNE.size());
 
 	transform.restore();
 }
@@ -324,7 +324,7 @@ void OpenGLRenderer::drawTorus(QVector3D const& center, double startAngle, doubl
 
 	program->setUniformValue("modelToWorld", transform.getMatrix());
 	object.bind();
-	glDrawArrays(GL_LINES, offsetMacaroni, int(GEOMETRY::MACARONI.size() * lambda));
+	glDrawArrays(GL_TRIANGLES, offsetMacaroni, int(GEOMETRY::MACARONI.size() * lambda));
 
 	transform.restore();
 }
