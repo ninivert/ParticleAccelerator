@@ -130,6 +130,7 @@
 - Update `README.md`
 - Sextupole
 - Return const string in `to_string`
+- remove const reference in constructors for elementary particles
 
 - Graphics documentation
 - Add pause button
@@ -147,7 +148,6 @@
 - use move semantics for `Vector3D::toQVector3D()`
 - move documentation generation to .pro file
 - solve problem where app.pro does not update when something in commom updates
-- add party mode
 
 ## Questions
 

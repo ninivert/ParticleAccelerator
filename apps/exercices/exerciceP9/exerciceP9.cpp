@@ -12,7 +12,7 @@ using namespace std;
 
 int main() {
 	// Create the default TextRenderer engine which prints to std::cout
-	TextRenderer engine("../log/exerciceP9.log");
+	TextRenderer engine("log/exerciceP9.log");
 
 	Dipole D1(
 		Vector3D(1, 0, 0),
