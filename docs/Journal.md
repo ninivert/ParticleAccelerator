@@ -130,6 +130,7 @@
 - update correct dependencies in header files -> use bundles
 - added fps counter
 - added antialising
+- added transparency (is a bit buggy though)
 
 ## Todo
 
