@@ -16,25 +16,58 @@ Beam::Beam(Particle const& defaultParticle, size_t const& particleCount, double 
 	if (lambda < 1) {
 		ERROR(EXCEPTIONS::BAD_LAMBDA);
 	}
-	// To trigger the exception if the initial particle is outside the accelerator
-	acc.initParticleToClosestElement(*defaultParticle_ptr);
 
-	double orientation(Vector3D::tripleProduct(Vector3D(0, 0, 1), defaultParticle_ptr->getPos(), defaultParticle_ptr->getPos() + defaultParticle_ptr->getSpeed()));
-	bool clockwise((orientation < 0));
-	int lastPart(particleCount / lambda);
+	bool beamFromParticle(acc.getBeamFromParticle());
 
-	for (double i(0); i < lastPart; ++i) {
-		// i is a double to avoid division of 2 integers
-		double progress(i / lastPart);
+	if (beamFromParticle) {
+		int lastPart(particleCount / lambda);
 
-		this->particles_ptr.push_back(unique_ptr<Particle>(new Particle
-			(acc.getPosAtProgress(progress),
-			lambda * CONVERT::EnergySItoGeV(defaultParticle_ptr->getEnergy()),
-			acc.getVelAtProgress(progress, clockwise),
-			lambda * CONVERT::MassSItoGeV(defaultParticle_ptr->getMass()),
-			lambda * defaultParticle_ptr->getChargeNumber()
-		)));
-		acc.initParticleToClosestElement(*particles_ptr[i]);
+		unique_ptr<Particle> temporaryPart(
+			unique_ptr<Particle>(new Particle(
+				defaultParticle_ptr->getPos(),
+				lambda * CONVERT::EnergySItoGeV(defaultParticle_ptr->getEnergy()),
+				defaultParticle_ptr->getSpeed(),
+				lambda * CONVERT::MassSItoGeV(defaultParticle_ptr->getMass()),
+				lambda * defaultParticle_ptr->getChargeNumber()
+			))
+		);
+
+		// To trigger the exception if the initial particle is outside the accelerator
+		acc.initParticleToClosestElement(*temporaryPart);
+
+		for (double i(0); i < lastPart; ++i) {
+			temporaryPart->getElementPtr()->updatePointedElement(*temporaryPart);
+
+			temporaryPart->step();
+
+			this->particles_ptr.push_back(temporaryPart->copy());
+		}
+
+
+	} else {
+		// To trigger the exception if the initial particle is outside the accelerator
+		acc.initParticleToClosestElement(*defaultParticle_ptr);
+
+		double orientation(Vector3D::tripleProduct(Vector3D(0, 0, 1), defaultParticle_ptr->getPos(), defaultParticle_ptr->getPos() + defaultParticle_ptr->getSpeed()));
+		bool clockwise((orientation < 0));
+		int lastPart(particleCount / lambda);
+
+		for (double i(0); i < lastPart; ++i) {
+			// i is a double to avoid division of 2 integers
+			double progress(i / lastPart);
+
+			this->particles_ptr.push_back(
+				unique_ptr<Particle>(new Particle(
+					acc.getPosAtProgress(progress),
+					lambda * CONVERT::EnergySItoGeV(defaultParticle_ptr->getEnergy()),
+					acc.getVelAtProgress(progress, clockwise),
+					lambda * CONVERT::MassSItoGeV(defaultParticle_ptr->getMass()),
+					lambda * defaultParticle_ptr->getChargeNumber()
+				))
+			);
+
+			acc.initParticleToClosestElement(*particles_ptr[i]);
+		}
 	}
 }
 

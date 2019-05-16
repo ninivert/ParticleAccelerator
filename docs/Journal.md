@@ -124,6 +124,11 @@
 	- Do not work with all combination of speed and charge
 	- To change the direction, change BOTH signs of speed and charge
 
+## Stage 8
+
+- bool beamFromParticle for Beam::Beam() (2 different representations of Beams)
+- update correct dependencies in header files -> use bundles
+
 ## Todo
 
 - ExerciceP14
@@ -135,18 +140,14 @@
 - Graphics documentation
 - Add pause button
 - Transparency
-- Move Geometry.h to .cpp implementation (?)
 - use proper QTimer.dt() for movement: Ponderate movement by frame dt
-- update correct dependencies in header files -> use bundles
 - lock camera angle
 - emittance graph
 - add floor/sky box
 - add target framerate
 - add pasta texture
 - research performance optimizations: index buffer
-- modelToWorldLocation is not useful
 - use move semantics for `Vector3D::toQVector3D()`
-- move documentation generation to .pro file
 - solve problem where app.pro does not update when something in commom updates
 
 ## Questions
