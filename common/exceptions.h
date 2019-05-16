@@ -12,6 +12,10 @@
  * https://stackoverflow.com/questions/348833/how-to-know-the-exact-line-of-code-where-where-an-exception-has-been-caused#answer-348862
  ****************************************************************/
 
+/**
+ * Queue USSR Anthem
+ */
+
 class OurException : public std::runtime_error {
 public:
 	OurException(std::string const& arg, std::string const& file, int const& line)

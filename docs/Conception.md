@@ -4,7 +4,7 @@
 
 Dépendances: `doxygen` et `qt5-default`
 
-```shell
+```sh
 rm doxydocs/* -r && doxygen Doxyfile
 # Optional to run from command line
 xdg-open doxydocs/html/index.html
@@ -14,7 +14,7 @@ xdg-open doxydocs/html/index.html
 
 Exécuter tous les tests
 
-```shell
+```sh
 for i in bin/test*.bin; do $i; done
 ```
 

@@ -25,19 +25,40 @@ enum InputState {
 	InputReleased
 };
 
+template <typename T>
+
 /**
  * InputInstance class
+ *
  * Inherits from std::pair and overwrites the == operator
  * Basically writing both classes KeyInstance and ButtonInstance
  */
 
-template <typename T>
 class InputInstance : public std::pair<T, InputState> {
 public:
+
+	/**
+	 * Base class type
+	 */
+
 	typedef std::pair<T, InputState> base_class;
+
+	/**
+	 * Default constructor initializes the std::pair with InputInvalid
+	 */
+
 	InputInstance(T value) : base_class(value, InputInvalid) {}
+
+	/**
+	 * Default constructor initializes the std::pair with a given state
+	 */
+
 	InputInstance(T value, InputState state) : base_class(value, state) {}
-	// operator == is for std::find included from <algorithm>
+
+	/**
+	 * operator == is for std::find included from <algorithm>
+	 */
+
 	bool operator == (InputInstance const& rhs) const {
 		return this->first == rhs.first;
 	}

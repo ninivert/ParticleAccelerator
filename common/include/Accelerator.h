@@ -255,7 +255,7 @@ private:
 	std::vector<std::shared_ptr<Element>> elements_ptr;
 
 	/**
-	 * SALE TRES SALE BEURK
+	 * Use approximate method for collision detection
 	 */
 
 	bool const methodChapi;

@@ -136,6 +136,7 @@
 - Sextupole
 - Return const string in `to_string`
 - remove const reference in constructors for elementary particles
+- calibrate accelerator to our settings
 
 - Graphics documentation
 - Add pause button

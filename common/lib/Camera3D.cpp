@@ -10,10 +10,6 @@ Camera3D::Camera3D() : dirty(true) {}
  * Transform by
  ****************************************************************/
 
-/**
- * Translations
- */
-
 void Camera3D::translate(double dx, double dy, double dz) {
 	translate(QVector3D(dx, dy, dz));
 }
@@ -22,10 +18,6 @@ void Camera3D::translate(QVector3D const& dt) {
 	dirty = true;
 	translationVector += dt;
 }
-
-/**
- * Rotation
- */
 
 void Camera3D::rotate(double angle, QVector3D const& axis) {
 	rotate(QQuaternion::fromAxisAndAngle(axis, angle));
@@ -44,10 +36,6 @@ void Camera3D::rotate(QQuaternion const& dr) {
  * Setters
  ****************************************************************/
 
-/**
- * Translation
- */
-
 void Camera3D::setTranslation(double x, double y, double z) {
 	setTranslation(QVector3D(x, y, z));
 }
@@ -56,10 +44,6 @@ void Camera3D::setTranslation(QVector3D const& t) {
 	dirty = true;
 	translationVector = t;
 }
-
-/**
- * Rotation
- */
 
 void Camera3D::setRotation(double angle, QVector3D const& axis) {
 	setRotation(QQuaternion::fromAxisAndAngle(axis, angle));
@@ -73,10 +57,6 @@ void Camera3D::setRotation(QQuaternion const& r) {
 	dirty = true;
 	rotationQuaternion = r;
 }
-
-/**
- * Reset
- */
 
 void Camera3D::reset() {
 	dirty = true;
