@@ -90,7 +90,7 @@ void Window::update() {
 		unsigned int timeDelta(timer.elapsed());
 		if (timeDelta > GRAPHICS::FRAMEDELTA_UPDATE) {
 			double frameDelta(double(timeDelta) / frames);
-			std::string title(std::to_string(frameDelta).substr(0, 5) + " ms/frame");
+			std::string title(std::string(APP::NAME) + " | " + std::to_string(frameDelta).substr(0, 5) + " ms/frame");
 			setTitle(reinterpret_cast<const char*>(title.c_str()));
 			frames = 0;
 			timer.start();

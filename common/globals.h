@@ -86,4 +86,12 @@ namespace CONTROLS {
 	inline constexpr double SLOWMO(0.2);
 }
 
+/****************************************************************
+ * App settings
+ ****************************************************************/
+
+namespace APP {
+	inline constexpr char NAME[]("Particle Accelerator");
+}
+
 #endif
