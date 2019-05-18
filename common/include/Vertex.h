@@ -30,6 +30,12 @@ public:
 
 	explicit SimpleVertex(QVector3D const& position) : position(position) {}
 
+	/**
+	 * Construct a vertex from position and normal vector
+	 */
+
+	explicit SimpleVertex(QVector3D const& position, QVector3D const& normal) : position(position), normal(normal) {}
+
 	/****************************************************************
 	 * Getters and setters
 	 ****************************************************************/
@@ -41,10 +47,22 @@ public:
 	const QVector3D& getPosition() const { return position; }
 
 	/**
+	 * Returns normal stored in vertex
+	 */
+
+	const QVector3D& getNormal() const { return normal; }
+
+	/**
 	 * Sets position of vertex
 	 */
 
 	void setPosition(const QVector3D& _position) { position = _position; }
+
+	/**
+	 * Sets color of vertex
+	 */
+
+	void setNormal(QVector3D const& _normal) { normal = _normal; }
 
 	/****************************************************************
 	 * OpenGL Helpers
@@ -57,6 +75,12 @@ public:
 	static const int PositionTupleSize = 3;
 
 	/**
+	 * 3 channels encode normal vector
+	 */
+
+	static const int NormalTupleSize = 3;
+
+	/**
 	 * Returns the offset value in bytes of member member in the data structure or union type type
 	 *
 	 * Useful for shader initialization for determining "where" to find the info
@@ -65,12 +89,20 @@ public:
 	static int positionOffset() { return offsetof(SimpleVertex, position); }
 
 	/**
+	 * Returns the offset value in bytes of member member in the data structure or union type type
+	 *
+	 * Useful for shader initialization for determining "where" to find the info
+	 */
+
+	static int normalOffset() { return offsetof(SimpleVertex, normal); }
+
+	/**
 	 * Stride indicates the number of bytes between vertices, aka the size of a SimpleVertex instance
 	 */
 
 	static int stride() { return sizeof(SimpleVertex); }
 
-protected:
+private:
 
 	/****************************************************************
 	 * Attributes
@@ -81,7 +113,14 @@ protected:
 	 */
 
 	QVector3D position;
+
+	/**
+	 * Normal stored in the vertex
+	 */
+
+	QVector3D normal;
 };
+
 
 /**
  * Normal vertex, positon and color

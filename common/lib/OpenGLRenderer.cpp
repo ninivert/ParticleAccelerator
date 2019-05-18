@@ -28,10 +28,8 @@ void OpenGLRenderer::init() {
 	glEnable(GL_DEPTH_TEST); // object layering
 	glEnable(GL_CULL_FACE); // only draw faces which wind counter-clockwise
 	glEnable(GL_MULTISAMPLE); // antialising
-	// glEnable(GL_BLEND); // transparency
-	// glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // transparency
 	// Set global information
-	glClearColor(236/255.0, 240/255.0, 241/255.0, 1.0);
+	glClearColor(0.0, 0.0, 0.0, 1.0);
 
 	// Shader stuffs
 	// Create Shader (Do not release until VAO is created)
@@ -95,7 +93,9 @@ void OpenGLRenderer::init() {
 
 	// Enable positions, colors are set during the call
 	program->enableAttributeArray("position");
+	program->enableAttributeArray("normal");
 	program->setAttributeBuffer("position", GL_FLOAT, SimpleVertex::positionOffset(), SimpleVertex::PositionTupleSize, SimpleVertex::stride());
+	program->setAttributeBuffer("normal", GL_FLOAT, SimpleVertex::normalOffset(), SimpleVertex::NormalTupleSize, SimpleVertex::stride());
 
 	// Release (unbind) all
 	object.release();
@@ -162,7 +162,7 @@ void OpenGLRenderer::begin() {
 	program->setUniformValue("worldToCamera", camera.getMatrix());
 	program->setUniformValue("cameraToView", projection);
 	program->setUniformValue("modelToWorld", transform.getMatrix());
-	program->setUniformValue("color", 0, 0, 0, 1);
+	program->setUniformValue("color", 0, 0, 0);
 }
 
 /**
@@ -178,8 +178,12 @@ void OpenGLRenderer::end() {
  * Drawing
  ****************************************************************/
 
+// static double angle(0);
+
 void OpenGLRenderer::draw(Accelerator const& acc) {
-	drawAxes();
+	// drawAxes();
+
+	// angle += 0.5;
 
 	// IF USING ALPHA BLENDING
 	// It is important for Particles to be drawn first for alpha blending to work
@@ -204,7 +208,7 @@ void OpenGLRenderer::draw(Dipole const& dipole) {
 	// 	console.log(n);
 	// }
 
-	program->setUniformValue("color", 104/255.0, 108/255.0, 224/255.0, GRAPHICS::OPACITY);
+	program->setUniformValue("color", 104/255.0, 108/255.0, 224/255.0);
 
 	transform.save();
 	transform.reset();
@@ -227,7 +231,7 @@ void OpenGLRenderer::draw(Quadrupole const& quadrupole) {
 	double radius(quadrupole.getRadius());
 
 	// #ff7979
-	program->setUniformValue("color", 255/255.0, 121/255.0, 121/255.0, GRAPHICS::OPACITY);
+	program->setUniformValue("color", 255/255.0, 121/255.0, 121/255.0);
 
 	drawCylinder(posIn.toQVector3D(), posOut.toQVector3D(), radius);
 }
@@ -238,7 +242,7 @@ void OpenGLRenderer::draw(Straight const& straight) {
 	double radius(straight.getRadius());
 
 	// #ffbe76
-	program->setUniformValue("color", 255/255.0, 190/255.0, 118/255.0, GRAPHICS::OPACITY);
+	program->setUniformValue("color", 255/255.0, 190/255.0, 118/255.0);
 
 	drawCylinder(posIn.toQVector3D(), posOut.toQVector3D(), radius);
 }
@@ -248,7 +252,7 @@ void OpenGLRenderer::draw(Frodo const& frodo) {
 }
 
 void OpenGLRenderer::draw(Particle const& particle) {
-	program->setUniformValue("color", 0.0, 0.0, 0.0, 1.0);
+	program->setUniformValue("color", 0.0, 0.0, 0.0);
 
 	// qDebug() << particle.getElementPtr();
 
@@ -314,6 +318,7 @@ void OpenGLRenderer::drawCylinder(QVector3D const& posIn, QVector3D const& posOu
 	transform.rotate(QQuaternion::rotationTo(posIn - posOut, Transform3D::LocalRight));
 	transform.scale((posIn - posOut).length(), radius, radius);
 	transform.translate((posIn + posOut) / 2);
+	// transform.rotate(angle, 1, 0, 0);
 
 	program->setUniformValue("modelToWorld", transform.getMatrix());
 	object.bind();
@@ -334,6 +339,7 @@ void OpenGLRenderer::drawTorus(QVector3D const& center, double startAngle, doubl
 
 	transform.scale(radius, innerRadius/0.1, radius);
 	transform.translate(center);
+	// transform.rotate(angle, 1, 0, 0);
 
 	double lambda(std::abs(totalAngle/(2*M_PI)));
 

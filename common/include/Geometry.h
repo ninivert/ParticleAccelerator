@@ -35,11 +35,12 @@ namespace GEOMETRY {
 	static Vertices getDiskVertices() {
 		Vertices vertices;
 		double step(2*M_PI/GRAPHICS::PRECISION);
+		QVector3D n(0, 1, 0);
 
 		for (size_t i(0); i < GRAPHICS::PRECISION; ++i) {
 			double angle(step * i);
 			QVector3D position(std::cos(angle), 0, std::sin(angle));
-			vertices.push_back(SimpleVertex(position));
+			vertices.push_back(SimpleVertex(position, n));
 		}
 
 		return vertices;
@@ -69,13 +70,28 @@ namespace GEOMETRY {
 			// vertices.push_back(SimpleVertex(QVector3D(0.5, x2, y2)));
 			// vertices.push_back(SimpleVertex(QVector3D(-0.5, x2, y2)));
 
+			// Vertices
+			QVector3D v1(-0.5, x1, y1);
+			QVector3D v2(0.5, x2, y2);
+			QVector3D v3(0.5, x1, y1);
+			QVector3D v4(-0.5, x1, y1);
+			QVector3D v5(-0.5, x2, y2);
+			QVector3D v6(0.5, x2, y2);
+
+			// Edges
+			QVector3D e1(v2 - v1);
+			QVector3D e2(v3 - v2);
+
+			// Normal
+			QVector3D n(QVector3D::crossProduct(e1, e2));
+
 			// Outside
-			vertices.push_back(SimpleVertex(QVector3D(-0.5, x1, y1)));
-			vertices.push_back(SimpleVertex(QVector3D(0.5, x2, y2)));
-			vertices.push_back(SimpleVertex(QVector3D(0.5, x1, y1)));
-			vertices.push_back(SimpleVertex(QVector3D(-0.5, x1, y1)));
-			vertices.push_back(SimpleVertex(QVector3D(-0.5, x2, y2)));
-			vertices.push_back(SimpleVertex(QVector3D(0.5, x2, y2)));
+			vertices.push_back(SimpleVertex(v1, n));
+			vertices.push_back(SimpleVertex(v2, n));
+			vertices.push_back(SimpleVertex(v3, n));
+			vertices.push_back(SimpleVertex(v4, n));
+			vertices.push_back(SimpleVertex(v5, n));
+			vertices.push_back(SimpleVertex(v6, n));
 		}
 
 		return vertices;
@@ -108,6 +124,13 @@ namespace GEOMETRY {
 				QVector3D pos21 = smallRot * pos11;
 				QVector3D pos22 = smallRot * pos12;
 
+				// Edges
+				QVector3D e1(pos21 - pos11);
+				QVector3D e2(pos22 - pos21);
+
+				// Normal
+				QVector3D n(QVector3D::crossProduct(e1, e2));
+
 				// Inside
 				// vertices.push_back(SimpleVertex(pos11));
 				// vertices.push_back(SimpleVertex(pos22));
@@ -117,12 +140,12 @@ namespace GEOMETRY {
 				// vertices.push_back(SimpleVertex(pos22));
 
 				// Outside
-				vertices.push_back(SimpleVertex(pos11));
-				vertices.push_back(SimpleVertex(pos21));
-				vertices.push_back(SimpleVertex(pos22));
-				vertices.push_back(SimpleVertex(pos11));
-				vertices.push_back(SimpleVertex(pos22));
-				vertices.push_back(SimpleVertex(pos12));
+				vertices.push_back(SimpleVertex(pos11, n));
+				vertices.push_back(SimpleVertex(pos21, n));
+				vertices.push_back(SimpleVertex(pos22, n));
+				vertices.push_back(SimpleVertex(pos11, n));
+				vertices.push_back(SimpleVertex(pos22, n));
+				vertices.push_back(SimpleVertex(pos12, n));
 			}
 		}
 
@@ -133,6 +156,7 @@ namespace GEOMETRY {
 
 	/****************************************************************
 	 * Cube
+	 * TODO: define normal vectors
 	 ****************************************************************/
 
 	// Front Vertices
