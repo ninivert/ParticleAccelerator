@@ -18,7 +18,7 @@ int main(int argc, char *argv[]) {
 	format.setVersion(3, 3);
 	format.setSamples(4); // antialising, 4 passes seems nice
 
-	// Set the window up
+	// Set the window up (QWidget)
 	Window window;
 	window.setFormat(format);
 	window.resize(QSize(800, 600));

@@ -61,15 +61,15 @@ namespace GEOMETRY {
 			double angle1(step * i), angle2(step * (i + 1));
 			double x1(std::cos(angle1)), x2(std::cos(angle2)), y1(std::sin(angle1)), y2(std::sin(angle2));
 
-			// Outside
-			vertices.push_back(SimpleVertex(QVector3D(-0.5, x1, y1)));
-			vertices.push_back(SimpleVertex(QVector3D(0.5, x1, y1)));
-			vertices.push_back(SimpleVertex(QVector3D(0.5, x2, y2)));
-			vertices.push_back(SimpleVertex(QVector3D(-0.5, x1, y1)));
-			vertices.push_back(SimpleVertex(QVector3D(0.5, x2, y2)));
-			vertices.push_back(SimpleVertex(QVector3D(-0.5, x2, y2)));
-
 			// Inside
+			// vertices.push_back(SimpleVertex(QVector3D(-0.5, x1, y1)));
+			// vertices.push_back(SimpleVertex(QVector3D(0.5, x1, y1)));
+			// vertices.push_back(SimpleVertex(QVector3D(0.5, x2, y2)));
+			// vertices.push_back(SimpleVertex(QVector3D(-0.5, x1, y1)));
+			// vertices.push_back(SimpleVertex(QVector3D(0.5, x2, y2)));
+			// vertices.push_back(SimpleVertex(QVector3D(-0.5, x2, y2)));
+
+			// Outside
 			vertices.push_back(SimpleVertex(QVector3D(-0.5, x1, y1)));
 			vertices.push_back(SimpleVertex(QVector3D(0.5, x2, y2)));
 			vertices.push_back(SimpleVertex(QVector3D(0.5, x1, y1)));
@@ -108,13 +108,15 @@ namespace GEOMETRY {
 				QVector3D pos21 = smallRot * pos11;
 				QVector3D pos22 = smallRot * pos12;
 
-				vertices.push_back(SimpleVertex(pos11));
-				vertices.push_back(SimpleVertex(pos22));
-				vertices.push_back(SimpleVertex(pos21));
-				vertices.push_back(SimpleVertex(pos11));
-				vertices.push_back(SimpleVertex(pos12));
-				vertices.push_back(SimpleVertex(pos22));
+				// Inside
+				// vertices.push_back(SimpleVertex(pos11));
+				// vertices.push_back(SimpleVertex(pos22));
+				// vertices.push_back(SimpleVertex(pos21));
+				// vertices.push_back(SimpleVertex(pos11));
+				// vertices.push_back(SimpleVertex(pos12));
+				// vertices.push_back(SimpleVertex(pos22));
 
+				// Outside
 				vertices.push_back(SimpleVertex(pos11));
 				vertices.push_back(SimpleVertex(pos21));
 				vertices.push_back(SimpleVertex(pos22));

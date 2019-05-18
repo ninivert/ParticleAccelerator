@@ -28,10 +28,10 @@ void OpenGLRenderer::init() {
 	glEnable(GL_DEPTH_TEST); // object layering
 	glEnable(GL_CULL_FACE); // only draw faces which wind counter-clockwise
 	glEnable(GL_MULTISAMPLE); // antialising
-	glEnable(GL_BLEND); // transparency
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // transparency
+	// glEnable(GL_BLEND); // transparency
+	// glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // transparency
 	// Set global information
-	glClearColor(236/256.0, 240/256.0, 241/256.0, 1.0);
+	glClearColor(236/255.0, 240/255.0, 241/255.0, 1.0);
 
 	// Shader stuffs
 	// Create Shader (Do not release until VAO is created)
@@ -181,9 +181,13 @@ void OpenGLRenderer::end() {
 void OpenGLRenderer::draw(Accelerator const& acc) {
 	drawAxes();
 
+	// IF USING ALPHA BLENDING
 	// It is important for Particles to be drawn first for alpha blending to work
-	acc.drawBeams();
+	// ELSE, we are forcing drawing of particles on top
+	glEnable(GL_DEPTH_TEST);
 	acc.drawElements();
+	glDisable(GL_DEPTH_TEST);
+	acc.drawBeams();
 }
 
 void OpenGLRenderer::draw(Beam const& beam) {
@@ -191,7 +195,16 @@ void OpenGLRenderer::draw(Beam const& beam) {
 }
 
 void OpenGLRenderer::draw(Dipole const& dipole) {
-	program->setUniformValue("color", 0.5, 1.0, 0.5, GRAPHICS::OPACITY);
+	// #686de0
+	// Convert using this JS script
+	// const string = "686de0";
+	// for (let i = 0; i < 6; i += 2) {
+	// 	const sub = string.substr(i, 2);
+	// 	const n = parseInt(sub, 16);
+	// 	console.log(n);
+	// }
+
+	program->setUniformValue("color", 104/255.0, 108/255.0, 224/255.0, GRAPHICS::OPACITY);
 
 	transform.save();
 	transform.reset();
@@ -213,7 +226,8 @@ void OpenGLRenderer::draw(Quadrupole const& quadrupole) {
 	Vector3D posOut(quadrupole.getPosOut());
 	double radius(quadrupole.getRadius());
 
-	program->setUniformValue("color", 1.0, 0.5, 0.5, GRAPHICS::OPACITY);
+	// #ff7979
+	program->setUniformValue("color", 255/255.0, 121/255.0, 121/255.0, GRAPHICS::OPACITY);
 
 	drawCylinder(posIn.toQVector3D(), posOut.toQVector3D(), radius);
 }
@@ -223,7 +237,8 @@ void OpenGLRenderer::draw(Straight const& straight) {
 	Vector3D posOut(straight.getPosOut());
 	double radius(straight.getRadius());
 
-	program->setUniformValue("color", 0.5, 0.5, 1.0, GRAPHICS::OPACITY);
+	// #ffbe76
+	program->setUniformValue("color", 255/255.0, 190/255.0, 118/255.0, GRAPHICS::OPACITY);
 
 	drawCylinder(posIn.toQVector3D(), posOut.toQVector3D(), radius);
 }

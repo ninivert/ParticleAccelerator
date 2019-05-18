@@ -130,7 +130,10 @@
 - update correct dependencies in header files -> use bundles
 - added fps counter
 - added antialising
-- added transparency (is a bit buggy though)
+- added transparency (is a bit buggy though) [solution ?](https://stackoverflow.com/questions/3388294/opengl-question-about-the-usage-of-gldepthmask) -> just force particles to be drawn + removed inside vertices
+- Graphics documentation
+- Solve problem where app.pro does not update when something in commom updates: use `make && cd apps/app/ && make -B && cd ../.. && bin/app.bin` `¯\_(ツ)_/¯`
+- Return type for getters: const, const reference ? -> const ref for getters, const for queries (if temp object is computed)
 
 ## Todo
 
@@ -139,21 +142,15 @@
 - Sextupole
 - Return const string in `to_string`
 - remove const reference in constructors for elementary particles
+- add proton and electron sub-class
 - calibrate accelerator to our settings
 
-- Graphics documentation
+- Document window.h
 - Add pause button
-- Transparency
 - use proper QTimer.dt() for movement: Ponderate movement by frame dt
 - lock camera angle
 - emittance graph
 - add floor/sky box
-- add target framerate
 - add pasta texture
 - research performance optimizations: index buffer
 - use move semantics for `Vector3D::toQVector3D()`
-- solve problem where app.pro does not update when something in commom updates
-
-## Questions
-
-- Return type for getters: const, const reference ?
