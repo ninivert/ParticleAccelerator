@@ -88,6 +88,24 @@ public:
 	double getMeanEnergy() const;
 
 	/**
+	 * Returns the Gamma coefficient of the Particle at index part
+	 */
+
+	double getGamma(size_t part) const;
+
+	/**
+	 * Returns the position of the Particle at index part
+	 */
+
+	Vector3D getPos(size_t part) const;
+
+	/**
+	 * Returns the charge of a Particle in the Beam
+	 */
+
+	double getCharge() const;
+
+	/**
 	 * Get the emittance epsilon_r along the horizontal axis
 	 */
 
@@ -148,6 +166,18 @@ public:
 	void updatePointedElement(bool methodChapi = false) const;
 
 	/**
+	 * Modifies the associatedProgress by updating the progress for each Particle which is still in the Beam (clears the vector and update afterwards to adapt to the loss of Particles)
+	 */
+
+	void updateProgresses(std::vector<double> & associatedProgress, Accelerator const& acc) const;
+
+	/**
+	 * Exerts the force to the particle at index part (add the force using Particle::exertForce(Vector3D const& force))
+	 */
+
+	void exertForce(Vector3D const& force, size_t part);
+
+	/**
 	 * Returns a string representation of the Beam
 	 */
 
@@ -203,7 +233,7 @@ private:
 	 * Adds the interaction forces to each Particle
 	 */
 
-	void exertInteractions();
+	// void exertInteractions();
 
 	/**
 	 * Remove the Particle of the Beam that are out of the Accelerator

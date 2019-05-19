@@ -106,6 +106,26 @@ double Beam::getMeanEnergy() const {
 	return CONVERT::EnergySItoGeV(mean);
 }
 
+double Beam::getGamma(size_t part) const {
+	if (part < particles_ptr.size()) {
+		return particles_ptr[part]->getGamma();
+	} else {
+		ERROR(EXCEPTIONS::NO_PARTICLES);
+	}
+}
+
+Vector3D Beam::getPos(size_t part) const {
+	if (part < particles_ptr.size()) {
+		return particles_ptr[part]->getPos();
+	} else {
+		ERROR(EXCEPTIONS::NO_PARTICLES);
+	}
+}
+
+double Beam::getCharge() const {
+	return (lambda * defaultParticle_ptr->getCharge());
+}
+
 double Beam::getEmittanceR() const {
 	Vector3D means(getRMeans());
 
@@ -215,7 +235,7 @@ Vector3D const Beam::getZMeans() const {
 void Beam::step(double dt, bool methodChapi) {
 	if (abs(dt) < GLOBALS::DELTA) { return; }
 
-	exertInteractions();
+	// exertInteractions();
 
 	for (unique_ptr<Particle> & particle_ptr : particles_ptr) {
 		particle_ptr->step(dt, methodChapi);
@@ -225,24 +245,24 @@ void Beam::step(double dt, bool methodChapi) {
 	clearDeadParticles();
 }
 
-void Beam::exertInteractions() {
-	if (particles_ptr.size() < 2) { return; }
+// void Beam::exertInteractions() {
+// 	if (particles_ptr.size() < 2) { return; }
 
-	double charge(lambda * defaultParticle_ptr->getCharge());
-	double cst(charge * charge / (4 * M_PI * CONSTANTS::EPISLON0));
+// 	double charge(lambda * defaultParticle_ptr->getCharge());
+// 	double cst(charge * charge / (4 * M_PI * CONSTANTS::EPISLON0));
 
-	for (size_t i(0); i < particles_ptr.size() - 1; ++i) {
-		for (size_t j(i + 1); j < particles_ptr.size(); ++j) {
-			Vector3D force(particles_ptr[j]->getPos() - particles_ptr[i]->getPos());
-			double r(force.norm());
-			// Arbitrary gamma because of small relative speed
-			double gamma(particles_ptr[i]->getGamma());
-			force *= cst / (r * r * r * gamma * gamma);
-			particles_ptr[j]->exertForce(force);
-			particles_ptr[i]->exertForce(-force);
-		}
-	}
-}
+// 	for (size_t i(0); i < particles_ptr.size() - 1; ++i) {
+// 		for (size_t j(i + 1); j < particles_ptr.size(); ++j) {
+// 			Vector3D force(particles_ptr[j]->getPos() - particles_ptr[i]->getPos());
+// 			double r(force.norm());
+// 			// Arbitrary gamma because of small relative speed
+// 			double gamma(particles_ptr[i]->getGamma());
+// 			force *= cst / (r * r * r * gamma * gamma);
+// 			particles_ptr[j]->exertForce(force);
+// 			particles_ptr[i]->exertForce(-force);
+// 		}
+// 	}
+// }
 
 void Beam::clearDeadParticles() {
 	// Remove particles that are out of the simulation
@@ -276,6 +296,21 @@ bool Beam::noParticle() const {
 void Beam::updatePointedElement(bool methodChapi) const {
 	for (unique_ptr<Particle> const& particle_ptr : particles_ptr) {
 		particle_ptr->getElementPtr()->updatePointedElement(*particle_ptr, methodChapi);
+	}
+}
+
+void Beam::updateProgresses(vector<double> & associatedProgress, Accelerator const& acc) const {
+	associatedProgress.clear();
+	for (unique_ptr<Particle> const& particle_ptr : particles_ptr) {
+		associatedProgress.push_back(acc.getParticleProgress(particle_ptr->getPos()));
+	}
+}
+
+void Beam::exertForce(Vector3D const& force, size_t part) {
+	if (part < particles_ptr.size()) {
+		particles_ptr[part]->exertForce(force);
+	} else {
+		ERROR(EXCEPTIONS::NO_PARTICLES);
 	}
 }
 

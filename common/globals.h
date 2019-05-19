@@ -35,6 +35,7 @@ namespace GLOBALS {
 	inline constexpr double EPSILON(1e-10); // For double comparaison
 	inline constexpr double DELTA(1e-30); // For division by 0 tests
 	inline constexpr double DT(1e-11); // Timestep
+	inline constexpr double DELTA_INTERACTION(1e-3); // Difference of progress in which two particles may interact (size of a "case")
 }
 
 /****************************************************************

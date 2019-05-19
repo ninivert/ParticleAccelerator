@@ -159,6 +159,14 @@ public:
 	Vector3D getVelAtProgress(double progress, bool clockwise) const;
 
 	/**
+	 * Returns the progress of the Particle at position pos w.r.t. the size of a "case", which is GLOBALS::DELTA_INTERACTION.
+	 *
+	 * The progress is simply the angle between the Particle and the input position of the first Element of the Accelerator.
+	 */
+
+	double getParticleProgress(Vector3D const& pos) const;
+
+	/**
 	 * Simulate the particle accelerator over a timestep `dt`
 	 *
 	 * Make a Particle point to the next Element if it has moved past its current Element
@@ -228,6 +236,12 @@ private:
 
 	double getTotalLength() const;
 
+	/**
+	 * Exerts the interaction between the first Particle in beam1, part1 and the second Particle in beam2, part2
+	 */
+
+	void exertInteraction(size_t beam1, size_t part1, size_t beam2, size_t part2);
+
 	/****************************************************************
 	 * Attributes
 	 ****************************************************************/
@@ -244,7 +258,7 @@ private:
 	 * For each Particle in the Beams, we associate a progress of that Particle in the Accelerator which will be used to evaluate the interaction between the Particles
 	 */
 
-	std::vector<std::vector<size_t>> associatedProgresses;
+	std::vector<std::vector<double>> associatedProgresses;
 
 	/**
 	 * Heterogeneous collection of shared_ptr on Element

@@ -46,6 +46,11 @@ void Accelerator::addBeam(Particle const& defaultParticle, size_t const& particl
 	if (elements_ptr.size() > 0) {
 		beams_ptr.push_back(unique_ptr<Beam>(new Beam(defaultParticle, particleCount, lambda, *this, engine_ptr)));
 		// Beam is automatically initialize
+
+		associatedProgresses.push_back(vector<double>(1, 0));
+		size_t i(associatedProgresses.size() - 1);
+		size_t j(beams_ptr.size() - 1);
+		beams_ptr[j]->updateProgresses(associatedProgresses[i], *this);
 	} else {
 		ERROR(EXCEPTIONS::NO_ELEMENTS);
 	}
@@ -57,6 +62,11 @@ void Accelerator::addParticle(Particle particle) {
 		// If there is only one particle, the beam is not automatically initialized !
 		initParticleToClosestElement(particle);
 		beams_ptr.push_back(unique_ptr<Beam>(new Beam(particle, engine_ptr)));
+
+		associatedProgresses.push_back(vector<double>(1, 0));
+		size_t i(associatedProgresses.size() - 1);
+		size_t j(beams_ptr.size() - 1);
+		beams_ptr[j]->updateProgresses(associatedProgresses[i], *this);
 	} else {
 		ERROR(EXCEPTIONS::NO_ELEMENTS);
 	}
@@ -91,7 +101,10 @@ void Accelerator::closeElementLoop() {
 	}
 }
 
-void Accelerator::clearBeams() { beams_ptr.clear(); }
+void Accelerator::clearBeams() {
+	beams_ptr.clear();
+	associatedProgresses.clear();
+}
 
 void Accelerator::clearElements() { elements_ptr.clear(); }
 
@@ -110,7 +123,9 @@ void Accelerator::clearDeadBeams() {
 			// using swap + pop_back
 			// faster but changes indexes
 			swap(beams_ptr[i], beams_ptr[size - 1]);
+			swap(associatedProgresses[i], associatedProgresses[size - 1]);
 			beams_ptr.pop_back();
+			associatedProgresses.pop_back();
 
 			// using erase
 			// slower but preserves indexes
@@ -174,15 +189,89 @@ double Accelerator::getTotalLength() const {
 	return length;
 }
 
+double Accelerator::getParticleProgress(Vector3D const& pos) const {
+	if (elements_ptr.empty()) { ERROR(EXCEPTIONS::NO_ELEMENTS); }
+
+	double x1(pos.getX());
+	double y1(pos.getY());
+	double x2(elements_ptr[0]->getPosIn().getX());
+	double y2(elements_ptr[0]->getPosIn().getY());
+	double angle(atan2(x1*y2 - y1*x2, x1*x2 + y1*y2));
+
+	if (angle < 0) { angle += 2 * M_PI; }
+	return angle / (2 * M_PI);
+}
+
+void Accelerator::exertInteraction(size_t beam1, size_t part1, size_t beam2, size_t part2) {
+	Vector3D force(beams_ptr[beam2]->getPos(part2) - beams_ptr[beam1]->getPos(part1));
+	double r(force.norm());
+
+	if (r < GLOBALS::EPSILON) {
+		cout << "Collision !" << endl;
+		return;
+	}
+
+	double charge1(beams_ptr[beam1]->getCharge());
+	double charge2(beams_ptr[beam2]->getCharge());
+
+	double cst(charge1 * charge2 / (4 * M_PI * CONSTANTS::EPISLON0));
+
+	// Mean of the 2 gammas
+	double gamma1(beams_ptr[beam1]->getGamma(part1));
+	double gamma2(beams_ptr[beam2]->getGamma(part2));
+
+	double gamma((gamma2 + gamma1) / 2);
+
+	force *= cst / (r * r * r * gamma * gamma);
+	beams_ptr[beam2]->exertForce(force, part2);
+	beams_ptr[beam1]->exertForce(-force, part1);
+}
+
 void Accelerator::step(double dt) {
 	// Do nothing if dt is null
 	if (abs(dt) < GLOBALS::DELTA) { return; }
 
-	// Step through all the particles
+	double i(0);
 	for (unique_ptr<Beam> & beam_ptr : beams_ptr) {
 		// Change the element if the particle goes out
 		beam_ptr->updatePointedElement(methodChapi);
 
+		beam_ptr->updateProgresses(associatedProgresses[i], *this);
+		++i;
+	}
+
+	// The progresses are normaly initialized so we can use them here
+	// 		to add interaction
+	size_t nbrBeam(associatedProgresses.size());
+
+	for (size_t beam1(0); beam1 < nbrBeam; ++beam1) {
+		size_t nbrPart1(associatedProgresses[beam1].size());
+
+		for (size_t part1(0); part1 < nbrPart1; ++part1) {
+
+			for (size_t beam2(0); beam2 < nbrBeam; ++beam2) {
+				if (beam1 <= beam2) {
+					size_t nbrPart2(associatedProgresses[beam2].size());
+
+					for (size_t part2(0); part2 < nbrPart2; ++part2) 	{
+						// no interaction if the particle is the same
+						if (part1 <= part2) {
+							// cout << beam1 << "    " << part1 << "    " << beam2 << "    " << part2	 << endl;
+							if (not((beam1 == beam2) and (part1 == part2))) {
+								if (abs(associatedProgresses[beam1][part1] - associatedProgresses[	beam2][part2]) < GLOBALS::DELTA_INTERACTION) {
+									cout << "Interaction" << endl;
+									exertInteraction(beam1, part1, beam2, part2);
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	// Step through all the particles
+	for (unique_ptr<Beam> & beam_ptr : beams_ptr) {
 		beam_ptr->step(dt, methodChapi);
 	}
 
