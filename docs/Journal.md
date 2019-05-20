@@ -132,26 +132,30 @@
 - added antialising
 - added transparency (is a bit buggy though) [solution ?](https://stackoverflow.com/questions/3388294/opengl-question-about-the-usage-of-gldepthmask) -> just force particles to be drawn + removed inside vertices
 - Graphics documentation
+- Dynamic scene lighting
 - Solve problem where app.pro does not update when something in commom updates: use `make && cd apps/app/ && make -B && cd ../.. && bin/app.bin` `¯\_(ツ)_/¯`
 - Return type for getters: const, const reference ? -> const ref for getters, const for queries (if temp object is computed)
 - Framerate-independant movement
+- add proton and electron sub-class
+- ExerciceP14 (KÄÄÄÄÄÄÄÄÄÄÄÄÄÄSE)
 
 ## Todo
 
-- ExerciceP14
 - Update `README.md`
-- Sextupole
 - Return const string in `to_string`
-- remove const reference in constructors for elementary particles
-- add proton and electron sub-class
 - calibrate accelerator to our settings
-
+- why division by 0 error when adding electrons to beam ?
+- fix lighting bug where downside is illuminated
 - Document window.h
+
+## Post-project
+
+- YEET our `Vector3D` to replace it with `QVector3D`
+- Use move semantics for `Vector3D::toQVector3D()`
+- Research performance optimizations: index buffer
+- Add floor/sky box
+- Add pasta texture
+- Lock camera angle
+- Emittance graph
 - Add pause button
-- use proper QTimer.dt() for movement: Ponderate movement by frame dt
-- lock camera angle
-- emittance graph
-- add floor/sky box
-- add pasta texture
-- research performance optimizations: index buffer
-- use move semantics for `Vector3D::toQVector3D()`
+- Sextupole

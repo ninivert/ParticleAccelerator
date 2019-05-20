@@ -274,6 +274,30 @@ private:
 };
 
 /****************************************************************
+ * Electrons and protons
+ ****************************************************************/
+
+/**
+ * Stupid simple electron class
+ */
+
+class Electron : public Particle {
+public:
+	explicit Electron(Vector3D const& pos, Vector3D const& speed, bool unitGeV = true, Renderer * engine_ptr = nullptr);
+	explicit Electron(Vector3D const& pos, double energy, Vector3D speed, bool unitGeV = true, Renderer * engine_ptr = nullptr);
+};
+
+/**
+ * Stupid simple proton class
+ */
+
+class Proton : public Particle {
+public:
+	explicit Proton(Vector3D const& pos, Vector3D const& speed, bool unitGeV = true, Renderer * engine_ptr = nullptr);
+	explicit Proton(Vector3D const& pos, double energy, Vector3D speed, bool unitGeV = true, Renderer * engine_ptr = nullptr);
+};
+
+/****************************************************************
  * Cout overloading
  ****************************************************************/
 

@@ -34,6 +34,27 @@ Particle::Particle(Vector3D const& pos, double energy, Vector3D speed, double _m
 	momentum = ~speed * mass * CONSTANTS::C * sqrt(1 - factor);
 }
 
+// Electrons
+
+Electron::Electron(Vector3D const& pos, Vector3D const& speed, bool unitGeV, Renderer * engine_ptr)
+: Particle(pos, speed, CONSTANTS::M_ELECTRON, -1, unitGeV, engine_ptr)
+{}
+
+Electron::Electron(Vector3D const& pos, double energy, Vector3D speed, bool unitGeV, Renderer * engine_ptr)
+: Particle(pos, energy, speed, CONSTANTS::M_ELECTRON, -1, unitGeV, engine_ptr)
+{}
+
+// Protons
+
+Proton::Proton(Vector3D const& pos, Vector3D const& speed, bool unitGeV, Renderer * engine_ptr)
+: Particle(pos, speed, CONSTANTS::M_PROTON, 1, unitGeV, engine_ptr)
+{}
+
+Proton::Proton(Vector3D const& pos, double energy, Vector3D speed, bool unitGeV, Renderer * engine_ptr)
+: Particle(pos, energy, speed, CONSTANTS::M_PROTON, 1, unitGeV, engine_ptr)
+{}
+
+
 /****************************************************************
  * Destructor
  ****************************************************************/

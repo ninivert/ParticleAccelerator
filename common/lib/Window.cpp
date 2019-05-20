@@ -59,10 +59,12 @@ Window::Window() : focus(true), acc(&engine, true, false), frames(0) {
 	// 	CONSTANTS::M_PROTON, -1
 	// ));
 
-	acc.addBeam(Particle(
-		Vector3D(2.99, 1.1, 0), 2,
-		Vector3D(0, -2.64754e+08, 0),
-		CONSTANTS::M_PROTON, 1),
+	acc.addBeam(
+		Proton(
+			Vector3D(2.99, 1.1, 0),
+			2,
+			Vector3D(0, -2.64754e+08, 0)
+		),
 		50, 1
 	);
 
