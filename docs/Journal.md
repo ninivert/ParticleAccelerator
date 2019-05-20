@@ -134,6 +134,7 @@
 - Graphics documentation
 - Solve problem where app.pro does not update when something in commom updates: use `make && cd apps/app/ && make -B && cd ../.. && bin/app.bin` `¯\_(ツ)_/¯`
 - Return type for getters: const, const reference ? -> const ref for getters, const for queries (if temp object is computed)
+- Framerate-independant movement
 
 ## Todo
 

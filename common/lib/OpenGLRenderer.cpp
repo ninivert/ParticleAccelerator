@@ -4,7 +4,7 @@
  * Constructor
  ****************************************************************/
 
-OpenGLRenderer::OpenGLRenderer() {}
+OpenGLRenderer::OpenGLRenderer() { time.start(); }
 
 OpenGLRenderer::~OpenGLRenderer() {
 	// Actually destroy our OpenGL information
@@ -120,7 +120,10 @@ void OpenGLRenderer::reset() {
  */
 
 void OpenGLRenderer::update() {
+	// Speed coefficient
 	double coef = Input::isKeyPressed(Qt::Key_Shift) ? CONTROLS::SLOWMO : 1;
+	// Framerate independance
+	coef *= time.restart() / GRAPHICS::FRAMEDELTA_TARGET;
 
 	// Camera rotations
 	// Rotate the camera around its (here absolute) up axis

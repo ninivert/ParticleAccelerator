@@ -75,6 +75,7 @@ namespace GRAPHICS {
 	inline constexpr double FAR_PLANE(1000);
 	inline constexpr unsigned int PRECISION(128); // n steps per circle
 	inline constexpr unsigned int FRAMEDELTA_UPDATE(1000); // update framerate every n ms
+	inline constexpr double FRAMEDELTA_TARGET(1000/60.0);
 }
 
 /****************************************************************

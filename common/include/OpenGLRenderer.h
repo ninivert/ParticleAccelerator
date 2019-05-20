@@ -14,6 +14,8 @@
 #include <QOpenGLShaderProgram>
 // Maths !!
 #include <QMatrix4x4>
+// Timer
+#include <QTime>
 
 #include <vector>
 #include <cmath>
@@ -266,6 +268,12 @@ private:
 	 */
 
 	QMatrix4x4 projection;
+
+	/****************************************************************
+	 * Timer
+	 ****************************************************************/
+
+	QTime time;
 };
 
 #endif

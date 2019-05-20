@@ -259,7 +259,7 @@ void Accelerator::step(double dt) {
 							// cout << beam1 << "    " << part1 << "    " << beam2 << "    " << part2	 << endl;
 							if (not((beam1 == beam2) and (part1 == part2))) {
 								if (abs(associatedProgresses[beam1][part1] - associatedProgresses[	beam2][part2]) < GLOBALS::DELTA_INTERACTION) {
-									cout << "Interaction" << endl;
+									// cout << "Interaction" << endl;
 									exertInteraction(beam1, part1, beam2, part2);
 								}
 							}
