@@ -45,25 +45,28 @@ Window::Window() : focus(true), acc(&engine, true, false), frames(0) {
 
 	acc.closeElementLoop();
 
-	// // clockwise
-	// acc.addParticle(Particle(
-	// 	Vector3D(3.01, 0, 0), 2,
-	// 	Vector3D(0, -2.64754e+08, 0),
-	// 	CONSTANTS::M_PROTON, 1
-	// ));
-
-	// // counter-clockwise
-	// acc.addParticle(Particle(
-	// 	Vector3D(2.99, 1.1, 0), 2,
-	// 	Vector3D(0, 2.64754e+08, 0),
-	// 	CONSTANTS::M_PROTON, -1
-	// ));
+	// acc.addParticle(
+	// 	Proton(
+	// 		Vector3D(2.99, 1.1, 0),
+	// 		2,
+	// 		Vector3D(0, -2.64754e+08, 0)
+	// 	)
+	// );
 
 	acc.addBeam(
 		Proton(
 			Vector3D(2.99, 1.1, 0),
 			2,
 			Vector3D(0, -2.64754e+08, 0)
+		),
+		50, 1
+	);
+
+	acc.addBeam(
+		AntiProton(
+			Vector3D(2.99, 1.1, 0),
+			2,
+			Vector3D(0, 2.64754e+08, 0)
 		),
 		50, 1
 	);
@@ -75,7 +78,7 @@ Window::Window() : focus(true), acc(&engine, true, false), frames(0) {
 void Window::update() {
 	if (focus) {
 		// Physics engine
-		for (size_t i(0); i < 10; ++i) acc.step();
+		for (size_t i(0); i < 2; ++i) acc.step();
 
 		// Input and rendering
 		Input::update();

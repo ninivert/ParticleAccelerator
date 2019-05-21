@@ -116,7 +116,7 @@ public:
 	 * Adds a Particle to the Accelerator, transform it into a Beam before storing it
 	 */
 
-	void addParticle(Particle particle);
+	void addParticle(Particle const& particle);
 
 	/**
 	 * Initialization of a particle by searching which element is the closest

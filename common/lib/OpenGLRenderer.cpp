@@ -255,11 +255,43 @@ void OpenGLRenderer::draw(Frodo const& frodo) {
 }
 
 void OpenGLRenderer::draw(Particle const& particle) {
+	QVector3D pos(particle.getPos().toQVector3D());
 	program->setUniformValue("color", 0.0, 0.0, 0.0);
+	glPointSize(10.0);
+	drawPoint(pos);
+	program->setUniformValue("color", 1.0, 1.0, 1.0);
+	glPointSize(6.0);
+	drawPoint(pos);
+}
 
-	// qDebug() << particle.getElementPtr();
+void OpenGLRenderer::draw(Proton const& proton) {
+	QVector3D pos(proton.getPos().toQVector3D());
+	program->setUniformValue("color", 0.0, 0.0, 0.0);
+	glPointSize(10.0);
+	drawPoint(pos);
+	program->setUniformValue("color", 1.0, 0.2, 0.2);
+	glPointSize(6.0);
+	drawPoint(pos);
+}
 
-	drawPoint((particle.getPos()).toQVector3D());
+void OpenGLRenderer::draw(AntiProton const& antiproton) {
+	QVector3D pos(antiproton.getPos().toQVector3D());
+	program->setUniformValue("color", 0.0, 0.0, 0.0);
+	glPointSize(10.0);
+	drawPoint(pos);
+	program->setUniformValue("color", 0.2, 0.2, 1.0);
+	glPointSize(6.0);
+	drawPoint(pos);
+}
+
+void OpenGLRenderer::draw(Electron const& electron) {
+	QVector3D pos(electron.getPos().toQVector3D());
+	program->setUniformValue("color", 0.0, 0.0, 0.0);
+	glPointSize(10.0);
+	drawPoint(pos);
+	program->setUniformValue("color", 0.2, 1.0, 0.2);
+	glPointSize(6.0);
+	drawPoint(pos);
 }
 
 void OpenGLRenderer::draw(Vector3D const& vec) {
@@ -278,8 +310,6 @@ void OpenGLRenderer::draw(Vector3D const& vec) {
 void OpenGLRenderer::drawPoint(QVector3D const& pos) {
 	transform.save();
 	transform.translate(pos);
-
-	glPointSize(5.0);
 
 	program->setUniformValue("modelToWorld", transform.getMatrix());
 	object.bind();

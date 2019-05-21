@@ -136,7 +136,9 @@
 - Solve problem where app.pro does not update when something in commom updates: use `make && cd apps/app/ && make -B && cd ../.. && bin/app.bin` `¯\_(ツ)_/¯`
 - Return type for getters: const, const reference ? -> const ref for getters, const for queries (if temp object is computed)
 - Framerate-independant movement
-- add proton and electron sub-class
+- add proton, antiproton and electron sub-class
+- fixed polymorphism not being applied on Particle in Beam constructor
+- fixed polymorphism not being applied on Particle in Accelerator::addParticle
 - ExerciceP14 (KÄÄÄÄÄÄÄÄÄÄÄÄÄÄSE)
 
 ## Todo
@@ -147,6 +149,8 @@
 - why division by 0 error when adding electrons to beam ?
 - fix lighting bug where downside is illuminated
 - Document window.h
+- Particle::scale()
+- YEEET sucky wucky particle constructor
 
 ## Post-project
 

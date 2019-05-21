@@ -12,6 +12,9 @@ class Quadrupole;
 class Straight;
 class Frodo;
 class Particle;
+class Proton;
+class AntiProton;
+class Electron;
 class Vector3D;
 
 /**
@@ -105,6 +108,24 @@ public:
 	 */
 
 	virtual void draw(Particle const& particle) = 0;
+
+	/**
+	 * Draw a Proton
+	 */
+
+	virtual void draw(Proton const& proton) = 0;
+
+	/**
+	 * Draw an AntiProton
+	 */
+
+	virtual void draw(AntiProton const& antiproton) = 0;
+
+	/**
+	 * Draw an Electron
+	 */
+
+	virtual void draw(Electron const& electron) = 0;
 
 	/**
 	 * Draw a Vector3D (debugging purposes)

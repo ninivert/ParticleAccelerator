@@ -33,7 +33,7 @@ namespace UNITS {
 
 namespace GLOBALS {
 	inline constexpr double EPSILON(1e-10); // For double comparaison
-	inline constexpr double DELTA(1e-30); // For division by 0 tests
+	inline constexpr double DELTA_DIV0(1e-30); // For division by 0 tests
 	inline constexpr double DT(1e-11); // Timestep
 	inline constexpr double DELTA_INTERACTION(1e-3); // Difference of progress in which two particles may interact (size of a "case")
 }
@@ -73,7 +73,7 @@ namespace GRAPHICS {
 	inline constexpr double FOV(60); // n degrees
 	inline constexpr double CLOSE_PLANE(0.001);
 	inline constexpr double FAR_PLANE(1000);
-	inline constexpr unsigned int PRECISION(128); // n steps per circle
+	inline constexpr unsigned int PRECISION(256); // n steps per circle
 	inline constexpr unsigned int FRAMEDELTA_UPDATE(1000); // update framerate every n ms
 	inline constexpr double FRAMEDELTA_TARGET(1000/60.0);
 }
@@ -83,7 +83,7 @@ namespace GRAPHICS {
  ****************************************************************/
 
 namespace CONTROLS {
-	inline constexpr double TRANSLATION_SPEED(0.02);
+	inline constexpr double TRANSLATION_SPEED(0.05);
 	inline constexpr double ROTATION_SPEED(0.2);
 	inline constexpr double SLOWMO(0.2);
 }

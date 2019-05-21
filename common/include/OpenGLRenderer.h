@@ -22,6 +22,9 @@
 
 class Vector3D;
 class Particle;
+class Proton;
+class AntiProton;
+class Electron;
 class Element;
 class Straight;
 class Dipole;
@@ -149,6 +152,24 @@ public:
 	 */
 
 	virtual void draw(Particle const& particle) override;
+
+	/**
+	 * Draw a Proton
+	 */
+
+	virtual void draw(Proton const& proton) override;
+
+	/**
+	 * Draw an AntiProton
+	 */
+
+	virtual void draw(AntiProton const& antiproton) override;
+
+	/**
+	 * Draw an Electron
+	 */
+
+	virtual void draw(Electron const& electron) override;
 
 	/**
 	 * Draw a Vector3D

@@ -23,12 +23,13 @@ Beam::Beam(Particle const& defaultParticle, size_t const& particleCount, double 
 		int lastPart(particleCount / lambda);
 
 		unique_ptr<Particle> temporaryPart(
-			unique_ptr<Particle>(new Particle(
+			unique_ptr<Particle>(defaultParticle.scaledCopy(
 				defaultParticle_ptr->getPos(),
-				lambda * CONVERT::EnergySItoGeV(defaultParticle_ptr->getEnergy()),
+				CONVERT::EnergySItoGeV(defaultParticle_ptr->getEnergy()),
 				defaultParticle_ptr->getSpeed(),
-				lambda * CONVERT::MassSItoGeV(defaultParticle_ptr->getMass()),
-				lambda * defaultParticle_ptr->getChargeNumber()
+				CONVERT::MassSItoGeV(defaultParticle_ptr->getMass()),
+				defaultParticle_ptr->getChargeNumber(),
+				lambda
 			))
 		);
 
@@ -37,9 +38,7 @@ Beam::Beam(Particle const& defaultParticle, size_t const& particleCount, double 
 
 		for (double i(0); i < lastPart; ++i) {
 			temporaryPart->getElementPtr()->updatePointedElement(*temporaryPart);
-
 			temporaryPart->step();
-
 			this->particles_ptr.push_back(temporaryPart->copy());
 		}
 
@@ -57,12 +56,13 @@ Beam::Beam(Particle const& defaultParticle, size_t const& particleCount, double 
 			double progress(i / lastPart);
 
 			this->particles_ptr.push_back(
-				unique_ptr<Particle>(new Particle(
+				unique_ptr<Particle>(defaultParticle.scaledCopy(
 					acc.getPosAtProgress(progress),
-					lambda * CONVERT::EnergySItoGeV(defaultParticle_ptr->getEnergy()),
+					CONVERT::EnergySItoGeV(defaultParticle_ptr->getEnergy()),
 					acc.getVelAtProgress(progress, clockwise),
-					lambda * CONVERT::MassSItoGeV(defaultParticle_ptr->getMass()),
-					lambda * defaultParticle_ptr->getChargeNumber()
+					CONVERT::MassSItoGeV(defaultParticle_ptr->getMass()),
+					defaultParticle_ptr->getChargeNumber(),
+					lambda
 				))
 			);
 

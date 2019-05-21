@@ -91,6 +91,16 @@ public:
 
 	virtual std::unique_ptr<Particle> copy() const;
 
+	/**
+	 * Returns a new unique_ptr constructed dynamically
+	 *
+	 * This new pointer contains a polymorphic copy with constructor arguments.
+	 *
+	 * We are returning a pointer on Particule because in Accelerator we store them as unique_ptr<Element>
+	 */
+
+	virtual std::unique_ptr<Particle> scaledCopy(Vector3D const& pos, double energy, Vector3D speed, double _mass, int charge, double lambda) const;
+
 	/****************************************************************
 	 * Getters (SI units)
 	 ****************************************************************/
@@ -245,7 +255,7 @@ private:
 	 * Integer because physically, only whole multiples of elementary charges make sense
 	 */
 
-	int const charge;
+	int charge;
 
 	/**
 	 * Position of the Particle
@@ -283,8 +293,11 @@ private:
 
 class Electron : public Particle {
 public:
-	explicit Electron(Vector3D const& pos, Vector3D const& speed, bool unitGeV = true, Renderer * engine_ptr = nullptr);
-	explicit Electron(Vector3D const& pos, double energy, Vector3D speed, bool unitGeV = true, Renderer * engine_ptr = nullptr);
+	explicit Electron(Vector3D const& pos, Vector3D const& speed, bool unitGeV = true, Renderer * engine_ptr = nullptr, double lambda = 1);
+	explicit Electron(Vector3D const& pos, double energy, Vector3D speed, bool unitGeV = true, Renderer * engine_ptr = nullptr, double lambda = 1);
+	virtual void draw(Renderer * engine_ptr = nullptr) const override;
+	virtual std::unique_ptr<Particle> copy() const override;
+	virtual std::unique_ptr<Particle> scaledCopy(Vector3D const& pos, double energy, Vector3D speed, double _mass, int charge, double lambda) const override;
 };
 
 /**
@@ -293,8 +306,24 @@ public:
 
 class Proton : public Particle {
 public:
-	explicit Proton(Vector3D const& pos, Vector3D const& speed, bool unitGeV = true, Renderer * engine_ptr = nullptr);
-	explicit Proton(Vector3D const& pos, double energy, Vector3D speed, bool unitGeV = true, Renderer * engine_ptr = nullptr);
+	explicit Proton(Vector3D const& pos, Vector3D const& speed, bool unitGeV = true, Renderer * engine_ptr = nullptr, double lambda = 1);
+	explicit Proton(Vector3D const& pos, double energy, Vector3D speed, bool unitGeV = true, Renderer * engine_ptr = nullptr, double lambda = 1);
+	virtual void draw(Renderer * engine_ptr = nullptr) const override;
+	virtual std::unique_ptr<Particle> copy() const override;
+	virtual std::unique_ptr<Particle> scaledCopy(Vector3D const& pos, double energy, Vector3D speed, double _mass, int charge, double lambda) const override;
+};
+
+/**
+ * Stupid simple antiproton class
+ */
+
+class AntiProton : public Particle {
+public:
+	explicit AntiProton(Vector3D const& pos, Vector3D const& speed, bool unitGeV = true, Renderer * engine_ptr = nullptr, double lambda = 1);
+	explicit AntiProton(Vector3D const& pos, double energy, Vector3D speed, bool unitGeV = true, Renderer * engine_ptr = nullptr, double lambda = 1);
+	virtual void draw(Renderer * engine_ptr = nullptr) const override;
+	virtual std::unique_ptr<Particle> copy() const override;
+	virtual std::unique_ptr<Particle> scaledCopy(Vector3D const& pos, double energy, Vector3D speed, double _mass, int charge, double lambda) const override;
 };
 
 /****************************************************************

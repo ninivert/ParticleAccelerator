@@ -56,17 +56,22 @@ void Accelerator::addBeam(Particle const& defaultParticle, size_t const& particl
 	}
 }
 
-void Accelerator::addParticle(Particle particle) {
+void Accelerator::addParticle(Particle const& particle) {
 	// Protection against no element to point to
 	if (elements_ptr.size() > 0) {
+		// make polymorphic copy on given particle, because we will init its bound Element
+		unique_ptr<Particle> particleCopy_ptr(particle.copy());
 		// If there is only one particle, the beam is not automatically initialized !
-		initParticleToClosestElement(particle);
-		beams_ptr.push_back(unique_ptr<Beam>(new Beam(particle, engine_ptr)));
+		initParticleToClosestElement(*particleCopy_ptr);
+		beams_ptr.push_back(unique_ptr<Beam>(new Beam(*particleCopy_ptr, engine_ptr)));
 
 		associatedProgresses.push_back(vector<double>(1, 0));
 		size_t i(associatedProgresses.size() - 1);
 		size_t j(beams_ptr.size() - 1);
 		beams_ptr[j]->updateProgresses(associatedProgresses[i], *this);
+
+		// Free memory on polymorphic particle
+		particleCopy_ptr.reset();
 	} else {
 		ERROR(EXCEPTIONS::NO_ELEMENTS);
 	}

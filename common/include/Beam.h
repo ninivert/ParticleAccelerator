@@ -285,7 +285,7 @@ private:
  ****************************************************************/
 
 /**
- * Streams the `Particle::to_string()` representation to a given stream
+ * Streams the `Beam::to_string()` representation to a given stream
  */
 
 std::ostream& operator << (std::ostream& stream, Beam const& beam);

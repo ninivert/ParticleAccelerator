@@ -84,6 +84,30 @@ void TextRenderer::draw(Particle const& particle) {
 }
 
 /**
+ * Draw a Proton
+ */
+
+void TextRenderer::draw(Proton const& proton) {
+	draw(proton);
+}
+
+/**
+ * Draw an AntiProton
+ */
+
+void TextRenderer::draw(AntiProton const& antiproton) {
+	draw(antiproton);
+}
+
+/**
+ * Draw an Electron
+ */
+
+void TextRenderer::draw(Electron const& electron) {
+	draw(electron);
+}
+
+/**
  * Draw a Vector3D (debugging purposes)
  */
 

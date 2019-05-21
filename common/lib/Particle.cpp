@@ -36,22 +36,32 @@ Particle::Particle(Vector3D const& pos, double energy, Vector3D speed, double _m
 
 // Electrons
 
-Electron::Electron(Vector3D const& pos, Vector3D const& speed, bool unitGeV, Renderer * engine_ptr)
-: Particle(pos, speed, CONSTANTS::M_ELECTRON, -1, unitGeV, engine_ptr)
+Electron::Electron(Vector3D const& pos, Vector3D const& speed, bool unitGeV, Renderer * engine_ptr, double lambda)
+: Particle(pos, speed, CONSTANTS::M_ELECTRON * lambda, -1 * lambda, unitGeV, engine_ptr)
 {}
 
-Electron::Electron(Vector3D const& pos, double energy, Vector3D speed, bool unitGeV, Renderer * engine_ptr)
-: Particle(pos, energy, speed, CONSTANTS::M_ELECTRON, -1, unitGeV, engine_ptr)
+Electron::Electron(Vector3D const& pos, double energy, Vector3D speed, bool unitGeV, Renderer * engine_ptr, double lambda)
+: Particle(pos, energy, speed, CONSTANTS::M_ELECTRON * lambda, -1 * lambda, unitGeV, engine_ptr)
 {}
 
 // Protons
 
-Proton::Proton(Vector3D const& pos, Vector3D const& speed, bool unitGeV, Renderer * engine_ptr)
-: Particle(pos, speed, CONSTANTS::M_PROTON, 1, unitGeV, engine_ptr)
+Proton::Proton(Vector3D const& pos, Vector3D const& speed, bool unitGeV, Renderer * engine_ptr, double lambda)
+: Particle(pos, speed, CONSTANTS::M_PROTON * lambda, 1 * lambda, unitGeV, engine_ptr)
 {}
 
-Proton::Proton(Vector3D const& pos, double energy, Vector3D speed, bool unitGeV, Renderer * engine_ptr)
-: Particle(pos, energy, speed, CONSTANTS::M_PROTON, 1, unitGeV, engine_ptr)
+Proton::Proton(Vector3D const& pos, double energy, Vector3D speed, bool unitGeV, Renderer * engine_ptr, double lambda)
+: Particle(pos, energy, speed, CONSTANTS::M_PROTON * lambda, 1 * lambda, unitGeV, engine_ptr)
+{}
+
+// AntiProtons
+
+AntiProton::AntiProton(Vector3D const& pos, Vector3D const& speed, bool unitGeV, Renderer * engine_ptr, double lambda)
+: Particle(pos, speed, CONSTANTS::M_PROTON * lambda, -1 * lambda, unitGeV, engine_ptr)
+{}
+
+AntiProton::AntiProton(Vector3D const& pos, double energy, Vector3D speed, bool unitGeV, Renderer * engine_ptr, double lambda)
+: Particle(pos, energy, speed, CONSTANTS::M_PROTON * lambda, -1 * lambda, unitGeV, engine_ptr)
 {}
 
 
@@ -67,6 +77,44 @@ Particle::~Particle() { element_ptr = nullptr; }
 
 unique_ptr<Particle> Particle::copy() const {
 	return unique_ptr<Particle>(new Particle(*this));
+}
+
+unique_ptr<Particle> Proton::copy() const {
+	return unique_ptr<Particle>(new Proton(*this));
+}
+
+unique_ptr<Particle> AntiProton::copy() const {
+	return unique_ptr<Particle>(new AntiProton(*this));
+}
+
+unique_ptr<Particle> Electron::copy() const {
+	return unique_ptr<Particle>(new Electron(*this));
+}
+
+/****************************************************************
+ * Scaled copies
+ ****************************************************************/
+
+unique_ptr<Particle> Particle::scaledCopy(Vector3D const& pos, double energy, Vector3D speed, double _mass, int charge, double lambda) const {
+	return unique_ptr<Particle>(new Particle(pos, energy * lambda, speed, _mass * lambda, charge * lambda));
+}
+
+unique_ptr<Particle> Proton::scaledCopy(Vector3D const& pos, double energy, Vector3D speed, double _mass, int charge, double lambda) const {
+	(void) _mass;
+	(void) charge;
+	return unique_ptr<Particle>(new Proton(pos, energy, speed, lambda));
+}
+
+unique_ptr<Particle> AntiProton::scaledCopy(Vector3D const& pos, double energy, Vector3D speed, double _mass, int charge, double lambda) const {
+	(void) _mass;
+	(void) charge;
+	return unique_ptr<Particle>(new AntiProton(pos, energy, speed, lambda));
+}
+
+unique_ptr<Particle> Electron::scaledCopy(Vector3D const& pos, double energy, Vector3D speed, double _mass, int charge, double lambda) const {
+	(void) _mass;
+	(void) charge;
+	return unique_ptr<Particle>(new Electron(pos, energy, speed, lambda));
 }
 
 /****************************************************************
@@ -231,6 +279,45 @@ ostream& operator << (ostream& stream, Particle const& p) {
  ****************************************************************/
 
 void Particle::draw(Renderer * engine_ptr) const {
+	// No engine specified, try to substitute it ?
+	if (engine_ptr == nullptr) {
+		// Do we have another engine ?
+		if (this->engine_ptr == nullptr) {
+			ERROR(EXCEPTIONS::NULLPTR);
+		} else {
+			engine_ptr = this->engine_ptr;
+		}
+	}
+	engine_ptr->draw(*this);
+}
+
+void Proton::draw(Renderer * engine_ptr) const {
+	// No engine specified, try to substitute it ?
+	if (engine_ptr == nullptr) {
+		// Do we have another engine ?
+		if (this->engine_ptr == nullptr) {
+			ERROR(EXCEPTIONS::NULLPTR);
+		} else {
+			engine_ptr = this->engine_ptr;
+		}
+	}
+	engine_ptr->draw(*this);
+}
+
+void AntiProton::draw(Renderer * engine_ptr) const {
+	// No engine specified, try to substitute it ?
+	if (engine_ptr == nullptr) {
+		// Do we have another engine ?
+		if (this->engine_ptr == nullptr) {
+			ERROR(EXCEPTIONS::NULLPTR);
+		} else {
+			engine_ptr = this->engine_ptr;
+		}
+	}
+	engine_ptr->draw(*this);
+}
+
+void Electron::draw(Renderer * engine_ptr) const {
 	// No engine specified, try to substitute it ?
 	if (engine_ptr == nullptr) {
 		// Do we have another engine ?
