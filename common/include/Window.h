@@ -79,6 +79,8 @@ private:
 	QTime timer;
 
 	unsigned int frames;
+
+	double engineSpeed;
 };
 
 #endif

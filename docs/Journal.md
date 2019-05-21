@@ -140,16 +140,15 @@
 - fixed polymorphism not being applied on Particle in Beam constructor
 - fixed polymorphism not being applied on Particle in Accelerator::addParticle
 - ExerciceP14 (KÄÄÄÄÄÄÄÄÄÄÄÄÄÄSE)
+- Added simulation speed control
 
 ## Todo
 
 - Update `README.md`
 - Return const string in `to_string`
 - calibrate accelerator to our settings
-- why division by 0 error when adding electrons to beam ?
 - fix lighting bug where downside is illuminated
 - Document window.h
-- Particle::scale()
 - YEEET sucky wucky particle constructor
 
 ## Post-project

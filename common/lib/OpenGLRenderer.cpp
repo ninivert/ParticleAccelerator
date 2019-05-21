@@ -11,7 +11,6 @@ OpenGLRenderer::~OpenGLRenderer() {
 	object.destroy();
 	buffer.destroy();
 	delete program;
-	qDebug() << "OpenGLRenderer destroyed";
 }
 
 /****************************************************************

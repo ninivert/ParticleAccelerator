@@ -94,6 +94,7 @@ namespace CONTROLS {
 
 namespace APP {
 	inline constexpr char NAME[]("Particle Accelerator");
+	inline constexpr double KEY_SPEED(0.05);
 }
 
 #endif

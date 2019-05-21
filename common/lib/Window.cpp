@@ -4,7 +4,7 @@
  * General stuffs
  ****************************************************************/
 
-Window::Window() : focus(true), acc(&engine, true, false), frames(0) {
+Window::Window() : focus(true), acc(&engine, true, false), frames(0), engineSpeed(0) {
 	// Cursor
 	QCursor c;
 	c.setPos(mapToGlobal(QPoint(width() / 2, height() / 2)));
@@ -77,12 +77,15 @@ Window::Window() : focus(true), acc(&engine, true, false), frames(0) {
 
 void Window::update() {
 	if (focus) {
-		// Physics engine
-		for (size_t i(0); i < 2; ++i) acc.step();
-
 		// Input and rendering
 		Input::update();
 		engine.update();
+
+		// Physics engine
+		if (Input::isKeyPressed(Qt::Key_Up)) engineSpeed += APP::KEY_SPEED;
+		if (Input::isKeyPressed(Qt::Key_Down)) engineSpeed -= APP::KEY_SPEED;
+		if (engineSpeed < 0) engineSpeed = 0;
+		else for (size_t i(0); i < engineSpeed; ++i) acc.step();
 
 		// Cursor position
 		QCursor c = cursor();
