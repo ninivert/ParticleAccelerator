@@ -149,7 +149,7 @@ Vector3D& Vector3D::rotate(Vector3D axis, double alpha) {
 	return (*this);
 }
 
-string Vector3D::to_string() const {
+string const Vector3D::to_string() const {
 	stringstream stream;
 	stream << setprecision(STYLES::PRECISION);
 	stream

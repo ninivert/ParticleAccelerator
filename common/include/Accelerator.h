@@ -180,7 +180,7 @@ public:
 	 * Generates a string representation of the accelerator
 	 */
 
-	std::string to_string() const;
+	std::string const to_string() const;
 
 	/****************************************************************
 	 * Rendering engine

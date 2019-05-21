@@ -123,7 +123,7 @@ bool Dipole::isInWall(Particle const& p) const {
 	return ((X - 1 / abs(curvature) * u).norm() > getRadius());
 }
 
-string Dipole::to_string() const {
+string const Dipole::to_string() const {
 	stringstream stream;
 	stream
 		<< STYLES::COLOR_CYAN

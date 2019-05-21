@@ -283,7 +283,7 @@ void Accelerator::step(double dt) {
 	clearDeadBeams();
 }
 
-string Accelerator::to_string() const {
+string const Accelerator::to_string() const {
 	stringstream stream;
 	stream << setprecision(STYLES::PRECISION);
 	stream << left;

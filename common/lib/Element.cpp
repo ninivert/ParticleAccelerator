@@ -70,7 +70,7 @@ void Element::updatePointedElement(Particle & p, bool methodChapi) const {
 	}
 }
 
-string Element::to_string() const {
+string const Element::to_string() const {
 	stringstream stream;
 	stream << setprecision(STYLES::PRECISION);
 	stream << left;

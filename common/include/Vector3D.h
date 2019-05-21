@@ -187,7 +187,7 @@ public:
 	 * Returns a string representation of the vector
 	 */
 
-	std::string to_string() const;
+	std::string const to_string() const;
 
 	/****************************************************************
 	 * Static methods

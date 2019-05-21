@@ -166,7 +166,7 @@ public:
 	 * Returns a string representation of the dipole
 	 */
 
-	virtual std::string to_string() const override;
+	virtual std::string const to_string() const override;
 
 	/****************************************************************
 	 * Rendering engine

@@ -169,7 +169,7 @@ void Particle::setElement(Element * _element_ptr) {
  * Methods
  ****************************************************************/
 
-string Particle::to_string() const {
+string const Particle::to_string() const {
 	stringstream stream;
 	stream << setprecision(STYLES::PRECISION);
 	stream << left;

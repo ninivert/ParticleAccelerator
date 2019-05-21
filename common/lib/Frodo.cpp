@@ -76,7 +76,7 @@ Vector3D Frodo::getField(Vector3D const& pos, bool methodChapi) const {
  * Virtual methods
  ****************************************************************/
 
-string Frodo::to_string() const {
+string const Frodo::to_string() const {
 	stringstream stream;
 	stream << setprecision(STYLES::PRECISION);
 	stream << left;

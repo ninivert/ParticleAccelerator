@@ -46,7 +46,7 @@ Vector3D Quadrupole::getField(Vector3D const& pos, bool methodChapi) const {
  * Virtual methods
  ****************************************************************/
 
-string Quadrupole::to_string() const {
+string const Quadrupole::to_string() const {
 	stringstream stream;
 	stream
 		<< STYLES::COLOR_CYAN

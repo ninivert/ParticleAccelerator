@@ -314,7 +314,7 @@ void Beam::exertForce(Vector3D const& force, size_t part) {
 	}
 }
 
-string Beam::to_string() const {
+string const Beam::to_string() const {
 	stringstream stream;
 	stream << setprecision(STYLES::PRECISION);
 	stream << left;

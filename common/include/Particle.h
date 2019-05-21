@@ -187,7 +187,7 @@ public:
 	 * Returns a string representation of the particle
 	 */
 
-	std::string to_string() const;
+	std::string const to_string() const;
 
 	/****************************************************************
 	 * Physics engine

@@ -95,7 +95,7 @@ bool Straight::isInWall(Particle const& p) const {
 	return ((X - (X * d) * d).norm() > getRadius());
 }
 
-string Straight::to_string() const {
+string const Straight::to_string() const {
 	stringstream stream;
 	stream
 		<< STYLES::COLOR_CYAN

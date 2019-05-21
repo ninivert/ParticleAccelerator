@@ -181,7 +181,7 @@ public:
 	 * Returns a string representation of the Beam
 	 */
 
-	std::string to_string() const;
+	std::string const to_string() const;
 
 	/****************************************************************
 	 * Rendering engine

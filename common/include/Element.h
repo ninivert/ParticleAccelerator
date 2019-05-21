@@ -189,7 +189,7 @@ public:
 	 * Returns a string representation of the element
 	 */
 
-	virtual std::string to_string() const;
+	virtual std::string const to_string() const;
 
 protected:
 

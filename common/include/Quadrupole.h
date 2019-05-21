@@ -97,7 +97,7 @@ public:
 	 * Returns a string representation of the Quadrupole
 	 */
 
-	virtual std::string to_string() const;
+	virtual std::string const to_string() const;
 
 	/****************************************************************
 	 * Rendering engine
