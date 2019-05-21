@@ -182,7 +182,7 @@ string Particle::to_string() const {
 
 void Particle::step(double dt, bool methodChapi) {
 	// Do nothing if dt is null
-	if (abs(dt) < GLOBALS::DELTA) { return; }
+	if (abs(dt) < GLOBALS::DELTA_DIV0) { return; }
 
 	// Integrate the movement equations
 	double const lambda(1 / (getGamma() * getMass()));
@@ -202,7 +202,7 @@ void Particle::exertForce(Vector3D const& force) { forces += force; }
 
 void Particle::exertLorentzForce(Vector3D const& B, double dt) {
 	// Do nothing if dt is null or B is null (for example in Straight elements)
-	if (dt < GLOBALS::DELTA or B == Vector3D(0, 0, 0)) { return; }
+	if (dt < GLOBALS::DELTA_DIV0 or B == Vector3D(0, 0, 0)) { return; }
 
 	// Apply Lorentz force
 	Vector3D F(getSpeed());

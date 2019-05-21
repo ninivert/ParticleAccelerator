@@ -146,7 +146,7 @@ public:
 	 *
 	 * We need the methodChapi for the getField (if it's a FODO element)
 	 *
-	 * If `dt` is null (aka inferior to GLOBALS::DELTA), then this doesn't do anything
+	 * If `dt` is null (aka inferior to GLOBALS::DELTA_DIV0), then this doesn't do anything
 	 */
 
 	void step(double dt = GLOBALS::DT, bool methodChapi = false);

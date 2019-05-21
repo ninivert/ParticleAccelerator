@@ -207,7 +207,7 @@ void Accelerator::exertInteraction(size_t beam1, size_t part1, size_t beam2, siz
 	double r(force.norm());
 
 	if (r < GLOBALS::EPSILON) {
-		cout << "Collision !" << endl;
+		// cout << "Collision !" << endl;
 		return;
 	}
 
@@ -229,7 +229,7 @@ void Accelerator::exertInteraction(size_t beam1, size_t part1, size_t beam2, siz
 
 void Accelerator::step(double dt) {
 	// Do nothing if dt is null
-	if (abs(dt) < GLOBALS::DELTA) { return; }
+	if (abs(dt) < GLOBALS::DELTA_DIV0) { return; }
 
 	double i(0);
 	for (unique_ptr<Beam> & beam_ptr : beams_ptr) {

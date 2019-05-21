@@ -10,7 +10,7 @@ Element::Element(Vector3D const& posIn, Vector3D const& posOut, double radius, R
 : Drawable(engine_ptr), posIn(posIn), posOut(posOut), radius(radius), next_ptr(nullptr), prev_ptr(nullptr)
 {
 	double orientation(Vector3D::tripleProduct(Vector3D(0, 0, 1), posIn, posOut));
-	if (abs(orientation) < GLOBALS::DELTA) {
+	if (abs(orientation) < GLOBALS::DELTA_DIV0) {
 		ERROR(EXCEPTIONS::BAD_ORIENTATION);
 	} else if (orientation > 0) {
 		ERROR(EXCEPTIONS::BAD_DIRECTION);

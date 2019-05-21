@@ -134,7 +134,7 @@ double Beam::getEmittanceR() const {
 	double moyR_Vr(means.getZ());
 	double emittanceR(moyR_Squared * moyVr_Squared - moyR_Vr * moyR_Vr);
 
-	if (emittanceR < GLOBALS::DELTA) { emittanceR = 0; }
+	if (emittanceR < GLOBALS::DELTA_DIV0) { emittanceR = 0; }
 	return sqrt(emittanceR);
 }
 
@@ -146,7 +146,7 @@ double Beam::getEmittanceZ() const {
 	double moyZ_Vz(means.getZ());
 	double emittanceZ(moyZ_Squared * moyVz_Squared - moyZ_Vz * moyZ_Vz);
 
-	if (emittanceZ < GLOBALS::DELTA) { emittanceZ = 0; }
+	if (emittanceZ < GLOBALS::DELTA_DIV0) { emittanceZ = 0; }
 	return sqrt(emittanceZ);
 }
 
@@ -156,7 +156,7 @@ Vector3D const Beam::getEllipsePhaseCoefR() const {
 	// No deviation along the R-axis
 	// => the area of the ellipse is 0
 	// => We assume that they are all 0 bcs we have no mean to calculate them (0/0)
-	if (abs(emittanceR) < GLOBALS::DELTA) {
+	if (abs(emittanceR) < GLOBALS::DELTA_DIV0) {
 		return Vector3D();
 	}
 
@@ -175,7 +175,7 @@ Vector3D const Beam::getEllipsePhaseCoefZ() const {
 	// No deviation along the Z-axis
 	// => The area of the ellipse is 0
 	// => We assume that they are all 0 bcs we have no mean to calculate them (0/0)
-	if (abs(emittanceZ) < GLOBALS::DELTA) {
+	if (abs(emittanceZ) < GLOBALS::DELTA_DIV0) {
 		return Vector3D();
 	}
 
@@ -233,7 +233,7 @@ Vector3D const Beam::getZMeans() const {
  ****************************************************************/
 
 void Beam::step(double dt, bool methodChapi) {
-	if (abs(dt) < GLOBALS::DELTA) { return; }
+	if (abs(dt) < GLOBALS::DELTA_DIV0) { return; }
 
 	// exertInteractions();
 
@@ -346,7 +346,7 @@ string Beam::to_string() const {
 
 	// Coeff of Phase Ellipse R
 	Vector3D coeff(getEllipsePhaseCoefR());
-	if (emittanceR < GLOBALS::DELTA) {
+	if (emittanceR < GLOBALS::DELTA_DIV0) {
 		stream
 			<< setw(STYLES::PADDING_XSM) << ""
 			<< setw(STYLES::PADDING_MD) << "Coeff EllipseR"
@@ -370,7 +370,7 @@ string Beam::to_string() const {
 
 	coeff = getEllipsePhaseCoefZ();
 	// Coeff of Phase Ellipse Z
-	if (emittanceZ < GLOBALS::DELTA) {
+	if (emittanceZ < GLOBALS::DELTA_DIV0) {
 		stream
 			<< setw(STYLES::PADDING_XSM) << ""
 			<< setw(STYLES::PADDING_MD) << "Coeff EllipseZ"

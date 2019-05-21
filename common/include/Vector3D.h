@@ -144,7 +144,7 @@ public:
 	/**
 	 * Divides *this by a given scalar (double or int)
 	 *
-	 * If you try to divide by 0 (aka abs(lambda) < GLOBALS::DELTA), we _will_ yell at you
+	 * If you try to divide by 0 (aka abs(lambda) < GLOBALS::DELTA_DIV0), we _will_ yell at you
 	 */
 
 	Vector3D& operator /= (double lambda);
@@ -152,7 +152,7 @@ public:
 	/**
 	 * Normalizes *this such that its norm becomes 1, but its direction remains unchanged
 	 *
-	 * If you try to normalize the null vector (aka this->norm() < GLOBALS::DELTA), we _will_ yell at you
+	 * If you try to normalize the null vector (aka this->norm() < GLOBALS::DELTA_DIV0), we _will_ yell at you
 	 */
 
 	Vector3D& operator ~ ();

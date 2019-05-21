@@ -188,7 +188,7 @@ public:
 	 *
 	 * We need the methodChapi for the getField (if it's a FODO element)
 	 *
-	 * If `dt` is null (aka inferior to GLOBALS::DELTA), then this doesn't do anything
+	 * If `dt` is null (aka inferior to GLOBALS::DELTA_DIV0), then this doesn't do anything
 	 */
 
 	void step(double dt = GLOBALS::DT, bool methodChapi = false);
@@ -202,9 +202,9 @@ public:
 	/**
 	 * Exerts the Lorentz force on a particle traversing a magnetic field given by the `B` vector over a timestep `dt` (defaults to `GLOBALS::DT(1e-11)`).
 	 *
-	 * If `dt` is null (aka inferior to GLOBALS::DELTA), then this doesn't do anything
+	 * If `dt` is null (aka inferior to GLOBALS::DELTA_DIV0), then this doesn't do anything
 	 *
-	 * If `B` is null (aka its components are all inferior to GLOBALS::DELTA), then this doesn't do anything
+	 * If `B` is null (aka its components are all inferior to GLOBALS::DELTA_DIV0), then this doesn't do anything
 	 * (prevent EXCEPTIONS::DIV_0 in `F.rotate()`
 	 *
 	 * 1. If B is null, then F ^ B is null

@@ -171,7 +171,7 @@ public:
 	 *
 	 * Make a Particle point to the next Element if it has moved past its current Element
 	 *
-	 * If `dt` is null (aka inferior to GLOBALS::DELTA), then this doesn't do anything
+	 * If `dt` is null (aka inferior to GLOBALS::DELTA_DIV0), then this doesn't do anything
 	 */
 
 	void step(double dt = GLOBALS::DT);

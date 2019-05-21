@@ -68,7 +68,7 @@ Vector3D& Vector3D::operator *= (double lambda) {
 }
 
 Vector3D& Vector3D::operator /= (double lambda) {
-	if (abs(lambda) < GLOBALS::DELTA) {
+	if (abs(lambda) < GLOBALS::DELTA_DIV0) {
 		ERROR(EXCEPTIONS::DIV_0);
 	}
 	x /= lambda;
