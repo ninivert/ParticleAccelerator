@@ -81,6 +81,8 @@ private:
 	unsigned int frames;
 
 	double engineSpeed;
+
+	double previousEngineSpeed;
 };
 
 #endif

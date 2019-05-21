@@ -141,11 +141,12 @@
 - fixed polymorphism not being applied on Particle in Accelerator::addParticle
 - ExerciceP14 (KÄÄÄÄÄÄÄÄÄÄÄÄÄÄSE)
 - Added simulation speed control
+- Pause using Space
+- Return const string in `to_string`
 
 ## Todo
 
 - Update `README.md`
-- Return const string in `to_string`
 - calibrate accelerator to our settings
 - fix lighting bug where downside is illuminated
 - Document window.h
@@ -153,6 +154,7 @@
 
 ## Post-project
 
+- Realistic `Beam`
 - YEET our `Vector3D` to replace it with `QVector3D`
 - Use move semantics for `Vector3D::toQVector3D()`
 - Research performance optimizations: index buffer
