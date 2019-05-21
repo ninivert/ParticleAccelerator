@@ -4,7 +4,7 @@
  * General stuffs
  ****************************************************************/
 
-Window::Window() : focus(true), acc(&engine, true, false), frames(0), engineSpeed(0) {
+Window::Window() : focus(true), acc(&engine, true, false), frames(0), engineSpeed(1) {
 	// Cursor
 	QCursor c;
 	c.setPos(mapToGlobal(QPoint(width() / 2, height() / 2)));
