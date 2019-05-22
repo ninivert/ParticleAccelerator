@@ -82,7 +82,7 @@ private:
 
 	double engineSpeed;
 
-	double previousEngineSpeed;
+	bool pause;
 };
 
 #endif

@@ -4,7 +4,7 @@
  * General stuffs
  ****************************************************************/
 
-Window::Window() : focus(true), acc(&engine, true, false), frames(0), engineSpeed(1), previousEngineSpeed(1) {
+Window::Window() : focus(true), acc(&engine, true, false), frames(0), engineSpeed(1), pause(false) {
 	// Cursor
 	QCursor c;
 	c.setPos(mapToGlobal(QPoint(width() / 2, height() / 2)));
@@ -85,16 +85,10 @@ void Window::update() {
 		if (Input::isKeyPressed(Qt::Key_Up)) engineSpeed += APP::KEY_SPEED;
 		if (Input::isKeyPressed(Qt::Key_Down)) engineSpeed -= APP::KEY_SPEED;
 
-		if (Input::isKeyPressed(Qt::Key_Space) and engineSpeed <= 0) {
-			engineSpeed += previousEngineSpeed;
+		if (not pause) {
+			if (engineSpeed < 0) engineSpeed = 0;
+			else for (size_t i(0); i < engineSpeed; ++i) acc.step();
 		}
-		else if (Input::isKeyPressed(Qt::Key_Space) and engineSpeed > 0) {
-			previousEngineSpeed = engineSpeed;
-			engineSpeed = 0;
-		}
-
-		if (engineSpeed < 0) engineSpeed = 0;
-		else for (size_t i(0); i < engineSpeed; ++i) acc.step();
 
 		// Cursor position
 		QCursor c = cursor();
@@ -186,6 +180,7 @@ void Window::focusOutEvent(QFocusEvent * ev) {
 
 void Window::keyPressEvent(QKeyEvent * event) {
 	if (event->isAutoRepeat()) event->ignore();
+	else if (event->key() == Qt::Key_Space) pause = !pause;
 	else Input::registerKeyPress(event->key());
 }
 

@@ -84,7 +84,7 @@ namespace GRAPHICS {
 
 namespace CONTROLS {
 	inline constexpr double TRANSLATION_SPEED(0.05);
-	inline constexpr double ROTATION_SPEED(0.2);
+	inline constexpr double ROTATION_SPEED(0.4);
 	inline constexpr double SLOWMO(0.2);
 }
 
