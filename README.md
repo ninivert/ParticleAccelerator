@@ -22,6 +22,13 @@ It is planned to add a way to edit the accelerator, but you can of course simply
 
 ## Compilation
 
+Requirements: `qt5-default`
+
+```sh
+qmake && make && bin/app.bin
+```
+
+See `docs/Conception.md` for more information.
 
 ## Further development
 

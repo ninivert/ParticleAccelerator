@@ -144,12 +144,11 @@
 - Pause using Space
 - Return const string in `to_string`
 - Add pause button
+- Update `README.md`
 
 ## Todo
 
-- Update `README.md`
-- calibrate accelerator to our settings
-- fix lighting bug where downside is illuminated
+- Calibrate accelerator to our settings
 - Document window.h
 - YEEET sucky wucky particle constructor
 
@@ -161,3 +160,4 @@
 - Research performance optimizations: index buffer
 - Add pasta texture
 - Sextupole
+- Fix lighting bug where downside is illuminated
