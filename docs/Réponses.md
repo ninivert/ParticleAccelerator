@@ -133,8 +133,73 @@ Il faire attention à la gestion de mémoire, lors de
 
 > Comment avez-vous implémenté ces différentes caractéristiques : comme attribut ou comme méthode ?
 
+Les émittances sont implémentées sous forme de méthodes. La méthode `Beam::getEllipsePhaseCoef*()` retourne un `Vector3D` des coefficients des ellipses. Idem pour l'énergie moyenne.
+
+c.f. documentation pour plus d'informations.
+
 ## Partie 7
 
 > Quelle est la complexité de ces deux algorithmes ?
 
+On suppose le calcul de forces et leur application en `O(1)`
+
+_Algorithme 1_
+
+```py
+for i in range(n):
+	for j in range(i):
+		# calcul de force F
+		# force F de i sur j
+		# force -F de j sur i
+```
+
+En total, `(n*(n-1))/2` itérations, c'est-à-dire algorithme en `O(n²)`
+
+_Algorithme 2_
+
+```py
+for i in range(n):
+	for j in range(n):
+		# calcul de force F
+		# force F de i sur j
+```
+
+Celui ci aussi en `O(n²)`, mais on notera qu'en termes implémentation, le premier algorithme sera plus rapide, car on n'a pas besoin de recalculer deux fois une même force.
+
+> Cases: avant de préciser les détails d'implémentation, quelle est la complexité temporelle pire cas de cette solution en fonction du nombre de particules ? [ On supposera ici que les particules sont « assez bien réparties » dans les cases. On supposera de plus que la taille d'une case est petite par rapport à la taille du système. Ainsi on peut faire l'hypothèse que le nombre de particules par case est négligeable (O(1)) devant le nombre total de particules (c.-à-d. que toutes les particules ne se retrouvent pas en même temps dans la même case). ]
+
+```py
+for particule in particules: # O(nb de particules)
+	# mettre a jour la kääääääääääääse de chaque particule
+
+for case in accelerator: # O(nb de cases)
+	for particule in voisins(case): # O(1)
+		# calcul des forces O(1)
+		# application des forces
+```
+
+En faisant la supposition que le nombre de cases est bien inférieur au nombre de particules, on a donc un algorithme `O(n)`, où `n` représente le nombre de particules dans l'accélérateur.
+
+> Quel(s) inconvénient(s) présente cependant cette solution ?
+
+- Au niveau de l'encapsulation, les particules « savent » dans quelle case elles sont, et la case sait quelles particules elle contient. On devrait alors changer les `unique_ptr` dans l'accélérateur à des `shared_ptr`, ce qui n'a conceptuellement pas de sens.
+- Ceci perturberait aussi dans notre cas la structure du code
+
 > Comment et où avez-vous implémenté cette nouvelle façon de calculer les interactions entre particules ?
+
+A chaque `step`, on cacule le "progrès" de chaque particule dans l'accélérateur, en se basant sur l'approximation que l'accélérateur est circulaire. Le progrès est alors défini comme l'angle que fait le vecteur position de la particule avec la position d'entrée du premier élément dans l'accélérateur.
+
+La taille d'une case est alors simplement définie comme une distance entre deux progrès.
+
+```py
+for beam in beams:
+	for particles in beam:
+		for particle in particles:
+			# stockage de l'angle
+			angle = <particle, base_vector>
+
+for particles in accelerator:
+	for otherParticles in accelerator:
+		if (abs(angle - otherAngle) < epsilon):
+			# exercer les intéractions entre les 2 particules
+```

@@ -202,13 +202,6 @@ void OpenGLRenderer::draw(Beam const& beam) {
 
 void OpenGLRenderer::draw(Dipole const& dipole) {
 	// #686de0
-	// Convert using this JS script
-	// const string = "686de0";
-	// for (let i = 0; i < 6; i += 2) {
-	// 	const sub = string.substr(i, 2);
-	// 	const n = parseInt(sub, 16);
-	// 	console.log(n);
-	// }
 
 	program->setUniformValue("color", 104/255.0, 108/255.0, 224/255.0);
 

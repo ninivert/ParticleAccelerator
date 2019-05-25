@@ -143,6 +143,7 @@
 - Added simulation speed control
 - Pause using Space
 - Return const string in `to_string`
+- Add pause button
 
 ## Todo
 
@@ -158,9 +159,5 @@
 - YEET our `Vector3D` to replace it with `QVector3D`
 - Use move semantics for `Vector3D::toQVector3D()`
 - Research performance optimizations: index buffer
-- Add floor/sky box
 - Add pasta texture
-- Lock camera angle
-- Emittance graph
-- Add pause button
 - Sextupole

@@ -46,3 +46,14 @@ Avec cette méthode, on est aussi plus explicites au niveau des dépendances req
 ## Conventions
 
 Une courbure k est de signe positif quand elle va dans le sens horaire (anti-trigonométrique)
+
+## Conversion des couleurs
+
+```javascript
+const string = "686de0"; // couleur
+for (let i = 0; i < 6; i += 2) {
+	const sub = string.substr(i, 2);
+	const n = parseInt(sub, 16);
+	console.log(n);
+}
+```

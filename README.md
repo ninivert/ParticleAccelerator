@@ -1,7 +1,34 @@
 # Particle Accelerator
 
-owo what's this ?
+## OwO what's this ?
 
-## References
+This project simulates the behavior of a very simplified particle accelerator.\
+In the current configuration, it is a simple circular accelerator composed of straight elements, focalizer elements, and dipoles.\
+It is planned to add a way to edit the accelerator, but you can of course simply add it manually by modifying the code and recompiling.
 
-- [GNU Make](https://www.gnu.org/software/make/manual/make.html)
+## Controls
+
+| Key | Description |
+| --- | --- |
+| W | Camera forward |
+| S | Camera backward |
+| A | Camera left |
+| D | Camera right |
+| Q | Camera down |
+| E | Camera up |
+| Space | Pause physical simulation |
+| Up | Increase simulation speed |
+| Down | Decrease simulation speed |
+
+## Compilation
+
+
+## Further development
+
+- Integrate our project with Qt completely
+- Rewrite a few classes for neater code
+- Add a good accelerator editor
+- Add auto calibrator (adjust magnetic fields and speeds)
+- Add floor/sky box
+- Add emittance graph
+- Fix lighting issues
