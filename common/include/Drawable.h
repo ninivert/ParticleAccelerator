@@ -14,6 +14,7 @@ class Renderer;
 
 class Drawable {
 protected:
+
 	Renderer * engine_ptr;
 
 public:

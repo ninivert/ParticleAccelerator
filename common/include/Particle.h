@@ -75,7 +75,7 @@ public:
 	 * - Don't delete the Element !!
 	 */
 
-	~Particle();
+	virtual ~Particle() override;
 
 	/****************************************************************
 	 * Polymorphic copy for Accelerator

@@ -50,7 +50,7 @@ public:
 	 * Destructor for the 2 attributes which are pointers on Element, prev and next, to point to nullptr without deleting these elements
 	 */
 
-	virtual ~Element();
+	virtual ~Element() override;
 
 	/****************************************************************
 	 * Copy constructor and operator =

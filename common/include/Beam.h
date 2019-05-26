@@ -53,7 +53,7 @@ public:
 	 * Destructor: we are storing pointers (smart pointers but ok)
 	 */
 
-	~Beam();
+	virtual ~Beam() override;
 
 	/****************************************************************
 	 * Copy constructor and operator =

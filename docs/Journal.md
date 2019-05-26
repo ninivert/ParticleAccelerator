@@ -145,10 +145,10 @@
 - Return const string in `to_string`
 - Add pause button
 - Update `README.md`
+- Verify virtual destructors
 
 ## Todo
 
 - Calibrate accelerator to our settings
 - Document window.h
 - YEEET sucky wucky particle constructor
-- verify virtual destructors

@@ -60,7 +60,7 @@ public:
 	 * Destructor calls the Accelerator::clear() method
 	 */
 
-	~Accelerator();
+	virtual ~Accelerator() override;
 
 	/****************************************************************
 	 * Copy constructor and operator =
