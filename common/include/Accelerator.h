@@ -43,7 +43,7 @@ public:
 	 * Possibility to choose which way we are constructing the Beams (beamFromParticle)
 	 *
 	 * - true  : The Beams are constructed using a physical source of Particle from the default Particle position by evolving a Particle a given number of times
-	 * - false : The Beams are constructed by spreading out a given number of Particles on the ideal trajectory
+	 * - false : The Beams are constructed by spreading out a given number of Particles along the ideal trajectory
 	 *
 	 * The constructor is explicit to prevent accidental type casting.
 	 *

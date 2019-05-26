@@ -151,13 +151,4 @@
 - Calibrate accelerator to our settings
 - Document window.h
 - YEEET sucky wucky particle constructor
-
-## Post-project
-
-- Realistic `Beam`
-- YEET our `Vector3D` to replace it with `QVector3D`
-- Use move semantics for `Vector3D::toQVector3D()`
-- Research performance optimizations: index buffer
-- Add pasta texture
-- Sextupole
-- Fix lighting bug where downside is illuminated
+- verify virtual destructors
