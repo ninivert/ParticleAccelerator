@@ -122,10 +122,6 @@ void Window::teardownGL() {
  * OpenGL stuffs
  ****************************************************************/
 
-/**
- * Init
- */
-
 void Window::initializeGL() {
 	// Connect signals and slots
 	connect(context(), SIGNAL(aboutToBeDestroyed()), this, SLOT(teardownGL()), Qt::DirectConnection);
@@ -136,17 +132,9 @@ void Window::initializeGL() {
 	engine.init();
 }
 
-/**
- * Resize
- */
-
 void Window::resizeGL(int width, int height) {
 	engine.resize(width, height);
 }
-
-/**
- * Paint
- */
 
 void Window::paintGL() {
 	engine.begin();

@@ -4,7 +4,7 @@
 /**
  * Following this tutorial
  * https://www.trentreed.net/topics/qt-framework/
- * upon which I expanded and added my own code
+ * which I refactored (to follow OOP guidelines), expanded and added to
  */
 
 int main(int argc, char *argv[]) {
