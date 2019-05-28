@@ -58,16 +58,34 @@ All the very serious, clear and professional 300+ commit messages can be found t
 ## Compilation
 
 Requirements: `qt5-default`
+Optional: `doxygen` (documentation)
 
 ```sh
 qmake && make && bin/app.bin
 ```
 
+This does NOT compile on the computers in CO (too old versions for `g++` and `qmake`) !!
+
+| Software | Version in CO | Version on our computers |
+| --- | --- | --- |
+| Qt | 5.5.1 | 5.9.5 |
+| qmake | 3.0 | 3.1 |
+| g++ | 5.5.0 | 7.4.0 (c++1z) |
+| doxygen | 1.8.11 | 1.8.13 |
+
+The problem is we use `inline` variables, new since c++17
+
 See `docs/Conception.md` for more information.
 
 ## Documentation
 
-See `docs/`
+```sh
+rm doxydocs/* -r && doxygen Doxyfile
+# Optional to run from command line
+xdg-open doxydocs/html/index.html
+```
+
+See `docs/` for more information
 
 ## Further development
 
@@ -88,4 +106,4 @@ See `docs/`
 ## Known ~~bugs~~ features
 
 - Lighting comes from below in a part of the accelerator, for some reason
-- On some graphics card (e.g. integrated intel), the depth buffer for the drawing calls is bugged and you can see through some elements. This does _not_ happen on nvidia cards.
+- On some graphics cards (e.g. integrated intel cards), the depth buffer for the drawing calls is bugged and you can see through some elements. This does _not_ happen on nvidia cards.
