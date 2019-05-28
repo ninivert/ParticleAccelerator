@@ -27,7 +27,7 @@ int main() {
 	dipole.setB(7);
 	assert(dipole.getField(Vector3D(0, 0, 0)) == Vector3D(0, 0, 7));
 
-	Particle p1(Vector3D(3.00894, -0.391837, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272);
+	Particle p1(Vector3D(3.00894, -0.391837, 0), 1.999989, Vector3D(-210200, -2.64754e8, 0), 0.938272);
 	Particle p2(Vector3D(3.00892956975892, -0.394484520288904, 0), 1.99998900529594, Vector3D(-1043024.10832297, -264752028.890446, 0), 0.938272);
 
 	p1.setElement(&dipole);
@@ -38,9 +38,10 @@ int main() {
 	double dist(dipole.getParticleProgress(p1.getPos()));
 	assert(dist <=1 and dist >= 0);
 
-	// We have to "reduce" the speed or our `operator ==` won't evaluate it correctly
-	// We are working at high speed (10e8) so small errors are way larger than our EPSILON (in globals.h)
-	assert(p1.getSpeed() / 10e8 == p2.getSpeed() / 10e8);
+	assert(Test::eq(p1.getSpeed().getX(), p2.getSpeed().getX(), 1e-3));
+	assert(Test::eq(p1.getSpeed().getY(), p2.getSpeed().getY(), 1e-3));
+	assert(Test::eq(p1.getSpeed().getZ(), p2.getSpeed().getZ(), 1e-3));
+
 	assert(p1.getMoment() == p2.getMoment());
 	assert(p1.getPos() == p2.getPos());
 	assert(Test::eq(p1.getEnergy(), p2.getEnergy()));
@@ -64,9 +65,9 @@ int main() {
 	assert(Test::eq(quadru.getRadius(), 0.1));
 	assert(quadru.getField(Vector3D(3.01, 0, 0)) == Vector3D(0, 0, -0.012));
 
-	Particle p3(Vector3D(3.01, 0, 0), Vector3D(0, -2.64754e8, 0), 0.938272);
+	Particle p3(Vector3D(3.01, 0, 0), 1.9999868, Vector3D(0, -2.64754e8, 0), 0.938272);
 
-	Particle p4(Vector3D(3.01, -0.00264754, 0), Vector3D(1427.7, -2.64754e+08, 0), 0.938272);
+	Particle p4(Vector3D(3.01, -0.00264754, 0), 1.9999868, Vector3D(1427.7, -2.64754e+08, 0), 0.938272);
 
 	p3.setElement(&quadru);
 	p3.step();
@@ -76,9 +77,9 @@ int main() {
 	dist = quadru.getParticleProgress(p3.getPos());
 	assert(dist <=1 and dist >= 0);
 
-	// We have to "reduce" the speed or our `operator ==` won't evaluate it correctly
-	// We are working at high speed (10e8) so small errors are way larger than our EPSILON (in globals.h)
-	assert(p3.getSpeed() / 10e8 == p4.getSpeed() / 10e8);
+	assert(Test::eq(p3.getSpeed().getX(), p4.getSpeed().getX(), 1e-3));
+	assert(Test::eq(p3.getSpeed().getY(), p4.getSpeed().getY(), 1e-3));
+	assert(Test::eq(p3.getSpeed().getZ(), p4.getSpeed().getZ(), 1e-3));
 	assert(p3.getMoment() == p4.getMoment());
 	assert(Test::eq(p3.getPos().getX(), p4.getPos().getX()));
 	assert(Test::eq(p3.getPos().getY(), p4.getPos().getY()));
@@ -101,7 +102,7 @@ int main() {
 	assert(Test::eq(straight1.getRadius(), 0.5));
 	assert(straight1.getField(Vector3D(0, 0, 0)) == Vector3D(0, 0, 0));
 
-	Particle p5(Vector3D(3.00894, -0.391837, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272);
+	Particle p5(Vector3D(3.00894, -0.391837, 0), 1.999989, Vector3D(-210200, -2.64754e8, 0), 0.938272);
 
 	// need a lot of decimals of the energy to have correct speed values
 	Particle p6(Vector3D(3.008937898, -0.39448454, 0), 1.99998900525257, Vector3D(-210200, -2.64754e8, 0), 0.938272);
@@ -114,9 +115,9 @@ int main() {
 	dist = straight1.getParticleProgress(p5.getPos());
 	assert(not (dist <=1 and dist >= 0));
 
-	// We have to "reduce" the speed or our `operator ==` won't evaluate it correctly
-	// We are working at high speed (10e8) so small errors are way larger than our EPSILON (in globals.h)
-	assert(p5.getSpeed() / 10e8 == p6.getSpeed() / 10e8);
+	assert(Test::eq(p5.getSpeed().getX(), p6.getSpeed().getX(), 1e-3));
+	assert(Test::eq(p5.getSpeed().getY(), p6.getSpeed().getY(), 1e-3));
+	assert(Test::eq(p5.getSpeed().getZ(), p6.getSpeed().getZ(), 1e-3));
 	assert(p5.getMoment() == p6.getMoment());
 	assert(p5.getPos() == p6.getPos());
 	assert(Test::eq(p5.getEnergy(), p6.getEnergy()));
@@ -131,7 +132,7 @@ int main() {
 	Straight straight2(Vector3D(3, 0, 0), Vector3D(3.01, -1, 0), 0.1);
 	Straight straight3(Vector3D(3.01, -1, 0), Vector3D(3.02, -2, 0), 0.1);
 
-	Particle p7(Vector3D(3.015, -1.2, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272);
+	Particle p7(Vector3D(3.015, -1.2, 0), 1, Vector3D(-210200, -2.64754e8, 0), 0.938272);
 	straight2.linkNext(straight3);
 
 	dist = straight2.getParticleProgress(p7.getPos());

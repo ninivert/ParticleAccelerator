@@ -44,7 +44,7 @@ public:
 	 * The constructor is explicit to prevent accidental type casting.
 	 */
 
-	explicit Particle(Vector3D const& pos, Vector3D const& speed, double mass, int charge = 1, bool unitGeV = true, Renderer * engine_ptr = nullptr);
+	// explicit Particle(Vector3D const& pos, Vector3D const& speed, double mass, int charge = 1, bool unitGeV = true, Renderer * engine_ptr = nullptr);
 
 	/**
 	 * Constructor for initialisation with energy and direction vector velocity
@@ -293,7 +293,7 @@ private:
 
 class Electron : public Particle {
 public:
-	explicit Electron(Vector3D const& pos, Vector3D const& speed, bool unitGeV = true, Renderer * engine_ptr = nullptr, double lambda = 1);
+	// explicit Electron(Vector3D const& pos, Vector3D const& speed, bool unitGeV = true, Renderer * engine_ptr = nullptr, double lambda = 1);
 	explicit Electron(Vector3D const& pos, double energy, Vector3D speed, bool unitGeV = true, Renderer * engine_ptr = nullptr, double lambda = 1);
 	virtual void draw(Renderer * engine_ptr = nullptr) const override;
 	virtual std::unique_ptr<Particle> copy() const override;
@@ -306,7 +306,7 @@ public:
 
 class Proton : public Particle {
 public:
-	explicit Proton(Vector3D const& pos, Vector3D const& speed, bool unitGeV = true, Renderer * engine_ptr = nullptr, double lambda = 1);
+	// explicit Proton(Vector3D const& pos, Vector3D const& speed, bool unitGeV = true, Renderer * engine_ptr = nullptr, double lambda = 1);
 	explicit Proton(Vector3D const& pos, double energy, Vector3D speed, bool unitGeV = true, Renderer * engine_ptr = nullptr, double lambda = 1);
 	virtual void draw(Renderer * engine_ptr = nullptr) const override;
 	virtual std::unique_ptr<Particle> copy() const override;
@@ -319,7 +319,7 @@ public:
 
 class AntiProton : public Particle {
 public:
-	explicit AntiProton(Vector3D const& pos, Vector3D const& speed, bool unitGeV = true, Renderer * engine_ptr = nullptr, double lambda = 1);
+	// explicit AntiProton(Vector3D const& pos, Vector3D const& speed, bool unitGeV = true, Renderer * engine_ptr = nullptr, double lambda = 1);
 	explicit AntiProton(Vector3D const& pos, double energy, Vector3D speed, bool unitGeV = true, Renderer * engine_ptr = nullptr, double lambda = 1);
 	virtual void draw(Renderer * engine_ptr = nullptr) const override;
 	virtual std::unique_ptr<Particle> copy() const override;

@@ -8,12 +8,12 @@ using namespace std;
 
 // Constructor for init with velocity
 
-Particle::Particle(Vector3D const& pos, Vector3D const& speed, double _mass, int charge, bool unitGeV, Renderer * engine_ptr)
-: Drawable(engine_ptr), mass(_mass), charge(charge), pos(pos), forces(Vector3D()), element_ptr(nullptr)
-{
-	if (unitGeV) mass = CONVERT::MassGeVtoSI(mass);
-	momentum = speed * mass;
-}
+// Particle::Particle(Vector3D const& pos, Vector3D const& speed, double _mass, int charge, bool unitGeV, Renderer * engine_ptr)
+// : Drawable(engine_ptr), mass(_mass), charge(charge), pos(pos), forces(Vector3D()), element_ptr(nullptr)
+// {
+// 	if (unitGeV) mass = CONVERT::MassGeVtoSI(mass);
+// 	momentum = speed * mass;
+// }
 
 // Constructor for init with velocity and energy
 
@@ -36,9 +36,9 @@ Particle::Particle(Vector3D const& pos, double energy, Vector3D speed, double _m
 
 // Electrons
 
-Electron::Electron(Vector3D const& pos, Vector3D const& speed, bool unitGeV, Renderer * engine_ptr, double lambda)
-: Particle(pos, speed, CONSTANTS::M_ELECTRON * lambda, -1 * lambda, unitGeV, engine_ptr)
-{}
+// Electron::Electron(Vector3D const& pos, Vector3D const& speed, bool unitGeV, Renderer * engine_ptr, double lambda)
+// : Particle(pos, speed, CONSTANTS::M_ELECTRON * lambda, -1 * lambda, unitGeV, engine_ptr)
+// {}
 
 Electron::Electron(Vector3D const& pos, double energy, Vector3D speed, bool unitGeV, Renderer * engine_ptr, double lambda)
 : Particle(pos, energy, speed, CONSTANTS::M_ELECTRON * lambda, -1 * lambda, unitGeV, engine_ptr)
@@ -46,9 +46,9 @@ Electron::Electron(Vector3D const& pos, double energy, Vector3D speed, bool unit
 
 // Protons
 
-Proton::Proton(Vector3D const& pos, Vector3D const& speed, bool unitGeV, Renderer * engine_ptr, double lambda)
-: Particle(pos, speed, CONSTANTS::M_PROTON * lambda, 1 * lambda, unitGeV, engine_ptr)
-{}
+// Proton::Proton(Vector3D const& pos, Vector3D const& speed, bool unitGeV, Renderer * engine_ptr, double lambda)
+// : Particle(pos, speed, CONSTANTS::M_PROTON * lambda, 1 * lambda, unitGeV, engine_ptr)
+// {}
 
 Proton::Proton(Vector3D const& pos, double energy, Vector3D speed, bool unitGeV, Renderer * engine_ptr, double lambda)
 : Particle(pos, energy, speed, CONSTANTS::M_PROTON * lambda, 1 * lambda, unitGeV, engine_ptr)
@@ -56,9 +56,9 @@ Proton::Proton(Vector3D const& pos, double energy, Vector3D speed, bool unitGeV,
 
 // AntiProtons
 
-AntiProton::AntiProton(Vector3D const& pos, Vector3D const& speed, bool unitGeV, Renderer * engine_ptr, double lambda)
-: Particle(pos, speed, CONSTANTS::M_PROTON * lambda, -1 * lambda, unitGeV, engine_ptr)
-{}
+// AntiProton::AntiProton(Vector3D const& pos, Vector3D const& speed, bool unitGeV, Renderer * engine_ptr, double lambda)
+// : Particle(pos, speed, CONSTANTS::M_PROTON * lambda, -1 * lambda, unitGeV, engine_ptr)
+// {}
 
 AntiProton::AntiProton(Vector3D const& pos, double energy, Vector3D speed, bool unitGeV, Renderer * engine_ptr, double lambda)
 : Particle(pos, energy, speed, CONSTANTS::M_PROTON * lambda, -1 * lambda, unitGeV, engine_ptr)

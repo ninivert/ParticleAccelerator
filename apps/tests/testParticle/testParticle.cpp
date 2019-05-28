@@ -7,7 +7,7 @@
 using namespace std;
 
 int main() {
-	Particle p1(Vector3D(3.00894, -0.391837, 0), Vector3D(-210200, -2.64754e8, 0), 0.938272);
+	Particle p1(Vector3D(3.00894, -0.391837, 0), 1.999989, Vector3D(-210200, -2.64754e8, 0), 0.938272);
 	Particle p2(Vector3D(2.99016, -0.391837, 0), 2, Vector3D(210200, -2.64754e8, 0), 0.938272);
 
 	Particle p3(Vector3D(3.00892956975892, -0.394484520288904, 0), 1.99998900529594, Vector3D(-1043024.10832297, -264752028.890446, 0), 0.938272);
@@ -19,18 +19,24 @@ int main() {
 	p1.step();
 	p2.step();
 
-	// We have to "reduce" the speed or our `operator ==` won't evaluate it correctly
-	// We are working at high speed (10e8) so small errors are way larger than our EPSILON (in globals.h)
-	assert(p1.getSpeed() / 10e8 == p3.getSpeed() / 10e8);
-	assert(p2.getSpeed() / 10e8 == p4.getSpeed() / 10e8);
+	assert(Test::eq(p1.getSpeed().getX(), p3.getSpeed().getX(), 1e-3));
+	assert(Test::eq(p1.getSpeed().getY(), p3.getSpeed().getY(), 1e-3));
+	assert(Test::eq(p1.getSpeed().getZ(), p3.getSpeed().getZ(), 1e-3));
+
+	assert(Test::eq(p2.getSpeed().getX(), p4.getSpeed().getX(), 1e-3));
+	assert(Test::eq(p2.getSpeed().getY(), p4.getSpeed().getY(), 1e-3));
+	assert(Test::eq(p2.getSpeed().getZ(), p4.getSpeed().getZ(), 1e-3));
 
 	assert(p1.getMoment() == p3.getMoment());
 	assert(p2.getMoment() == p4.getMoment());
 
-	assert(p1.getPos() == p3.getPos());
-	assert(Test::eq(p2.getPos().getX(), p4.getPos().getX()));
-	assert(Test::eq(p2.getPos().getY(), p4.getPos().getY()));
-	assert(Test::eq(p2.getPos().getZ(), p4.getPos().getZ()));
+	assert(Test::eq(p1.getPos().getX(), p3.getPos().getX(), 1e-3));
+	assert(Test::eq(p1.getPos().getY(), p3.getPos().getY(), 1e-3));
+	assert(Test::eq(p1.getPos().getZ(), p3.getPos().getZ(), 1e-3));
+
+	assert(Test::eq(p2.getPos().getX(), p4.getPos().getX(), 1e-3));
+	assert(Test::eq(p2.getPos().getY(), p4.getPos().getY(), 1e-3));
+	assert(Test::eq(p2.getPos().getZ(), p4.getPos().getZ(), 1e-3));
 
 	assert(Test::eq(p1.getEnergy(), p3.getEnergy()));
 	assert(Test::eq(p2.getEnergy(), p4.getEnergy()));
