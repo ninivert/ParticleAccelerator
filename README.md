@@ -75,6 +75,7 @@ See `docs/`
 - Fix lighting issues
 - Rewrite a few classes for neater code
 - Add a good accelerator editor
+- Calibrate accelerator to our settings
 - Add auto calibrator (adjust magnetic fields and speeds)
 - Add floor/sky box
 - Add emittance graph
@@ -84,3 +85,7 @@ See `docs/`
 - Research move semantics for better physics engine
 - Research graphics optimizations using index buffer
 
+## Known ~~bugs~~ features
+
+- Lighting comes from below in a part of the accelerator, for some reason
+- On some graphics card (mesa), the depth buffer for the drawing calls is bugged and you can see through some elements. This does _not_ happen on nvidia cards.
