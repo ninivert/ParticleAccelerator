@@ -148,7 +148,3 @@
 - Verify virtual destructors
 
 ## Todo
-
-- Calibrate accelerator to our settings
-- Document window.h
-- YEEET sucky wucky particle constructor

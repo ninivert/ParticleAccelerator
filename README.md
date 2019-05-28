@@ -88,4 +88,4 @@ See `docs/`
 ## Known ~~bugs~~ features
 
 - Lighting comes from below in a part of the accelerator, for some reason
-- On some graphics card (mesa), the depth buffer for the drawing calls is bugged and you can see through some elements. This does _not_ happen on nvidia cards.
+- On some graphics card (e.g. integrated intel), the depth buffer for the drawing calls is bugged and you can see through some elements. This does _not_ happen on nvidia cards.
