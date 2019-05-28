@@ -23,6 +23,7 @@ It is planned to add a way to edit the accelerator, but you can of course simply
 	- Lighting (kinda)
 	- Antialising
 	- Framerate-independant movement
+	- VSync
 - Application
 	- Fluid mouse and keyboard controls
 	- Framerate indicator
