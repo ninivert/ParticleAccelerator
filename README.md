@@ -107,3 +107,9 @@ See `docs/` for more information
 
 - Lighting comes from below in a part of the accelerator, for some reason
 - On some graphics cards (e.g. integrated intel cards), the depth buffer for the drawing calls is bugged and you can see through some elements. This does _not_ happen on nvidia cards.
+
+![Dedicated graphics card: OpenGL 3.3.0 NVIDIA 390.116 ( CoreProfile )](assets/nvidia_card.png)
+
+![Integrated graphics card: OpenGL 4.5 (Core Profile) Mesa 18.2.8 ( CoreProfile )](assets/integrated_card.png)
+
+![Lighting bug](assets/lighting_bug.png)
